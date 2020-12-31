@@ -26,9 +26,10 @@
             @endif
 
             <div id="app">
-                Vue 3 testing ...
-                <test-component foo="bar"></test-component>
-                End testing ..
+
+                <test-component foo="bar1"></test-component>
+                <new-component foo="bar2"></new-component>
+
                 <div class="text-white bg-black">White text</div>
             </div>
 
