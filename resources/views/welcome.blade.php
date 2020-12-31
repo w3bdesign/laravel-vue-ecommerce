@@ -29,6 +29,7 @@
                 Vue 3 testing ...
                 <test-component foo="bar"></test-component>
                 End testing ..
+                <div class="text-white bg-black">White text</div>
             </div>
 
         <script src="/js/app.js"></script>
