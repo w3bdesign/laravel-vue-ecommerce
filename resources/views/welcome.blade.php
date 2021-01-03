@@ -7,7 +7,7 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <!-- Main CSS -->
-        <link href="/css/app.css" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
     </head>
     <body class="antialiased">
         <div class="relative flex justify-center min-h-screen bg-gray-100 items-top dark:bg-gray-900 sm:items-center sm:pt-0">
@@ -33,6 +33,6 @@
                 <div class="text-white bg-black">White text</div>
             </div>
 
-        <script src="/js/app.js"></script>
+            <script src="{{ mix('js/app.js') }}"></script>
     </body>
 </html>
