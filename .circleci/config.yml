@@ -1,50 +1,58 @@
-# PHP CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-php/ for more details
-#
 version: 2
 jobs:
   build:
     docker:
-      # Specify the version you desire here
-      - image: circleci/php:7.4-node-browsers
-
+      - image: 'circleci/php:7.4-node-browsers'
     steps:
       - checkout
-
       - run:
-          name: "Prepare Environment"
+          name: Prepare Environment
           command: |
             sudo apt update
             sudo docker-php-ext-install zip
-
       - run:
-          name: "Create Environment file"
+          name: Create Environment file
           command: |
             mv .env.testing .env
-
-      # Download and cache dependencies
       - restore_cache:
           keys:
-            # "composer.lock" can be used if it is committed to the repo
-            - v1-dependencies-{{ checksum "composer.json" }}
-            # fallback to using the latest cache if no exact match is found
+            - 'v1-dependencies-{{ checksum "composer.json" }}'
             - v1-dependencies-
-
       - run:
-          name: "Install Dependencies"
+          name: Install Dependencies
           command: composer install -n --prefer-dist
-
       - save_cache:
-          key: v1-dependencies-{{ checksum "composer.json" }}
+          key: 'v1-dependencies-{{ checksum "composer.json" }}'
           paths:
             - ./vendor
-
       - run:
-          name: "Generate App key"
-          command: php artisan key:generate
-
-      # run tests with phpunit
+          name: Generate App key
+          command: 'php artisan key:generate'
       - run:
-          name: "Run Unit Tests"
+          name: Run Unit Tests
           command: ./vendor/bin/phpunit tests/Unit
+      - run:
+          name: Create database and run migration
+          command: |
+            touch database/database.sqlite
+            php artisan migrate --env=testing
+      - run:
+          name: Run Http Tests
+          command: ./vendor/bin/phpunit tests/Feature
+      - run:
+          name: Install Dusk and Update Chrome Drivers
+          command: |
+            composer require --dev laravel/dusk:"^6.11"
+            composer require --dev staudenmeir/dusk-updater
+            php artisan dusk:update --detect
+      - run:
+          name: Start Chrome Driver
+          command: ./vendor/laravel/dusk/bin/chromedriver-linux
+          background: true
+      - run:
+          name: Run Laravel Server
+          command: php artisan serve
+          background: true
+      - run:
+          name: Run Browser Tests Tests
+          command: php artisan dusk
