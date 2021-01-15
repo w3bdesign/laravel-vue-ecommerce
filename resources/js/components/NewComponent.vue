@@ -1,11 +1,9 @@
 <template>
     <div>
-        Testing out API
         <div v-if="products">
-            Products is true ...
             <div v-for="product in products" :key="product.id">
-                Echoing out name:
-                {{ product.name }}
+                {{ product.id }} - {{ product.name }} -
+                {{ product.description }} - {{ product.price }}
             </div>
         </div>
     </div>
@@ -13,6 +11,11 @@
 
 <script>
 export default {
+    data() {
+        return {
+            products: null,
+        };
+    },
     mounted() {
         axios
             .get("/api/products")
@@ -21,15 +24,15 @@ export default {
                 console.log("We got a response!");
                 console.log(response.data);
                 this.products = response.data;
+                console.log(this.products);
             })
             .catch((error) => console.error(error));
     },
-    // props: ["foo"],
-    setup() {
-        //const greeting = "Greetings";
+
+    /*setup() {
         const products = {};
         return { products };
-    },
+    },*/
 };
 </script>
 
