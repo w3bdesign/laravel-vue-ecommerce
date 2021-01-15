@@ -1,11 +1,20 @@
 <template>
-    <div>Testing out New Vue 3 components <br />Greeting: {{ greeting }}</div>
-    <div>Foo: {{ foo }}</div>
+    <div>Testing out API</div>
 </template>
 
 <script>
 export default {
-    props: ["foo"],
+    mounted() {
+        axios
+            .get("/api/products")
+            .then((response) => {
+                // commit('updateProducts', response.data);
+                console.log("We got a response!");
+                console.log(response.data);
+            })
+            .catch((error) => console.error(error));
+    },
+    // props: ["foo"],
     setup() {
         const greeting = "Greetings";
         return { greeting };
