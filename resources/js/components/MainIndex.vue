@@ -1,5 +1,6 @@
 <template>
     <div>
+        <nav-bar />
         Laravel Ecommerce
         <loading-spinner v-if="loading" />
         <div v-if="products">
@@ -12,10 +13,11 @@
 </template>
 
 <script>
+import NavBar from "./Header/Navbar";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
 
 export default {
-    components: { LoadingSpinner },
+    components: { LoadingSpinner, NavBar },
     data() {
         return {
             loading: true,
