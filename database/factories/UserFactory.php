@@ -30,7 +30,7 @@ class UserFactory extends Factory
             'address' => $this->faker->address,
             'city' => $this->faker->city,
             'state' => $this->faker->state,
-            'zip_code' => $this->faker->postcode
+            'zipcode' => $this->faker->postcode
         ];
     }
 }
