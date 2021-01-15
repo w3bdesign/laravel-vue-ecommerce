@@ -26,13 +26,8 @@
             @endif
 
             <div id="app">
-
-                <test-component foo="bar1"></test-component>
-                <new-component foo="bar2"></new-component>
-
-                <div class="text-white bg-black">White text</div>
+                <new-component></new-component>
             </div>
-
             <script src="{{ mix('js/app.js') }}"></script>
     </body>
 </html>
