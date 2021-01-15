@@ -30,7 +30,7 @@ class ProductFactory extends Factory
             'name' => $name,
             'slug' => Str::slug($name),
             'description' => $this->faker->realText(320),
-            'price' => $this->faker->numberBetween(10000, 100000),
+            'price' => $this->faker->numberBetween(100, 1000),
         ];
     }
 }
