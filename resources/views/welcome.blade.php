@@ -26,7 +26,7 @@
             @endif
 
             <div id="app">
-                <new-component></new-component>
+                <main-index />
             </div>
             <script src="{{ mix('js/app.js') }}"></script>
     </body>

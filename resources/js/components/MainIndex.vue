@@ -1,6 +1,7 @@
 <template>
     <div>
-        Vue
+        <nav-bar />
+        Laravel Vue 3 Ecommerce
         <loading-spinner v-if="loading" />
         <div v-if="products">
             <div v-for="product in products" :key="product.id">
@@ -12,10 +13,11 @@
 </template>
 
 <script>
+import NavBar from "./Header/Navbar";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
 
 export default {
-    components: { LoadingSpinner },
+    components: { LoadingSpinner, NavBar },
     data() {
         return {
             loading: true,

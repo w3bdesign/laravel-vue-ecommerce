@@ -2,8 +2,8 @@ require("./bootstrap");
 
 import { createApp } from "vue";
 
-import NewComponent from "./components/NewComponent.vue";
+import MainIndex from "./components/MainIndex.vue";
 
 createApp({
-    components: { NewComponent },
+    components: { MainIndex },
 }).mount("#app");

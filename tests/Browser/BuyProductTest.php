@@ -17,15 +17,7 @@ class BuyProductTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('http://127.0.0.1:8000')
-                    ->assertSee('Vue');
-        });
-    }
-
-    public function testWeDoNotSeeLaravel()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('http://127.0.0.1:8000')
-                    ->assertDontSee('Laravel');
+                    ->assertSee('Laravel Vue 3 Ecommerce');
         });
     }
 }
