@@ -1,7 +1,7 @@
 <template>
     <div>
         <nav-bar />
-        Laravel Ecommerce
+        Laravel Vue 3 Ecommerce
         <loading-spinner v-if="loading" />
         <div v-if="products">
             <div v-for="product in products" :key="product.id">

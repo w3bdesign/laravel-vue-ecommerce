@@ -20,12 +20,4 @@ class BuyProductTest extends DuskTestCase
                     ->assertSee('Laravel Ecommerce');
         });
     }
-
-    public function testWeDoNotSeeLaravel()
-    {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('http://127.0.0.1:8000')
-                    ->assertDontSee('Laravel');
-        });
-    }
 }
