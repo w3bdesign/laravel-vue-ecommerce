@@ -1,5 +1,6 @@
 <template>
     <div>
+        Vue
         <div v-if="products">
             <div v-for="product in products" :key="product.id">
                 {{ product.id }} - {{ product.name }} -
