@@ -1,6 +1,7 @@
 <template>
     <div>
         Vue
+        <loading-spinner v-if="loading" />
         <div v-if="products">
             <div v-for="product in products" :key="product.id">
                 {{ product.id }} - {{ product.name }} -
@@ -11,9 +12,13 @@
 </template>
 
 <script>
+import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
+
 export default {
+    components: { LoadingSpinner },
     data() {
         return {
+            loading: true,
             products: null,
         };
     },
@@ -25,6 +30,7 @@ export default {
                 console.log("We got a response!");
                 console.log(response.data);
                 this.products = response.data;
+                this.loading = false;
                 console.log(this.products);
             })
             .catch((error) => console.error(error));
