@@ -8,4 +8,5 @@
 
  - Laravel 8
  - Vue 3
+ - VueX state management
  - Laravel tests with CircleCI integration
