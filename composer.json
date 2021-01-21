@@ -14,6 +14,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/cashier": "^12.6",
         "laravel/framework": "^8.12",
+        "laravel/scout": "^8.6",
         "laravel/tinker": "^2.5"
     },
     "require-dev": {
