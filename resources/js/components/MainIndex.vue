@@ -8,15 +8,20 @@
                 {{ product.id }} - {{ product.name }} -
                 {{ product.description }} - {{ product.price }}
             </div>
+            Add to cart:
+            <button @click="$store.commit('addProductToCart', 'testproduct')">Add to cart</button
+            ><br />
+            Cart: {{ $store.state.cart }}
         </div>
     </div>
 </template>
 
 <script>
+import { defineComponent } from "vue";
 import NavBar from "./Header/Navbar";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
 
-export default {
+export default defineComponent({
     components: { LoadingSpinner, NavBar },
     data() {
         return {
@@ -29,11 +34,8 @@ export default {
             .get("/api/products")
             .then((response) => {
                 // commit('updateProducts', response.data);
-                console.log("We got a response!");
-                console.log(response.data);
                 this.products = response.data;
                 this.loading = false;
-                console.log(this.products);
             })
             .catch((error) => console.error(error));
     },
@@ -42,7 +44,7 @@ export default {
         const products = {};
         return { products };
     },*/
-};
+});
 </script>
 
 <style></style>
