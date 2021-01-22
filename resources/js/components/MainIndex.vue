@@ -9,9 +9,9 @@
                 {{ product.description }} - {{ product.price }}
             </div>
             Add to cart:
-            <button @click="this.$store.commit('addProductToCart', 'testproduct')">Add to cart</button
+            <button @click="$store.commit('addProductToCart', 'testproduct')">Add to cart</button
             ><br />
-            Cart: {{ this.$store.state.cart }}
+            Cart: {{ $store.state.cart }}
         </div>
     </div>
 </template>
