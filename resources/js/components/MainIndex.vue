@@ -8,8 +8,12 @@
                 {{ product.id }} - {{ product.name }} -
                 {{ product.description }} - {{ product.price }}
             </div>
-            Add to cart:
-            <button @click="$store.commit('addProductToCart', 'testproduct')">Add to cart</button
+
+            <button
+                class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded"
+                @click="$store.commit('addProductToCart', 'clicktestproduct')"
+            >
+                Add to cart button</button
             ><br />
             Cart: {{ $store.state.cart }}
         </div>

@@ -3,9 +3,10 @@ import { createStore } from "vuex";
 export default createStore({
     state: { cart: [] },
     mutations: {
-        addProductToCart({ cart }) {
+        addProductToCart({ cart }, payload) {
             console.log(cart);
-            cart.push("test");
+            console.log(payload);
+            cart.push(payload);
         },
     },
     //actions: {},

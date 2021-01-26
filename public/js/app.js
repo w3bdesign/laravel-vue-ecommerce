@@ -16484,9 +16484,7 @@ var _hoisted_2 = {
   key: 1
 };
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Add to cart: ");
-
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
@@ -16505,11 +16503,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     );
   }), 128
   /* KEYED_FRAGMENT */
-  )), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    "class": "p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded",
     onClick: _cache[1] || (_cache[1] = function ($event) {
-      return _ctx.$store.commit('addProductToCart', 'testproduct');
+      return _ctx.$store.commit('addProductToCart', 'clicktestproduct');
     })
-  }, "Add to cart"), _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cart: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$store.state.cart), 1
+  }, " Add to cart button"), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cart: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$store.state.cart), 1
   /* TEXT */
   )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
@@ -16589,10 +16588,11 @@ __webpack_require__.r(__webpack_exports__);
     cart: []
   },
   mutations: {
-    addProductToCart: function addProductToCart(_ref) {
+    addProductToCart: function addProductToCart(_ref, payload) {
       var cart = _ref.cart;
       console.log(cart);
-      cart.push("test");
+      console.log(payload);
+      cart.push(payload);
     }
   } //actions: {},
   //modules: {},
