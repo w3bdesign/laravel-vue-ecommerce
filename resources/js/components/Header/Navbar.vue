@@ -1,47 +1,85 @@
 <template>
-    <div>
-        <header class="text-gray-700 body-font">
-            <div
-                class="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row"
-            >
-                <a
-                    class="flex items-center mb-4 font-medium text-gray-900 title-font md:mb-0"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        class="w-10 h-10 p-2 text-white bg-indigo-500 rounded-full"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-                        ></path>
-                    </svg>
-                    <span class="ml-3 text-xl">Shopping Cart</span>
-                </a>
-                <nav
-                    class="flex flex-wrap items-center justify-center text-base md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400"
-                >
-                    <router-link
-                        class="mr-5 hover:text-gray-900"
-                        :to="{ name: 'products.index' }"
-                    >
-                        Products
-                    </router-link>
-                </nav>
-                <router-link
-                    class="inline-flex items-center px-3 py-1 mt-4 text-base bg-gray-200 border-0 rounded focus:outline-none hover:bg-gray-300 md:mt-0"
-                    :to="{ name: 'order.checkout' }"
-                >
-                    Checkout<span class="inline-block ml-1"></span>
-                </router-link>
+    <header
+        role="banner"
+        class="container flex flex-col justify-center px-0 pt-6 mx-auto mb-6"
+    >
+        <div class="flex flex-wrap lg:px-4">
+            <div class="w-9/12 pr-2 my-2 overflow-hidden lg:w-3/12 md:w-10/12">
+                <div class="ml-4 lg:ml-0">
+                    <img
+                        alt="Logo"
+                        class="h-20 lg:h-24"
+                        aria-label="Nettbutikk logo"
+                        src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg"
+                    />
+                </div>
             </div>
-        </header>
-    </div>
+            MobileMenu
+            <div class="hidden lg:w-1/12 lg:block"></div>
+            <div
+                id="nav-content"
+                class="hidden w-full mt-4 bg-black lg:w-8/12 lg:block lg:bg-white lg:mt-0 lg:text-right"
+                aria-expanded="false"
+            >
+                <div class="px-6 lg:px-0 lg:pt-5 xl:pt-7">
+                    <div>
+                        <nav
+                            id="block-main"
+                            role="navigation"
+                            aria-labelledby="block-main-menu"
+                        >
+                            <ul
+                                class="items-center justify-end flex-1 pr-4 -mr-4 list-reset lg:flex"
+                            >
+                                <li
+                                    class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
+                                >
+                                    <router-link to="/">
+                                        <span
+                                            class="text-xl text-white no-underline lg:text-black is-active"
+                                        >
+                                            Home
+                                        </span>
+                                    </router-link>
+                                </li>
+                                <li
+                                    class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
+                                >
+                                    <router-link to="/products">
+                                        <span
+                                            class="text-xl text-white no-underline lg:text-black"
+                                            >Products</span
+                                        >
+                                    </router-link>
+                                </li>
+                                <li
+                                    class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
+                                >
+                                    <router-link to="/categories">
+                                        <span
+                                            class="text-xl text-white no-underline lg:text-black is-active"
+                                            >Categories</span
+                                        >
+                                    </router-link>
+                                </li>
+                                <li
+                                    class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
+                                >
+                                    Search
+                                </li>
+                                <li
+                                    class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
+                                >
+                                    Shopping cart
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <router-view></router-view>
 </template>
 
 <script>
@@ -51,7 +89,7 @@ export default {
 </script>
 
 <style scoped>
-header {
-    max-width: 1400px;
+.red {
+    @apply text-8xl;
 }
 </style>
