@@ -1,5 +1,4 @@
 <template>
-    Layout!
     <nav-bar />
     <router-view></router-view>
     <footer />
