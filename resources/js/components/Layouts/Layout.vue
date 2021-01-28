@@ -1,6 +1,6 @@
 <template>
     <nav-bar />
-    <div class="flex justify-center w-full">
+    <div class="flex justify-center">
         <router-view></router-view>
     </div>
     <footer />
