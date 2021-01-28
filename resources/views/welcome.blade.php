@@ -26,7 +26,7 @@
             @endif
 
             <div id="app">
-                <main-index />
+                <layout />
             </div>
             <script src="{{ mix('js/app.js') }}"></script>
     </body>
