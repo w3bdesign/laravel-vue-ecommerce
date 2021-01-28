@@ -37,7 +37,6 @@ export default defineComponent({
             axios
                 .get("/api/products")
                 .then((response) => {
-                    console.log(response.data);
                     // commit('updateProducts', response.data);
                     state.products = response.data;
                     state.loading = false;
@@ -49,17 +48,6 @@ export default defineComponent({
 
         return { ...toRefs(state) };
     },
-    /*mounted() {
-        axios
-            .get("/api/products")
-            .then((response) => {
-                console.log(state);
-                // commit('updateProducts', response.data);
-                //products = response.data;
-                //loading = false;
-            })
-            .catch((error) => console.error(error));
-    },*/
 });
 </script>
 
