@@ -1,6 +1,5 @@
 <template>
     <div>
-        <nav-bar />
         Laravel Vue 3 Ecommerce
         <loading-spinner v-if="loading" />
         <div v-if="products">
@@ -22,22 +21,19 @@
 
 <script>
 import { defineComponent, reactive, toRefs, onMounted } from "vue";
-import NavBar from "./Header/Navbar";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
 
 export default defineComponent({
-    components: { LoadingSpinner, NavBar },
+    components: { LoadingSpinner },
     setup() {
         const state = reactive({
             loading: true,
             products: null,
         });
-
         const fetchProducts = () => {
             axios
                 .get("/api/products")
                 .then((response) => {
-                    console.log(response.data);
                     // commit('updateProducts', response.data);
                     state.products = response.data;
                     state.loading = false;
@@ -49,17 +45,6 @@ export default defineComponent({
 
         return { ...toRefs(state) };
     },
-    /*mounted() {
-        axios
-            .get("/api/products")
-            .then((response) => {
-                console.log(state);
-                // commit('updateProducts', response.data);
-                //products = response.data;
-                //loading = false;
-            })
-            .catch((error) => console.error(error));
-    },*/
 });
 </script>
 

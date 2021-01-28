@@ -1,14 +1,16 @@
 <template>
-
+    Layout!
+    <nav-bar />
+    <router-view></router-view>
+    <footer />
 </template>
 
 <script>
-// https://stackoverflow.com/questions/64951947/vue-js-3-trying-to-build-a-system-with-2-layouts
-export default {
+import NavBar from "../Header/Navbar";
 
-}
+export default {
+    components: { NavBar },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
