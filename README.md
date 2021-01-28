@@ -9,6 +9,7 @@
  - Laravel 8
  - Vue 3
  - VueX state management
+ - Composition API
  - Laravel Scout
  - Laravel tests with CircleCI integration
 
