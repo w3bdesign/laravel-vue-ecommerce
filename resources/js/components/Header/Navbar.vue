@@ -14,7 +14,7 @@
                     />
                 </div>
             </div>
-            MobileMenu
+            <mobile-menu />
             <div class="hidden lg:w-1/12 lg:block"></div>
             <div
                 id="nav-content"
@@ -82,8 +82,10 @@
 </template>
 
 <script>
+import MobileMenu from "./MobileMenu";
 export default {
     name: "Navbar",
+    components: { MobileMenu },
 };
 </script>
 
