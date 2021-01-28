@@ -10,7 +10,7 @@
         <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
     </head>
     <body class="antialiased">
-        <div class="relative flex justify-center min-h-screen bg-gray-100 items-top dark:bg-gray-900 sm:items-center sm:pt-0">
+        <div>
             @if (Route::has('login'))
                 <div class="fixed top-0 right-0 hidden px-6 py-4 sm:block">
                     @auth
@@ -25,7 +25,7 @@
                 </div>
             @endif
 
-            <div id="app">
+            <div id="app" class="container p-4 mx-auto">
                 <layout />
             </div>
             <script src="{{ mix('js/app.js') }}"></script>

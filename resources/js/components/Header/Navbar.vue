@@ -10,11 +10,11 @@
                         alt="Logo"
                         class="h-20 lg:h-24"
                         aria-label="Nettbutikk logo"
-                        src="../../../img/laravel-logo.svg"
+                        src="../../../img/svg/Logo.svg"
                     />
                 </div>
             </div>
-            MobileMenu
+            <mobile-menu />
             <div class="hidden lg:w-1/12 lg:block"></div>
             <div
                 id="nav-content"
@@ -70,7 +70,7 @@
                                 <li
                                     class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
                                 >
-                                    Shopping cart
+                                    <cart />
                                 </li>
                             </ul>
                         </nav>
@@ -82,8 +82,11 @@
 </template>
 
 <script>
+import Cart from "./Cart";
+import MobileMenu from "./MobileMenu";
 export default {
     name: "Navbar",
+    components: { MobileMenu, Cart },
 };
 </script>
 
