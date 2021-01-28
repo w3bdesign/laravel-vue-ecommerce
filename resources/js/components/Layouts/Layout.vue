@@ -1,7 +1,7 @@
 <template>
     <nav-bar />
     <div class="flex justify-center">
-        <router-view></router-view>
+        <router-view />
     </div>
     <footer />
 </template>
