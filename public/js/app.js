@@ -16734,8 +16734,6 @@ __webpack_require__.r(__webpack_exports__);
   mutations: {
     addProductToCart: function addProductToCart(_ref, payload) {
       var cart = _ref.cart;
-      console.log(cart);
-      console.log(payload);
       cart.push(payload);
     }
   } //actions: {},
