@@ -6,6 +6,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import store from "./store/index";
 
 import Layout from "./components/Layouts/Layout.vue";
+import Cart from "./components/Header/Cart.vue";
 import Index from "./components/Index.vue";
 import Products from "./components/Products/Products.vue";
 import Categories from "./components/Categories/Categories.vue";
@@ -22,7 +23,7 @@ const router = createRouter({
 });
 
 createApp({
-    components: { Layout, Index, Products, Categories },
+    components: { Cart, Layout, Index, Products, Categories },
 })
     .use(store)
     .use(router)

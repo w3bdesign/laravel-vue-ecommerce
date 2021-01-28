@@ -70,7 +70,7 @@
                                 <li
                                     class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
                                 >
-                                    Shopping cart
+                                    <cart />
                                 </li>
                             </ul>
                         </nav>
@@ -82,10 +82,11 @@
 </template>
 
 <script>
+import Cart from "./Cart";
 import MobileMenu from "./MobileMenu";
 export default {
     name: "Navbar",
-    components: { MobileMenu },
+    components: { MobileMenu, Cart },
 };
 </script>
 
