@@ -38,7 +38,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .cart-enter-active,
 .cart-leave-active {
     transition: all 0.5s;
