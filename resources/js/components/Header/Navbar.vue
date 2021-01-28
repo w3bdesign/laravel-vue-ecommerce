@@ -10,7 +10,7 @@
                         alt="Logo"
                         class="h-20 lg:h-24"
                         aria-label="Nettbutikk logo"
-                        src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg"
+                        src="../../../img/laravel-logo.svg"
                     />
                 </div>
             </div>
