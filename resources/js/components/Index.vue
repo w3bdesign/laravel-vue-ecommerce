@@ -10,7 +10,7 @@
                 <br />
                 <button
                     class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded"
-                    @click="$store.commit('addProductToCart', product)"
+                    @click="$store.commit('ADD_PRODUCT_TO_CART', product)"
                 >
                     Add to cart button
                 </button>

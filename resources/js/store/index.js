@@ -3,7 +3,7 @@ import { createStore } from "vuex";
 export default createStore({
     state: { cart: [] },
     mutations: {
-        addProductToCart({ cart }, payload) {
+        ADD_PRODUCT_TO_CART({ cart }, payload) {
             cart.push(payload);
         },
     },

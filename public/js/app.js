@@ -16728,7 +16728,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     ), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
       "class": "p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded",
       onClick: function onClick($event) {
-        return _ctx.$store.commit('addProductToCart', product);
+        return _ctx.$store.commit('ADD_PRODUCT_TO_CART', product);
       }
     }, " Add to cart button ", 8
     /* PROPS */
@@ -16922,7 +16922,7 @@ __webpack_require__.r(__webpack_exports__);
     cart: []
   },
   mutations: {
-    addProductToCart: function addProductToCart(_ref, payload) {
+    ADD_PRODUCT_TO_CART: function ADD_PRODUCT_TO_CART(_ref, payload) {
       var cart = _ref.cart;
       cart.push(payload);
     }
