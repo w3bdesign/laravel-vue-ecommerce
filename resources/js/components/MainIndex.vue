@@ -5,8 +5,8 @@
         <loading-spinner v-if="loading" />
         <div v-if="products">
             <div v-for="product in products" :key="product.id">
-                {{ state.product.id }} - {{ state.product.name }} -
-                {{ state.product.description }} - {{ state.product.price }}
+                {{ product.id }} - {{ product.name }} -
+                {{ product.description }} - {{ product.price }}
             </div>
 
             <button
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { defineComponent, reactive, toRefs } from "vue";
+import { defineComponent, reactive, toRefs, onMounted } from "vue";
 import NavBar from "./Header/Navbar";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
 
@@ -33,18 +33,33 @@ export default defineComponent({
             products: null,
         });
 
-        return { state };
+        const fetchProducts = () => {
+            axios
+                .get("/api/products")
+                .then((response) => {
+                    console.log(response.data);
+                    // commit('updateProducts', response.data);
+                    state.products = response.data;
+                    state.loading = false;
+                })
+                .catch((error) => console.error(error));
+        };
+
+        onMounted(fetchProducts);
+
+        return { ...toRefs(state) };
     },
-    mounted() {
+    /*mounted() {
         axios
             .get("/api/products")
             .then((response) => {
+                console.log(state);
                 // commit('updateProducts', response.data);
-                state.products = response.data;
-                state.loading = false;
+                //products = response.data;
+                //loading = false;
             })
             .catch((error) => console.error(error));
-    },
+    },*/
 });
 </script>
 
