@@ -16305,6 +16305,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _Header_Navbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Header/Navbar */ "./resources/js/components/Header/Navbar.vue");
 /* harmony import */ var _LoadingSpinner_LoadingSpinner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LoadingSpinner/LoadingSpinner */ "./resources/js/components/LoadingSpinner/LoadingSpinner.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -16313,26 +16319,36 @@ __webpack_require__.r(__webpack_exports__);
     LoadingSpinner: _LoadingSpinner_LoadingSpinner__WEBPACK_IMPORTED_MODULE_2__.default,
     NavBar: _Header_Navbar__WEBPACK_IMPORTED_MODULE_1__.default
   },
-  data: function data() {
-    return {
+  setup: function setup() {
+    var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       loading: true,
       products: null
-    };
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    axios.get("/api/products").then(function (response) {
-      // commit('updateProducts', response.data);
-      _this.products = response.data;
-      _this.loading = false;
-    })["catch"](function (error) {
-      return console.error(error);
     });
+
+    var fetchProducts = function fetchProducts() {
+      axios.get("/api/products").then(function (response) {
+        console.log(response.data); // commit('updateProducts', response.data);
+
+        state.products = response.data;
+        state.loading = false;
+      })["catch"](function (error) {
+        return console.error(error);
+      });
+    };
+
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(fetchProducts);
+    return _objectSpread({}, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toRefs)(state));
   }
-  /*setup() {
-      const products = {};
-      return { products };
+  /*mounted() {
+      axios
+          .get("/api/products")
+          .then((response) => {
+              console.log(state);
+              // commit('updateProducts', response.data);
+              //products = response.data;
+              //loading = false;
+          })
+          .catch((error) => console.error(error));
   },*/
 
 }));

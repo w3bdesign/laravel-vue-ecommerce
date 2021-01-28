@@ -21,32 +21,44 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, reactive, toRefs, onMounted } from "vue";
 import NavBar from "./Header/Navbar";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
 
 export default defineComponent({
     components: { LoadingSpinner, NavBar },
-    data() {
-        return {
+    setup() {
+        const state = reactive({
             loading: true,
             products: null,
+        });
+
+        const fetchProducts = () => {
+            axios
+                .get("/api/products")
+                .then((response) => {
+                    console.log(response.data);
+                    // commit('updateProducts', response.data);
+                    state.products = response.data;
+                    state.loading = false;
+                })
+                .catch((error) => console.error(error));
         };
+
+        onMounted(fetchProducts);
+
+        return { ...toRefs(state) };
     },
-    mounted() {
+    /*mounted() {
         axios
             .get("/api/products")
             .then((response) => {
+                console.log(state);
                 // commit('updateProducts', response.data);
-                this.products = response.data;
-                this.loading = false;
+                //products = response.data;
+                //loading = false;
             })
             .catch((error) => console.error(error));
-    },
-
-    /*setup() {
-        const products = {};
-        return { products };
     },*/
 });
 </script>
