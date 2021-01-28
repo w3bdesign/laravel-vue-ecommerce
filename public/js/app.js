@@ -16461,7 +16461,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => /* binding */ render
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _img_laravel_logo_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../img/laravel-logo.svg */ "./resources/img/laravel-logo.svg");
+/* harmony import */ var _img_svg_Logo_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../img/svg/Logo.svg */ "./resources/img/svg/Logo.svg");
 
 
 
@@ -16485,7 +16485,7 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
   alt: "Logo",
   "class": "h-20 lg:h-24",
   "aria-label": "Nettbutikk logo",
-  src: _img_laravel_logo_svg__WEBPACK_IMPORTED_MODULE_1__.default
+  src: _img_svg_Logo_svg__WEBPACK_IMPORTED_MODULE_1__.default
 })])], -1
 /* HOISTED */
 );
@@ -16927,10 +16927,10 @@ module.exports = function (cssWithMappingToString) {
 
 /***/ }),
 
-/***/ "./resources/img/laravel-logo.svg":
-/*!****************************************!*\
-  !*** ./resources/img/laravel-logo.svg ***!
-  \****************************************/
+/***/ "./resources/img/svg/Logo.svg":
+/*!************************************!*\
+  !*** ./resources/img/svg/Logo.svg ***!
+  \************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -16938,7 +16938,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/laravel-logo.svg?83eef76f698f6bf6b4a349895f928699");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/Logo.svg?83eef76f698f6bf6b4a349895f928699");
 
 /***/ }),
 
