@@ -16406,16 +16406,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var _Index_Hero__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Index/Hero */ "./resources/js/components/Index/Hero.vue");
-/* harmony import */ var _Products_Products__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Products/Products */ "./resources/js/components/Products/Products.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _Index_Hero__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Index/Hero */ "./resources/js/components/Index/Hero.vue");
+/* harmony import */ var _Products_Products__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Products/Products */ "./resources/js/components/Products/Products.vue");
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   components: {
-    Hero: _Index_Hero__WEBPACK_IMPORTED_MODULE_0__.default,
-    Products: _Products_Products__WEBPACK_IMPORTED_MODULE_1__.default
+    Hero: _Index_Hero__WEBPACK_IMPORTED_MODULE_1__.default,
+    Products: _Products_Products__WEBPACK_IMPORTED_MODULE_2__.default
   }
-});
+}));
 
 /***/ }),
 
