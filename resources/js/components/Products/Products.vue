@@ -3,10 +3,8 @@
         <div v-for="product in products" :key="product.id">
             <div class="flex flex-col mt-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4">
                 <img
-                    id="product-image"
                     class="container mx-auto transition duration-500 ease-in-out transform cursor-pointer hover:scale-105"
                     :alt="product.name"
-                    loading="lazy"
                     src="../../../img/jpg/product-image.jpg"
                 />
                 <div class="flex justify-center pt-3">

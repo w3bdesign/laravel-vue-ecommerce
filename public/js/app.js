@@ -16982,10 +16982,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       key: product.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
-      id: "product-image",
       "class": "container mx-auto transition duration-500 ease-in-out transform cursor-pointer hover:scale-105",
       alt: product.name,
-      loading: "lazy",
       src: _img_jpg_product_image_jpg__WEBPACK_IMPORTED_MODULE_1__.default
     }, null, 8
     /* PROPS */
