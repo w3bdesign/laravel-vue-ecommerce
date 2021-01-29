@@ -6,7 +6,8 @@
                     id="product-image"
                     class="container mx-auto transition duration-500 ease-in-out transform cursor-pointer hover:scale-105"
                     :alt="product.name"
-                    src="https://via.placeholder.com/376"
+                    loading="lazy"
+                    src="../../../img/jpg/product-image.jpg"
                 />
                 <div class="flex justify-center pt-3">
                     <p class="text-xl font-bold text-center cursor-pointer">

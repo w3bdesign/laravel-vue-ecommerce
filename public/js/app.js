@@ -16953,6 +16953,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => /* binding */ render
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _img_jpg_product_image_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../img/jpg/product-image.jpg */ "./resources/img/jpg/product-image.jpg");
+
 
 var _hoisted_1 = {
   key: 0,
@@ -16983,7 +16985,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       id: "product-image",
       "class": "container mx-auto transition duration-500 ease-in-out transform cursor-pointer hover:scale-105",
       alt: product.name,
-      src: "https://via.placeholder.com/376"
+      loading: "lazy",
+      src: _img_jpg_product_image_jpg__WEBPACK_IMPORTED_MODULE_1__.default
     }, null, 8
     /* PROPS */
     , ["alt"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.name), 1
@@ -17342,6 +17345,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/Hero.jpg?08d3511fc673a60a255bdc23f3f6102f");
+
+/***/ }),
+
+/***/ "./resources/img/jpg/product-image.jpg":
+/*!*********************************************!*\
+  !*** ./resources/img/jpg/product-image.jpg ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/product-image.jpg?292b4de2247a85e87694ccfdfae9f432");
 
 /***/ }),
 
