@@ -1,12 +1,19 @@
 <template>
-    <div>
-        <loading-spinner v-if="loading" />
-        <div v-if="products">
-            <div v-for="product in products" :key="product.id">
-                {{ product.id }} - {{ product.name }} -
-                {{ product.description }} -
-                {{ product.price }}
-                <br />
+    <div class="mt-12" v-if="products">
+        <div v-for="product in products" :key="product.id">
+            <div class="flex flex-col mt-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4">
+                <img
+                    id="product-image"
+                    class="container mx-auto transition duration-500 ease-in-out transform cursor-pointer hover:scale-105"
+                    :alt="product.name"
+                    src="https://via.placeholder.com/376"
+                />
+                <div class="flex justify-center pt-3">
+                    <p class="text-xl font-bold text-center cursor-pointer">
+                        {{ product.name }}
+                    </p>
+                </div>
+
                 <button
                     class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded"
                     @click="$store.commit('ADD_PRODUCT_TO_CART', product)"
@@ -14,9 +21,10 @@
                     Add To Cart
                 </button>
             </div>
-            Cart: {{ $store.state.cart }}
         </div>
+        Cart: {{ $store.state.cart }}
     </div>
+    <loading-spinner v-if="loading" />
 </template>
 
 <script>
