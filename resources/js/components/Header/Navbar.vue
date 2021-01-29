@@ -22,54 +22,63 @@
                 aria-expanded="false"
             >
                 <div class="px-6 lg:px-0 lg:pt-5 xl:pt-7">
-                    <div>
-                        <nav
-                            id="block-main"
-                            role="navigation"
-                            aria-labelledby="block-main-menu"
+                    <nav
+                        id="block-main"
+                        role="navigation"
+                        aria-labelledby="block-main-menu"
+                    >
+                        <ul
+                            class="items-center justify-end flex-1 pr-4 -mr-4 list-reset lg:flex"
                         >
-                            <ul
-                                class="items-center justify-end flex-1 pr-4 -mr-4 list-reset lg:flex"
+                            <li
+                                class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
                             >
-                                <li
-                                    class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
-                                >
-                                    <router-link to="/">
-                                        <span
-                                            class="text-xl text-white no-underline lg:text-black is-active"
-                                        >
-                                            Home
-                                        </span>
-                                    </router-link>
-                                </li>
-                                <li
-                                    class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
-                                >
-                                    <router-link to="/products">
-                                        <span
-                                            class="text-xl text-white no-underline lg:text-black"
-                                            >Products</span
-                                        >
-                                    </router-link>
-                                </li>
-                                <li
-                                    class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
-                                >
-                                    <router-link to="/categories">
-                                        <span
-                                            class="text-xl text-white no-underline lg:text-black is-active"
-                                            >Categories</span
-                                        >
-                                    </router-link>
-                                </li>
-                                <li
-                                    class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
-                                >
-                                    <cart />
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+                                <input
+                                    class="w-56 px-2 py-2 pt-2 pb-2 border border-gray-400 rounded appearance-none input focus focus:border-indigo-600 focus:outline-none active:outline-none active:border-indigo-600"
+                                    placeholder="Search ..."
+                                    aria-placeholder="Search ..."
+                                    id="email"
+                                    type="text"
+                                />
+                            </li>
+                            <li
+                                class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
+                            >
+                                <router-link to="/">
+                                    <span
+                                        class="text-xl text-white no-underline lg:text-black is-active"
+                                    >
+                                        Home
+                                    </span>
+                                </router-link>
+                            </li>
+                            <li
+                                class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
+                            >
+                                <router-link to="/products">
+                                    <span
+                                        class="text-xl text-white no-underline lg:text-black"
+                                        >Products</span
+                                    >
+                                </router-link>
+                            </li>
+                            <li
+                                class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
+                            >
+                                <router-link to="/categories">
+                                    <span
+                                        class="text-xl text-white no-underline lg:text-black is-active"
+                                        >Categories</span
+                                    >
+                                </router-link>
+                            </li>
+                            <li
+                                class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
+                            >
+                                <cart />
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
