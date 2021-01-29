@@ -10,14 +10,12 @@
  - Vue 3
  - VueX state management
  - Composition API
- - Laravel Scout
+ - Animations 
  - Laravel tests with CircleCI integration
 
  ## TODO
 
  - Finish implementing Laravel Scout
- - Finish implementing VueX
  - Add some tests to verify that the cart and checkout works correctly
  - Consider adding an admin dashboard
- - Implement animations
  - Update all composer packages and verify that everything still works

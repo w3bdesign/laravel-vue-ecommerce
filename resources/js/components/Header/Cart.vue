@@ -1,6 +1,6 @@
 <template>
     <div>
-        <transition name="cart">
+        <transition name="fade">
             <span
                 v-if="cartLength"
                 class="text-xl text-white no-underline lg:text-black is-active"
@@ -12,7 +12,7 @@
                     src="../../../img/svg/Cart.svg"
             /></span>
         </transition>
-        <transition name="cart">
+        <transition name="fade">
             <div v-if="cartLength">
                 <span
                     class="absolute w-6 h-6 pb-2 ml-16 -mt-12 text-center text-white bg-black rounded-full lg:ml-14"
@@ -38,15 +38,14 @@ export default {
 };
 </script>
 
-<style>
-.cart-enter-active,
-.cart-leave-active {
-    transition: all 0.5s;
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+    transition: all 0.5s ease;
 }
-.cart-enter,
-.cart-leave-active {
+
+.fade-enter-from,
+.fade-leave-to {
     opacity: 0;
-    transform: translateX(-50px);
-    transform: translateY(-50px);
 }
 </style>
