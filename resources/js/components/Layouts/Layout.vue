@@ -1,15 +1,17 @@
 <template>
     <nav-bar />
-    <div class="flex justify-center">
+    <div class="container mx-auto">
         <router-view />
+        <foot />
     </div>
-    <footer />
+
 </template>
 
 <script>
 import NavBar from "../Header/Navbar";
+import Foot from "../Footer/Footer";
 
 export default {
-    components: { NavBar },
+    components: { NavBar, Foot },
 };
 </script>
