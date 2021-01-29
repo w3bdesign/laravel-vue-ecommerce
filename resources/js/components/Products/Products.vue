@@ -13,9 +13,14 @@
                         {{ product.name }}
                     </p>
                 </div>
+                <div class="flex justify-center mt-2">
+                    <div class="ml-4 text-xl text-gray-900">
+                        ${{ product.price }}
+                    </div>
+                </div>
 
                 <button
-                    class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded"
+                    class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
                     @click="$store.commit('ADD_PRODUCT_TO_CART', product)"
                 >
                     Add To Cart

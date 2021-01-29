@@ -16965,6 +16965,12 @@ var _hoisted_3 = {
 var _hoisted_4 = {
   "class": "text-xl font-bold text-center cursor-pointer"
 };
+var _hoisted_5 = {
+  "class": "flex justify-center mt-2"
+};
+var _hoisted_6 = {
+  "class": "ml-4 text-xl text-gray-900"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_loading_spinner = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("loading-spinner");
 
@@ -16980,8 +16986,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* PROPS */
     , ["alt"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.name), 1
     /* TEXT */
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, " $" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.price), 1
+    /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-      "class": "p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded",
+      "class": "p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700",
       onClick: function onClick($event) {
         return _ctx.$store.commit('ADD_PRODUCT_TO_CART', product);
       }
