@@ -1,6 +1,5 @@
 <template>
     <div>
-        Laravel Vue 3 Ecommerce
         <loading-spinner v-if="loading" />
         <div v-if="products">
             <div v-for="product in products" :key="product.id">
@@ -12,7 +11,7 @@
                     class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded"
                     @click="$store.commit('ADD_PRODUCT_TO_CART', product)"
                 >
-                    Add to cart button
+                    Add To Cart
                 </button>
             </div>
             Cart: {{ $store.state.cart }}

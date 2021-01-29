@@ -65,11 +65,6 @@
                                 <li
                                     class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
                                 >
-                                    Search
-                                </li>
-                                <li
-                                    class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
-                                >
                                     <cart />
                                 </li>
                             </ul>
