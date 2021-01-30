@@ -8,8 +8,8 @@
 <script>
 import { defineComponent } from 'vue';
 
-import Hero from './Index/Hero.vue';
-import Products from './Products/Products.vue';
+import Hero from './Hero.vue';
+import Products from '../../components/Products/Products.vue';
 
 export default defineComponent({
   components: { Hero, Products },

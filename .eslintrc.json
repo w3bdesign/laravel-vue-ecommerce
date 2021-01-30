@@ -10,7 +10,7 @@
     },
     "plugins": ["vue"],
     "rules": {
-        // "import/no-extraneous-dependencies": "off",
+        // "import/no-extraneous-dependencies": "warn",
         "no-console": "warn",
         "global-require": "off"
     }
