@@ -8,7 +8,7 @@
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "eslint": "./node_modules/.bin/eslint resources/assets/js/ test/ --ext .js,.vue"
+        "eslint": "./node_modules/.bin/eslint resources/js/ --ext .js,.vue"
     },
     "devDependencies": {
         "@vue/compiler-sfc": "^3.0.5",
