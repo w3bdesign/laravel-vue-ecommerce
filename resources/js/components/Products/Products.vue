@@ -38,11 +38,6 @@
       Cart: {{ $store.state.cart }}
     </div>
     <loading-spinner v-if="loading" />
-    <div class="grid grid-cols-3 divide-x-2 divide-gray-700">
-      <div>1</div>
-      <div>2</div>
-      <div>3</div>
-    </div>
   </div>
 </template>
 
