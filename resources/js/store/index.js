@@ -2,6 +2,8 @@ import { createStore, createLogger } from 'vuex';
 
 const debug = process.env.NODE_ENV !== 'production';
 
+// TODO Move state into modules when the store grows bigger
+
 export default createStore({
 
   state: { cart: [] },
