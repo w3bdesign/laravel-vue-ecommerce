@@ -3,15 +3,15 @@
         "browser": true,
         "es2021": true
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:vue/recommended",
-        "airbnb-base"
-    ],
+    "extends": ["eslint:recommended", "plugin:vue/recommended", "airbnb-base"],
     "parserOptions": {
         "ecmaVersion": 12,
         "sourceType": "module"
     },
     "plugins": ["vue"],
-    "rules": {}
+    "rules": {
+        "import/no-extraneous-dependencies": "off",
+        "no-console": "off",
+        "no-undef": "off"
+    }
 }

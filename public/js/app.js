@@ -16619,7 +16619,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
 
     var fetchProducts = function fetchProducts() {
-      axios__WEBPACK_IMPORTED_MODULE_0__.axios.get('/api/products').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/products').then(function (response) {
         // commit('updateProducts', response.data);
         state.products = response.data;
         state.loading = false;
