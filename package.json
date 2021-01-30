@@ -7,20 +7,26 @@
         "watch-poll": "npm run watch -- --watch-poll",
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
-        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js"
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "eslint": "./node_modules/.bin/eslint resources/assets/js/ test/ --ext .js,.vue"
     },
     "devDependencies": {
         "@vue/compiler-sfc": "^3.0.5",
-        "axios": "^0.21.1",
         "cross-env": "^7.0.3",
-        "laravel-mix": "^6.0.11",
-        "lodash": "^4.17.20",
+        "eslint": "^7.18.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-loader": "^4.0.2",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-vue": "^7.5.0",
         "postcss": "^8.2.4",
         "resolve-url-loader": "^3.1.2",
-        "tailwindcss": "^2.0.2",
         "vue-loader": "^16.0.0-rc.2"
     },
     "dependencies": {
+        "lodash": "^4.17.20",
+        "axios": "^0.21.1",
+        "laravel-mix": "^6.0.11",
+        "tailwindcss": "^2.0.2",
         "vue": "^3.0.5",
         "vue-router": "^4.0.3",
         "vuex": "^4.0.0-rc.2"
