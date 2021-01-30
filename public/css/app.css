@@ -604,6 +604,67 @@ video {
   outline-offset: 2px;
 }
 
+.productImage {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .productImage {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .productImage {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .productImage {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .productImage {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .productImage {
+    max-width: 1536px;
+  }
+}
+
+.productImage {
+  margin-left: auto;
+  margin-right: auto;
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-duration: 500ms;
+  cursor: pointer;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.productImage:hover {
+  --tw-scale-x: 1.05;
+  --tw-scale-y: 1.05;
+}
+
+.productImage {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .space-y-0 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
