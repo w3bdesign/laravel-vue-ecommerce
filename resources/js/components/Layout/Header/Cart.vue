@@ -9,7 +9,7 @@
           alt="Cart icon"
           class="h-12 ml-4 lg:ml-2"
           aria-label="Cart"
-          src="../../../img/svg/Cart.svg"
+          src="../../../../img/svg/Cart.svg"
         ></span>
     </transition>
     <transition name="fade">
