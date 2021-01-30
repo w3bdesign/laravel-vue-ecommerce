@@ -9,6 +9,7 @@
  - Laravel 8
  - Vue 3
  - VueX state management
+ - ESLint code linting with AirBnB ruleset
  - Composition API
  - Animations 
  - Laravel tests with CircleCI integration
