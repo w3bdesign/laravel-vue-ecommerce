@@ -74,10 +74,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style>
-.productImage {
-    @apply container mx-auto transition duration-500
-    ease-in-out transform cursor-pointer hover:scale-105;
-}
-</style>

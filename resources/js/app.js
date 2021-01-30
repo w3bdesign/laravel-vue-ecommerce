@@ -7,7 +7,9 @@ import Layout from './components/Layout/Layout.vue';
 import FooterContent from './components/Layout/Footer/FooterContent.vue';
 import Cart from './components/Layout/Header/Cart.vue';
 import CartContents from './components/Cart/CartContents.vue';
+
 import Index from './pages/Home/Index.vue';
+
 import Products from './components/Products/Products.vue';
 import Categories from './components/Categories/Categories.vue';
 
