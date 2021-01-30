@@ -1,11 +1,6 @@
 @tailwind base;
 @tailwind components;
 
-.inputSearch {
-    @apply w-56 px-2 py-2 pt-2 pb-2 border border-gray-400 rounded appearance-none;
-    @apply focus:border-indigo-600 focus:outline-none;
-}
-
 .productImage {
     @apply container mx-auto transition duration-500;
     @apply ease-in-out transform cursor-pointer hover:scale-105;
