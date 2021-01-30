@@ -42,10 +42,12 @@
 </template>
 
 <script>
-import { axios } from 'axios';
+import axios from 'axios';
+
 import {
   defineComponent, reactive, toRefs, onMounted,
 } from 'vue';
+
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.vue';
 
 export default defineComponent({

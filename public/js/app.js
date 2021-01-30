@@ -16381,6 +16381,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.mjs");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vuex__WEBPACK_IMPORTED_MODULE_0__.createStore)({
+  strict: "development" !== 'production',
   state: {
     cart: []
   },
@@ -16619,7 +16620,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
 
     var fetchProducts = function fetchProducts() {
-      axios__WEBPACK_IMPORTED_MODULE_0__.axios.get('/api/products').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/products').then(function (response) {
         // commit('updateProducts', response.data);
         state.products = response.data;
         state.loading = false;
