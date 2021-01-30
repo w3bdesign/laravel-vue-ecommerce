@@ -34,8 +34,8 @@
                 class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
               >
                 <input
-                  id="email"
-                  class="w-56 px-2 py-2 pt-2 pb-2 border border-gray-400 rounded appearance-none input focus focus:border-indigo-600 focus:outline-none active:outline-none active:border-indigo-600"
+                  id="search"
+                  class="inputSearch"
                   placeholder="Search ..."
                   aria-placeholder="Search ..."
                   type="text"
@@ -84,8 +84,8 @@
 </template>
 
 <script>
-import Cart from './Cart';
-import MobileMenu from './MobileMenu';
+import Cart from './Cart.vue';
+import MobileMenu from './MobileMenu.vue';
 
 export default {
   name: 'Navbar',
@@ -94,7 +94,9 @@ export default {
 </script>
 
 <style scoped>
-.red {
-    @apply text-8xl;
+.inputSearch {
+    @apply w-56 px-2 py-2 pt-2 pb-2 border border-gray-400 rounded appearance-none
+    input focus focus:border-indigo-600 focus:outline-none
+    active:outline-none active:border-indigo-600;
 }
 </style>

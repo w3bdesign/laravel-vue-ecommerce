@@ -1,4 +1,6 @@
-<template>Show all categories</template>
+<template>
+  <div>Show all categories</div>
+</template>
 
 <script>
 export default {};
