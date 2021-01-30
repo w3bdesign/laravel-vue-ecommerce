@@ -16380,8 +16380,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.mjs");
 
+var debug = "development" !== 'production';
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vuex__WEBPACK_IMPORTED_MODULE_0__.createStore)({
-  strict: "development" !== 'production',
   state: {
     cart: []
   },
@@ -16390,7 +16390,9 @@ __webpack_require__.r(__webpack_exports__);
       var cart = _ref.cart;
       cart.push(payload);
     }
-  } // actions: {},
+  },
+  strict: "development" !== 'production',
+  plugins: debug ? [(0,vuex__WEBPACK_IMPORTED_MODULE_0__.createLogger)()] : [] // actions: {},
   // modules: {},
 
 }));
@@ -16866,7 +16868,6 @@ var _hoisted_8 = {
 var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", {
   "class": "inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
-  id: "search",
   "class": "inputSearch",
   placeholder: "Search ...",
   "aria-placeholder": "Search ...",
