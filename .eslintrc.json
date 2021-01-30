@@ -11,7 +11,7 @@
     "plugins": ["vue"],
     "rules": {
         // "import/no-extraneous-dependencies": "off",
-        "no-console": "warn"
-        // "no-undef": "off"
+        "no-console": "warn",
+        "global-require": "off"
     }
 }
