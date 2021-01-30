@@ -12,6 +12,7 @@
     "rules": {
         // "import/no-extraneous-dependencies": "warn",
         "no-console": "warn",
-        "global-require": "off"
+        "global-require": "off",
+        "max-len": "warn"
     }
 }

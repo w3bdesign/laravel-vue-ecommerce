@@ -91,11 +91,3 @@ export default {
   components: { MobileMenu, Cart },
 };
 </script>
-
-<style scoped>
-.inputSearch {
-    @apply w-56 px-2 py-2 pt-2 pb-2 border border-gray-400 rounded appearance-none
-    input focus focus:border-indigo-600 focus:outline-none
-    active:outline-none active:border-indigo-600;
-}
-</style>
