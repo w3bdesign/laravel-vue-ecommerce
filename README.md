@@ -12,7 +12,8 @@
  - VueX state management
  - ESLint code linting with AirBnB ruleset
  - Composition API
- - Animations 
+ - Animations
+ - SonarCloud code quality scanner integration on all pull requests
  - Laravel tests with CircleCI integration
 
  ## TODO
