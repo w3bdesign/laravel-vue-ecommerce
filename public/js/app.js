@@ -16389,12 +16389,7 @@ var debug = "development" !== 'production'; // TODO Move state into modules when
   mutations: {
     ADD_PRODUCT_TO_CART: function ADD_PRODUCT_TO_CART(_ref, payload) {
       var cart = _ref.cart;
-      cart.push(payload); // localStorage.setItem('agreedToPrivacy', true);
-      // localStorage.setItem('LaravelCart', payload);
-
-      localStorage.setItem('agreedToPrivacy', true);
-      console.log('Set local storage to: ');
-      console.log(localStorage.getItem('agreedToPrivacy'));
+      cart.push(payload);
     }
   },
   strict: "development" !== 'production',
