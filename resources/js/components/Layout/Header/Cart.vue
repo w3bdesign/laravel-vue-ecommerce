@@ -5,19 +5,24 @@
         v-if="cartLength"
         class="text-xl text-white no-underline lg:text-black is-active"
       >
-        <img
-          alt="Cart icon"
-          class="h-12 ml-4 lg:ml-2"
-          aria-label="Cart"
-          src="../../../../img/svg/Cart.svg"
-        ></span>
+        <router-link to="/checkout">
+          <img
+            alt="Cart icon"
+            class="h-12 ml-4 lg:ml-2"
+            aria-label="Cart"
+            src="../../../../img/svg/Cart.svg"
+          >
+        </router-link>
+      </span>
     </transition>
     <transition name="fade">
       <div v-if="cartLength">
-        <span class="cartLength">
-          {{ cartLength }}
-        </span>
-        <span>Total: 0 </span>
+        <router-link to="/checkout">
+          <span class="cartLength">
+            {{ cartLength }}
+          </span>
+          <span>Total: 0 </span>
+        </router-link>
       </div>
     </transition>
   </div>
