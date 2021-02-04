@@ -9,7 +9,7 @@
 import { defineComponent } from 'vue';
 
 import Hero from './Hero.vue';
-import Products from '../../components/Products/Products.vue';
+import Products from '../Products/Products.vue';
 
 export default defineComponent({
   components: { Hero, Products },

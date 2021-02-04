@@ -10,7 +10,7 @@ import CartContents from './components/Cart/CartContents.vue';
 
 import Index from './pages/Home/Index.vue';
 
-import Products from './components/Products/Products.vue';
+import Products from './pages/Products/Products.vue';
 import Categories from './components/Categories/Categories.vue';
 
 require('./bootstrap');
