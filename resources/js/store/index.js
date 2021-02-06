@@ -9,6 +9,13 @@ export default createStore({
   state: { cart: [] },
   mutations: {
     ADD_PRODUCT_TO_CART({ cart }, payload) {
+      const foundProductInCartIndex = cart.findIndex((item) => item === cart.product);
+
+      if (foundProductInCartIndex !== -1) {
+        console.log('Found item!');
+        return;
+      }
+
       cart.push(payload);
     },
   },
