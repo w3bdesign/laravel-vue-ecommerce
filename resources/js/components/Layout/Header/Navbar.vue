@@ -94,7 +94,7 @@ export default {
 
 <style>
 .inputSearch {
-    @apply w-56 px-2 py-2 pt-2 pb-2 border border-gray-400;
-    @apply rounded appearance-none focus:border-indigo-600 focus:outline-none;
+  @apply w-56 px-2 py-2 pt-2 pb-2 border border-gray-400;
+  @apply rounded appearance-none focus:border-indigo-600 focus:outline-none;
 }
 </style>
