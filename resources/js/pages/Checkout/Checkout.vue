@@ -8,7 +8,11 @@
 
 <script>
 import {
-  defineComponent, onMounted, reactive, toRefs,
+  computed,
+  defineComponent,
+  onMounted,
+  reactive,
+  toRefs,
 } from 'vue';
 
 import { loadStripe } from '@stripe/stripe-js';
@@ -27,17 +31,19 @@ export default defineComponent({
         state: '',
         zip_code: '',
       },
-
     });
+
+    const cart = computed(() => this.$store.state.cart);
 
     onMounted(async () => {
       const stripe = await loadStripe(process.env.MIX_STRIPE_KEY);
       console.log('Stripe test: ');
       console.log(stripe);
+      console.log('Cart computed: ');
+      console.log(cart);
     });
 
-    return { ...toRefs(state) };
+    return { ...toRefs(state), cart };
   },
 });
-
 </script>
