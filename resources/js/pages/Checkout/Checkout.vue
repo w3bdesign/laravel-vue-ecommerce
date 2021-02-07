@@ -6,6 +6,15 @@
   </div>
 </template>
 
-<script setup>
+<script>
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+  setup(_, { emit }) {
+    console.log('Emit: ');
+    console.log(emit);
+  },
+
+});
 
 </script>
