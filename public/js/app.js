@@ -16752,9 +16752,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
             case 2:
               stripe = _context.sent;
+              console.log('Stripe test: ');
               console.log(stripe);
 
-            case 4:
+            case 5:
             case "end":
               return _context.stop();
           }

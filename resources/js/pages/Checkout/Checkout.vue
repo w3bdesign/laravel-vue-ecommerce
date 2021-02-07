@@ -32,6 +32,7 @@ export default defineComponent({
 
     onMounted(async () => {
       const stripe = await loadStripe(process.env.MIX_STRIPE_KEY);
+      console.log('Stripe test: ');
       console.log(stripe);
     });
 

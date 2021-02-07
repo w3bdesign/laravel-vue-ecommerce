@@ -5,7 +5,6 @@ const debug = process.env.NODE_ENV !== 'production';
 // TODO Move state into modules when the store becomes bigger
 
 export default createStore({
-
   state: {
     products: [],
     cart: [],
