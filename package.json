@@ -23,6 +23,7 @@
         "vue-loader": "^16.0.0-rc.2"
     },
     "dependencies": {
+        "@stripe/stripe-js": "^1.12.1",
         "axios": "^0.21.1",
         "laravel-mix": "^6.0.11",
         "lodash": "^4.17.20",

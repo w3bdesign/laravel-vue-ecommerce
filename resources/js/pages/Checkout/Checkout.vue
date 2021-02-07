@@ -7,14 +7,36 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import {
+  defineComponent, onMounted, reactive, toRefs,
+} from 'vue';
+
+import { loadStripe } from '@stripe/stripe-js';
 
 export default defineComponent({
-  setup(_, { emit }) {
-    console.log('Emit: ');
-    console.log(emit);
-  },
+  setup() {
+    const state = reactive({
+      stripe: {},
+      cardElement: {},
+      customer: {
+        first_name: '',
+        last_name: '',
+        email: '',
+        address: '',
+        city: '',
+        state: '',
+        zip_code: '',
+      },
 
+    });
+
+    onMounted(async () => {
+      const stripe = await loadStripe(process.env.MIX_STRIPE_KEY);
+      console.log(stripe);
+    });
+
+    return { ...toRefs(state) };
+  },
 });
 
 </script>
