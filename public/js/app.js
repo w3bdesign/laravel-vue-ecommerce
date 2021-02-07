@@ -16728,6 +16728,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
   setup: function setup() {
+    var _this = this;
+
     var state = (0,vue__WEBPACK_IMPORTED_MODULE_1__.reactive)({
       stripe: {},
       cardElement: {},
@@ -16740,6 +16742,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         state: '',
         zip_code: ''
       }
+    });
+    var cart = (0,vue__WEBPACK_IMPORTED_MODULE_1__.computed)(function () {
+      return _this.$store.state.cart;
     });
     (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       var stripe;
@@ -16754,15 +16759,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               stripe = _context.sent;
               console.log('Stripe test: ');
               console.log(stripe);
+              console.log('Cart computed: ');
+              console.log(cart);
 
-            case 5:
+            case 7:
             case "end":
               return _context.stop();
           }
         }
       }, _callee);
     })));
-    return _objectSpread({}, (0,vue__WEBPACK_IMPORTED_MODULE_1__.toRefs)(state));
+    return _objectSpread(_objectSpread({}, (0,vue__WEBPACK_IMPORTED_MODULE_1__.toRefs)(state)), {}, {
+      cart: cart
+    });
   }
 }));
 
