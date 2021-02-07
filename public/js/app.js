@@ -16378,7 +16378,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.mjs");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 
 var debug = "development" !== 'production'; // TODO Move state into modules when the store grows bigger
 
@@ -16443,7 +16443,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.mjs");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -16539,10 +16539,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/Checkout/Checkout.vue?vue&type=script&lang=js":
-/*!******************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/Checkout/Checkout.vue?vue&type=script&lang=js ***!
-  \******************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/Checkout/Checkout.vue?vue&type=script&setup=true&lang=js":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/Checkout/Checkout.vue?vue&type=script&setup=true&lang=js ***!
+  \*****************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -16550,7 +16550,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  expose: [],
+  setup: function setup(__props) {
+    return {};
+  }
+});
 
 /***/ }),
 
@@ -35367,17 +35372,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var _Checkout_vue_vue_type_template_id_67966e56__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Checkout.vue?vue&type=template&id=67966e56 */ "./resources/js/pages/Checkout/Checkout.vue?vue&type=template&id=67966e56");
-/* harmony import */ var _Checkout_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Checkout.vue?vue&type=script&lang=js */ "./resources/js/pages/Checkout/Checkout.vue?vue&type=script&lang=js");
+/* harmony import */ var _Checkout_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Checkout.vue?vue&type=script&setup=true&lang=js */ "./resources/js/pages/Checkout/Checkout.vue?vue&type=script&setup=true&lang=js");
 
 
 
-_Checkout_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.render = _Checkout_vue_vue_type_template_id_67966e56__WEBPACK_IMPORTED_MODULE_0__.render
+_Checkout_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.render = _Checkout_vue_vue_type_template_id_67966e56__WEBPACK_IMPORTED_MODULE_0__.render
 /* hot reload */
 if (false) {}
 
-_Checkout_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.__file = "resources/js/pages/Checkout/Checkout.vue"
+_Checkout_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__.default.__file = "resources/js/pages/Checkout/Checkout.vue"
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_Checkout_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__.default);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_Checkout_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_1__.default);
 
 /***/ }),
 
@@ -35559,18 +35564,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/pages/Checkout/Checkout.vue?vue&type=script&lang=js":
-/*!**************************************************************************!*\
-  !*** ./resources/js/pages/Checkout/Checkout.vue?vue&type=script&lang=js ***!
-  \**************************************************************************/
+/***/ "./resources/js/pages/Checkout/Checkout.vue?vue&type=script&setup=true&lang=js":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/pages/Checkout/Checkout.vue?vue&type=script&setup=true&lang=js ***!
+  \*************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Checkout_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__.default
+/* harmony export */   "default": () => /* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Checkout_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__.default
 /* harmony export */ });
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Checkout_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Checkout.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/Checkout/Checkout.vue?vue&type=script&lang=js");
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_Checkout_vue_vue_type_script_setup_true_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./Checkout.vue?vue&type=script&setup=true&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/pages/Checkout/Checkout.vue?vue&type=script&setup=true&lang=js");
  
 
 /***/ }),
@@ -39349,28 +39354,41 @@ function compileToFunction(template, options) {
 
 /***/ }),
 
-/***/ "./node_modules/vuex/dist/vuex.cjs.js":
-/*!********************************************!*\
-  !*** ./node_modules/vuex/dist/vuex.cjs.js ***!
-  \********************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ "./node_modules/vuex/dist/vuex.esm-bundler.js":
+/*!****************************************************!*\
+  !*** ./node_modules/vuex/dist/vuex.esm-bundler.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__,
+/* harmony export */   "Store": () => /* binding */ Store,
+/* harmony export */   "createLogger": () => /* binding */ createLogger,
+/* harmony export */   "createNamespacedHelpers": () => /* binding */ createNamespacedHelpers,
+/* harmony export */   "createStore": () => /* binding */ createStore,
+/* harmony export */   "mapActions": () => /* binding */ mapActions,
+/* harmony export */   "mapGetters": () => /* binding */ mapGetters,
+/* harmony export */   "mapMutations": () => /* binding */ mapMutations,
+/* harmony export */   "mapState": () => /* binding */ mapState,
+/* harmony export */   "storeKey": () => /* binding */ storeKey,
+/* harmony export */   "useStore": () => /* binding */ useStore
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /*!
- * vuex v4.0.0-rc.2
- * (c) 2020 Evan You
+ * vuex v4.0.0
+ * (c) 2021 Evan You
  * @license MIT
  */
 
-
-var vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var storeKey = 'store';
 
 function useStore (key) {
   if ( key === void 0 ) key = null;
 
-  return vue.inject(key !== null ? key : storeKey)
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.inject)(key !== null ? key : storeKey)
 }
 
 var target = typeof window !== 'undefined'
@@ -39891,7 +39909,7 @@ Store.prototype.watch = function watch$1 (getter, cb, options) {
   if ((true)) {
     assert(typeof getter === 'function', "store.watch only accepts a function.");
   }
-  return vue.watch(function () { return getter(this$1.state, this$1.getters); }, cb, Object.assign({}, options))
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(function () { return getter(this$1.state, this$1.getters); }, cb, Object.assign({}, options))
 };
 
 Store.prototype.replaceState = function replaceState (state) {
@@ -40007,7 +40025,7 @@ function resetStoreState (store, state, hot) {
     });
   });
 
-  store._state = vue.reactive({
+  store._state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
     data: state
   });
 
@@ -40212,7 +40230,7 @@ function registerGetter (store, type, rawGetter, local) {
 }
 
 function enableStrictMode (store) {
-  vue.watch(function () { return store._state.data; }, function () {
+  (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(function () { return store._state.data; }, function () {
     if ((true)) {
       assert(store._committing, "do not mutate vuex store state outside mutation handlers.");
     }
@@ -40276,7 +40294,7 @@ var mapState = normalizeNamespace(function (namespace, states) {
 /**
  * Reduce the code which written in Vue.js for committing the mutation
  * @param {String} [namespace] - Module's namespace
- * @param {Object|Array} mutations # Object's item can be a function which accept `commit` function as the first param, it can accept anthor params. You can commit mutation and do any other things in this function. specially, You need to pass anthor params from the mapped function.
+ * @param {Object|Array} mutations # Object's item can be a function which accept `commit` function as the first param, it can accept another params. You can commit mutation and do any other things in this function. specially, You need to pass anthor params from the mapped function.
  * @return {Object}
  */
 var mapMutations = normalizeNamespace(function (namespace, mutations) {
@@ -40538,10 +40556,11 @@ function pad (num, maxLength) {
   return repeat('0', maxLength - num.toString().length) + num
 }
 
-var index_cjs = {
-  version: '4.0.0-rc.2',
-  createStore: createStore,
+var index = {
+  version: '4.0.0',
   Store: Store,
+  storeKey: storeKey,
+  createStore: createStore,
   useStore: useStore,
   mapState: mapState,
   mapMutations: mapMutations,
@@ -40551,50 +40570,7 @@ var index_cjs = {
   createLogger: createLogger
 };
 
-module.exports = index_cjs;
-
-
-/***/ }),
-
-/***/ "./node_modules/vuex/dist/vuex.mjs":
-/*!*****************************************!*\
-  !*** ./node_modules/vuex/dist/vuex.mjs ***!
-  \*****************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => /* reexport default export from named module */ _dist_vuex_cjs_js__WEBPACK_IMPORTED_MODULE_0__,
-/* harmony export */   "version": () => /* binding */ version,
-/* harmony export */   "createStore": () => /* binding */ createStore,
-/* harmony export */   "Store": () => /* binding */ Store,
-/* harmony export */   "install": () => /* binding */ install,
-/* harmony export */   "useStore": () => /* binding */ useStore,
-/* harmony export */   "mapState": () => /* binding */ mapState,
-/* harmony export */   "mapMutations": () => /* binding */ mapMutations,
-/* harmony export */   "mapGetters": () => /* binding */ mapGetters,
-/* harmony export */   "mapActions": () => /* binding */ mapActions,
-/* harmony export */   "createNamespacedHelpers": () => /* binding */ createNamespacedHelpers,
-/* harmony export */   "createLogger": () => /* binding */ createLogger
-/* harmony export */ });
-/* harmony import */ var _dist_vuex_cjs_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../dist/vuex.cjs.js */ "./node_modules/vuex/dist/vuex.cjs.js");
-
-
-const {
-  version,
-  createStore,
-  Store,
-  install,
-  useStore,
-  mapState,
-  mapMutations,
-  mapGetters,
-  mapActions,
-  createNamespacedHelpers,
-  createLogger
-} = _dist_vuex_cjs_js__WEBPACK_IMPORTED_MODULE_0__
-
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (index);
 
 
 
