@@ -17276,10 +17276,70 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 /* HOISTED */
 );
 
+var _hoisted_3 = {
+  "class": "w-full text-left whitespace-no-wrap table-auto"
+};
+
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", {
+  "class": "px-4 py-3 text-sm font-medium tracking-wider text-gray-900 bg-gray-200 rounded-tl rounded-bl title-font"
+}, " Item "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", {
+  "class": "px-4 py-3 text-sm font-medium tracking-wider text-gray-900 bg-gray-200 title-font"
+}, " Quantity "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", {
+  "class": "px-4 py-3 text-sm font-medium tracking-wider text-gray-900 bg-gray-200 title-font"
+}, " Price "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("th", {
+  "class": "px-4 py-3 text-sm font-medium tracking-wider text-gray-900 bg-gray-200 title-font"
+}, " Actions ")])], -1
+/* HOISTED */
+);
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+  "class": "w-10 text-right"
+}, " Remove ", -1
+/* HOISTED */
+);
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+  "class": "p-4 font-bold"
+}, " Total Amount ", -1
+/* HOISTED */
+);
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+  "class": "w-10 text-right"
+}, null, -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [_hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cart: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$store.state.cart), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [_hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cart: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$store.state.cart) + " ", 1
   /* TEXT */
-  )]);
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("table", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.$store.state.cart, function (item) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("tr", {
+      key: item.id
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      "class": "p-4",
+      textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.name)
+    }, null, 8
+    /* PROPS */
+    , ["textContent"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      "class": "p-4",
+      textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.quantity)
+    }, null, 8
+    /* PROPS */
+    , ["textContent"]), _hoisted_5]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", null, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+    "class": "p-4 font-bold",
+    textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.cartQuantity)
+  }, null, 8
+  /* PROPS */
+  , ["textContent"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+    "class": "p-4 font-bold",
+    textContent: (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.cartTotal)
+  }, null, 8
+  /* PROPS */
+  , ["textContent"]), _hoisted_7])])])]);
 }
 
 /***/ }),
