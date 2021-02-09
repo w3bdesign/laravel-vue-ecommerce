@@ -35,15 +35,19 @@ export default defineComponent({
 
     const cart = computed(() => this.$store.state.cart);
 
+    const processPayment = async () => {
+      console.log('Process!');
+    };
+
     onMounted(async () => {
-      const stripe = await loadStripe(process.env.MIX_STRIPE_KEY);
+      state.stripe = await loadStripe(process.env.MIX_STRIPE_KEY);
       console.log('Stripe test: ');
-      console.log(stripe);
+      console.log(state.stripe);
       console.log('Cart computed: ');
       console.log(cart);
     });
 
-    return { ...toRefs(state), cart };
+    return { ...toRefs(state), cart, processPayment };
   },
 });
 </script>
