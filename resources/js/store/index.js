@@ -12,6 +12,8 @@ export default createStore({
   },
   mutations: {
     ADD_PRODUCT_TO_CART({ cart }, payload) {
+      console.log('Cart: ');
+      console.log(cart);
       const foundProductInCartIndex = cart.findIndex((item) => item === cart.product);
 
       console.log(foundProductInCartIndex);
