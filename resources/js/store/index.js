@@ -12,16 +12,29 @@ export default createStore({
   },
   mutations: {
     ADD_PRODUCT_TO_CART({ cart }, payload) {
-      const foundProductInCartIndex = cart.findIndex((item) => item === cart.product);
+      console.log('Find index: ');
+      const foundProductInCartIndex = cart.findIndex(
+        (item) => item.slug === payload.slug,
+      );
 
+      console.log('foundProductInCartIndex: ');
       console.log(foundProductInCartIndex);
 
       if (foundProductInCartIndex !== -1) {
         console.log('Found item!');
-        return;
+        // cart[foundProductInCartIndex].quantity += 1;
+
+        const increasedQuantity = cart;
+        increasedQuantity[foundProductInCartIndex].quantity += 1;
+
+        return increasedQuantity;
       }
 
-      cart.push(payload);
+      const newPayload = payload;
+
+      newPayload.quantity = 1;
+      cart.push(newPayload);
+      return false;
     },
   },
   strict: process.env.NODE_ENV !== 'production',
