@@ -12,21 +12,13 @@ export default createStore({
   },
   mutations: {
     ADD_PRODUCT_TO_CART({ cart }, payload) {
-      console.log('Find index: ');
+      const increasedQuantity = cart;
       const foundProductInCartIndex = cart.findIndex(
         (item) => item.slug === payload.slug,
       );
 
-      console.log('foundProductInCartIndex: ');
-      console.log(foundProductInCartIndex);
-
       if (foundProductInCartIndex !== -1) {
-        console.log('Found item!');
-        // cart[foundProductInCartIndex].quantity += 1;
-
-        const increasedQuantity = cart;
         increasedQuantity[foundProductInCartIndex].quantity += 1;
-
         return increasedQuantity;
       }
 
@@ -34,7 +26,7 @@ export default createStore({
 
       newPayload.quantity = 1;
       cart.push(newPayload);
-      return false;
+      return null;
     },
   },
   strict: process.env.NODE_ENV !== 'production',
