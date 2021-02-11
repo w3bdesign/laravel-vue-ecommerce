@@ -16546,19 +16546,25 @@ var debug = "development" !== 'production'; // TODO Move state into modules when
   mutations: {
     ADD_PRODUCT_TO_CART: function ADD_PRODUCT_TO_CART(_ref, payload) {
       var cart = _ref.cart;
-      console.log('Cart: ');
-      console.log(cart);
+      console.log('Find index: ');
       var foundProductInCartIndex = cart.findIndex(function (item) {
-        return item === cart.product;
+        return item.slug === payload.slug;
       });
+      console.log('foundProductInCartIndex: ');
       console.log(foundProductInCartIndex);
 
       if (foundProductInCartIndex !== -1) {
-        console.log('Found item!');
-        return;
+        console.log('Found item!'); // cart[foundProductInCartIndex].quantity += 1;
+
+        var increasedQuantity = cart;
+        increasedQuantity[foundProductInCartIndex].quantity += 1;
+        return increasedQuantity;
       }
 
-      cart.push(payload);
+      var newPayload = payload;
+      newPayload.quantity = 1;
+      cart.push(newPayload);
+      return false;
     }
   },
   strict: "development" !== 'production',
