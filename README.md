@@ -11,6 +11,7 @@
  - Laravel 8
  - Vue 3
  - VueX state management
+ - Vee Validate
  - Stripe for payments
  - ESLint code linting with AirBnB ruleset
  - Composition API
