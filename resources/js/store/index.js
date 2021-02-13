@@ -10,6 +10,10 @@ export default createStore({
     cart: [],
     order: {},
   },
+  getters: {
+    getCart: (state) => state.cart,
+    cartLength: (state) => state.cart.length,
+  },
   mutations: {
     ADD_PRODUCT_TO_CART({ cart }, payload) {
       const increasedQuantity = cart;
