@@ -26,7 +26,7 @@
           </div>
           <button
             class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
-            @click="$store.commit('ADD_PRODUCT_TO_CART', product)"
+            @click="addProductToCart(product)"
           >
             Add To Cart
           </button>
@@ -40,6 +40,8 @@
 <script>
 import axios from 'axios';
 
+import { useStore } from 'vuex';
+
 import {
   defineComponent, reactive, toRefs, onMounted,
 } from 'vue';
@@ -49,10 +51,14 @@ import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner.vue';
 export default defineComponent({
   components: { LoadingSpinner },
   setup() {
+    const store = useStore();
     const state = reactive({
       loading: true,
       products: null,
     });
+
+    const addProductToCart = (product) => store.dispatch('addProductToCart', product);
+
     const fetchProducts = () => {
       axios
         .get('/api/products')
@@ -63,7 +69,7 @@ export default defineComponent({
         .catch((error) => console.error(error));
     };
     onMounted(fetchProducts);
-    return { ...toRefs(state) };
+    return { ...toRefs(state), addProductToCart };
   },
 });
 </script>

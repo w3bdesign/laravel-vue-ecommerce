@@ -1,10 +1,9 @@
 <template>
   <div>
-    This is the checkout page We will list products and have a checkout here
+    <h1>Checkout</h1>
     <br>
     Cart: {{ $store.state.cart }}
     <br>
-
     <div>
       <h1 class="h-10 p-6 text-3xl font-bold text-center">
         Cart
@@ -24,7 +23,7 @@
                 alt="Remove icon"
                 aria-label="Remove"
                 src="../../../img/svg/Remove.svg"
-                @click="handleRemoveProduct(products)"
+                @click="removeProductFromCart(products)"
               >
             </span>
           </div>
@@ -85,25 +84,18 @@ export default defineComponent({
       },
     });
 
+    const removeProductFromCart = (product) => {
+      console.log('Remove: ');
+      console.log(product);
+      store.dispatch('removeProductFromCart', product);
+    };
+
     // const cart = computed(() => mapState(store.state.cart));
 
     // const cartLength = computed(() => store.getters.cartLength);
 
     const processPayment = async () => {
       console.log('Process!');
-    };
-
-    const handleRemoveProduct = async (products) => {
-      localState.removingCartItem = true;
-      // const updatedItems = [];
-      console.log('Removing cart items: ');
-      console.log(products);
-
-      console.log(store.getters.cart);
-      /* updatedItems.push({
-        key: products.key,
-        quantity: 0,
-      }); */
     };
 
     onMounted(async () => {
@@ -122,8 +114,8 @@ export default defineComponent({
     return {
       ...toRefs(localState),
       store,
+      removeProductFromCart,
       processPayment,
-      handleRemoveProduct,
     };
   },
 });
