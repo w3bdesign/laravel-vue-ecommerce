@@ -24,7 +24,6 @@
               ${{ product.price }}
             </div>
           </div>
-
           <button
             class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
             @click="$store.commit('ADD_PRODUCT_TO_CART', product)"
@@ -33,7 +32,6 @@
           </button>
         </div>
       </div>
-      Cart: {{ $store.state.cart }}
     </div>
     <loading-spinner v-if="loading" />
   </div>
@@ -59,15 +57,12 @@ export default defineComponent({
       axios
         .get('/api/products')
         .then((response) => {
-          // commit('updateProducts', response.data);
           state.products = response.data;
           state.loading = false;
         })
         .catch((error) => console.error(error));
     };
-
     onMounted(fetchProducts);
-
     return { ...toRefs(state) };
   },
 });

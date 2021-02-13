@@ -21,9 +21,7 @@ export default createStore({
         increasedQuantity[foundProductInCartIndex].quantity += 1;
         return increasedQuantity;
       }
-
       const newPayload = payload;
-
       newPayload.quantity = 1;
       cart.push(newPayload);
       return null;
@@ -31,6 +29,4 @@ export default createStore({
   },
   strict: process.env.NODE_ENV !== 'production',
   plugins: debug ? [createLogger()] : [],
-  // actions: {},
-  // modules: {},
 });
