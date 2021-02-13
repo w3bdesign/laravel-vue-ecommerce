@@ -16543,6 +16543,14 @@ var debug = "development" !== 'production'; // TODO Move state into modules when
     cart: [],
     order: {}
   },
+  getters: {
+    getCart: function getCart(state) {
+      return state.cart;
+    },
+    cartLength: function cartLength(state) {
+      return state.cart.length;
+    }
+  },
   mutations: {
     ADD_PRODUCT_TO_CART: function ADD_PRODUCT_TO_CART(_ref, payload) {
       var cart = _ref.cart;
@@ -16712,7 +16720,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _stripe_stripe_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @stripe/stripe-js */ "./node_modules/@stripe/stripe-js/dist/stripe.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex_composition_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex-composition-helpers */ "./node_modules/vuex-composition-helpers/dist/index.js");
+/* harmony import */ var _stripe_stripe_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @stripe/stripe-js */ "./node_modules/@stripe/stripe-js/dist/stripe.esm.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -16727,11 +16737,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
   setup: function setup() {
-    var _this = this;
-
-    var state = (0,vue__WEBPACK_IMPORTED_MODULE_1__.reactive)({
+    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_4__.useStore)();
+    var localState = (0,vue__WEBPACK_IMPORTED_MODULE_1__.reactive)({
       removingCartItem: false,
       stripe: {},
       cardElement: {},
@@ -16744,10 +16755,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         state: '',
         zip_code: ''
       }
-    });
-    var cart = (0,vue__WEBPACK_IMPORTED_MODULE_1__.computed)(function () {
-      return _this.$store.state.cart;
-    });
+    }); // const cart = computed(() => mapState(store.state.cart));
+    // const cartLength = computed(() => store.getters.cartLength);
 
     var processPayment = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -16776,17 +16785,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                // this.removingCartItem = true;
-                state.removingCartItem = true; // const updatedItems = [];
+                localState.removingCartItem = true; // const updatedItems = [];
 
-                console.log('Removing cart items!');
+                console.log('Removing cart items: ');
                 console.log(products);
+                console.log(store.getters.cart);
                 /* updatedItems.push({
                   key: products.key,
                   quantity: 0,
                 }); */
 
-              case 3:
+              case 4:
               case "end":
                 return _context2.stop();
             }
@@ -16800,29 +16809,35 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }();
 
     (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      var _useState, state, cart;
+
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
         while (1) {
           switch (_context3.prev = _context3.next) {
             case 0:
-              _context3.next = 2;
-              return (0,_stripe_stripe_js__WEBPACK_IMPORTED_MODULE_2__.loadStripe)("pk_test_nF5FAPJedaaoeeaHLxZ0R0X900AqFQTTLF");
+              _useState = (0,vuex_composition_helpers__WEBPACK_IMPORTED_MODULE_2__.useState)(['state', 'cart']), state = _useState.state, cart = _useState.cart;
+              console.log((0,vuex_composition_helpers__WEBPACK_IMPORTED_MODULE_2__.useState)(['state']));
+              console.log('State from useState hook: ');
+              console.log(state);
+              console.log('Cart from useState hook: ');
+              console.log(cart);
+              _context3.next = 8;
+              return (0,_stripe_stripe_js__WEBPACK_IMPORTED_MODULE_3__.loadStripe)("pk_test_nF5FAPJedaaoeeaHLxZ0R0X900AqFQTTLF");
 
-            case 2:
-              state.stripe = _context3.sent;
+            case 8:
+              localState.stripe = _context3.sent;
               console.log('Stripe test: ');
               console.log(state.stripe);
-              console.log('Cart computed: ');
-              console.log(cart);
 
-            case 7:
+            case 11:
             case "end":
               return _context3.stop();
           }
         }
       }, _callee3);
     })));
-    return _objectSpread(_objectSpread({}, (0,vue__WEBPACK_IMPORTED_MODULE_1__.toRefs)(state)), {}, {
-      cart: cart,
+    return _objectSpread(_objectSpread({}, (0,vue__WEBPACK_IMPORTED_MODULE_1__.toRefs)(localState)), {}, {
+      store: store,
       processPayment: processPayment,
       handleRemoveProduct: handleRemoveProduct
     });
@@ -40569,6 +40584,291 @@ function compileToFunction(template, options) {
 
 
 
+
+/***/ }),
+
+/***/ "./node_modules/vuex-composition-helpers/dist/global.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/vuex-composition-helpers/dist/global.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "useState": () => /* binding */ useState,
+/* harmony export */   "useGetters": () => /* binding */ useGetters,
+/* harmony export */   "useMutations": () => /* binding */ useMutations,
+/* harmony export */   "useActions": () => /* binding */ useActions
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./util */ "./node_modules/vuex-composition-helpers/dist/util.js");
+
+
+function computedState(store, prop) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => store.state[prop]);
+}
+function useState(storeOrMap, map) {
+    let store = storeOrMap;
+    if (arguments.length === 1) {
+        map = store;
+        store = (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
+    }
+    return (0,_util__WEBPACK_IMPORTED_MODULE_1__.useMapping)(store, null, map, computedState);
+}
+function useGetters(storeOrMap, map) {
+    let store = storeOrMap;
+    if (arguments.length === 1) {
+        map = store;
+        store = (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
+    }
+    return (0,_util__WEBPACK_IMPORTED_MODULE_1__.useMapping)(store, null, map, _util__WEBPACK_IMPORTED_MODULE_1__.computedGetter);
+}
+function useMutations(storeOrMap, map) {
+    let store = storeOrMap;
+    if (arguments.length === 1) {
+        map = store;
+        store = (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
+    }
+    return (0,_util__WEBPACK_IMPORTED_MODULE_1__.useMapping)(store, null, map, _util__WEBPACK_IMPORTED_MODULE_1__.getMutation);
+}
+function useActions(storeOrMap, map) {
+    let store = storeOrMap;
+    if (arguments.length === 1) {
+        map = store;
+        store = (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
+    }
+    return (0,_util__WEBPACK_IMPORTED_MODULE_1__.useMapping)(store, null, map, _util__WEBPACK_IMPORTED_MODULE_1__.getAction);
+}
+//# sourceMappingURL=global.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuex-composition-helpers/dist/index.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/vuex-composition-helpers/dist/index.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "useActions": () => /* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_0__.useActions,
+/* harmony export */   "useGetters": () => /* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_0__.useGetters,
+/* harmony export */   "useMutations": () => /* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_0__.useMutations,
+/* harmony export */   "useState": () => /* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_0__.useState,
+/* harmony export */   "createNamespacedHelpers": () => /* reexport safe */ _namespaced__WEBPACK_IMPORTED_MODULE_1__.createNamespacedHelpers,
+/* harmony export */   "useNamespacedActions": () => /* reexport safe */ _namespaced__WEBPACK_IMPORTED_MODULE_1__.useNamespacedActions,
+/* harmony export */   "useNamespacedGetters": () => /* reexport safe */ _namespaced__WEBPACK_IMPORTED_MODULE_1__.useNamespacedGetters,
+/* harmony export */   "useNamespacedMutations": () => /* reexport safe */ _namespaced__WEBPACK_IMPORTED_MODULE_1__.useNamespacedMutations,
+/* harmony export */   "useNamespacedState": () => /* reexport safe */ _namespaced__WEBPACK_IMPORTED_MODULE_1__.useNamespacedState,
+/* harmony export */   "wrapStore": () => /* reexport safe */ _wrapper__WEBPACK_IMPORTED_MODULE_2__.wrapStore
+/* harmony export */ });
+/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./global */ "./node_modules/vuex-composition-helpers/dist/global.js");
+/* harmony import */ var _namespaced__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./namespaced */ "./node_modules/vuex-composition-helpers/dist/namespaced.js");
+/* harmony import */ var _wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./wrapper */ "./node_modules/vuex-composition-helpers/dist/wrapper.js");
+
+
+
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuex-composition-helpers/dist/namespaced.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/vuex-composition-helpers/dist/namespaced.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "useNamespacedState": () => /* binding */ useNamespacedState,
+/* harmony export */   "useNamespacedMutations": () => /* binding */ useNamespacedMutations,
+/* harmony export */   "useNamespacedActions": () => /* binding */ useNamespacedActions,
+/* harmony export */   "useNamespacedGetters": () => /* binding */ useNamespacedGetters,
+/* harmony export */   "createNamespacedHelpers": () => /* binding */ createNamespacedHelpers
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./util */ "./node_modules/vuex-composition-helpers/dist/util.js");
+
+
+function computedState(store, namespace, prop) {
+    let module = namespace.split('/').reduce((module, key) => module[key], store.state);
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => module[prop]);
+}
+function useNamespacedState(storeOrNamespace, namespaceOrMap, map) {
+    let store, namespace;
+    if (arguments.length === 2) {
+        store = (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
+        map = namespaceOrMap;
+        namespace = storeOrNamespace;
+    }
+    else {
+        store = storeOrNamespace || (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
+        namespace = namespaceOrMap;
+    }
+    return (0,_util__WEBPACK_IMPORTED_MODULE_1__.useMapping)(store, namespace, map, computedState);
+}
+function useNamespacedMutations(storeOrNamespace, namespaceOrMap, map) {
+    let store, namespace;
+    if (arguments.length === 2) {
+        store = (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
+        map = namespaceOrMap;
+        namespace = storeOrNamespace;
+    }
+    else {
+        store = storeOrNamespace || (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
+        namespace = namespaceOrMap;
+    }
+    return (0,_util__WEBPACK_IMPORTED_MODULE_1__.useMapping)(store, namespace, map, _util__WEBPACK_IMPORTED_MODULE_1__.getMutation);
+}
+function useNamespacedActions(storeOrNamespace, namespaceOrMap, map) {
+    let store, namespace;
+    if (arguments.length === 2) {
+        store = (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
+        map = namespaceOrMap;
+        namespace = storeOrNamespace;
+    }
+    else {
+        store = storeOrNamespace || (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
+        namespace = namespaceOrMap;
+    }
+    return (0,_util__WEBPACK_IMPORTED_MODULE_1__.useMapping)(store, namespace, map, _util__WEBPACK_IMPORTED_MODULE_1__.getAction);
+}
+function useNamespacedGetters(storeOrNamespace, namespaceOrMap, map) {
+    let store, namespace;
+    if (arguments.length === 2) {
+        store = (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
+        map = namespaceOrMap;
+        namespace = storeOrNamespace;
+    }
+    else {
+        store = storeOrNamespace || (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
+        namespace = namespaceOrMap;
+    }
+    return (0,_util__WEBPACK_IMPORTED_MODULE_1__.useMapping)(store, namespace, map, _util__WEBPACK_IMPORTED_MODULE_1__.computedGetter);
+}
+function createNamespacedHelpers(storeOrNamespace, namespace) {
+    let store = undefined;
+    if (arguments.length === 1) {
+        namespace = storeOrNamespace;
+    }
+    else {
+        store = storeOrNamespace;
+        if (!namespace) {
+            throw new Error('Namespace is missing to provide namespaced helpers');
+        }
+    }
+    return {
+        useState: (map) => useNamespacedState(store, namespace, map),
+        useGetters: (map) => useNamespacedGetters(store, namespace, map),
+        useMutations: (map) => useNamespacedMutations(store, namespace, map),
+        useActions: (map) => useNamespacedActions(store, namespace, map),
+    };
+}
+//# sourceMappingURL=namespaced.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuex-composition-helpers/dist/util.js":
+/*!************************************************************!*\
+  !*** ./node_modules/vuex-composition-helpers/dist/util.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "computedGetter": () => /* binding */ computedGetter,
+/* harmony export */   "getMutation": () => /* binding */ getMutation,
+/* harmony export */   "getAction": () => /* binding */ getAction,
+/* harmony export */   "useMapping": () => /* binding */ useMapping,
+/* harmony export */   "getStoreFromInstance": () => /* binding */ getStoreFromInstance
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+function runCB(cb, store, namespace, prop) {
+    if (cb.length === 3) { // choose which signature to pass to cb function
+        return cb(store, namespace, prop);
+    }
+    else {
+        return cb(store, namespace ? `${namespace}/${prop}` : prop);
+    }
+}
+function useFromArray(store, namespace, props, cb) {
+    return props.reduce((result, prop) => {
+        result[prop] = runCB(cb, store, namespace, prop);
+        return result;
+    }, {});
+}
+function useFromObject(store, namespace, props, cb) {
+    const obj = {};
+    for (let key in props) {
+        if (props.hasOwnProperty(key)) {
+            obj[key] = runCB(cb, store, namespace, props[key]);
+        }
+    }
+    return obj;
+}
+function computedGetter(store, prop) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => store.getters[prop]);
+}
+function getMutation(store, mutation) {
+    return function () {
+        return store.commit.apply(store, [mutation, ...arguments]);
+    };
+}
+function getAction(store, action) {
+    return function () {
+        return store.dispatch.apply(store, [action, ...arguments]);
+    };
+}
+function useMapping(store, namespace, map, cb) {
+    if (!map) {
+        return {};
+    }
+    if (map instanceof Array) {
+        return useFromArray(store, namespace, map, cb);
+    }
+    return useFromObject(store, namespace, map, cb);
+}
+function getStoreFromInstance() {
+    const vm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.getCurrentInstance)();
+    if (!vm) {
+        throw new Error('You must use this function within the "setup()" method, or insert the store as first argument.');
+    }
+    return vm.proxy?.$store;
+}
+//# sourceMappingURL=util.js.map
+
+/***/ }),
+
+/***/ "./node_modules/vuex-composition-helpers/dist/wrapper.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/vuex-composition-helpers/dist/wrapper.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "wrapStore": () => /* binding */ wrapStore
+/* harmony export */ });
+/* harmony import */ var _namespaced__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./namespaced */ "./node_modules/vuex-composition-helpers/dist/namespaced.js");
+/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./global */ "./node_modules/vuex-composition-helpers/dist/global.js");
+
+
+function wrapStore(store) {
+    return {
+        createNamespacedHelpers: _namespaced__WEBPACK_IMPORTED_MODULE_0__.createNamespacedHelpers.bind(null, store),
+        useActions: _global__WEBPACK_IMPORTED_MODULE_1__.useActions.bind(null, store),
+        useGetters: _global__WEBPACK_IMPORTED_MODULE_1__.useGetters.bind(null, store),
+        useMutations: _global__WEBPACK_IMPORTED_MODULE_1__.useMutations.bind(null, store),
+        useState: _global__WEBPACK_IMPORTED_MODULE_1__.useState.bind(null, store)
+    };
+}
+//# sourceMappingURL=wrapper.js.map
 
 /***/ }),
 

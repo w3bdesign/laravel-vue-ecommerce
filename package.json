@@ -32,6 +32,7 @@
         "vue": "^3.0.5",
         "vue-router": "^4.0.3",
         "vuex": "^4.0.0",
+        "vuex-composition-helpers": "^2.0.0",
         "vuex-persist": "^3.1.3"
     }
 }
