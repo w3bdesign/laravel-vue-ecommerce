@@ -2,8 +2,6 @@
   <div>
     <h1>Checkout</h1>
     <br>
-    Cart: {{ $store.state.cart }}
-    <br>
     <div>
       <h1 class="h-10 p-6 text-3xl font-bold text-center">
         Cart

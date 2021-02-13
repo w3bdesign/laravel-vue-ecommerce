@@ -37,18 +37,10 @@ export default createStore({
       const newPayload = payload;
       newPayload.quantity = 1;
       cart.push(newPayload);
-      return null;
+      return cart;
     },
     REMOVE_PRODUCT_FROM_CART({ cart }, payload) {
-      // cart.slice(payload, 1);
-      // return cart;
-
-      // removeTodo (state, todo) {
       cart.splice(cart.indexOf(payload), 1);
-      // },
-
-      // return cart.filter((item) => item.slug !== payload.slug);
-      // return cart.filter((item) => item )
     },
   },
   strict: process.env.NODE_ENV !== 'production',
