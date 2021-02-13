@@ -16563,9 +16563,7 @@ var debug = "development" !== 'production'; // TODO Move state into modules when
     }
   },
   strict: "development" !== 'production',
-  plugins: debug ? [(0,vuex__WEBPACK_IMPORTED_MODULE_0__.createLogger)()] : [] // actions: {},
-  // modules: {},
-
+  plugins: debug ? [(0,vuex__WEBPACK_IMPORTED_MODULE_0__.createLogger)()] : []
 }));
 
 /***/ }),
