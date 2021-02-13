@@ -14,6 +14,15 @@ export default createStore({
     getCart: (state) => state.cart,
     cartLength: (state) => state.cart.length,
   },
+  actions: {
+    addProductToCart({ commit }, product) {
+      commit('ADD_PRODUCT_TO_CART', product);
+    },
+    removeProductFromCart({ commit }, product) {
+      commit('REMOVE_PRODUCT_FROM_CART', product);
+    },
+
+  },
   mutations: {
     ADD_PRODUCT_TO_CART({ cart }, payload) {
       const increasedQuantity = cart;
@@ -29,6 +38,17 @@ export default createStore({
       newPayload.quantity = 1;
       cart.push(newPayload);
       return null;
+    },
+    REMOVE_PRODUCT_FROM_CART({ cart }, payload) {
+      // cart.slice(payload, 1);
+      // return cart;
+
+      // removeTodo (state, todo) {
+      cart.splice(cart.indexOf(payload), 1);
+      // },
+
+      // return cart.filter((item) => item.slug !== payload.slug);
+      // return cart.filter((item) => item )
     },
   },
   strict: process.env.NODE_ENV !== 'production',
