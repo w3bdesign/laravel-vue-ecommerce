@@ -16636,13 +16636,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup() {
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.useStore)();
-    var cartLength = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
-      return store.state.cart.reduce(function (item, value) {
+    var cartQuantity = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.state.cart.length ? store.state.cart.reduce(function (item, value) {
         return item.quantity + value.quantity;
-      });
+      }) : 0;
     });
+    /* const cartTotal = computed(() => store.state.cart.reduce(
+      (item, value) => item.price * value.price,
+    )); */
+
     return {
-      cartLength: cartLength
+      cartQuantity: cartQuantity
     };
   }
 });
@@ -17009,7 +17013,7 @@ var _hoisted_3 = {
   key: 0
 };
 var _hoisted_4 = {
-  "class": "cartLength"
+  "class": "cartQuantity"
 };
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, "Total: 0 ", -1
@@ -17025,7 +17029,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     name: "fade"
   }, {
     "default": _withId(function () {
-      return [$setup.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+      return [$setup.cartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("span", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
         to: "/checkout"
       }, {
         "default": _withId(function () {
@@ -17043,11 +17047,11 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     name: "fade"
   }, {
     "default": _withId(function () {
-      return [$setup.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+      return [$setup.cartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
         to: "/checkout"
       }, {
         "default": _withId(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.cartLength.quantity), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.cartQuantity.quantity), 1
           /* TEXT */
           ), _hoisted_5];
         }),
@@ -17575,7 +17579,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".cartLength[data-v-12452128] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(0, 0, 0, var(--tw-bg-opacity));\n  border-radius: 9999px;\n  height: 1.5rem;\n  margin-left: 4rem;\n  margin-top: -3rem;\n  padding-bottom: 0.5rem;\n  position: absolute;\n  text-align: center;\n  --tw-text-opacity: 1;\n  color: rgba(255, 255, 255, var(--tw-text-opacity));\n  width: 1.5rem;\n}\n@media (min-width: 1024px) {\n.cartLength[data-v-12452128] {\n    margin-left: 3.5rem;\n}\n}\n.fade-enter-active[data-v-12452128],\n.fade-leave-active[data-v-12452128] {\n  transition: all 0.5s ease;\n}\n.fade-enter-from[data-v-12452128],\n.fade-leave-to[data-v-12452128] {\n  opacity: 0;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".cartQuantity[data-v-12452128] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(0, 0, 0, var(--tw-bg-opacity));\n  border-radius: 9999px;\n  height: 1.5rem;\n  margin-left: 4rem;\n  margin-top: -3rem;\n  padding-bottom: 0.5rem;\n  position: absolute;\n  text-align: center;\n  --tw-text-opacity: 1;\n  color: rgba(255, 255, 255, var(--tw-text-opacity));\n  width: 1.5rem;\n}\n@media (min-width: 1024px) {\n.cartQuantity[data-v-12452128] {\n    margin-left: 3.5rem;\n}\n}\n.fade-enter-active[data-v-12452128],\n.fade-leave-active[data-v-12452128] {\n  transition: all 0.5s ease;\n}\n.fade-enter-from[data-v-12452128],\n.fade-leave-to[data-v-12452128] {\n  opacity: 0;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
