@@ -29,7 +29,6 @@ export default createStore({
     removeProductFromCart({ commit }, product) {
       commit('REMOVE_PRODUCT_FROM_CART', product);
     },
-
   },
   mutations: {
     ADD_PRODUCT_TO_CART({ cart }, payload) {
@@ -37,7 +36,7 @@ export default createStore({
       const foundProductInCartIndex = cart.findIndex(
         (item) => item.slug === payload.slug,
       );
-      if (foundProductInCartIndex) {
+      if (!foundProductInCartIndex) {
         increasedQuantity[foundProductInCartIndex].quantity += 1;
         return increasedQuantity;
       }

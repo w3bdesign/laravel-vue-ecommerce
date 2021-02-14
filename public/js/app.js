@@ -16575,7 +16575,7 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_1__.default({
         return item.slug === payload.slug;
       });
 
-      if (foundProductInCartIndex) {
+      if (!foundProductInCartIndex) {
         increasedQuantity[foundProductInCartIndex].quantity += 1;
         return increasedQuantity;
       }
