@@ -41,7 +41,7 @@
           <span
             class="block mt-2 font-extrabold"
           >Subtotal: <br></span>
-          <span class="item-content"> {{ products.total }} </span>
+          <span class="item-content"> {{ cartTotal }} </span>
         </div>
       </div>
     </section>
@@ -69,8 +69,6 @@ import {
 
 import { useStore } from 'vuex';
 
-// import { useState } from 'vuex-composition-helpers';
-
 import { loadStripe } from '@stripe/stripe-js';
 
 export default defineComponent({
@@ -94,6 +92,8 @@ export default defineComponent({
 
     const cartLength = computed(() => store.state.cart.length);
 
+    const cartTotal = computed(() => store.getters.cartTotal);
+
     const removeProductFromCart = (product) => {
       console.log('Remove: ');
       console.log(product);
@@ -114,6 +114,7 @@ export default defineComponent({
       ...toRefs(localState),
       store,
       cartLength,
+      cartTotal,
       removeProductFromCart,
       checkout,
     };

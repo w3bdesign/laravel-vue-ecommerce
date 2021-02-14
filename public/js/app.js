@@ -16550,6 +16550,11 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_1__.default({
     order: {}
   },
   getters: {
+    cartTotal: function cartTotal(state) {
+      return state.cart.length ? state.cart.reduce(function (total, product) {
+        return total + product.price * product.quantity;
+      }, 0) : 0;
+    },
     getCart: function getCart(state) {
       return state.cart;
     },
@@ -16763,7 +16768,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
- // import { useState } from 'vuex-composition-helpers';
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
@@ -16785,6 +16789,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     });
     var cartLength = (0,vue__WEBPACK_IMPORTED_MODULE_1__.computed)(function () {
       return store.state.cart.length;
+    });
+    var cartTotal = (0,vue__WEBPACK_IMPORTED_MODULE_1__.computed)(function () {
+      return store.getters.cartTotal;
     });
 
     var removeProductFromCart = function removeProductFromCart(product) {
@@ -16837,6 +16844,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return _objectSpread(_objectSpread({}, (0,vue__WEBPACK_IMPORTED_MODULE_1__.toRefs)(localState)), {}, {
       store: store,
       cartLength: cartLength,
+      cartTotal: cartTotal,
       removeProductFromCart: removeProductFromCart,
       checkout: checkout
     });
@@ -17417,7 +17425,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(products.quantity), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(products.total), 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.cartTotal), 1
     /* TEXT */
     )])]);
   }), 128
