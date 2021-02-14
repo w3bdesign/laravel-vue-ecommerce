@@ -16647,9 +16647,7 @@ __webpack_require__.r(__webpack_exports__);
       }) : 0;
     });
     var cartTotal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
-      return store.state.cart.length ? store.state.cart.reduce(function (total, product) {
-        return total + product.price * product.quantity;
-      }, 0) : 0;
+      return store.getters.cartTotal;
     });
     return {
       cartQuantity: cartQuantity,

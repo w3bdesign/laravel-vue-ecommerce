@@ -40,12 +40,7 @@ export default {
         (item, value) => item.quantity + value.quantity,
       )
       : 0));
-    const cartTotal = computed(() => (store.state.cart.length
-      ? store.state.cart.reduce(
-        (total, product) => total + product.price * product.quantity,
-        0,
-      )
-      : 0));
+    const cartTotal = computed(() => store.getters.cartTotal);
     return { cartQuantity, cartTotal };
   },
 };
