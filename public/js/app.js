@@ -16637,7 +16637,9 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup() {
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.useStore)();
     var cartLength = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
-      return store.state.cart.length;
+      return store.state.cart.reduce(function (item, value) {
+        return item.quantity + value.quantity;
+      });
     });
     return {
       cartLength: cartLength
@@ -17045,7 +17047,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
         to: "/checkout"
       }, {
         "default": _withId(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.cartLength), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.cartLength.quantity), 1
           /* TEXT */
           ), _hoisted_5];
         }),
