@@ -19,7 +19,7 @@
       <div v-if="cartLength">
         <router-link to="/checkout">
           <span class="cartLength">
-            {{ cartLength }}
+            {{ cartLength.quantity }}
           </span>
           <span>Total: 0 </span>
         </router-link>
@@ -35,7 +35,9 @@ import { useStore } from 'vuex';
 export default {
   setup() {
     const store = useStore();
-    const cartLength = computed(() => store.state.cart.length);
+    const cartLength = computed(() => store.state.cart.reduce(
+      (item, value) => item.quantity + value.quantity,
+    ));
     return { cartLength };
   },
 };
