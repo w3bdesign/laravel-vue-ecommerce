@@ -1,67 +1,75 @@
 <template>
   <div>
-    <h1>Checkout</h1>
-    <br>
-    Cart: {{ $store.state.cart }}
-    <br>
-    <div>
-      <h1 class="h-10 p-6 text-3xl font-bold text-center">
-        Cart
-      </h1>
-      <section class="mt-10">
-        <div
-          v-for="products in $store.state.cart"
-          :key="products.id"
-          class="container mx-auto mt-4 flex-container"
-        >
-          <div class="item">
-            <span class="block mt-2 font-extrabold">Remove: <br></span>
-            <span class="item-content">
-              <img
-                class="mt-2 ml-4 cursor-pointer"
-                :class="{ removing: removingCartItem }"
-                alt="Remove icon"
-                aria-label="Remove"
-                src="../../../img/svg/Remove.svg"
-                @click="removeProductFromCart(products)"
-              >
-            </span>
-          </div>
-          <div class="item">
-            <span class="block mt-2 font-extrabold">Name: <br></span>
-            <span class="item-content">{{ products.name }}</span>
-          </div>
-          <div class="item">
-            <span class="block mt-2 font-extrabold">Quantity: <br> </span>
-            <span class="item-content">
-              {{ products.quantity }}
-            </span>
-          </div>
-          <div class="item">
-            <span class="block mt-2 font-extrabold">Subtotal: <br></span>
-            <span class="item-content"> {{ products.total }} </span>
-          </div>
-        </div>
-      </section>
-      <h2
-        v-if="!$store.state.cart.length"
-        class="m-4 text-3xl text-center"
+    <h1 class="h-10 p-6 text-4xl font-bold text-center">
+      Checkout
+    </h1>
+    <section class="mt-10">
+      <div
+        v-for="products in $store.state.cart"
+        :key="products.id"
+        class="container mx-auto mt-4 flex-container"
       >
-        Cart is currently empty
-      </h2>
-      Checkout button
-    </div>
+        <div class="item">
+          <span
+            class="block mt-2 font-extrabold"
+          >Remove: <br></span>
+          <span class="item-content">
+            <img
+              class="mt-2 ml-4 cursor-pointer"
+              :class="{ removing: removingCartItem }"
+              alt="Remove icon"
+              aria-label="Remove"
+              src="../../../img/svg/Remove.svg"
+              @click="removeProductFromCart(products)"
+            >
+          </span>
+        </div>
+        <div class="item">
+          <span class="block mt-2 font-extrabold">Name: <br></span>
+          <span class="item-content">{{ products.name }}</span>
+        </div>
+        <div class="item">
+          <span
+            class="block mt-2 font-extrabold"
+          >Quantity: <br>
+          </span>
+          <span class="item-content">
+            {{ products.quantity }}
+          </span>
+        </div>
+        <div class="item">
+          <span
+            class="block mt-2 font-extrabold"
+          >Subtotal: <br></span>
+          <span class="item-content"> {{ products.total }} </span>
+        </div>
+      </div>
+    </section>
+
+    <h2
+      v-if="!cartLength"
+      class="m-4 text-3xl text-center"
+    >
+      Cart is currently empty
+    </h2>
+    <button
+      v-if="cartLength"
+      class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+      @click="checkout(products)"
+    >
+      Checkout
+    </button>
   </div>
 </template>
 
 <script>
 import {
-  defineComponent, onMounted, reactive, toRefs,
+  defineComponent, onMounted, reactive, toRefs, computed,
 } from 'vue';
 
 import { useStore } from 'vuex';
 
-import { useState } from 'vuex-composition-helpers';
+// import { useState } from 'vuex-composition-helpers';
 
 import { loadStripe } from '@stripe/stripe-js';
 
@@ -84,38 +92,30 @@ export default defineComponent({
       },
     });
 
+    const cartLength = computed(() => store.state.cart.length);
+
     const removeProductFromCart = (product) => {
       console.log('Remove: ');
       console.log(product);
       store.dispatch('removeProductFromCart', product);
     };
 
-    // const cart = computed(() => mapState(store.state.cart));
-
-    // const cartLength = computed(() => store.getters.cartLength);
-
-    const processPayment = async () => {
-      console.log('Process!');
+    const checkout = async () => {
+      console.log('Checkout process!');
     };
 
     onMounted(async () => {
-      const { state, cart } = useState(['state', 'cart']);
-      console.log(useState(['state']));
-      console.log('State from useState hook: ');
-      console.log(state);
-      console.log('Cart from useState hook: ');
-      console.log(cart);
-
       localState.stripe = await loadStripe(process.env.MIX_STRIPE_KEY);
       console.log('Stripe test: ');
-      console.log(state.stripe);
+      console.log(localState.stripe);
     });
 
     return {
       ...toRefs(localState),
       store,
+      cartLength,
       removeProductFromCart,
-      processPayment,
+      checkout,
     };
   },
 });
@@ -123,25 +123,25 @@ export default defineComponent({
 
 <style scoped>
 .flex-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  align-content: center;
-  max-width: 1380px;
-  @apply border border-gray-300 rounded-lg shadow;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    max-width: 1380px;
+    @apply border border-gray-300 rounded-lg shadow;
 }
 
 .item {
-  @apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
+    @apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
 }
 
 .item-content {
-  @apply inline-block mt-4 w-20 h-12 md:w-full lg:w-full xl:w-full;
+    @apply inline-block mt-4 w-20 h-12 md:w-full lg:w-full xl:w-full;
 }
 
 .removing {
-  @apply animate-spin cursor-not-allowed;
+    @apply animate-spin cursor-not-allowed;
 }
 </style>

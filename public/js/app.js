@@ -16577,16 +16577,11 @@ var debug = "development" !== 'production'; // TODO Move state into modules when
       var newPayload = payload;
       newPayload.quantity = 1;
       cart.push(newPayload);
-      return null;
+      return cart;
     },
     REMOVE_PRODUCT_FROM_CART: function REMOVE_PRODUCT_FROM_CART(_ref4, payload) {
       var cart = _ref4.cart;
-      // cart.slice(payload, 1);
-      // return cart;
-      // removeTodo (state, todo) {
-      cart.splice(cart.indexOf(payload), 1); // },
-      // return cart.filter((item) => item.slug !== payload.slug);
-      // return cart.filter((item) => item )
+      cart.splice(cart.indexOf(payload), 1);
     }
   },
   strict: "development" !== 'production',
@@ -16739,9 +16734,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-/* harmony import */ var vuex_composition_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex-composition-helpers */ "./node_modules/vuex-composition-helpers/dist/index.js");
-/* harmony import */ var _stripe_stripe_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @stripe/stripe-js */ "./node_modules/@stripe/stripe-js/dist/stripe.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var _stripe_stripe_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @stripe/stripe-js */ "./node_modules/@stripe/stripe-js/dist/stripe.esm.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -16755,12 +16749,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
-
+ // import { useState } from 'vuex-composition-helpers';
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
   setup: function setup() {
-    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_4__.useStore)();
+    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.useStore)();
     var localState = (0,vue__WEBPACK_IMPORTED_MODULE_1__.reactive)({
       removingCartItem: false,
       stripe: {},
@@ -16775,22 +16769,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         zip_code: ''
       }
     });
+    var cartLength = (0,vue__WEBPACK_IMPORTED_MODULE_1__.computed)(function () {
+      return store.state.cart.length;
+    });
 
     var removeProductFromCart = function removeProductFromCart(product) {
       console.log('Remove: ');
       console.log(product);
       store.dispatch('removeProductFromCart', product);
-    }; // const cart = computed(() => mapState(store.state.cart));
-    // const cartLength = computed(() => store.getters.cartLength);
+    };
 
-
-    var processPayment = /*#__PURE__*/function () {
+    var checkout = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log('Process!');
+                console.log('Checkout process!');
 
               case 1:
               case "end":
@@ -16800,33 +16795,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }));
 
-      return function processPayment() {
+      return function checkout() {
         return _ref.apply(this, arguments);
       };
     }();
 
     (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-      var _useState, state, cart;
-
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              _useState = (0,vuex_composition_helpers__WEBPACK_IMPORTED_MODULE_2__.useState)(['state', 'cart']), state = _useState.state, cart = _useState.cart;
-              console.log((0,vuex_composition_helpers__WEBPACK_IMPORTED_MODULE_2__.useState)(['state']));
-              console.log('State from useState hook: ');
-              console.log(state);
-              console.log('Cart from useState hook: ');
-              console.log(cart);
-              _context2.next = 8;
-              return (0,_stripe_stripe_js__WEBPACK_IMPORTED_MODULE_3__.loadStripe)("pk_test_nF5FAPJedaaoeeaHLxZ0R0X900AqFQTTLF");
+              _context2.next = 2;
+              return (0,_stripe_stripe_js__WEBPACK_IMPORTED_MODULE_2__.loadStripe)("pk_test_nF5FAPJedaaoeeaHLxZ0R0X900AqFQTTLF");
 
-            case 8:
+            case 2:
               localState.stripe = _context2.sent;
               console.log('Stripe test: ');
-              console.log(state.stripe);
+              console.log(localState.stripe);
 
-            case 11:
+            case 5:
             case "end":
               return _context2.stop();
           }
@@ -16835,8 +16822,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     })));
     return _objectSpread(_objectSpread({}, (0,vue__WEBPACK_IMPORTED_MODULE_1__.toRefs)(localState)), {}, {
       store: store,
+      cartLength: cartLength,
       removeProductFromCart: removeProductFromCart,
-      processPayment: processPayment
+      checkout: checkout
     });
   }
 }));
@@ -17328,26 +17316,27 @@ var _withId = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.withScopeId)("dat
 
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-67966e56");
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", null, "Checkout", -1
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
+  "class": "h-10 p-6 text-4xl font-bold text-center"
+}, " Checkout ", -1
 /* HOISTED */
 );
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
-/* HOISTED */
-);
+var _hoisted_2 = {
+  "class": "mt-10"
+};
+var _hoisted_3 = {
+  "class": "item"
+};
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
-  "class": "h-10 p-6 text-3xl font-bold text-center"
-}, " Cart ", -1
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
+  "class": "block mt-2 font-extrabold"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Remove: "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br")], -1
 /* HOISTED */
 );
 
 var _hoisted_5 = {
-  "class": "mt-10"
+  "class": "item-content"
 };
 var _hoisted_6 = {
   "class": "item"
@@ -17355,7 +17344,7 @@ var _hoisted_6 = {
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
   "class": "block mt-2 font-extrabold"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Remove: "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br")], -1
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Name: "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br")], -1
 /* HOISTED */
 );
 
@@ -17368,7 +17357,7 @@ var _hoisted_9 = {
 
 var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
   "class": "block mt-2 font-extrabold"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Name: "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br")], -1
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Quantity: "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br")], -1
 /* HOISTED */
 );
 
@@ -17381,7 +17370,7 @@ var _hoisted_12 = {
 
 var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
   "class": "block mt-2 font-extrabold"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Quantity: "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br")], -1
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Subtotal: "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br")], -1
 /* HOISTED */
 );
 
@@ -17389,35 +17378,18 @@ var _hoisted_14 = {
   "class": "item-content"
 };
 var _hoisted_15 = {
-  "class": "item"
-};
-
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
-  "class": "block mt-2 font-extrabold"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Subtotal: "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br")], -1
-/* HOISTED */
-);
-
-var _hoisted_17 = {
-  "class": "item-content"
-};
-var _hoisted_18 = {
   key: 0,
   "class": "m-4 text-3xl text-center"
 };
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Checkout button ");
-
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)();
 
 var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [_hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cart: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$store.state.cart) + " ", 1
-  /* TEXT */
-  ), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.$store.state.cart, function (products) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.$store.state.cart, function (products) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       key: products.id,
       "class": "container mx-auto mt-4 flex-container"
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
       "class": ["mt-2 ml-4 cursor-pointer", {
         removing: _ctx.removingCartItem
       }],
@@ -17429,16 +17401,22 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
       }
     }, null, 10
     /* CLASS, PROPS */
-    , ["onClick"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(products.name), 1
+    , ["onClick"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(products.name), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(products.quantity), 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(products.quantity), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(products.total), 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(products.total), 1
     /* TEXT */
     )])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), !_ctx.$store.state.cart.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h2", _hoisted_18, " Cart is currently empty ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_19])]);
+  ))]), !_ctx.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h2", _hoisted_15, " Cart is currently empty ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
+    key: 1,
+    "class": "p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700",
+    onClick: _cache[1] || (_cache[1] = function ($event) {
+      return _ctx.checkout(_ctx.products);
+    })
+  }, " Checkout ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 });
 
 /***/ }),
@@ -40592,291 +40570,6 @@ function compileToFunction(template, options) {
 
 
 
-
-/***/ }),
-
-/***/ "./node_modules/vuex-composition-helpers/dist/global.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/vuex-composition-helpers/dist/global.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "useState": () => /* binding */ useState,
-/* harmony export */   "useGetters": () => /* binding */ useGetters,
-/* harmony export */   "useMutations": () => /* binding */ useMutations,
-/* harmony export */   "useActions": () => /* binding */ useActions
-/* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./util */ "./node_modules/vuex-composition-helpers/dist/util.js");
-
-
-function computedState(store, prop) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => store.state[prop]);
-}
-function useState(storeOrMap, map) {
-    let store = storeOrMap;
-    if (arguments.length === 1) {
-        map = store;
-        store = (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
-    }
-    return (0,_util__WEBPACK_IMPORTED_MODULE_1__.useMapping)(store, null, map, computedState);
-}
-function useGetters(storeOrMap, map) {
-    let store = storeOrMap;
-    if (arguments.length === 1) {
-        map = store;
-        store = (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
-    }
-    return (0,_util__WEBPACK_IMPORTED_MODULE_1__.useMapping)(store, null, map, _util__WEBPACK_IMPORTED_MODULE_1__.computedGetter);
-}
-function useMutations(storeOrMap, map) {
-    let store = storeOrMap;
-    if (arguments.length === 1) {
-        map = store;
-        store = (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
-    }
-    return (0,_util__WEBPACK_IMPORTED_MODULE_1__.useMapping)(store, null, map, _util__WEBPACK_IMPORTED_MODULE_1__.getMutation);
-}
-function useActions(storeOrMap, map) {
-    let store = storeOrMap;
-    if (arguments.length === 1) {
-        map = store;
-        store = (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
-    }
-    return (0,_util__WEBPACK_IMPORTED_MODULE_1__.useMapping)(store, null, map, _util__WEBPACK_IMPORTED_MODULE_1__.getAction);
-}
-//# sourceMappingURL=global.js.map
-
-/***/ }),
-
-/***/ "./node_modules/vuex-composition-helpers/dist/index.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/vuex-composition-helpers/dist/index.js ***!
-  \*************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "useActions": () => /* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_0__.useActions,
-/* harmony export */   "useGetters": () => /* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_0__.useGetters,
-/* harmony export */   "useMutations": () => /* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_0__.useMutations,
-/* harmony export */   "useState": () => /* reexport safe */ _global__WEBPACK_IMPORTED_MODULE_0__.useState,
-/* harmony export */   "createNamespacedHelpers": () => /* reexport safe */ _namespaced__WEBPACK_IMPORTED_MODULE_1__.createNamespacedHelpers,
-/* harmony export */   "useNamespacedActions": () => /* reexport safe */ _namespaced__WEBPACK_IMPORTED_MODULE_1__.useNamespacedActions,
-/* harmony export */   "useNamespacedGetters": () => /* reexport safe */ _namespaced__WEBPACK_IMPORTED_MODULE_1__.useNamespacedGetters,
-/* harmony export */   "useNamespacedMutations": () => /* reexport safe */ _namespaced__WEBPACK_IMPORTED_MODULE_1__.useNamespacedMutations,
-/* harmony export */   "useNamespacedState": () => /* reexport safe */ _namespaced__WEBPACK_IMPORTED_MODULE_1__.useNamespacedState,
-/* harmony export */   "wrapStore": () => /* reexport safe */ _wrapper__WEBPACK_IMPORTED_MODULE_2__.wrapStore
-/* harmony export */ });
-/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./global */ "./node_modules/vuex-composition-helpers/dist/global.js");
-/* harmony import */ var _namespaced__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./namespaced */ "./node_modules/vuex-composition-helpers/dist/namespaced.js");
-/* harmony import */ var _wrapper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./wrapper */ "./node_modules/vuex-composition-helpers/dist/wrapper.js");
-
-
-
-//# sourceMappingURL=index.js.map
-
-/***/ }),
-
-/***/ "./node_modules/vuex-composition-helpers/dist/namespaced.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/vuex-composition-helpers/dist/namespaced.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "useNamespacedState": () => /* binding */ useNamespacedState,
-/* harmony export */   "useNamespacedMutations": () => /* binding */ useNamespacedMutations,
-/* harmony export */   "useNamespacedActions": () => /* binding */ useNamespacedActions,
-/* harmony export */   "useNamespacedGetters": () => /* binding */ useNamespacedGetters,
-/* harmony export */   "createNamespacedHelpers": () => /* binding */ createNamespacedHelpers
-/* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./util */ "./node_modules/vuex-composition-helpers/dist/util.js");
-
-
-function computedState(store, namespace, prop) {
-    let module = namespace.split('/').reduce((module, key) => module[key], store.state);
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => module[prop]);
-}
-function useNamespacedState(storeOrNamespace, namespaceOrMap, map) {
-    let store, namespace;
-    if (arguments.length === 2) {
-        store = (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
-        map = namespaceOrMap;
-        namespace = storeOrNamespace;
-    }
-    else {
-        store = storeOrNamespace || (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
-        namespace = namespaceOrMap;
-    }
-    return (0,_util__WEBPACK_IMPORTED_MODULE_1__.useMapping)(store, namespace, map, computedState);
-}
-function useNamespacedMutations(storeOrNamespace, namespaceOrMap, map) {
-    let store, namespace;
-    if (arguments.length === 2) {
-        store = (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
-        map = namespaceOrMap;
-        namespace = storeOrNamespace;
-    }
-    else {
-        store = storeOrNamespace || (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
-        namespace = namespaceOrMap;
-    }
-    return (0,_util__WEBPACK_IMPORTED_MODULE_1__.useMapping)(store, namespace, map, _util__WEBPACK_IMPORTED_MODULE_1__.getMutation);
-}
-function useNamespacedActions(storeOrNamespace, namespaceOrMap, map) {
-    let store, namespace;
-    if (arguments.length === 2) {
-        store = (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
-        map = namespaceOrMap;
-        namespace = storeOrNamespace;
-    }
-    else {
-        store = storeOrNamespace || (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
-        namespace = namespaceOrMap;
-    }
-    return (0,_util__WEBPACK_IMPORTED_MODULE_1__.useMapping)(store, namespace, map, _util__WEBPACK_IMPORTED_MODULE_1__.getAction);
-}
-function useNamespacedGetters(storeOrNamespace, namespaceOrMap, map) {
-    let store, namespace;
-    if (arguments.length === 2) {
-        store = (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
-        map = namespaceOrMap;
-        namespace = storeOrNamespace;
-    }
-    else {
-        store = storeOrNamespace || (0,_util__WEBPACK_IMPORTED_MODULE_1__.getStoreFromInstance)();
-        namespace = namespaceOrMap;
-    }
-    return (0,_util__WEBPACK_IMPORTED_MODULE_1__.useMapping)(store, namespace, map, _util__WEBPACK_IMPORTED_MODULE_1__.computedGetter);
-}
-function createNamespacedHelpers(storeOrNamespace, namespace) {
-    let store = undefined;
-    if (arguments.length === 1) {
-        namespace = storeOrNamespace;
-    }
-    else {
-        store = storeOrNamespace;
-        if (!namespace) {
-            throw new Error('Namespace is missing to provide namespaced helpers');
-        }
-    }
-    return {
-        useState: (map) => useNamespacedState(store, namespace, map),
-        useGetters: (map) => useNamespacedGetters(store, namespace, map),
-        useMutations: (map) => useNamespacedMutations(store, namespace, map),
-        useActions: (map) => useNamespacedActions(store, namespace, map),
-    };
-}
-//# sourceMappingURL=namespaced.js.map
-
-/***/ }),
-
-/***/ "./node_modules/vuex-composition-helpers/dist/util.js":
-/*!************************************************************!*\
-  !*** ./node_modules/vuex-composition-helpers/dist/util.js ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "computedGetter": () => /* binding */ computedGetter,
-/* harmony export */   "getMutation": () => /* binding */ getMutation,
-/* harmony export */   "getAction": () => /* binding */ getAction,
-/* harmony export */   "useMapping": () => /* binding */ useMapping,
-/* harmony export */   "getStoreFromInstance": () => /* binding */ getStoreFromInstance
-/* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-
-function runCB(cb, store, namespace, prop) {
-    if (cb.length === 3) { // choose which signature to pass to cb function
-        return cb(store, namespace, prop);
-    }
-    else {
-        return cb(store, namespace ? `${namespace}/${prop}` : prop);
-    }
-}
-function useFromArray(store, namespace, props, cb) {
-    return props.reduce((result, prop) => {
-        result[prop] = runCB(cb, store, namespace, prop);
-        return result;
-    }, {});
-}
-function useFromObject(store, namespace, props, cb) {
-    const obj = {};
-    for (let key in props) {
-        if (props.hasOwnProperty(key)) {
-            obj[key] = runCB(cb, store, namespace, props[key]);
-        }
-    }
-    return obj;
-}
-function computedGetter(store, prop) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(() => store.getters[prop]);
-}
-function getMutation(store, mutation) {
-    return function () {
-        return store.commit.apply(store, [mutation, ...arguments]);
-    };
-}
-function getAction(store, action) {
-    return function () {
-        return store.dispatch.apply(store, [action, ...arguments]);
-    };
-}
-function useMapping(store, namespace, map, cb) {
-    if (!map) {
-        return {};
-    }
-    if (map instanceof Array) {
-        return useFromArray(store, namespace, map, cb);
-    }
-    return useFromObject(store, namespace, map, cb);
-}
-function getStoreFromInstance() {
-    const vm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.getCurrentInstance)();
-    if (!vm) {
-        throw new Error('You must use this function within the "setup()" method, or insert the store as first argument.');
-    }
-    return vm.proxy?.$store;
-}
-//# sourceMappingURL=util.js.map
-
-/***/ }),
-
-/***/ "./node_modules/vuex-composition-helpers/dist/wrapper.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/vuex-composition-helpers/dist/wrapper.js ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "wrapStore": () => /* binding */ wrapStore
-/* harmony export */ });
-/* harmony import */ var _namespaced__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./namespaced */ "./node_modules/vuex-composition-helpers/dist/namespaced.js");
-/* harmony import */ var _global__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./global */ "./node_modules/vuex-composition-helpers/dist/global.js");
-
-
-function wrapStore(store) {
-    return {
-        createNamespacedHelpers: _namespaced__WEBPACK_IMPORTED_MODULE_0__.createNamespacedHelpers.bind(null, store),
-        useActions: _global__WEBPACK_IMPORTED_MODULE_1__.useActions.bind(null, store),
-        useGetters: _global__WEBPACK_IMPORTED_MODULE_1__.useGetters.bind(null, store),
-        useMutations: _global__WEBPACK_IMPORTED_MODULE_1__.useMutations.bind(null, store),
-        useState: _global__WEBPACK_IMPORTED_MODULE_1__.useState.bind(null, store)
-    };
-}
-//# sourceMappingURL=wrapper.js.map
 
 /***/ }),
 
