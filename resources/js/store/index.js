@@ -1,5 +1,4 @@
 import { createStore, createLogger } from 'vuex';
-// import { createStore } from 'vuex';
 
 import VuexPersistence from 'vuex-persist';
 
@@ -38,7 +37,6 @@ export default createStore({
       const foundProductInCartIndex = cart.findIndex(
         (item) => item.slug === payload.slug,
       );
-      // if (foundProductInCartIndex !== -1) {
       if (foundProductInCartIndex) {
         increasedQuantity[foundProductInCartIndex].quantity += 1;
         return increasedQuantity;

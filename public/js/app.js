@@ -16535,7 +16535,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var vuex_persist__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex-persist */ "./node_modules/vuex-persist/dist/esm/index.js");
- // import { createStore } from 'vuex';
 
 
 var debug = "development" !== 'production';
@@ -16574,7 +16573,7 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_1__.default({
       var increasedQuantity = cart;
       var foundProductInCartIndex = cart.findIndex(function (item) {
         return item.slug === payload.slug;
-      }); // if (foundProductInCartIndex !== -1) {
+      });
 
       if (foundProductInCartIndex) {
         increasedQuantity[foundProductInCartIndex].quantity += 1;
