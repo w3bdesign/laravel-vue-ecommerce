@@ -1,6 +1,15 @@
 import { createStore, createLogger } from 'vuex';
+// import { createStore } from 'vuex';
+
+import VuexPersistence from 'vuex-persist';
 
 const debug = process.env.NODE_ENV !== 'production';
+
+const debugLogger = debug ? createLogger() : [];
+
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage,
+});
 
 // TODO Move state into modules when the store becomes bigger
 
@@ -44,5 +53,5 @@ export default createStore({
     },
   },
   strict: process.env.NODE_ENV !== 'production',
-  plugins: debug ? [createLogger()] : [],
+  plugins: [vuexLocal.plugin, debugLogger],
 });
