@@ -38,8 +38,8 @@ export default createStore({
       const foundProductInCartIndex = cart.findIndex(
         (item) => item.slug === payload.slug,
       );
-
-      if (foundProductInCartIndex !== -1) {
+      // if (foundProductInCartIndex !== -1) {
+      if (foundProductInCartIndex) {
         increasedQuantity[foundProductInCartIndex].quantity += 1;
         return increasedQuantity;
       }
@@ -52,6 +52,6 @@ export default createStore({
       cart.splice(cart.indexOf(payload), 1);
     },
   },
-  strict: process.env.NODE_ENV !== 'production',
+  strict: debug,
   plugins: [vuexLocal.plugin, debugLogger],
 });
