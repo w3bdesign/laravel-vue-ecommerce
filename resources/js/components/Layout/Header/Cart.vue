@@ -35,11 +35,7 @@ import { useStore } from 'vuex';
 export default {
   setup() {
     const store = useStore();
-    const cartQuantity = computed(() => (store.state.cart.length
-      ? store.state.cart.reduce(
-        (item, value) => item.quantity + value.quantity,
-      )
-      : 0));
+    const cartQuantity = computed(() => store.getters.cartQuantity);
     const cartTotal = computed(() => store.getters.cartTotal);
     return { cartQuantity, cartTotal };
   },

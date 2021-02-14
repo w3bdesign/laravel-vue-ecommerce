@@ -16555,6 +16555,11 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_1__.default({
         return total + product.price * product.quantity;
       }, 0) : 0;
     },
+    cartQuantity: function cartQuantity(state) {
+      return state.cart.length ? state.cart.reduce(function (item, value) {
+        return item.quantity + value.quantity;
+      }) : 0;
+    },
     getCart: function getCart(state) {
       return state.cart;
     },
@@ -16642,9 +16647,7 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup() {
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.useStore)();
     var cartQuantity = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
-      return store.state.cart.length ? store.state.cart.reduce(function (item, value) {
-        return item.quantity + value.quantity;
-      }) : 0;
+      return store.getters.cartQuantity;
     });
     var cartTotal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       return store.getters.cartTotal;

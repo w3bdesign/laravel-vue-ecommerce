@@ -25,6 +25,12 @@ export default createStore({
         0,
       )
       : 0),
+    cartQuantity: (state) => (state.cart.length
+      ? state.cart.reduce(
+        (item, value) => item.quantity + value.quantity,
+      )
+      : 0),
+
     getCart: (state) => state.cart,
     cartLength: (state) => state.cart.length,
   },
