@@ -21,7 +21,7 @@
           <span class="cartQuantity">
             {{ cartQuantity.quantity }}
           </span>
-          <span>Total: {{ cartTotal }} </span>
+          <span>Total: ${{ cartTotal }} </span>
         </router-link>
       </div>
     </transition>

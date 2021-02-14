@@ -41,11 +41,10 @@
           <span
             class="block mt-2 font-extrabold"
           >Subtotal: <br></span>
-          <span class="item-content"> {{ cartTotal }} </span>
+          <span class="item-content"> ${{ cartTotal }} </span>
         </div>
       </div>
     </section>
-
     <h2
       v-if="!cartLength"
       class="m-4 text-3xl text-center"
@@ -91,7 +90,6 @@ export default defineComponent({
     });
 
     const cartLength = computed(() => store.state.cart.length);
-
     const cartTotal = computed(() => store.getters.cartTotal);
 
     const removeProductFromCart = (product) => {
