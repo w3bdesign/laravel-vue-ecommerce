@@ -2,7 +2,7 @@
   <div>
     <transition name="fade">
       <span
-        v-if="cartLength"
+        v-if="cartQuantity"
         class="text-xl text-white no-underline lg:text-black is-active"
       >
         <router-link to="/checkout">
@@ -16,10 +16,10 @@
       </span>
     </transition>
     <transition name="fade">
-      <div v-if="cartLength">
+      <div v-if="cartQuantity">
         <router-link to="/checkout">
-          <span class="cartLength">
-            {{ cartLength.quantity }}
+          <span class="cartQuantity">
+            {{ cartQuantity.quantity }}
           </span>
           <span>Total: 0 </span>
         </router-link>
@@ -35,24 +35,25 @@ import { useStore } from 'vuex';
 export default {
   setup() {
     const store = useStore();
-    const cartLength = computed(() => store.state.cart.reduce(
+    const cartQuantity = computed(() => (store.state.cart.length ? store.state.cart.reduce(
       (item, value) => item.quantity + value.quantity,
-    ));
-    return { cartLength };
+    ) : 0));
+    /* const cartTotal = computed(() => store.state.cart.reduce(
+      (item, value) => item.price * value.price,
+    )); */
+    return { cartQuantity };
   },
 };
 </script>
 
 <style scoped>
-.cartLength {
+.cartQuantity {
     @apply absolute w-6 h-6 pb-2 ml-16 -mt-12 text-center text-white bg-black rounded-full lg:ml-14;
 }
-
 .fade-enter-active,
 .fade-leave-active {
     transition: all 0.5s ease;
 }
-
 .fade-enter-from,
 .fade-leave-to {
     opacity: 0;
