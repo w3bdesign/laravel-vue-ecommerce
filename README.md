@@ -10,7 +10,8 @@
 
  - Laravel 8
  - Vue 3
- - VueX state management
+ - Vuex state management
+ - Vuex-persist for persisting cart after page refresh
  - Vee Validate
  - Stripe for payments
  - ESLint code linting with AirBnB ruleset
