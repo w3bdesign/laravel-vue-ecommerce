@@ -16550,6 +16550,9 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_1__.default({
     order: {}
   },
   getters: {
+    cartContent: function cartContent(state) {
+      return state.cart;
+    },
     cartTotal: function cartTotal(state) {
       return state.cart.length ? state.cart.reduce(function (total, product) {
         return total + product.price * product.quantity;
@@ -16794,10 +16797,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var cartTotal = (0,vue__WEBPACK_IMPORTED_MODULE_1__.computed)(function () {
       return store.getters.cartTotal;
     });
+    var cartContent = (0,vue__WEBPACK_IMPORTED_MODULE_1__.computed)(function () {
+      return store.getters.cartContent;
+    });
 
     var removeProductFromCart = function removeProductFromCart(product) {
-      console.log('Remove: ');
-      console.log(product);
       store.dispatch('removeProductFromCart', product);
     };
 
@@ -16846,6 +16850,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       store: store,
       cartLength: cartLength,
       cartTotal: cartTotal,
+      cartContent: cartContent,
       removeProductFromCart: removeProductFromCart,
       checkout: checkout
     });
@@ -17406,7 +17411,7 @@ var _hoisted_15 = {
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)();
 
 var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.$store.state.cart, function (products) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.cartContent, function (products) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       key: products.id,
       "class": "container mx-auto mt-4 flex-container"
