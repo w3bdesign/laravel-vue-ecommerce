@@ -16749,8 +16749,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-/* harmony import */ var _stripe_stripe_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @stripe/stripe-js */ "./node_modules/@stripe/stripe-js/dist/stripe.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var _stripe_stripe_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @stripe/stripe-js */ "./node_modules/@stripe/stripe-js/dist/stripe.esm.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -16766,22 +16768,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
   setup: function setup() {
-    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.useStore)();
+    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_4__.useStore)();
     var localState = (0,vue__WEBPACK_IMPORTED_MODULE_1__.reactive)({
       removingCartItem: false,
       paymentIsProcessing: false,
       stripe: {},
       cardElement: {},
       customer: {
-        first_name: '',
-        last_name: '',
-        email: '',
-        address: '',
-        city: '',
-        state: '',
-        zip_code: ''
+        first_name: 'Firstname',
+        last_name: 'Lastname',
+        email: 'test@test.com',
+        address: 'Address',
+        city: 'City',
+        state: 'NA',
+        zip_code: '1234'
       }
     });
     var cartLength = (0,vue__WEBPACK_IMPORTED_MODULE_1__.computed)(function () {
@@ -16808,8 +16811,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 localState.paymentIsProcessing = true;
                 console.log('Checkout process!');
+                axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/purchase', localState.customer).then(function (response) {
+                  localState.paymentIsProcessing = false;
+                  console.log('Order placed. Response: ');
+                  console.log(response);
+                })["catch"](function (error) {
+                  localState.paymentProcessing = false;
+                  console.log('Order NOT placed. Error: ');
+                  console.error(error);
+                });
 
-              case 2:
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -16828,7 +16840,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return (0,_stripe_stripe_js__WEBPACK_IMPORTED_MODULE_2__.loadStripe)("pk_test_nF5FAPJedaaoeeaHLxZ0R0X900AqFQTTLF");
+              return (0,_stripe_stripe_js__WEBPACK_IMPORTED_MODULE_3__.loadStripe)("pk_test_nF5FAPJedaaoeeaHLxZ0R0X900AqFQTTLF");
 
             case 2:
               localState.stripe = _context2.sent;

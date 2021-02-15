@@ -70,6 +70,8 @@ import {
   defineComponent, onMounted, reactive, computed, toRefs,
 } from 'vue';
 
+import axios from 'axios';
+
 import { useStore } from 'vuex';
 
 import { loadStripe } from '@stripe/stripe-js';
@@ -84,13 +86,13 @@ export default defineComponent({
       stripe: {},
       cardElement: {},
       customer: {
-        first_name: '',
-        last_name: '',
-        email: '',
-        address: '',
-        city: '',
-        state: '',
-        zip_code: '',
+        first_name: 'Firstname',
+        last_name: 'Lastname',
+        email: 'test@test.com',
+        address: 'Address',
+        city: 'City',
+        state: 'NA',
+        zip_code: '1234',
       },
     });
 
@@ -107,6 +109,18 @@ export default defineComponent({
     const checkout = async () => {
       localState.paymentIsProcessing = true;
       console.log('Checkout process!');
+      axios
+        .post('/api/purchase', localState.customer)
+        .then((response) => {
+          localState.paymentIsProcessing = false;
+          console.log('Order placed. Response: ');
+          console.log(response);
+        })
+        .catch((error) => {
+          localState.paymentProcessing = false;
+          console.log('Order NOT placed. Error: ');
+          console.error(error);
+        });
     };
 
     onMounted(async () => {
