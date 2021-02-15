@@ -16794,8 +16794,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var removeProductFromCart = function removeProductFromCart(product) {
       localState.removingCartItem = true;
-      store.dispatch('removeProductFromCart', product);
-      localState.removingCartItem = false;
+      store.dispatch('removeProductFromCart', product); // localState.removingCartItem = false;
     };
 
     var checkout = /*#__PURE__*/function () {
@@ -17400,6 +17399,9 @@ var _hoisted_15 = {
   key: 0,
   "class": "m-4 text-3xl text-center"
 };
+var _hoisted_16 = {
+  "class": "flex justify-center w-full align-center"
+};
 
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)();
 
@@ -17429,13 +17431,13 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     )])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), !_ctx.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h2", _hoisted_15, " Cart is currently empty ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
-    key: 1,
-    "class": "p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700",
+  ))]), !_ctx.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h2", _hoisted_15, " Cart is currently empty ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [_ctx.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
+    key: 0,
+    "class": "p-2 mt-4 mb-4 text-lg font-bold text-white bg-red-500 rounded hover:bg-red-700",
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return _ctx.checkout(_ctx.products);
     })
-  }, " Checkout ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  }, " Checkout ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
 });
 
 /***/ }),

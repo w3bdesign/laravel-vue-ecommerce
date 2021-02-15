@@ -51,13 +51,15 @@
     >
       Cart is currently empty
     </h2>
-    <button
-      v-if="cartLength"
-      class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
-      @click="checkout(products)"
-    >
-      Checkout
-    </button>
+    <div class="flex justify-center w-full align-center">
+      <button
+        v-if="cartLength"
+        class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-red-500 rounded hover:bg-red-700"
+        @click="checkout(products)"
+      >
+        Checkout
+      </button>
+    </div>
   </div>
 </template>
 
@@ -96,7 +98,7 @@ export default defineComponent({
     const removeProductFromCart = (product) => {
       localState.removingCartItem = true;
       store.dispatch('removeProductFromCart', product);
-      localState.removingCartItem = false;
+      // localState.removingCartItem = false;
     };
 
     const checkout = async () => {
