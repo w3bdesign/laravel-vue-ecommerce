@@ -55,12 +55,12 @@
       <button
         v-if="cartLength"
         class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+        :class="{ disabledButton: paymentIsProcessing }"
         :disabled="paymentIsProcessing"
         @click="checkout(products)"
       >
         Checkout
       </button>
-      Processing: {{ paymentIsProcessing }}
     </div>
   </div>
 </template>
@@ -130,15 +130,18 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.disabledButton {
+    @apply cursor-not-allowed opacity-50;
+}
+
 .flex-container {
-    display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     align-content: center;
     max-width: 1380px;
-    @apply border border-gray-300 rounded-lg shadow;
+    @apply flex border border-gray-300 rounded-lg shadow;
 }
 
 .item {
