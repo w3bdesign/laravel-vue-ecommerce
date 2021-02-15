@@ -16846,6 +16846,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
                 console.log(amount);
                 localState.customer.amount = 9900;
+                localState.customer.cart = JSON.stringify(store.state.cart);
                 localState.customer.payment_method_id = paymentMethod.id;
                 axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/purchase', localState.customer).then(function (response) {
                   localState.paymentIsProcessing = false;
@@ -16857,7 +16858,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   console.error(orderError);
                 });
 
-              case 15:
+              case 16:
               case "end":
                 return _context.stop();
             }

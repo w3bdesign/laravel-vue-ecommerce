@@ -154,6 +154,8 @@ export default defineComponent({
 
       localState.customer.amount = 9900;
 
+      localState.customer.cart = JSON.stringify(store.state.cart);
+
       localState.customer.payment_method_id = paymentMethod.id;
 
       axios
