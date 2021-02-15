@@ -91,10 +91,12 @@ export default defineComponent({
 
     const cartLength = computed(() => store.state.cart.length);
     const cartTotal = computed(() => store.getters.cartTotal);
-    const cartContent = computed(() => store.getters.cartContent);
+    const cartContent = computed(() => store.state.cart);
 
     const removeProductFromCart = (product) => {
+      localState.removingCartItem = true;
       store.dispatch('removeProductFromCart', product);
+      localState.removingCartItem = false;
     };
 
     const checkout = async () => {

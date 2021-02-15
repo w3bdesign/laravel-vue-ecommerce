@@ -16550,9 +16550,6 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_1__.default({
     order: {}
   },
   getters: {
-    cartContent: function cartContent(state) {
-      return state.cart;
-    },
     cartTotal: function cartTotal(state) {
       return state.cart.length ? state.cart.reduce(function (total, product) {
         return total + product.price * product.quantity;
@@ -16562,12 +16559,6 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_1__.default({
       return state.cart.length ? state.cart.reduce(function (item, value) {
         return item.quantity + value.quantity;
       }) : 0;
-    },
-    getCart: function getCart(state) {
-      return state.cart;
-    },
-    cartLength: function cartLength(state) {
-      return state.cart.length;
     }
   },
   actions: {
@@ -16798,11 +16789,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return store.getters.cartTotal;
     });
     var cartContent = (0,vue__WEBPACK_IMPORTED_MODULE_1__.computed)(function () {
-      return store.getters.cartContent;
+      return store.state.cart;
     });
 
     var removeProductFromCart = function removeProductFromCart(product) {
+      localState.removingCartItem = true;
       store.dispatch('removeProductFromCart', product);
+      localState.removingCartItem = false;
     };
 
     var checkout = /*#__PURE__*/function () {
