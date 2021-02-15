@@ -16,7 +16,7 @@
           <span class="item-content">
             <img
               class="mt-2 ml-4 cursor-pointer"
-              :class="{ removing: removingCartItem }"
+              :class="{ removing: localState.removingCartItem }"
               alt="Remove icon"
               aria-label="Remove"
               src="../../../img/svg/Remove.svg"
@@ -54,18 +54,20 @@
     <div class="flex justify-center w-full align-center">
       <button
         v-if="cartLength"
-        class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-red-500 rounded hover:bg-red-700"
+        class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+        :disabled="paymentIsProcessing"
         @click="checkout(products)"
       >
         Checkout
       </button>
+      Processing: {{ paymentIsProcessing }}
     </div>
   </div>
 </template>
 
 <script>
 import {
-  defineComponent, onMounted, reactive, toRefs, computed,
+  defineComponent, onMounted, reactive, computed, toRefs,
 } from 'vue';
 
 import { useStore } from 'vuex';
@@ -78,6 +80,7 @@ export default defineComponent({
 
     const localState = reactive({
       removingCartItem: false,
+      paymentIsProcessing: false,
       stripe: {},
       cardElement: {},
       customer: {
@@ -98,10 +101,11 @@ export default defineComponent({
     const removeProductFromCart = (product) => {
       localState.removingCartItem = true;
       store.dispatch('removeProductFromCart', product);
-      // localState.removingCartItem = false;
+      localState.removingCartItem = false;
     };
 
     const checkout = async () => {
+      localState.paymentIsProcessing = true;
       console.log('Checkout process!');
     };
 
@@ -113,6 +117,7 @@ export default defineComponent({
 
     return {
       ...toRefs(localState),
+      localState,
       store,
       cartLength,
       cartTotal,
