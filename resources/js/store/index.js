@@ -30,9 +30,6 @@ export default createStore({
         (item, value) => item.quantity + value.quantity,
       )
       : 0),
-
-    getCart: (state) => state.cart,
-    cartLength: (state) => state.cart.length,
   },
   actions: {
     addProductToCart({ commit }, product) {

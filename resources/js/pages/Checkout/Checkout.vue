@@ -5,7 +5,7 @@
     </h1>
     <section class="mt-10">
       <div
-        v-for="products in $store.state.cart"
+        v-for="products in cartContent"
         :key="products.id"
         class="container mx-auto mt-4 flex-container"
       >
@@ -91,11 +91,12 @@ export default defineComponent({
 
     const cartLength = computed(() => store.state.cart.length);
     const cartTotal = computed(() => store.getters.cartTotal);
+    const cartContent = computed(() => store.state.cart);
 
     const removeProductFromCart = (product) => {
-      console.log('Remove: ');
-      console.log(product);
+      localState.removingCartItem = true;
       store.dispatch('removeProductFromCart', product);
+      localState.removingCartItem = false;
     };
 
     const checkout = async () => {
@@ -113,6 +114,7 @@ export default defineComponent({
       store,
       cartLength,
       cartTotal,
+      cartContent,
       removeProductFromCart,
       checkout,
     };
