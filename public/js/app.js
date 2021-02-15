@@ -16784,7 +16784,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         address: 'Address',
         city: 'City',
         state: 'NA',
-        zip_code: '1234'
+        zipcode: '1234'
       }
     });
     var cartLength = (0,vue__WEBPACK_IMPORTED_MODULE_1__.computed)(function () {
@@ -16805,23 +16805,59 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var checkout = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var _yield$localState$str, paymentMethod, error, totalAmount, amount;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 localState.paymentIsProcessing = true;
-                console.log('Checkout process!');
+                _context.next = 3;
+                return localState.stripe.createPaymentMethod('card', localState.cardElement, {
+                  billing_details: {
+                    name: 'Firstname Lastname',
+                    // this.customer.first_name + ' ' + this.customer.last_name,
+                    email: 'test@test.com',
+                    // this.customer.email,
+                    address: {
+                      line1: 'Address',
+                      // this.customer.address,
+                      city: 'City',
+                      // this.customer.city,
+                      state: 'State',
+                      // this.customer.state,
+                      postal_code: '1234' // this.customer.zip_code
+
+                    }
+                  }
+                });
+
+              case 3:
+                _yield$localState$str = _context.sent;
+                paymentMethod = _yield$localState$str.paymentMethod;
+                error = _yield$localState$str.error;
+                console.log('Payment method: ');
+                console.log(paymentMethod);
+                console.log(error);
+                totalAmount = 99.00;
+                amount = totalAmount.toLocaleString('nb-NO', {
+                  style: 'currency',
+                  currency: 'NOK'
+                });
+                console.log(amount);
+                localState.customer.amount = 9900;
+                localState.customer.payment_method_id = paymentMethod.id;
                 axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/purchase', localState.customer).then(function (response) {
                   localState.paymentIsProcessing = false;
                   console.log('Order placed. Response: ');
                   console.log(response);
-                })["catch"](function (error) {
+                })["catch"](function (orderError) {
                   localState.paymentProcessing = false;
                   console.log('Order NOT placed. Error: ');
-                  console.error(error);
+                  console.error(orderError);
                 });
 
-              case 3:
+              case 15:
               case "end":
                 return _context.stop();
             }
@@ -16835,6 +16871,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }();
 
     (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var elements;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -16844,10 +16881,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
             case 2:
               localState.stripe = _context2.sent;
+              elements = localState.stripe.elements();
+              localState.cardElement = elements.create('card', {
+                classes: {
+                  base: 'bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 p-3 leading-8 transition-colors duration-200 ease-in-out'
+                }
+              });
+              localState.cardElement.mount('#card-element');
               console.log('Stripe test: ');
               console.log(localState.stripe);
 
-            case 5:
+            case 8:
             case "end":
               return _context2.stop();
           }
@@ -17416,9 +17460,33 @@ var _hoisted_15 = {
   key: 0,
   "class": "m-4 text-3xl text-center"
 };
-var _hoisted_16 = {
+
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+  "class": "h-10 p-6 text-2xl font-bold text-center"
+}, " Stripe payment ", -1
+/* HOISTED */
+);
+
+var _hoisted_17 = {
+  "class": "flex justify-center w-full p-4 align-center"
+};
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_19 = {
+  key: 0,
+  id: "card-element",
+  "class": "w-1/2 h-32 mt-4"
+};
+var _hoisted_20 = {
   "class": "flex justify-center w-full align-center"
 };
+
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+/* HOISTED */
+);
 
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)();
 
@@ -17448,7 +17516,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     )])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), !_ctx.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h2", _hoisted_15, " Cart is currently empty ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [_ctx.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
+  ))]), !_ctx.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h2", _hoisted_15, " Cart is currently empty ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, [_hoisted_18, _ctx.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_19, " Stripe ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [_ctx.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
     key: 0,
     "class": ["p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700", {
       disabledButton: _ctx.paymentIsProcessing
@@ -17459,7 +17527,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     })
   }, " Checkout ", 10
   /* CLASS, PROPS */
-  , ["disabled"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
+  , ["disabled"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_21])]);
 });
 
 /***/ }),

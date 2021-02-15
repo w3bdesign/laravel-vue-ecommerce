@@ -51,6 +51,19 @@
     >
       Cart is currently empty
     </h2>
+    <h2 class="h-10 p-6 text-2xl font-bold text-center">
+      Stripe payment
+    </h2>
+    <div class="flex justify-center w-full p-4 align-center">
+      <br>
+      <div
+        v-if="cartLength"
+        id="card-element"
+        class="w-1/2 h-32 mt-4"
+      >
+        Stripe
+      </div>
+    </div>
     <div class="flex justify-center w-full align-center">
       <button
         v-if="cartLength"
@@ -61,6 +74,7 @@
       >
         Checkout
       </button>
+      <br>
     </div>
   </div>
 </template>
@@ -92,7 +106,7 @@ export default defineComponent({
         address: 'Address',
         city: 'City',
         state: 'NA',
-        zip_code: '1234',
+        zipcode: '1234',
       },
     });
 
@@ -108,7 +122,40 @@ export default defineComponent({
 
     const checkout = async () => {
       localState.paymentIsProcessing = true;
-      console.log('Checkout process!');
+
+      const {
+        paymentMethod,
+        error,
+      } = await localState.stripe.createPaymentMethod(
+        'card',
+        localState.cardElement,
+        {
+          billing_details: {
+            name: 'Firstname Lastname', // this.customer.first_name + ' ' + this.customer.last_name,
+            email: 'test@test.com', // this.customer.email,
+            address: {
+              line1: 'Address', // this.customer.address,
+              city: 'City', // this.customer.city,
+              state: 'State', // this.customer.state,
+              postal_code: '1234', // this.customer.zip_code
+            },
+          },
+        },
+      );
+
+      console.log('Payment method: ');
+      console.log(paymentMethod);
+      console.log(error);
+
+      const totalAmount = 99.00;
+      const amount = totalAmount.toLocaleString('nb-NO', { style: 'currency', currency: 'NOK' });
+
+      console.log(amount);
+
+      localState.customer.amount = 9900;
+
+      localState.customer.payment_method_id = paymentMethod.id;
+
       axios
         .post('/api/purchase', localState.customer)
         .then((response) => {
@@ -116,15 +163,24 @@ export default defineComponent({
           console.log('Order placed. Response: ');
           console.log(response);
         })
-        .catch((error) => {
+        .catch((orderError) => {
           localState.paymentProcessing = false;
           console.log('Order NOT placed. Error: ');
-          console.error(error);
+          console.error(orderError);
         });
     };
 
     onMounted(async () => {
       localState.stripe = await loadStripe(process.env.MIX_STRIPE_KEY);
+
+      const elements = localState.stripe.elements();
+      localState.cardElement = elements.create('card', {
+        classes: {
+          base:
+                        'bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 p-3 leading-8 transition-colors duration-200 ease-in-out',
+        },
+      });
+      localState.cardElement.mount('#card-element');
       console.log('Stripe test: ');
       console.log(localState.stripe);
     });
