@@ -41,13 +41,14 @@ export default createStore({
   },
   mutations: {
     ADD_PRODUCT_TO_CART({ cart }, payload) {
-      const increasedQuantity = cart;
+      // ESLint complains if we modify the state directly
+      const cartCopy = cart;
       const foundProductInCartIndex = cart.findIndex(
         (item) => item.slug === payload.slug,
       );
       if (!foundProductInCartIndex) {
-        increasedQuantity[foundProductInCartIndex].quantity += 1;
-        return increasedQuantity;
+        cartCopy[foundProductInCartIndex].quantity += 1;
+        return cartCopy;
       }
       const newPayload = payload;
       newPayload.quantity = 1;

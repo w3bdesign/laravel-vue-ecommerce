@@ -16574,14 +16574,15 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_1__.default({
   mutations: {
     ADD_PRODUCT_TO_CART: function ADD_PRODUCT_TO_CART(_ref3, payload) {
       var cart = _ref3.cart;
-      var increasedQuantity = cart;
+      // ESLint complains if we modify the state directly
+      var cartCopy = cart;
       var foundProductInCartIndex = cart.findIndex(function (item) {
         return item.slug === payload.slug;
       });
 
       if (!foundProductInCartIndex) {
-        increasedQuantity[foundProductInCartIndex].quantity += 1;
-        return increasedQuantity;
+        cartCopy[foundProductInCartIndex].quantity += 1;
+        return cartCopy;
       }
 
       var newPayload = payload;
@@ -16770,6 +16771,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.useStore)();
     var localState = (0,vue__WEBPACK_IMPORTED_MODULE_1__.reactive)({
       removingCartItem: false,
+      paymentIsProcessing: false,
       stripe: {},
       cardElement: {},
       customer: {
@@ -16794,7 +16796,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var removeProductFromCart = function removeProductFromCart(product) {
       localState.removingCartItem = true;
-      store.dispatch('removeProductFromCart', product); // localState.removingCartItem = false;
+      store.dispatch('removeProductFromCart', product);
+      localState.removingCartItem = false;
     };
 
     var checkout = /*#__PURE__*/function () {
@@ -16803,9 +16806,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                localState.paymentIsProcessing = true;
                 console.log('Checkout process!');
 
-              case 1:
+              case 2:
               case "end":
                 return _context.stop();
             }
@@ -16839,6 +16843,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, _callee2);
     })));
     return _objectSpread(_objectSpread({}, (0,vue__WEBPACK_IMPORTED_MODULE_1__.toRefs)(localState)), {}, {
+      localState: localState,
       store: store,
       cartLength: cartLength,
       cartTotal: cartTotal,
@@ -17412,7 +17417,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
       "class": "container mx-auto mt-4 flex-container"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
       "class": ["mt-2 ml-4 cursor-pointer", {
-        removing: _ctx.removingCartItem
+        removing: _ctx.localState.removingCartItem
       }],
       alt: "Remove icon",
       "aria-label": "Remove",
@@ -17433,11 +17438,16 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   /* KEYED_FRAGMENT */
   ))]), !_ctx.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h2", _hoisted_15, " Cart is currently empty ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_16, [_ctx.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
     key: 0,
-    "class": "p-2 mt-4 mb-4 text-lg font-bold text-white bg-red-500 rounded hover:bg-red-700",
+    "class": "p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700",
+    disabled: _ctx.paymentIsProcessing,
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return _ctx.checkout(_ctx.products);
     })
-  }, " Checkout ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
+  }, " Checkout ", 8
+  /* PROPS */
+  , ["disabled"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Processing: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.paymentIsProcessing), 1
+  /* TEXT */
+  )])]);
 });
 
 /***/ }),
