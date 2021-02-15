@@ -16811,8 +16811,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                localState.paymentIsProcessing = true;
-                _context.next = 3;
+                _context.next = 2;
                 return localState.stripe.createPaymentMethod('card', localState.cardElement, {
                   billing_details: {
                     name: 'Firstname Lastname',
@@ -16832,10 +16831,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 });
 
-              case 3:
+              case 2:
                 _yield$localState$str = _context.sent;
                 paymentMethod = _yield$localState$str.paymentMethod;
                 error = _yield$localState$str.error;
+
+                if (!error) {
+                  _context.next = 8;
+                  break;
+                }
+
+                localState.paymentIsProcessing = false;
+                return _context.abrupt("return");
+
+              case 8:
+                localState.paymentIsProcessing = true;
                 console.log('Payment method: ');
                 console.log(paymentMethod);
                 console.log(error);
@@ -16844,7 +16854,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   style: 'currency',
                   currency: 'NOK'
                 });
-                console.log(amount);
                 localState.customer.amount = 9900;
                 localState.customer.cart = JSON.stringify(store.state.cart);
                 localState.customer.payment_method_id = paymentMethod.id;
@@ -16858,7 +16867,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   console.error(orderError);
                 });
 
-              case 16:
+              case 18:
               case "end":
                 return _context.stop();
             }

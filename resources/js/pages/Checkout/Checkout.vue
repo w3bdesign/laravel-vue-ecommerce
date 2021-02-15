@@ -121,8 +121,6 @@ export default defineComponent({
     };
 
     const checkout = async () => {
-      localState.paymentIsProcessing = true;
-
       const {
         paymentMethod,
         error,
@@ -143,14 +141,15 @@ export default defineComponent({
         },
       );
 
+      if (error) { localState.paymentIsProcessing = false; return; }
+      localState.paymentIsProcessing = true;
+
       console.log('Payment method: ');
       console.log(paymentMethod);
       console.log(error);
 
       const totalAmount = 99.00;
       const amount = totalAmount.toLocaleString('nb-NO', { style: 'currency', currency: 'NOK' });
-
-      console.log(amount);
 
       localState.customer.amount = 9900;
 
