@@ -51,30 +51,32 @@
     >
       Cart is currently empty
     </h2>
-    <h2 class="h-10 p-6 text-2xl font-bold text-center">
-      Stripe payment
-    </h2>
-    <div class="flex justify-center w-full p-4 align-center">
-      <br>
-      <div
-        v-if="cartLength"
-        id="card-element"
-        class="w-1/2 h-32 mt-4"
+    <div v-if="cartLength">
+      <h2
+        class="h-10 p-6 text-2xl font-bold text-center"
       >
-        Stripe
+        Stripe payment
+      </h2>
+      <div class="flex justify-center w-full p-4 align-center">
+        <br>
+        <div
+
+          id="card-element"
+          class="w-1/2 h-32 mt-4"
+        >
+          Stripe
+        </div>
       </div>
-    </div>
-    <div class="flex justify-center w-full align-center">
-      <button
-        v-if="cartLength"
-        class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
-        :class="{ disabledButton: paymentIsProcessing }"
-        :disabled="paymentIsProcessing"
-        @click="checkout(products)"
-      >
-        Checkout
-      </button>
-      <br>
+      <div class="flex justify-center w-full align-center">
+        <button
+          class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+          :class="{ disabledButton: paymentIsProcessing }"
+          :disabled="paymentIsProcessing"
+          @click="checkout(products)"
+        >
+          Checkout
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -88,12 +90,14 @@ import axios from 'axios';
 
 import { useStore } from 'vuex';
 
+import { useRouter } from 'vue-router';
+
 import { loadStripe } from '@stripe/stripe-js';
 
 export default defineComponent({
   setup() {
     const store = useStore();
-
+    const router = useRouter();
     const localState = reactive({
       removingCartItem: false,
       paymentIsProcessing: false,
@@ -147,8 +151,8 @@ export default defineComponent({
       }
       localState.paymentIsProcessing = true;
 
-      const totalAmount = 99.00;
-      const amount = totalAmount.toLocaleString('nb-NO', { style: 'currency', currency: 'NOK' });
+      // const totalAmount = 99.00;
+      // const amount = totalAmount.toLocaleString('nb-NO', { style: 'currency', currency: 'NOK' });
 
       localState.customer.amount = 9900;
       localState.customer.cart = JSON.stringify(store.state.cart);
@@ -160,7 +164,9 @@ export default defineComponent({
           localState.paymentIsProcessing = false;
           if (response.statusText === 'Created') {
             // TODO Redirect to success page
-            console.log('Success!');
+            console.log('Success! Redirecting ....');
+            // this.$router.push('/thankyou');
+            router.push('/thankyou');
           }
         })
         .catch((orderError) => {
@@ -172,7 +178,6 @@ export default defineComponent({
 
     onMounted(async () => {
       localState.stripe = await loadStripe(process.env.MIX_STRIPE_KEY);
-
       const elements = localState.stripe.elements();
       localState.cardElement = elements.create('card', {
         classes: {
@@ -181,8 +186,6 @@ export default defineComponent({
         },
       });
       localState.cardElement.mount('#card-element');
-      console.log('Stripe test: ');
-      console.log(localState.stripe);
     });
 
     return {

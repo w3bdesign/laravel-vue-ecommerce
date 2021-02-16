@@ -11,6 +11,7 @@ import Index from './pages/Home/Index.vue';
 import Products from './pages/Products/Products.vue';
 import Categories from './pages/Categories/Categories.vue';
 import Checkout from './pages/Checkout/Checkout.vue';
+import Summary from './pages/Checkout/Summary.vue';
 
 require('./bootstrap');
 
@@ -19,6 +20,7 @@ const routes = [
   { path: '/products', component: Products },
   { path: '/categories', component: Categories },
   { path: '/checkout', component: Checkout },
+  { path: '/thankyou', component: Summary },
 ];
 
 const router = createRouter({
@@ -35,6 +37,7 @@ createApp({
     Products,
     Categories,
     Checkout,
+    Summary,
   },
 })
   .use(store)
