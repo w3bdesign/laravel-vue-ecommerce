@@ -16811,8 +16811,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                localState.paymentIsProcessing = true;
-                _context.next = 3;
+                _context.next = 2;
                 return localState.stripe.createPaymentMethod('card', localState.cardElement, {
                   billing_details: {
                     name: 'Firstname Lastname',
@@ -16832,33 +16831,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 });
 
-              case 3:
+              case 2:
                 _yield$localState$str = _context.sent;
                 paymentMethod = _yield$localState$str.paymentMethod;
                 error = _yield$localState$str.error;
-                console.log('Payment method: ');
-                console.log(paymentMethod);
-                console.log(error);
+
+                if (!error) {
+                  _context.next = 8;
+                  break;
+                }
+
+                localState.paymentIsProcessing = false;
+                return _context.abrupt("return");
+
+              case 8:
+                localState.paymentIsProcessing = true;
                 totalAmount = 99.00;
                 amount = totalAmount.toLocaleString('nb-NO', {
                   style: 'currency',
                   currency: 'NOK'
                 });
-                console.log(amount);
                 localState.customer.amount = 9900;
                 localState.customer.cart = JSON.stringify(store.state.cart);
                 localState.customer.payment_method_id = paymentMethod.id;
                 axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/purchase', localState.customer).then(function (response) {
                   localState.paymentIsProcessing = false;
-                  console.log('Order placed. Response: ');
-                  console.log(response);
+
+                  if (response.statusText === 'Created') {
+                    // TODO Redirect to success page
+                    console.log('Success!');
+                  }
                 })["catch"](function (orderError) {
                   localState.paymentProcessing = false;
                   console.log('Order NOT placed. Error: ');
                   console.error(orderError);
                 });
 
-              case 16:
+              case 15:
               case "end":
                 return _context.stop();
             }

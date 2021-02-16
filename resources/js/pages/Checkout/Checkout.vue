@@ -121,8 +121,6 @@ export default defineComponent({
     };
 
     const checkout = async () => {
-      localState.paymentIsProcessing = true;
-
       const {
         paymentMethod,
         error,
@@ -143,27 +141,27 @@ export default defineComponent({
         },
       );
 
-      console.log('Payment method: ');
-      console.log(paymentMethod);
-      console.log(error);
+      if (error) {
+        localState.paymentIsProcessing = false;
+        return;
+      }
+      localState.paymentIsProcessing = true;
 
       const totalAmount = 99.00;
       const amount = totalAmount.toLocaleString('nb-NO', { style: 'currency', currency: 'NOK' });
 
-      console.log(amount);
-
       localState.customer.amount = 9900;
-
       localState.customer.cart = JSON.stringify(store.state.cart);
-
       localState.customer.payment_method_id = paymentMethod.id;
 
       axios
         .post('/api/purchase', localState.customer)
         .then((response) => {
           localState.paymentIsProcessing = false;
-          console.log('Order placed. Response: ');
-          console.log(response);
+          if (response.statusText === 'Created') {
+            // TODO Redirect to success page
+            console.log('Success!');
+          }
         })
         .catch((orderError) => {
           localState.paymentProcessing = false;
