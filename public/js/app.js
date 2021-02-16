@@ -16846,9 +16846,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 8:
                 localState.paymentIsProcessing = true;
-                console.log('Payment method: ');
-                console.log(paymentMethod);
-                console.log(error);
                 totalAmount = 99.00;
                 amount = totalAmount.toLocaleString('nb-NO', {
                   style: 'currency',
@@ -16859,15 +16856,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 localState.customer.payment_method_id = paymentMethod.id;
                 axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/purchase', localState.customer).then(function (response) {
                   localState.paymentIsProcessing = false;
-                  console.log('Order placed. Response: ');
-                  console.log(response);
+
+                  if (response.statusText === 'Created') {
+                    // TODO Redirect to success page
+                    console.log('Success!');
+                  }
                 })["catch"](function (orderError) {
                   localState.paymentProcessing = false;
                   console.log('Order NOT placed. Error: ');
                   console.error(orderError);
                 });
 
-              case 18:
+              case 15:
               case "end":
                 return _context.stop();
             }
