@@ -9,19 +9,18 @@
  ## Features
 
  - Laravel 8
- - Vue 3
- - Vuex state management
+ - Vue 3 with composition API
+ - Vuex 4 state management
  - Vuex-persist for persisting cart after page refresh
- - Vee Validate
  - Stripe for payments
  - ESLint code linting with AirBnB ruleset
- - Composition API
  - Animations
  - SonarCloud code quality scanner integration on all pull requests
  - Laravel tests with CircleCI integration
 
  ## TODO
 
+ - Finish implementing Vee Validate
  - Finish implementing Laravel Scout
  - Add some tests to verify that the cart and checkout works correctly
  - Consider adding an admin dashboard
