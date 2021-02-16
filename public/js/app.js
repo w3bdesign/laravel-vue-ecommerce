@@ -16575,11 +16575,23 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_1__.default({
     removeProductFromCart: function removeProductFromCart(_ref2, product) {
       var commit = _ref2.commit;
       commit('REMOVE_PRODUCT_FROM_CART', product);
+    },
+    emptyCart: function emptyCart(_ref3) {
+      var commit = _ref3.commit;
+      commit('UPDATE_CART', []);
     }
   },
   mutations: {
-    ADD_PRODUCT_TO_CART: function ADD_PRODUCT_TO_CART(_ref3, payload) {
-      var cart = _ref3.cart;
+    UPDATE_CART: function UPDATE_CART(state, cart) {
+      var newState = state;
+      newState.cart = cart;
+    },
+    UPDATE_ORDER: function UPDATE_ORDER(state, order) {
+      var newState = state;
+      newState.order = order;
+    },
+    ADD_PRODUCT_TO_CART: function ADD_PRODUCT_TO_CART(_ref4, payload) {
+      var cart = _ref4.cart;
       // ESLint complains if we modify the state directly
       var cartCopy = cart;
       var foundProductInCartIndex = cart.findIndex(function (item) {
@@ -16596,8 +16608,8 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_1__.default({
       cart.push(newPayload);
       return cart;
     },
-    REMOVE_PRODUCT_FROM_CART: function REMOVE_PRODUCT_FROM_CART(_ref4, payload) {
-      var cart = _ref4.cart;
+    REMOVE_PRODUCT_FROM_CART: function REMOVE_PRODUCT_FROM_CART(_ref5, payload) {
+      var cart = _ref5.cart;
       cart.splice(cart.indexOf(payload), 1);
     }
   },
@@ -16865,8 +16877,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                   if (response.statusText === 'Created') {
                     // TODO Redirect to success page
-                    console.log('Success! Redirecting ....'); // this.$router.push('/thankyou');
-
+                    console.log('Success! Redirecting .... Response data: ');
+                    store.dispatch('emptyCart');
+                    store.commit('UPDATE_ORDER', response.data);
                     router.push('/thankyou');
                   }
                 })["catch"](function (orderError) {
@@ -16939,7 +16952,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  setup: function setup() {
+    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.useStore)();
+    var order = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.state.order;
+    });
+    return {
+      order: order
+    };
+  }
+});
 
 /***/ }),
 
@@ -17570,8 +17597,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h1", {
+  "class": "h-10 p-6 text-4xl font-bold text-center"
+}, " Order summary ", -1
+/* HOISTED */
+);
+
+var _hoisted_2 = {
+  "class": "mt-4"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, "This is the summary page");
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("pre", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.order), 1
+  /* TEXT */
+  )])]);
 }
 
 /***/ }),

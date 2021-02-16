@@ -38,8 +38,19 @@ export default createStore({
     removeProductFromCart({ commit }, product) {
       commit('REMOVE_PRODUCT_FROM_CART', product);
     },
+    emptyCart({ commit }) {
+      commit('UPDATE_CART', []);
+    },
   },
   mutations: {
+    UPDATE_CART(state, cart) {
+      const newState = state;
+      newState.cart = cart;
+    },
+    UPDATE_ORDER(state, order) {
+      const newState = state;
+      newState.order = order;
+    },
     ADD_PRODUCT_TO_CART({ cart }, payload) {
       // ESLint complains if we modify the state directly
       const cartCopy = cart;
