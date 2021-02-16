@@ -164,8 +164,9 @@ export default defineComponent({
           localState.paymentIsProcessing = false;
           if (response.statusText === 'Created') {
             // TODO Redirect to success page
-            console.log('Success! Redirecting ....');
-            // this.$router.push('/thankyou');
+            console.log('Success! Redirecting .... Response data: ');
+            store.dispatch('emptyCart');
+            store.commit('UPDATE_ORDER', response.data);
             router.push('/thankyou');
           }
         })
