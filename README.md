@@ -24,4 +24,3 @@
  - Finish implementing Laravel Scout
  - Add some tests to verify that the cart and checkout works correctly
  - Consider adding an admin dashboard
- - Update all composer packages and verify that everything still works
