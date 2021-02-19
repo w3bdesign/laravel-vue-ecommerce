@@ -46,8 +46,8 @@ class UserController extends Controller
             $order->load('products');
             return $order;
         } catch (\Exception $e) {
-            return "Error: " . $e->getMessage();
-            //return response()->json(['message' => $e->getMessage()], 500);
+            // Return $e->getMessage ?
+            return response()->json(['message' => $e->getMessage()], 500);
         }
     }
 }

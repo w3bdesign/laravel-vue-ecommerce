@@ -1,13 +1,9 @@
 import { createStore, createLogger } from 'vuex';
-
 import VuexPersistence from 'vuex-persist';
-
 import axios from 'axios';
 
 const debug = process.env.NODE_ENV !== 'production';
-
 const debugLogger = debug ? createLogger() : [];
-
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
 });
@@ -39,8 +35,6 @@ export default createStore({
         .get('/api/products')
         .then((response) => {
           commit('FETCH_PRODUCTS_FROM_API', response.data);
-          // state.products = response.data;
-          // state.loading = false;
         })
         .catch((error) => console.error(error));
     },
