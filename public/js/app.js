@@ -16501,7 +16501,8 @@ var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_11__.createRouter)({
     Summary: _pages_Checkout_Summary_vue__WEBPACK_IMPORTED_MODULE_10__.default
   },
   created: function created() {
-    _store_index__WEBPACK_IMPORTED_MODULE_1__.default.dispatch('getProductsFromApi').then(function () {})["catch"](function (error) {
+    _store_index__WEBPACK_IMPORTED_MODULE_1__.default.dispatch('getProductsFromApi') // Do we need a then here?
+    ["catch"](function (error) {
       return console.error(error);
     });
   }
