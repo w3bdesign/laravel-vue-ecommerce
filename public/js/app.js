@@ -16501,7 +16501,9 @@ var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_11__.createRouter)({
     Summary: _pages_Checkout_Summary_vue__WEBPACK_IMPORTED_MODULE_10__.default
   },
   created: function created() {
-    console.log('Created app!');
+    _store_index__WEBPACK_IMPORTED_MODULE_1__.default.dispatch('getProductsFromApi').then(function (_) {})["catch"](function (error) {
+      return console.error(error);
+    });
   }
 }).use(_store_index__WEBPACK_IMPORTED_MODULE_1__.default).use(router).mount('#app');
 
@@ -16549,24 +16551,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-/* harmony import */ var vuex_persist__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex-persist */ "./node_modules/vuex-persist/dist/esm/index.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex_persist__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex-persist */ "./node_modules/vuex-persist/dist/esm/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
 
 
 var debug = "development" !== 'production';
-var debugLogger = debug ? (0,vuex__WEBPACK_IMPORTED_MODULE_0__.createLogger)() : [];
-var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_1__.default({
+var debugLogger = debug ? (0,vuex__WEBPACK_IMPORTED_MODULE_1__.createLogger)() : [];
+var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_2__.default({
   storage: window.localStorage
 }); // TODO Move state into modules when the store becomes bigger
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vuex__WEBPACK_IMPORTED_MODULE_0__.createStore)({
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vuex__WEBPACK_IMPORTED_MODULE_1__.createStore)({
   state: {
     products: [],
     cart: [],
     order: {}
   },
   getters: {
-    // getSingleProduct: ()
     cartTotal: function cartTotal(state) {
       return state.cart.length ? state.cart.reduce(function (total, product) {
         return total + product.price * product.quantity;
@@ -16579,20 +16583,33 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_1__.default({
     }
   },
   actions: {
-    addProductToCart: function addProductToCart(_ref, product) {
+    getProductsFromApi: function getProductsFromApi(_ref) {
       var commit = _ref.commit;
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/products').then(function (response) {
+        commit('FETCH_PRODUCTS_FROM_API', response.data); // state.products = response.data;
+        // state.loading = false;
+      })["catch"](function (error) {
+        return console.error(error);
+      });
+    },
+    addProductToCart: function addProductToCart(_ref2, product) {
+      var commit = _ref2.commit;
       commit('ADD_PRODUCT_TO_CART', product);
     },
-    removeProductFromCart: function removeProductFromCart(_ref2, product) {
-      var commit = _ref2.commit;
+    removeProductFromCart: function removeProductFromCart(_ref3, product) {
+      var commit = _ref3.commit;
       commit('REMOVE_PRODUCT_FROM_CART', product);
     },
-    emptyCart: function emptyCart(_ref3) {
-      var commit = _ref3.commit;
+    emptyCart: function emptyCart(_ref4) {
+      var commit = _ref4.commit;
       commit('UPDATE_CART', []);
     }
   },
   mutations: {
+    FETCH_PRODUCTS_FROM_API: function FETCH_PRODUCTS_FROM_API(state, products) {
+      var newState = state;
+      newState.products = products;
+    },
     UPDATE_CART: function UPDATE_CART(state, cart) {
       var newState = state;
       newState.cart = cart;
@@ -16601,8 +16618,8 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_1__.default({
       var newState = state;
       newState.order = order;
     },
-    ADD_PRODUCT_TO_CART: function ADD_PRODUCT_TO_CART(_ref4, payload) {
-      var cart = _ref4.cart;
+    ADD_PRODUCT_TO_CART: function ADD_PRODUCT_TO_CART(_ref5, payload) {
+      var cart = _ref5.cart;
       // ESLint complains if we modify the state directly
       var cartCopy = cart;
       var foundProductInCartIndex = cart.findIndex(function (item) {
@@ -16619,8 +16636,8 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_1__.default({
       cart.push(newPayload);
       return cart;
     },
-    REMOVE_PRODUCT_FROM_CART: function REMOVE_PRODUCT_FROM_CART(_ref5, payload) {
-      var cart = _ref5.cart;
+    REMOVE_PRODUCT_FROM_CART: function REMOVE_PRODUCT_FROM_CART(_ref6, payload) {
+      var cart = _ref6.cart;
       cart.splice(cart.indexOf(payload), 1);
     }
   },
@@ -17066,12 +17083,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
 
     var fetchProducts = function fetchProducts() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/products').then(function (response) {
-        state.products = response.data;
-        state.loading = false;
-      })["catch"](function (error) {
-        return console.error(error);
-      });
+      state.products = store.state.products;
+      state.loading = false;
+      /* axios
+        .get('/api/products')
+        .then((response) => {
+          state.products = response.data;
+          state.loading = false;
+        })
+        .catch((error) => console.error(error)); */
     };
 
     (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)(fetchProducts);

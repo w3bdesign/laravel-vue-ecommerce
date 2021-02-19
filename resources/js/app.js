@@ -19,7 +19,11 @@ require('./bootstrap');
 const routes = [
   { path: '/', component: Index },
   { path: '/products', component: Products },
-  { name: 'single.product', path: '/product/:slug', component: SingleProduct },
+  {
+    name: 'single.product',
+    path: '/product/:slug',
+    component: SingleProduct,
+  },
   { path: '/categories', component: Categories },
   { path: '/checkout', component: Checkout },
   { path: '/thankyou', component: Summary },
@@ -44,7 +48,10 @@ createApp({
   },
 
   created() {
-    console.log('Created app!');
+    store
+      .dispatch('getProductsFromApi')
+      .then((_) => {})
+      .catch((error) => console.error(error));
   },
 })
   .use(store)

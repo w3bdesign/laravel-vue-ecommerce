@@ -64,13 +64,15 @@ export default defineComponent({
     const addProductToCart = (product) => store.dispatch('addProductToCart', product);
 
     const fetchProducts = () => {
-      axios
+      state.products = store.state.products;
+      state.loading = false;
+      /* axios
         .get('/api/products')
         .then((response) => {
           state.products = response.data;
           state.loading = false;
         })
-        .catch((error) => console.error(error));
+        .catch((error) => console.error(error)); */
     };
     onMounted(fetchProducts);
     return { ...toRefs(state), addProductToCart };

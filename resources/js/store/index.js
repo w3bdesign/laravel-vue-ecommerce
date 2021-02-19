@@ -2,6 +2,8 @@ import { createStore, createLogger } from 'vuex';
 
 import VuexPersistence from 'vuex-persist';
 
+import axios from 'axios';
+
 const debug = process.env.NODE_ENV !== 'production';
 
 const debugLogger = debug ? createLogger() : [];
@@ -19,7 +21,6 @@ export default createStore({
     order: {},
   },
   getters: {
-    // getSingleProduct: ()
     cartTotal: (state) => (state.cart.length
       ? state.cart.reduce(
         (total, product) => total + product.price * product.quantity,
@@ -33,6 +34,16 @@ export default createStore({
       : 0),
   },
   actions: {
+    getProductsFromApi({ commit }) {
+      axios
+        .get('/api/products')
+        .then((response) => {
+          commit('FETCH_PRODUCTS_FROM_API', response.data);
+          // state.products = response.data;
+          // state.loading = false;
+        })
+        .catch((error) => console.error(error));
+    },
     addProductToCart({ commit }, product) {
       commit('ADD_PRODUCT_TO_CART', product);
     },
@@ -44,6 +55,10 @@ export default createStore({
     },
   },
   mutations: {
+    FETCH_PRODUCTS_FROM_API(state, products) {
+      const newState = state;
+      newState.products = products;
+    },
     UPDATE_CART(state, cart) {
       const newState = state;
       newState.cart = cart;
