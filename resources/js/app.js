@@ -50,7 +50,7 @@ createApp({
   created() {
     store
       .dispatch('getProductsFromApi')
-      .then((_) => {})
+      .then(() => {})
       .catch((error) => console.error(error));
   },
 })

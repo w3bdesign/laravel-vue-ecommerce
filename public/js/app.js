@@ -16501,7 +16501,7 @@ var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_11__.createRouter)({
     Summary: _pages_Checkout_Summary_vue__WEBPACK_IMPORTED_MODULE_10__.default
   },
   created: function created() {
-    _store_index__WEBPACK_IMPORTED_MODULE_1__.default.dispatch('getProductsFromApi').then(function (_) {})["catch"](function (error) {
+    _store_index__WEBPACK_IMPORTED_MODULE_1__.default.dispatch('getProductsFromApi').then(function () {})["catch"](function (error) {
       return console.error(error);
     });
   }
@@ -17052,28 +17052,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _components_LoadingSpinner_LoadingSpinner_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/LoadingSpinner/LoadingSpinner.vue */ "./resources/js/components/LoadingSpinner/LoadingSpinner.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _components_LoadingSpinner_LoadingSpinner_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/LoadingSpinner/LoadingSpinner.vue */ "./resources/js/components/LoadingSpinner/LoadingSpinner.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+// import axios from 'axios';
 
 
 
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   components: {
-    LoadingSpinner: _components_LoadingSpinner_LoadingSpinner_vue__WEBPACK_IMPORTED_MODULE_2__.default
+    LoadingSpinner: _components_LoadingSpinner_LoadingSpinner_vue__WEBPACK_IMPORTED_MODULE_1__.default
   },
   setup: function setup() {
-    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.useStore)();
-    var state = (0,vue__WEBPACK_IMPORTED_MODULE_1__.reactive)({
+    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.useStore)();
+    var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       loading: true,
       products: null
     });
@@ -17085,17 +17083,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var fetchProducts = function fetchProducts() {
       state.products = store.state.products;
       state.loading = false;
-      /* axios
-        .get('/api/products')
-        .then((response) => {
-          state.products = response.data;
-          state.loading = false;
-        })
-        .catch((error) => console.error(error)); */
     };
 
-    (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)(fetchProducts);
-    return _objectSpread(_objectSpread({}, (0,vue__WEBPACK_IMPORTED_MODULE_1__.toRefs)(state)), {}, {
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(fetchProducts);
+    return _objectSpread(_objectSpread({}, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toRefs)(state)), {}, {
       addProductToCart: addProductToCart
     });
   }

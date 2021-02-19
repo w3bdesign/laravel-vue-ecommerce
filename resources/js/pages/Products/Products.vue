@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+// import axios from 'axios';
 
 import { useStore } from 'vuex';
 
@@ -66,13 +66,6 @@ export default defineComponent({
     const fetchProducts = () => {
       state.products = store.state.products;
       state.loading = false;
-      /* axios
-        .get('/api/products')
-        .then((response) => {
-          state.products = response.data;
-          state.loading = false;
-        })
-        .catch((error) => console.error(error)); */
     };
     onMounted(fetchProducts);
     return { ...toRefs(state), addProductToCart };

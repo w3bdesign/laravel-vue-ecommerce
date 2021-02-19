@@ -12,10 +12,6 @@ class UserController extends Controller
 {
     public function purchase(Request $request)
     {
-        // die($request);
-        // die($request->input('cart'));
-
-
         $user = User::firstOrCreate(
             [
                 'email' => $request->input('email')
@@ -50,8 +46,7 @@ class UserController extends Controller
             $order->load('products');
             return $order;
         } catch (\Exception $e) {
-            return "Stripe Error: " . $e->getMessage();
-            // die($e->getMessage());
+            return "Error: " . $e->getMessage();
             //return response()->json(['message' => $e->getMessage()], 500);
         }
     }
