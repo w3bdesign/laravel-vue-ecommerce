@@ -8,9 +8,14 @@
         v-for="product in products"
         :key="product.id"
       >
-        <div class="flex flex-col mt-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4">
+        <div
+          class="flex flex-col mt-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4"
+        >
           <router-link
-            :to="{ name: 'single.product', params: { slug: product.slug }}"
+            :to="{
+              name: 'single.product',
+              params: { slug: product.slug },
+            }"
           >
             <img
               class="productImage"
@@ -25,7 +30,7 @@
           </div>
           <div class="flex justify-center mt-2">
             <div class="ml-4 text-xl text-gray-900">
-              ${{ product.price }}
+              kr {{ product.price }}
             </div>
           </div>
           <button
@@ -42,8 +47,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 import { useStore } from 'vuex';
 
 import {
@@ -56,7 +59,7 @@ export default defineComponent({
   components: { LoadingSpinner },
   setup() {
     const store = useStore();
-    const state = reactive({
+    const localState = reactive({
       loading: true,
       products: null,
     });
@@ -64,18 +67,11 @@ export default defineComponent({
     const addProductToCart = (product) => store.dispatch('addProductToCart', product);
 
     const fetchProducts = () => {
-      state.products = store.state.products;
-      state.loading = false;
-      /* axios
-        .get('/api/products')
-        .then((response) => {
-          state.products = response.data;
-          state.loading = false;
-        })
-        .catch((error) => console.error(error)); */
+      localState.products = store.state.products;
+      localState.loading = false;
     };
     onMounted(fetchProducts);
-    return { ...toRefs(state), addProductToCart };
+    return { ...toRefs(localState), addProductToCart };
   },
 });
 </script>
