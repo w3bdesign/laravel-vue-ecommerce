@@ -33,17 +33,6 @@ export default defineComponent({
       console.log('Params: ');
       // console.log(this.$route.params.slug);
       console.log(route.params.slug);
-
-      /* axios
-        .get('/api/products')
-        .then((response) => {
-          console.log('Response: ');
-          console.log(response.data);
-          localState.products = response.data;
-          console.log(response.data);
-          localState.loading = false;
-        })
-        .catch((error) => console.error(error)); */
     };
     onMounted(fetchProduct);
 

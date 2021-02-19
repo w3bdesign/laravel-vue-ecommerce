@@ -17133,16 +17133,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log('Params: '); // console.log(this.$route.params.slug);
 
       console.log(route.params.slug);
-      /* axios
-        .get('/api/products')
-        .then((response) => {
-          console.log('Response: ');
-          console.log(response.data);
-          localState.products = response.data;
-          console.log(response.data);
-          localState.loading = false;
-        })
-        .catch((error) => console.error(error)); */
     };
 
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(fetchProduct);
