@@ -31,18 +31,15 @@ export default defineComponent({
       localState.loading = false;
 
       console.log('Params: ');
-      // console.log(this.$route.params.slug);
+
       console.log(route.params.slug);
     };
     onMounted(fetchProduct);
 
     const singleProduct = computed(() => localState.products.find(
       (product) => product.slug === this.$route.params.slug,
-      // (product) => product.slug === route.params.slug,
+      // route params slug,
     ));
-
-    console.log('Single product: ');
-    console.log(singleProduct);
 
     return { ...toRefs(localState), singleProduct };
   },

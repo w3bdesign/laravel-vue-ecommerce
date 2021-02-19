@@ -17123,8 +17123,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var fetchProduct = function fetchProduct() {
       localState.products = store.state.products;
       localState.loading = false;
-      console.log('Params: '); // console.log(this.$route.params.slug);
-
+      console.log('Params: ');
       console.log(route.params.slug);
     };
 
@@ -17132,11 +17131,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var singleProduct = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       return localState.products.find(function (product) {
         return product.slug === _this.$route.params.slug;
-      } // (product) => product.slug === route.params.slug,
+      } // route params slug,
       );
     });
-    console.log('Single product: ');
-    console.log(singleProduct);
     return _objectSpread(_objectSpread({}, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toRefs)(localState)), {}, {
       singleProduct: singleProduct
     });
