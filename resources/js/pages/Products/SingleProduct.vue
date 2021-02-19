@@ -31,7 +31,6 @@ export default defineComponent({
       localState.loading = false;
 
       console.log('Params: ');
-
       console.log(route.params.slug);
     };
     onMounted(fetchProduct);
@@ -45,5 +44,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style></style>
