@@ -18137,7 +18137,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/Logo.svg?83eef76f698f6bf6b4a349895f928699");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/Logo.svg?3e6427f5344cbd2d3346b19366ec5fa5");
 
 /***/ }),
 
