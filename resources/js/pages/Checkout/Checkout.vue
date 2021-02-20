@@ -54,15 +54,20 @@
       Cart is currently empty
     </h2>
     <div v-if="cartLength">
-      <h2
-        class="h-10 p-6 text-2xl font-bold text-center"
-      >
+      <div class="flex justify-center w-full p-4 align-center">
+        FORM here!
+        <input
+          v-model="value"
+          type="text"
+        >
+        <span>{{ errorMessage }}</span>
+      </div>
+      <h2 class="h-10 p-6 text-2xl font-bold text-center">
         Stripe payment
       </h2>
       <div class="flex justify-center w-full p-4 align-center">
         <br>
         <div
-
           id="card-element"
           class="w-1/2 h-32 mt-4"
         >
@@ -84,18 +89,15 @@
 </template>
 
 <script>
-
 import {
   defineComponent, onMounted, reactive, computed, toRefs,
 } from 'vue';
-
+import { useField } from 'vee-validate';
 import axios from 'axios';
-
 import { useStore } from 'vuex';
-
 import { useRouter } from 'vue-router';
-
 import { loadStripe } from '@stripe/stripe-js';
+
 import { formatPrice } from '../../utils/functions';
 
 export default defineComponent({
@@ -193,6 +195,15 @@ export default defineComponent({
       localState.cardElement.mount('#card-element');
     });
 
+    const isRequired = (value) => {
+      if (value && value.trim()) {
+        return true;
+      }
+      return 'This is required';
+    };
+
+    const { errorMessage, value } = useField('fieldName', isRequired);
+
     return {
       ...toRefs(localState),
       localState,
@@ -203,6 +214,8 @@ export default defineComponent({
       removeProductFromCart,
       checkout,
       formatPrice,
+      errorMessage,
+      value,
     };
   },
 });
