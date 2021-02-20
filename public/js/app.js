@@ -17110,7 +17110,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       localState.loading = false;
     };
 
-    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(fetchProducts);
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeMount)(fetchProducts);
     return _objectSpread(_objectSpread({}, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toRefs)(localState)), {}, {
       addProductToCart: addProductToCart,
       formatPrice: _utils_functions__WEBPACK_IMPORTED_MODULE_1__.formatPrice
