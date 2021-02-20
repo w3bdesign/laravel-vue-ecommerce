@@ -153,6 +153,8 @@ export default defineComponent({
 
       // const totalAmount = 99.00;
       // const amount = totalAmount.toLocaleString('nb-NO', { style: 'currency', currency: 'NOK' });
+      // console.log('Currency locale: ');
+      // console.log(process.env.CASHIER_CURRENCY_LOCALE);
 
       localState.customer.amount = 9900;
       localState.customer.cart = JSON.stringify(store.state.cart);
