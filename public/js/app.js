@@ -17146,32 +17146,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   name: 'SingleProduct',
   setup: function setup() {
-    var _this = this;
-
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.useStore)();
     var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.useRoute)();
     var localState = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       loading: true,
-      products: null
+      product: null
     });
+    var singleProduct = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.state.products.find( // (product) => product.slug === this.$route.params.slug,
+      function (product) {
+        return product.slug === route.params.slug;
+      });
+    } // route params slug,
+    );
 
     var fetchProduct = function fetchProduct() {
-      localState.products = store.state.products;
+      // localState.products = store.state.products;
+      localState.product = singleProduct;
+      console.log(localState.product);
       localState.loading = false;
       console.log('Params: ');
       console.log(route.params.slug);
-    };
+    }; // onMounted(fetchProduct);
 
-    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(fetchProduct);
-    var singleProduct = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
-      return localState.products.find(function (product) {
-        return product.slug === _this.$route.params.slug;
-      } // route params slug,
-      );
-    });
-    return _objectSpread(_objectSpread({}, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toRefs)(localState)), {}, {
-      singleProduct: singleProduct
-    });
+
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeMount)(fetchProduct);
+    return _objectSpread({}, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toRefs)(localState));
   }
 }));
 
@@ -17890,7 +17890,7 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("\n    ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("pre", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("    Router params: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.$route.params.slug) + "\n\n    ", 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("pre", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("    Router params: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.$route.params.slug) + "\n    Product: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.product) + "\n\n    ", 1
   /* TEXT */
   ), _hoisted_2, _hoisted_3])]);
 }

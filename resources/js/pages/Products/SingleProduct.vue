@@ -3,6 +3,7 @@
     Single product!
     <pre>
     Router params: {{ this.$route.params.slug }}
+    Product: {{ product }}
 
     <br>
     </pre>
@@ -11,7 +12,7 @@
 
 <script>
 import {
-  defineComponent, toRefs, reactive, onMounted, computed,
+  defineComponent, toRefs, reactive, computed, onBeforeMount, // onMounted
 } from 'vue';
 import { useRoute } from 'vue-router';
 import { useStore } from 'vuex';
@@ -23,24 +24,29 @@ export default defineComponent({
     const route = useRoute();
     const localState = reactive({
       loading: true,
-      products: null,
+      product: null,
     });
+    const singleProduct = computed(
+      () => store.state.products.find(
+        // (product) => product.slug === this.$route.params.slug,
+        (product) => product.slug === route.params.slug,
+      ),
+      // route params slug,
+    );
 
     const fetchProduct = () => {
-      localState.products = store.state.products;
+      // localState.products = store.state.products;
+      localState.product = singleProduct;
+      console.log(localState.product);
       localState.loading = false;
 
       console.log('Params: ');
       console.log(route.params.slug);
     };
-    onMounted(fetchProduct);
+    // onMounted(fetchProduct);
+    onBeforeMount(fetchProduct);
 
-    const singleProduct = computed(() => localState.products.find(
-      (product) => product.slug === this.$route.params.slug,
-      // route params slug,
-    ));
-
-    return { ...toRefs(localState), singleProduct };
+    return { ...toRefs(localState) };
   },
 });
 </script>
