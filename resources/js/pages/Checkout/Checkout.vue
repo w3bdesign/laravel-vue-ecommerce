@@ -41,7 +41,9 @@
           <span
             class="block mt-2 font-extrabold"
           >Subtotal: <br></span>
-          <span class="item-content"> ${{ cartTotal }} </span>
+          <span class="item-content">
+            {{ formatPrice(cartTotal) }}
+          </span>
         </div>
       </div>
     </section>
@@ -82,6 +84,7 @@
 </template>
 
 <script>
+
 import {
   defineComponent, onMounted, reactive, computed, toRefs,
 } from 'vue';
@@ -93,6 +96,7 @@ import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
 import { loadStripe } from '@stripe/stripe-js';
+import { formatPrice } from '../../utils/functions';
 
 export default defineComponent({
   setup() {
@@ -198,6 +202,7 @@ export default defineComponent({
       cartContent,
       removeProductFromCart,
       checkout,
+      formatPrice,
     };
   },
 });
@@ -205,28 +210,29 @@ export default defineComponent({
 
 <style scoped>
 .disabledButton {
-    @apply cursor-not-allowed opacity-50;
+  @apply cursor-not-allowed opacity-50;
 }
 
 .flex-container {
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    align-content: center;
-    max-width: 1380px;
-    @apply flex border border-gray-300 rounded-lg shadow;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  max-width: 1380px;
+
+  @apply flex border border-gray-300 rounded-lg shadow;
 }
 
 .item {
-    @apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
+  @apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
 }
 
 .item-content {
-    @apply inline-block mt-4 w-20 h-12 md:w-full lg:w-full xl:w-full;
+  @apply inline-block mt-4 w-20 h-12 md:w-full lg:w-full xl:w-full;
 }
 
 .removing {
-    @apply animate-spin cursor-not-allowed;
+  @apply animate-spin cursor-not-allowed;
 }
 </style>

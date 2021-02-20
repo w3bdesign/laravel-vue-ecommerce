@@ -30,7 +30,7 @@
           </div>
           <div class="flex justify-center mt-2">
             <div class="ml-4 text-xl text-gray-900">
-              {{ CURRENCY_SYMBOL() }} {{ product.price }}
+              {{ formatPrice(product.price) }}
             </div>
           </div>
           <button
@@ -53,7 +53,8 @@ import {
   defineComponent, reactive, toRefs, onMounted,
 } from 'vue';
 
-import CURRENCY_SYMBOL from '../../utils/functions';
+import { formatPrice } from '../../utils/functions';
+
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner.vue';
 
 export default defineComponent({
@@ -72,7 +73,7 @@ export default defineComponent({
       localState.loading = false;
     };
     onMounted(fetchProducts);
-    return { ...toRefs(localState), addProductToCart, CURRENCY_SYMBOL };
+    return { ...toRefs(localState), addProductToCart, formatPrice };
   },
 });
 </script>
