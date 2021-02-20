@@ -17819,7 +17819,9 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
   "class": "invisible",
   value: "cod",
   type: "hidden"
-})])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", null, "Submit button comes here")], -1
+})])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  "class": "submitButton"
+}, " Submit button comes here ")], -1
 /* HOISTED */
 );
 
@@ -18194,7 +18196,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".text-input[data-v-f38b66b8] {\n  --tw-border-opacity: 1;\n  border-color: rgba(156, 163, 175, var(--tw-border-opacity));\n  border-radius: 0.25rem;\n  border-width: 1px;\n  padding: 0.5rem;\n}\n.text-input[data-v-f38b66b8]::-moz-placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-placeholder-opacity));\n}\n.text-input[data-v-f38b66b8]:-ms-input-placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-placeholder-opacity));\n}\n.text-input[data-v-f38b66b8]::placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-placeholder-opacity));\n}\n.text-input[data-v-f38b66b8] {\n  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n  --tw-text-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-text-opacity));\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".text-input[data-v-f38b66b8] {\n  --tw-border-opacity: 1;\n  border-color: rgba(156, 163, 175, var(--tw-border-opacity));\n  border-radius: 0.25rem;\n  border-width: 1px;\n  padding: 0.5rem;\n}\n.text-input[data-v-f38b66b8]::-moz-placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-placeholder-opacity));\n}\n.text-input[data-v-f38b66b8]:-ms-input-placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-placeholder-opacity));\n}\n.text-input[data-v-f38b66b8]::placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-placeholder-opacity));\n}\n.text-input[data-v-f38b66b8] {\n  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n  --tw-text-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-text-opacity));\n}\n.submitButton[data-v-f38b66b8] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(59, 130, 246, var(--tw-bg-opacity));\n}\n.submitButton[data-v-f38b66b8]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgba(29, 78, 216, var(--tw-bg-opacity));\n}\n.submitButton[data-v-f38b66b8] {\n  border-radius: 0.25rem;\n  font-weight: 700;\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n  padding: 0.5rem;\n  --tw-text-opacity: 1;\n  color: rgba(255, 255, 255, var(--tw-text-opacity));\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

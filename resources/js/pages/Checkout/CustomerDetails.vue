@@ -78,7 +78,9 @@
           </div>
         </div>
       </div>
-      <button>Submit button comes here</button>
+      <button class="submitButton">
+        Submit button comes here
+      </button>
     </section>
   </div>
 </template>
@@ -90,5 +92,9 @@ export default {};
 <style scoped>
 .text-input {
     @apply p-2 text-gray-800 placeholder-gray-800 border border-gray-400 rounded shadow-md;
+}
+
+.submitButton {
+  @apply p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700;
 }
 </style>
