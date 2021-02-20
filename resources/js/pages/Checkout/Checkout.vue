@@ -55,6 +55,7 @@
     </h2>
     <div v-if="cartLength">
       <div class="flex justify-center w-full p-4 align-center">
+        <customer-details />
         FORM here!
         <input
           v-model="value"
@@ -99,8 +100,10 @@ import { useRouter } from 'vue-router';
 import { loadStripe } from '@stripe/stripe-js';
 
 import { formatPrice } from '../../utils/functions';
+import CustomerDetails from './CustomerDetails.vue';
 
 export default defineComponent({
+  components: { CustomerDetails },
   setup() {
     const store = useStore();
     const router = useRouter();
