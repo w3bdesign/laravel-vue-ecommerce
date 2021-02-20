@@ -22,23 +22,25 @@
               :alt="product.name"
               src="../../../img/jpg/product-image.jpg"
             >
-          </router-link>
-          <div class="flex justify-center pt-3">
-            <p class="text-xl font-bold text-center cursor-pointer">
-              {{ product.name }}
-            </p>
-          </div>
-          <div class="flex justify-center mt-2">
-            <div class="ml-4 text-xl text-gray-900">
-              {{ formatPrice(product.price) }}
+
+            <div class="flex justify-center pt-3">
+              <p
+                class="text-xl font-bold text-center cursor-pointer"
+              >
+                {{ product.name }}
+              </p>
             </div>
-          </div>
-          <button
-            class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
-            @click="addProductToCart(product)"
-          >
-            Add To Cart
-          </button>
+            <div class="flex justify-center mt-2">
+              <div class="ml-4 text-xl text-gray-900">
+                {{ formatPrice(product.price) }}
+              </div>
+            </div>
+            <button
+              class="w-full p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+            >
+              View Product
+            </button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -66,8 +68,6 @@ export default defineComponent({
       products: null,
     });
 
-    const addProductToCart = (product) => store.dispatch('addProductToCart', product);
-
     const fetchProducts = () => {
       localState.products = store.state.products;
       localState.loading = false;
@@ -75,7 +75,7 @@ export default defineComponent({
 
     onBeforeMount(fetchProducts);
 
-    return { ...toRefs(localState), addProductToCart, formatPrice };
+    return { ...toRefs(localState), formatPrice };
   },
 });
 </script>
