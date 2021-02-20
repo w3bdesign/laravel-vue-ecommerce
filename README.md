@@ -8,7 +8,7 @@
 
  <img src="https://user-images.githubusercontent.com/45217974/108582060-2a960a80-7331-11eb-9375-d72c691b01d0.png" alt="Project screenshot" />
  
-## Live URL: https://laravel-vue3.herokuapp.com
+## Live URL: https://laravel-vue3.herokuapp.com (initial pageload may be slow because of the Heroku container needing to bootup)
 
 ## Features
 
@@ -22,9 +22,11 @@
 
 -   Stripe for payments
 
+-   Dynamic currency formatting based on values set in environment variables
+
 -   ESLint code linting with AirBnB ruleset
 
--   Animations
+-   CSS animations
 
 -   SonarCloud code quality scanner integration on all pull requests
 
@@ -34,7 +36,7 @@
 
 -   Fork or clone the project
 
--   Ensure you have PHP 7.4 or newer installed and setup properly
+-   Ensure you have PHP 7.4 or newer installed and setup properly (alternatively use Docker, see https://laravel.com/docs/8.x/sail)
 
 -   Ensure you have access to a PostgreSQL database
 
