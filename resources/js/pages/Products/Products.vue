@@ -18,11 +18,17 @@
             }"
           >
             <img
+              v-if="product.image !== undefined"
               class="productImage"
               :alt="product.name"
-              src="../../../img/jpg/product-image.jpg"
+              :src="product.image"
             >
-
+            <img
+              v-else
+              class="productImage"
+              :alt="product.name"
+              :src="placeholderImage"
+            >
             <div class="flex justify-center pt-3">
               <p
                 class="text-xl font-bold text-center cursor-pointer"
@@ -36,7 +42,7 @@
               </div>
             </div>
             <button
-              class="w-full p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+              class="productButton"
             >
               View Product
             </button>
@@ -68,6 +74,8 @@ export default defineComponent({
       products: null,
     });
 
+    const placeholderImage = process.env.MIX_PLACEHOLDER_SMALL_IMAGE_URL;
+
     const fetchProducts = () => {
       localState.products = store.state.products;
       localState.loading = false;
@@ -75,7 +83,13 @@ export default defineComponent({
 
     onBeforeMount(fetchProducts);
 
-    return { ...toRefs(localState), formatPrice };
+    return { ...toRefs(localState), formatPrice, placeholderImage };
   },
 });
 </script>
+
+<style scoped>
+.productButton {
+  @apply w-full p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700;
+}
+</style>
