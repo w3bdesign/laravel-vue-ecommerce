@@ -5,26 +5,50 @@
 # Laravel eCommerce
 
  Creating an eCommerce site with Laravel 8 and Vue 3.
- 
+
  <img src="https://user-images.githubusercontent.com/45217974/108582060-2a960a80-7331-11eb-9375-d72c691b01d0.png" alt="Project screenshot" />
  
- ## Live URL: https://laravel-vue3.herokuapp.com
+## Live URL: https://laravel-vue3.herokuapp.com
 
- ## Features
+## Features
 
- - Laravel 8
- - Vue 3 with composition API
- - Vuex 4 state management
- - Vuex-persist for persisting cart after page refresh
- - Stripe for payments
- - ESLint code linting with AirBnB ruleset
- - Animations
- - SonarCloud code quality scanner integration on all pull requests
- - Laravel tests with CircleCI integration
+-   Laravel 8
 
- ## TODO
+-   Vue 3 with composition API
 
- - Finish implementing Vee Validate
- - Finish implementing Laravel Scout
- - Add some tests to verify that the cart and checkout works correctly
- - Consider adding an admin dashboard 
+-   Vuex 4 state management
+
+-   Vuex-persist for persisting cart after page refresh
+
+-   Stripe for payments
+
+-   ESLint code linting with AirBnB ruleset
+
+-   Animations
+
+-   SonarCloud code quality scanner integration on all pull requests
+
+-   Laravel tests with CircleCI integration
+
+## Setup
+
+-   Fork or clone the project
+-   Ensure you have PHP 7.4 or newer installed and setup properly
+-   Ensure you have access to a PostgreSQL database
+-   Ensure you have Node installed
+-   Rename `.env.example` to `.env` and modify the values
+-   Run `composer install` to install the PHP dependencies with Composer. Check out <https://getcomposer.org/> if necessary
+-   Run `npm install` to imstall the Node dependencies needed by the project. Check out <https://nodejs.org/en/> if necessary
+-   Run `npm run watch` to serve the Vue 3 files
+-   Run `php artisan serve` to serve the PHP files
+-   Open up `http://localhost:8000`
+
+## TODO
+
+-   Finish implementing Vee Validate
+
+-   Finish implementing Laravel Scout
+
+-   Add some tests to verify that the cart and checkout works correctly
+
+-   Consider adding an admin dashboard 
