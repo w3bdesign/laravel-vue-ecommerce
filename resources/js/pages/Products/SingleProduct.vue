@@ -4,13 +4,11 @@
       <div
         class="container flex flex-wrap items-center pt-4 pb-12 mx-auto"
       >
-        <div
-          class="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-2"
-        >
+        <div class="divGrid">
           <img
             v-if="product.image !== undefined"
             id="product-image"
-            class="h-auto p-8 transition duration-500 ease-in-out transform xl:p-2 md:p-2 lg:p-2 hover:grow hover:shadow-lg hover:scale-105"
+            class="productImage"
             :alt="product.name"
             :src="product.image.sourceUrl"
           >
@@ -19,7 +17,7 @@
             id="product-image"
             class="productImage"
             :alt="product.name"
-            src="https://res.cloudinary.com/duelisue0/image/upload/v1595541416/Nextjs-Woocommerce/placeholder-616-616_beecp5.jpg"
+            :src="placeholderImage"
           >
           <div class="ml-8">
             <p class="text-3xl font-bold text-left">
@@ -36,7 +34,7 @@
 
             <div class="pt-1 mt-2">
               <button
-                class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+                class="productButton"
                 @click="addProductToCart(product)"
               >
                 Add To Cart
@@ -71,9 +69,12 @@ export default defineComponent({
       loading: true,
       product: null,
     });
+
     const singleProduct = computed(() => store.state.products.find(
       (product) => product.slug === route.params.slug,
     ));
+
+    const placeholderImage = process.env.MIX_PLACEHOLDER_LARGE_IMAGE_URL;
 
     const fetchProduct = () => {
       localState.product = singleProduct;
@@ -84,7 +85,24 @@ export default defineComponent({
 
     onBeforeMount(fetchProduct);
 
-    return { ...toRefs(localState), addProductToCart, formatPrice };
+    return {
+      ...toRefs(localState), addProductToCart, formatPrice, placeholderImage,
+    };
   },
 });
 </script>
+
+<style scoped>
+.divGrid {
+  @apply grid grid-cols-1 gap-4 mt-8 lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-2;
+}
+
+.productImage {
+  @apply h-auto p-8 transition duration-500 ease-in-out transform;
+  @apply xl:p-2 md:p-2 lg:p-2 hover:shadow-lg hover:scale-105;
+}
+
+.productButton {
+  @apply p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700;
+}
+</style>
