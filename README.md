@@ -36,7 +36,7 @@
 
 -   Fork or clone the project
 
--   Ensure you have PHP 7.4 or newer installed and setup properly (alternatively use Docker, see https://laravel.com/docs/8.x/sail)
+-   Ensure you have PHP 7.4 or newer installed and setup properly (alternatively use Docker, see <https://laravel.com/docs/8.x/sail>)
 
 -   Ensure you have access to a PostgreSQL database
 
@@ -63,3 +63,5 @@
 -   Add some tests to verify that the cart and checkout works correctly
 
 -   Consider adding an admin dashboard 
+
+-   Look into performance optimization: <https://medium.com/@aetherus.zhou/vue-cli-3-performance-optimization-55316dcd491c>
