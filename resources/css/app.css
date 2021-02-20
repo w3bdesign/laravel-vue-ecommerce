@@ -2,8 +2,8 @@
 @tailwind components;
 
 .productImage {
-  @apply container mx-auto transition duration-500;
-  @apply ease-in-out transform cursor-pointer hover:scale-105;
+    @apply container mx-auto transition duration-500;
+    @apply ease-in-out transform cursor-pointer hover:scale-105;
 }
 
 @tailwind utilities;
