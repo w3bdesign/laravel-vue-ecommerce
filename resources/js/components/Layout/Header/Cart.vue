@@ -21,7 +21,7 @@
           <span class="cartQuantity">
             {{ cartQuantity.quantity }}
           </span>
-          <span>Total: ${{ cartTotal }} </span>
+          <span>Total: {{ CURRENCY_SYMBOL() }} {{ cartTotal }} </span>
         </router-link>
       </div>
     </transition>
@@ -32,12 +32,15 @@
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 
+import CURRENCY_SYMBOL from '../../../utils/functions';
+
 export default {
   setup() {
     const store = useStore();
     const cartQuantity = computed(() => store.getters.cartQuantity);
     const cartTotal = computed(() => store.getters.cartTotal);
-    return { cartQuantity, cartTotal };
+
+    return { cartQuantity, cartTotal, CURRENCY_SYMBOL };
   },
 };
 </script>
