@@ -24,7 +24,7 @@
 
 -   ESLint code linting with AirBnB ruleset
 
--   Animations
+-   CSS animations
 
 -   SonarCloud code quality scanner integration on all pull requests
 
