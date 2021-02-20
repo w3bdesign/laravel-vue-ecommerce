@@ -21,7 +21,7 @@
           <span class="cartQuantity">
             {{ cartQuantity.quantity }}
           </span>
-          <span>Total: {{ CURRENCY_SYMBOL() }} {{ cartTotal }} </span>
+          <span>Total: {{ formatPrice(cartTotal) }}</span>
         </router-link>
       </div>
     </transition>
@@ -32,29 +32,30 @@
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 
-import CURRENCY_SYMBOL from '../../../utils/functions';
+import { formatPrice } from '../../../utils/functions';
 
 export default {
   setup() {
     const store = useStore();
     const cartQuantity = computed(() => store.getters.cartQuantity);
     const cartTotal = computed(() => store.getters.cartTotal);
-
-    return { cartQuantity, cartTotal, CURRENCY_SYMBOL };
+    return { cartQuantity, cartTotal, formatPrice };
   },
 };
 </script>
 
 <style scoped>
 .cartQuantity {
-    @apply absolute w-6 h-6 pb-2 ml-16 -mt-12 text-center text-white bg-black rounded-full lg:ml-14;
+  @apply absolute w-6 h-6 pb-2 ml-16 -mt-12 text-center text-white bg-black rounded-full lg:ml-14;
 }
+
 .fade-enter-active,
 .fade-leave-active {
-    transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
+
 .fade-enter-from,
 .fade-leave-to {
-    opacity: 0;
+  opacity: 0;
 }
 </style>

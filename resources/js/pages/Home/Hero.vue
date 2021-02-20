@@ -21,7 +21,7 @@ export default {
 
 <style scoped>
 #hero {
-    background-image: url("../../../img/jpg/Hero.jpg");
-    height: 24rem;
+  background-image: url("../../../img/jpg/Hero.jpg");
+  height: 24rem;
 }
 </style>
