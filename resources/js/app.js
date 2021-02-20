@@ -50,8 +50,7 @@ createApp({
   created() {
     store
       .dispatch('getProductsFromApi')
-      // Do we need a then here?
-
+    // Do we need a then here?
       .catch((error) => console.error(error));
   },
 })

@@ -50,7 +50,7 @@
 import { useStore } from 'vuex';
 
 import {
-  defineComponent, reactive, toRefs, onMounted,
+  defineComponent, reactive, toRefs, onBeforeMount,
 } from 'vue';
 
 import { formatPrice } from '../../utils/functions';
@@ -72,7 +72,9 @@ export default defineComponent({
       localState.products = store.state.products;
       localState.loading = false;
     };
-    onMounted(fetchProducts);
+
+    onBeforeMount(fetchProducts);
+
     return { ...toRefs(localState), addProductToCart, formatPrice };
   },
 });
