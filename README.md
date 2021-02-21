@@ -79,4 +79,4 @@
 
 -   Consider adding an admin dashboard 
 
--   Look into performance optimization: <https://medium.com/@aetherus.zhou/vue-cli-3-performance-optimization-55316dcd491c>
+-   Look into performance optimization
