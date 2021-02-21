@@ -34,7 +34,9 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            print_r($e);
+            print_r("Error.");
+            report($e);
+            return false;
         });
     }
 }
