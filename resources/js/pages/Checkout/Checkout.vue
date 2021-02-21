@@ -245,6 +245,7 @@ export default defineComponent({
   align-items: flex-end;
   align-content: center;
   max-width: 1380px;
+
   @apply flex;
 }
 
