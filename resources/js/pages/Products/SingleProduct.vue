@@ -6,11 +6,11 @@
       >
         <div class="divGrid">
           <img
-            v-if="product.image !== undefined"
+            v-if="product.imageUrl !== undefined"
             id="product-image"
             class="productImage"
             :alt="product.name"
-            :src="product.image.sourceUrl"
+            :src="product.imageUrl"
           >
           <img
             v-else
