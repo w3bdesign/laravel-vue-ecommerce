@@ -68,7 +68,6 @@
     <div v-if="cartLength">
       <div class="flex justify-center w-full p-4 align-center">
         <customer-details />
-        FORM here!
         <input
           v-model="value"
           type="text"
@@ -105,7 +104,6 @@
 import {
   defineComponent, onMounted, reactive, computed, toRefs,
 } from 'vue';
-import { useField } from 'vee-validate';
 import axios from 'axios';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
@@ -210,15 +208,6 @@ export default defineComponent({
       localState.cardElement.mount('#card-element');
     });
 
-    const isRequired = (value) => {
-      if (value && value.trim()) {
-        return true;
-      }
-      return 'This is required';
-    };
-
-    const { errorMessage, value } = useField('fieldName', isRequired);
-
     return {
       ...toRefs(localState),
       localState,
@@ -229,8 +218,7 @@ export default defineComponent({
       removeProductFromCart,
       checkout,
       formatPrice,
-      errorMessage,
-      value,
+
     };
   },
 });
@@ -238,40 +226,40 @@ export default defineComponent({
 
 <style scoped>
 .disabledButton {
-    @apply cursor-not-allowed opacity-50;
+  @apply cursor-not-allowed opacity-50;
 }
 
 .flex-container {
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    align-content: center;
-    max-width: 1380px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  max-width: 1380px;
 
-    @apply flex border border-gray-300 rounded-lg shadow;
+  @apply flex border border-gray-300 rounded-lg shadow;
 }
 
 .flex-container-total {
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: end;
-    align-items: flex-end;
-    align-content: center;
-    max-width: 1380px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: end;
+  align-items: flex-end;
+  align-content: center;
+  max-width: 1380px;
 
-    @apply flex;
+  @apply flex;
 }
 
 .item {
-    @apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
+  @apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
 }
 
 .item-content {
-    @apply inline-block mt-4 w-20 h-12 md:w-full lg:w-full xl:w-full;
+  @apply inline-block mt-4 w-20 h-12 md:w-full lg:w-full xl:w-full;
 }
 
 .removing {
-    @apply animate-spin cursor-not-allowed;
+  @apply animate-spin cursor-not-allowed;
 }
 </style>

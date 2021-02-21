@@ -47,16 +47,16 @@ export default {
 
 <style scoped>
 .cartQuantity {
-    @apply absolute w-6 h-6 pb-2 ml-16 -mt-12 text-center text-white bg-black rounded-full lg:ml-14;
+  @apply absolute w-6 h-6 pb-2 ml-16 -mt-12 text-center text-white bg-black rounded-full lg:ml-14;
 }
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
-    opacity: 0;
+  opacity: 0;
 }
 </style>
