@@ -16570,7 +16570,11 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_2__.default({
       }, 0) : 0;
     },
     cartQuantity: function cartQuantity(state) {
-      return state.cart.length ? state.cart.reduce(function (item, value) {
+      return state.cart.length ? state.cart.reduce( // (item, value) => item.quantity + value.quantity,
+      function (item, value) {
+        console.log('Cart quantity: ');
+        console.log(item);
+        console.log(value);
         return item.quantity + value.quantity;
       }) : 0;
     }
@@ -16712,7 +16716,8 @@ __webpack_require__.r(__webpack_exports__);
     });
     var cartTotal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       return store.getters.cartTotal;
-    });
+    }); // if(cartQuantity.quantity) {  }
+
     return {
       cartQuantity: cartQuantity,
       cartTotal: cartTotal,
@@ -17317,7 +17322,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
         to: "/checkout"
       }, {
         "default": _withId(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.cartQuantity.quantity), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.cartQuantity.quantity ? $setup.cartQuantity.quantity : $setup.cartQuantity), 1
           /* TEXT */
           ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, "Total: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formatPrice($setup.cartTotal)), 1
           /* TEXT */

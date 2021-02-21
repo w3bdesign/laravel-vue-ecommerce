@@ -19,7 +19,11 @@
       <div v-if="cartQuantity">
         <router-link to="/checkout">
           <span class="cartQuantity">
-            {{ cartQuantity.quantity }}
+            {{
+              cartQuantity.quantity
+                ? cartQuantity.quantity
+                : cartQuantity
+            }}
           </span>
           <span>Total: {{ formatPrice(cartTotal) }}</span>
         </router-link>
@@ -39,6 +43,8 @@ export default {
     const store = useStore();
     const cartQuantity = computed(() => store.getters.cartQuantity);
     const cartTotal = computed(() => store.getters.cartTotal);
+    // if(cartQuantity.quantity) {  }
+
     return { cartQuantity, cartTotal, formatPrice };
   },
 };

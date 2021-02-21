@@ -25,7 +25,13 @@ export default createStore({
       : 0),
     cartQuantity: (state) => (state.cart.length
       ? state.cart.reduce(
-        (item, value) => item.quantity + value.quantity,
+        // (item, value) => item.quantity + value.quantity,
+        (item, value) => {
+          console.log('Cart quantity: ');
+          console.log(item);
+          console.log(value);
+          return item.quantity + value.quantity;
+        },
       )
       : 0),
   },
