@@ -6,7 +6,7 @@
 
  Creating an eCommerce site with Laravel 8 and Vue 3.
 
- <img src="https://user-images.githubusercontent.com/45217974/108582060-2a960a80-7331-11eb-9375-d72c691b01d0.png" alt="Project screenshot" />
+ <img src="https://user-images.githubusercontent.com/45217974/108638044-9b523980-748d-11eb-9a24-0b58baffecc8.png" alt="Project screenshot" />
  
 ## Live URL: https://laravel-vue3.herokuapp.com (initial pageload may be slow because of the Heroku container needing to bootup)
 
