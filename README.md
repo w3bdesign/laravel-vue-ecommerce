@@ -67,7 +67,7 @@
 
 -   Run `php artisan serve` to serve the PHP files
 
--   Open up `http://localhost:8000`
+-   Open up `http://localhost:8000` in your browser
 
 ## TODO
 
@@ -79,4 +79,4 @@
 
 -   Consider adding an admin dashboard 
 
--   Look into performance optimization: <https://medium.com/@aetherus.zhou/vue-cli-3-performance-optimization-55316dcd491c>
+-   Look into performance optimization
