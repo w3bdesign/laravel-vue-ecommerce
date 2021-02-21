@@ -28,7 +28,9 @@
           <span
             class="block mt-2 text-xl font-bold"
           >Name: <br></span>
-          <span class="text-lg item-content">{{ products.name }}</span>
+          <span class="text-lg item-content">{{
+            products.name
+          }}</span>
         </div>
         <div class="item">
           <span
@@ -48,7 +50,10 @@
           </span>
         </div>
       </div>
-      <div class="container mx-auto mt-2 flex-container-total">
+      <div
+        v-if="cartLength"
+        class="container mx-auto mt-2 flex-container-total"
+      >
         <span
           class="p-4 text-2xl font-extrabold text-right"
         >Total: {{ formatPrice(cartTotal) }}</span>
