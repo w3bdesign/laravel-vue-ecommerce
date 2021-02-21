@@ -16,10 +16,10 @@
           }"
         >
           <img
-            v-if="product.image !== undefined"
+            v-if="product.imageUrl !== undefined"
             class="productImage"
             :alt="product.name"
-            :src="product.image"
+            :src="product.imageUrl"
           >
           <img
             v-else
