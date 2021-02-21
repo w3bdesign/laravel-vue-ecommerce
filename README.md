@@ -59,6 +59,7 @@
     $product->name = 'Example Product';
     $product->slug = 'example-product';
     $product->description = 'Example product description';
+    $product->imageUrl = 'url to image';
     $product->price = 99;
     $product->save();
     ```
