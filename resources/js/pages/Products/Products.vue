@@ -7,7 +7,7 @@
       <div
         v-for="product in products"
         :key="product.id"
-        class="flex flex-col p-4 mt-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4"
+        class="flex flex-col pr-6 mt-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4"
       >
         <router-link
           :to="{
@@ -28,9 +28,7 @@
             :src="placeholderImage"
           >
           <div class="flex justify-center pt-3">
-            <p
-              class="text-xl font-bold text-center cursor-pointer"
-            >
+            <p class="text-xl font-bold text-center cursor-pointer">
               {{ product.name }}
             </p>
           </div>
@@ -39,9 +37,7 @@
               {{ formatPrice(product.price) }}
             </div>
           </div>
-          <button
-            class="productButton"
-          >
+          <button class="productButton">
             View Product
           </button>
         </router-link>
@@ -88,6 +84,6 @@ export default defineComponent({
 
 <style scoped>
 .productButton {
-  @apply w-full p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700;
+    @apply w-full p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700;
 }
 </style>
