@@ -17597,7 +17597,7 @@ var _hoisted_3 = {
 };
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
-  "class": "block mt-2 font-extrabold"
+  "class": "block mt-2 text-xl font-bold"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Remove: "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br")], -1
 /* HOISTED */
 );
@@ -17610,69 +17610,75 @@ var _hoisted_6 = {
 };
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
-  "class": "block mt-2 font-extrabold"
+  "class": "block mt-2 text-xl font-bold"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Name: "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br")], -1
 /* HOISTED */
 );
 
 var _hoisted_8 = {
-  "class": "item-content"
+  "class": "text-lg item-content"
 };
 var _hoisted_9 = {
   "class": "item"
 };
 
 var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
-  "class": "block mt-2 font-extrabold"
+  "class": "block mt-2 text-xl font-bold"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Quantity: "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br")], -1
 /* HOISTED */
 );
 
 var _hoisted_11 = {
-  "class": "item-content"
+  "class": "text-lg item-content"
 };
 var _hoisted_12 = {
   "class": "item"
 };
 
 var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", {
-  "class": "block mt-2 font-extrabold"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Subtotal: "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br")], -1
+  "class": "block mt-2 text-xl font-bold"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Price: "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br")], -1
 /* HOISTED */
 );
 
 var _hoisted_14 = {
-  "class": "item-content"
+  "class": "text-lg item-content"
 };
 var _hoisted_15 = {
+  "class": "container mx-auto mt-2 flex-container-total"
+};
+var _hoisted_16 = {
+  "class": "p-4 text-2xl font-extrabold text-right"
+};
+var _hoisted_17 = {
   key: 0,
   "class": "m-4 text-3xl text-center"
 };
-var _hoisted_16 = {
+var _hoisted_18 = {
   key: 1
 };
-var _hoisted_17 = {
+var _hoisted_19 = {
   "class": "flex justify-center w-full p-4 align-center"
 };
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" FORM here! ");
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" FORM here! ");
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
-  "class": "h-10 p-6 text-2xl font-bold text-center"
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+  "class": "h-10 p-4 text-2xl font-bold text-center"
 }, " Stripe payment ", -1
 /* HOISTED */
 );
 
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "flex justify-center w-full p-4 align-center"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   id: "card-element",
-  "class": "w-1/2 h-32 mt-4"
+  "class": "w-full h-16 mt-4 lg:w-5/12 xl:w-5/12"
 }, " Stripe ")], -1
 /* HOISTED */
 );
 
-var _hoisted_21 = {
+var _hoisted_23 = {
   "class": "flex justify-center w-full align-center"
 };
 
@@ -17701,12 +17707,14 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(products.quantity), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.formatPrice(_ctx.cartTotal)), 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.formatPrice(products.price)), 1
     /* TEXT */
     )])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))]), !_ctx.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h2", _hoisted_15, " Cart is currently empty ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_customer_details), _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_16, "Total: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.formatPrice(_ctx.cartTotal)), 1
+  /* TEXT */
+  )])]), !_ctx.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h2", _hoisted_17, " Cart is currently empty ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_customer_details), _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return _ctx.value = $event;
     }),
@@ -17715,7 +17723,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.value]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.errorMessage), 1
   /* TEXT */
-  )]), _hoisted_19, _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  )]), _hoisted_21, _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": ["p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700", {
       disabledButton: _ctx.paymentIsProcessing
     }],
@@ -18170,7 +18178,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".disabledButton[data-v-67966e56] {\n  cursor: not-allowed;\n  opacity: 0.5;\n}\n.flex-container[data-v-67966e56] {\n  flex-wrap: wrap;\n  flex-direction: row;\n  justify-content: space-around;\n  align-items: center;\n  align-content: center;\n  max-width: 1380px;\n  --tw-border-opacity: 1;\n  border-color: rgba(209, 213, 219, var(--tw-border-opacity));\n  border-radius: 0.5rem;\n  border-width: 1px;\n  display: flex;\n  --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n.item[data-v-67966e56] {\n  width: auto;\n}\n@media (min-width: 640px) {\n.item[data-v-67966e56] {\n    margin: 0.5rem;\n}\n}\n@media (min-width: 1024px) {\n.item[data-v-67966e56] {\n    margin: 0.5rem;\n    width: 16.666667%;\n}\n}\n@media (min-width: 1280px) {\n.item[data-v-67966e56] {\n    margin: 1rem;\n    width: 16.666667%;\n}\n}\n.item-content[data-v-67966e56] {\n  display: inline-block;\n  height: 3rem;\n  margin-top: 1rem;\n  width: 5rem;\n}\n@media (min-width: 768px) {\n.item-content[data-v-67966e56] {\n    width: 100%;\n}\n}\n@media (min-width: 1024px) {\n.item-content[data-v-67966e56] {\n    width: 100%;\n}\n}\n@media (min-width: 1280px) {\n.item-content[data-v-67966e56] {\n    width: 100%;\n}\n}\n.removing[data-v-67966e56] {\n  cursor: not-allowed;\n  -webkit-animation: spin 1s linear infinite;\n          animation: spin 1s linear infinite;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".disabledButton[data-v-67966e56] {\n  cursor: not-allowed;\n  opacity: 0.5;\n}\n.flex-container[data-v-67966e56] {\n  flex-wrap: wrap;\n  flex-direction: row;\n  justify-content: space-around;\n  align-items: center;\n  align-content: center;\n  max-width: 1380px;\n  --tw-border-opacity: 1;\n  border-color: rgba(209, 213, 219, var(--tw-border-opacity));\n  border-radius: 0.5rem;\n  border-width: 1px;\n  display: flex;\n  --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n.flex-container-total[data-v-67966e56] {\n  flex-wrap: wrap;\n  flex-direction: row;\n  justify-content: end;\n  align-items: flex-end;\n  align-content: center;\n  max-width: 1380px;\n  display: flex;\n}\n.item[data-v-67966e56] {\n  width: auto;\n}\n@media (min-width: 640px) {\n.item[data-v-67966e56] {\n    margin: 0.5rem;\n}\n}\n@media (min-width: 1024px) {\n.item[data-v-67966e56] {\n    margin: 0.5rem;\n    width: 16.666667%;\n}\n}\n@media (min-width: 1280px) {\n.item[data-v-67966e56] {\n    margin: 1rem;\n    width: 16.666667%;\n}\n}\n.item-content[data-v-67966e56] {\n  display: inline-block;\n  height: 3rem;\n  margin-top: 1rem;\n  width: 5rem;\n}\n@media (min-width: 768px) {\n.item-content[data-v-67966e56] {\n    width: 100%;\n}\n}\n@media (min-width: 1024px) {\n.item-content[data-v-67966e56] {\n    width: 100%;\n}\n}\n@media (min-width: 1280px) {\n.item-content[data-v-67966e56] {\n    width: 100%;\n}\n}\n.removing[data-v-67966e56] {\n  cursor: not-allowed;\n  -webkit-animation: spin 1s linear infinite;\n          animation: spin 1s linear infinite;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
