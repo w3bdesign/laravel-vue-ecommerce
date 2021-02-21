@@ -16570,8 +16570,8 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_2__.default({
       }, 0) : 0;
     },
     cartQuantity: function cartQuantity(state) {
-      return state.cart.length ? state.cart.reduce(function (item, value) {
-        return item.quantity + value.quantity;
+      return state.cart.length ? state.cart.reduce(function (accumulator, value) {
+        return accumulator.quantity + value.quantity;
       }) : 0;
     }
   },
@@ -16618,7 +16618,7 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_2__.default({
         return item.slug === payload.slug;
       });
 
-      if (!foundProductInCartIndex) {
+      if (foundProductInCartIndex > -1) {
         cartCopy[foundProductInCartIndex].quantity += 1;
         return cartCopy;
       }
@@ -17317,7 +17317,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
         to: "/checkout"
       }, {
         "default": _withId(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.cartQuantity.quantity), 1
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.cartQuantity.quantity ? $setup.cartQuantity.quantity : $setup.cartQuantity), 1
           /* TEXT */
           ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, "Total: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formatPrice($setup.cartTotal)), 1
           /* TEXT */

@@ -50,6 +50,19 @@
 
 -   Run `php artisan:migrate` to setup the Laravel database migrations
 
+-   You should create at least one sample product. Although you can use the builtin factory seeders, I prefer to do manual creation for testing purposes.
+
+Run these commands: 
+
+```php
+$product = new App\Models\Product();
+$product->name = 'Example Product';
+$product->slug = 'example-product';
+$product->description = 'Example product description';
+$product->price = 99;
+$product->save();
+```
+
 -   Run `npm run watch` to serve the Vue 3 files
 
 -   Run `php artisan serve` to serve the PHP files

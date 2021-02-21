@@ -25,7 +25,7 @@ export default createStore({
       : 0),
     cartQuantity: (state) => (state.cart.length
       ? state.cart.reduce(
-        (item, value) => item.quantity + value.quantity,
+        (accumulator, value) => accumulator.quantity + value.quantity,
       )
       : 0),
   },
@@ -67,7 +67,8 @@ export default createStore({
       const foundProductInCartIndex = cart.findIndex(
         (item) => item.slug === payload.slug,
       );
-      if (!foundProductInCartIndex) {
+
+      if (foundProductInCartIndex > -1) {
         cartCopy[foundProductInCartIndex].quantity += 1;
         return cartCopy;
       }
