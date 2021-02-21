@@ -91,7 +91,7 @@ export default {};
 
 <style scoped>
 .text-input {
-    @apply p-2 text-gray-800 placeholder-gray-800 border border-gray-400 rounded shadow-md;
+  @apply p-2 text-gray-800 placeholder-gray-800 border border-gray-400 rounded shadow-md;
 }
 
 .submitButton {

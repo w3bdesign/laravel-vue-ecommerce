@@ -22,7 +22,7 @@
 
 -   Stripe for payments
 
--   Dynamic currency formatting based on values set in environment variables
+-   Easily change currency by editing two environment variables
 
 -   ESLint code linting with AirBnB ruleset
 
