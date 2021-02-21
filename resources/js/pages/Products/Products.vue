@@ -1,55 +1,53 @@
 <template>
   <div>
     <div
-      v-if="products"
-      class="mt-12"
+      id="product-container"
+      class="flex flex-wrap items-center"
     >
       <div
         v-for="product in products"
         :key="product.id"
+        class="flex flex-col p-4 mt-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4"
       >
-        <div
-          class="flex flex-col mt-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4"
+        <router-link
+          :to="{
+            name: 'single.product',
+            params: { slug: product.slug },
+          }"
         >
-          <router-link
-            :to="{
-              name: 'single.product',
-              params: { slug: product.slug },
-            }"
+          <img
+            v-if="product.image !== undefined"
+            class="productImage"
+            :alt="product.name"
+            :src="product.image"
           >
-            <img
-              v-if="product.image !== undefined"
-              class="productImage"
-              :alt="product.name"
-              :src="product.image"
+          <img
+            v-else
+            class="productImage"
+            :alt="product.name"
+            :src="placeholderImage"
+          >
+          <div class="flex justify-center pt-3">
+            <p
+              class="text-xl font-bold text-center cursor-pointer"
             >
-            <img
-              v-else
-              class="productImage"
-              :alt="product.name"
-              :src="placeholderImage"
-            >
-            <div class="flex justify-center pt-3">
-              <p
-                class="text-xl font-bold text-center cursor-pointer"
-              >
-                {{ product.name }}
-              </p>
+              {{ product.name }}
+            </p>
+          </div>
+          <div class="flex justify-center mt-2">
+            <div class="ml-4 text-xl text-gray-900">
+              {{ formatPrice(product.price) }}
             </div>
-            <div class="flex justify-center mt-2">
-              <div class="ml-4 text-xl text-gray-900">
-                {{ formatPrice(product.price) }}
-              </div>
-            </div>
-            <button
-              class="productButton"
-            >
-              View Product
-            </button>
-          </router-link>
-        </div>
+          </div>
+          <button
+            class="productButton"
+          >
+            View Product
+          </button>
+        </router-link>
       </div>
     </div>
+
     <loading-spinner v-if="loading" />
   </div>
 </template>
