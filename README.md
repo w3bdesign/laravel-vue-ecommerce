@@ -18,6 +18,8 @@
 
 -   Vuex 4 state management
 
+-   Form validation with Vee Validate and Yup
+
 -   Vuex-persist for persisting cart after page refresh
 
 -   Stripe for payments

@@ -78,15 +78,56 @@
         <button class="submitButton">
           Submit button comes here
         </button>
+        <input
+          v-model="email"
+          name="email"
+        >
+        <span>{{ emailError }}</span>
+
+        <input
+          v-model="password"
+          name="password"
+          type="password"
+        >
+        <span>{{ passwordError }}</span>
       </div>
     </section>
   </div>
 </template>
 
 <script>
+import {
+  defineComponent, // onMounted, reactive, computed, toRefs,
+} from 'vue';
 
-// import { useForm, useField } from 'vee-validate';
-export default {};
+import { useForm, useField } from 'vee-validate';
+import * as yup from 'yup';
+
+export default defineComponent({
+  setup() {
+    const schema = yup.object({
+      email: yup.string().required().email(),
+      name: yup.string().required(),
+      password: yup.string().required().min(8),
+    });
+
+    // Create a form context with the validation schema
+    useForm({
+      validationSchema: schema,
+    });
+
+    // No need to define rules for fields
+    const { value: email, errorMessage: emailError } = useField('email');
+    const { value: password, errorMessage: passwordError } = useField('password');
+
+    return {
+      email,
+      emailError,
+      password,
+      passwordError,
+    };
+  },
+});
 </script>
 
 <style scoped>
