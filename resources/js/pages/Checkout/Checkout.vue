@@ -66,13 +66,11 @@
       Cart is currently empty
     </h2>
     <div v-if="cartLength">
+      <h2 class="h-10 m-4 text-2xl font-bold text-center">
+        Customer Details
+      </h2>
       <div class="flex justify-center w-full p-4 align-center">
         <customer-details />
-        <input
-          v-model="value"
-          type="text"
-        >
-        <span>{{ errorMessage }}</span>
       </div>
       <h2 class="h-10 p-4 text-2xl font-bold text-center">
         Stripe payment
@@ -247,7 +245,6 @@ export default defineComponent({
   align-items: flex-end;
   align-content: center;
   max-width: 1380px;
-
   @apply flex;
 }
 
