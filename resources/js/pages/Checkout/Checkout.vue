@@ -11,7 +11,7 @@
       >
         <div class="item">
           <span
-            class="block mt-2 font-extrabold"
+            class="block mt-2 text-xl font-bold"
           >Remove: <br></span>
           <span class="item-content">
             <img
@@ -25,26 +25,38 @@
           </span>
         </div>
         <div class="item">
-          <span class="block mt-2 font-extrabold">Name: <br></span>
-          <span class="item-content">{{ products.name }}</span>
+          <span
+            class="block mt-2 text-xl font-bold"
+          >Name: <br></span>
+          <span class="text-lg item-content">{{
+            products.name
+          }}</span>
         </div>
         <div class="item">
           <span
-            class="block mt-2 font-extrabold"
+            class="block mt-2 text-xl font-bold"
           >Quantity: <br>
           </span>
-          <span class="item-content">
+          <span class="text-lg item-content">
             {{ products.quantity }}
           </span>
         </div>
         <div class="item">
           <span
-            class="block mt-2 font-extrabold"
-          >Subtotal: <br></span>
-          <span class="item-content">
-            {{ formatPrice(cartTotal) }}
+            class="block mt-2 text-xl font-bold"
+          >Price: <br></span>
+          <span class="text-lg item-content">
+            {{ formatPrice(products.price) }}
           </span>
         </div>
+      </div>
+      <div
+        v-if="cartLength"
+        class="container mx-auto mt-2 flex-container-total"
+      >
+        <span
+          class="p-4 text-2xl font-extrabold text-right"
+        >Total: {{ formatPrice(cartTotal) }}</span>
       </div>
     </section>
     <h2
@@ -63,14 +75,14 @@
         >
         <span>{{ errorMessage }}</span>
       </div>
-      <h2 class="h-10 p-6 text-2xl font-bold text-center">
+      <h2 class="h-10 p-4 text-2xl font-bold text-center">
         Stripe payment
       </h2>
       <div class="flex justify-center w-full p-4 align-center">
         <br>
         <div
           id="card-element"
-          class="w-1/2 h-32 mt-4"
+          class="w-full h-16 mt-4 lg:w-5/12 xl:w-5/12"
         >
           Stripe
         </div>
@@ -226,29 +238,40 @@ export default defineComponent({
 
 <style scoped>
 .disabledButton {
-  @apply cursor-not-allowed opacity-50;
+    @apply cursor-not-allowed opacity-50;
 }
 
 .flex-container {
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  align-content: center;
-  max-width: 1380px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    max-width: 1380px;
 
-  @apply flex border border-gray-300 rounded-lg shadow;
+    @apply flex border border-gray-300 rounded-lg shadow;
+}
+
+.flex-container-total {
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: end;
+    align-items: flex-end;
+    align-content: center;
+    max-width: 1380px;
+
+    @apply flex;
 }
 
 .item {
-  @apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
+    @apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
 }
 
 .item-content {
-  @apply inline-block mt-4 w-20 h-12 md:w-full lg:w-full xl:w-full;
+    @apply inline-block mt-4 w-20 h-12 md:w-full lg:w-full xl:w-full;
 }
 
 .removing {
-  @apply animate-spin cursor-not-allowed;
+    @apply animate-spin cursor-not-allowed;
 }
 </style>
