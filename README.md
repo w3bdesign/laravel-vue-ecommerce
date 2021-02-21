@@ -67,7 +67,7 @@
 
 -   Run `php artisan serve` to serve the PHP files
 
--   Open up `http://localhost:8000`
+-   Open up `http://localhost:8000` in your browser
 
 ## TODO
 
