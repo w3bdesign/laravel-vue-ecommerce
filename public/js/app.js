@@ -16570,12 +16570,8 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_2__.default({
       }, 0) : 0;
     },
     cartQuantity: function cartQuantity(state) {
-      return state.cart.length ? state.cart.reduce( // (item, value) => item.quantity + value.quantity,
-      function (item, value) {
-        console.log('Cart quantity: ');
-        console.log(item);
-        console.log(value);
-        return item.quantity + value.quantity;
+      return state.cart.length ? state.cart.reduce(function (accumulator, value) {
+        return accumulator.quantity + value.quantity;
       }) : 0;
     }
   },
@@ -16622,7 +16618,7 @@ var vuexLocal = new vuex_persist__WEBPACK_IMPORTED_MODULE_2__.default({
         return item.slug === payload.slug;
       });
 
-      if (!foundProductInCartIndex) {
+      if (foundProductInCartIndex > -1) {
         cartCopy[foundProductInCartIndex].quantity += 1;
         return cartCopy;
       }
@@ -16716,8 +16712,7 @@ __webpack_require__.r(__webpack_exports__);
     });
     var cartTotal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       return store.getters.cartTotal;
-    }); // if(cartQuantity.quantity) {  }
-
+    });
     return {
       cartQuantity: cartQuantity,
       cartTotal: cartTotal,
