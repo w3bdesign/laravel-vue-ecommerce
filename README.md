@@ -52,16 +52,16 @@
 
 -   You should create at least one sample product. Although you can use the builtin factory seeders, I prefer to do manual creation for testing purposes.
 
-Run these commands: 
+    To do so run these commands after running `php artisan tinker`: 
 
-```php
-$product = new App\Models\Product();
-$product->name = 'Example Product';
-$product->slug = 'example-product';
-$product->description = 'Example product description';
-$product->price = 99;
-$product->save();
-```
+    ```php
+    $product = new App\Models\Product();
+    $product->name = 'Example Product';
+    $product->slug = 'example-product';
+    $product->description = 'Example product description';
+    $product->price = 99;
+    $product->save();
+    ```
 
 -   Run `npm run watch` to serve the Vue 3 files
 
