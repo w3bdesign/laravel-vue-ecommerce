@@ -17770,27 +17770,27 @@ var _withId = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.withScopeId)("dat
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-f38b66b8");
 
 var _hoisted_1 = {
-  "class": "p-6 flex-container"
+  "class": "p-4 flex-container"
 };
 var _hoisted_2 = {
   "class": "text-gray-700"
 };
 var _hoisted_3 = {
-  "class": "mx-auto lg:w-1/2 md:w-2/3"
+  "class": "mx-auto md:w-2/3 lg:w-1/2"
 };
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "flex flex-wrap -m-2"
+  "class": "flex flex-wrap"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "w-full p-2 lg:w-1/2"
+  "class": "p-2 lg:w-1/2"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
-  name: "firstName",
+  name: "first_name",
   "class": "text-input",
   label: "First name",
   validation: [['required'], ['min', 3]],
   type: "text"
 })]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "w-full p-2 lg:w-1/2"
+  "class": "p-2 lg:w-1/2"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
   name: "lastName",
   "class": "text-input",
@@ -17798,7 +17798,7 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
   validation: [['required'], ['min', 3]],
   type: "text"
 })]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "w-full p-2 lg:w-1/2"
+  "class": "p-2 lg:w-1/2"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
   name: "address1",
   "class": "text-input",
@@ -17806,7 +17806,7 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
   validation: [['required'], ['min', 3]],
   type: "text"
 })]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "w-full p-2 lg:w-1/2"
+  "class": "p-2 lg:w-1/2"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
   name: "postcode",
   "class": "text-input",
@@ -17814,7 +17814,7 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
   validation: [['required'], ['number']],
   type: "text"
 })]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "w-full p-2 lg:w-1/2"
+  "class": "p-2 lg:w-1/2"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
   name: "city",
   "class": "text-input",
@@ -17822,7 +17822,7 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
   validation: [['required'], ['min', 2]],
   type: "text"
 })]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "w-full p-2 lg:w-1/2"
+  "class": "p-2 lg:w-1/2"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
   name: "email",
   "class": "text-input",
@@ -17830,34 +17830,21 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
   validation: [['required'], ['email']],
   type: "text"
 })]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "w-full p-2 lg:w-1/2"
+  "class": "p-2 lg:w-1/2"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
   name: "phone",
   "class": "text-input",
   label: "Phone",
   validation: [['required'], ['number']],
   type: "text"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "w-1/2 p-2"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
-  name: "paymentMethod",
-  "class": "invisible",
-  value: "cod",
-  type: "hidden"
 })])], -1
-/* HOISTED */
-);
-
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-  "class": "submitButton"
-}, " Submit button comes here ", -1
 /* HOISTED */
 );
 
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)();
 
 var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [_hoisted_4, _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("section", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return _ctx.email = $event;
     }),
@@ -18242,7 +18229,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".text-input[data-v-f38b66b8] {\n  --tw-border-opacity: 1;\n  border-color: rgba(156, 163, 175, var(--tw-border-opacity));\n  border-radius: 0.25rem;\n  border-width: 1px;\n  padding: 0.5rem;\n}\n.text-input[data-v-f38b66b8]::-moz-placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-placeholder-opacity));\n}\n.text-input[data-v-f38b66b8]:-ms-input-placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-placeholder-opacity));\n}\n.text-input[data-v-f38b66b8]::placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-placeholder-opacity));\n}\n.text-input[data-v-f38b66b8] {\n  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n  --tw-text-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-text-opacity));\n}\n.submitButton[data-v-f38b66b8] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(59, 130, 246, var(--tw-bg-opacity));\n}\n.submitButton[data-v-f38b66b8]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgba(29, 78, 216, var(--tw-bg-opacity));\n}\n.submitButton[data-v-f38b66b8] {\n  border-radius: 0.25rem;\n  font-weight: 700;\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n  padding: 0.5rem;\n  --tw-text-opacity: 1;\n  color: rgba(255, 255, 255, var(--tw-text-opacity));\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".text-input[data-v-f38b66b8] {\n  --tw-border-opacity: 1;\n  border-color: rgba(156, 163, 175, var(--tw-border-opacity));\n  border-radius: 0.25rem;\n  border-width: 1px;\n  padding: 0.5rem;\n}\n.text-input[data-v-f38b66b8]::-moz-placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-placeholder-opacity));\n}\n.text-input[data-v-f38b66b8]:-ms-input-placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-placeholder-opacity));\n}\n.text-input[data-v-f38b66b8]::placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-placeholder-opacity));\n}\n.text-input[data-v-f38b66b8] {\n  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n  --tw-text-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-text-opacity));\n  width: 100%;\n}\n.submitButton[data-v-f38b66b8] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(59, 130, 246, var(--tw-bg-opacity));\n}\n.submitButton[data-v-f38b66b8]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgba(29, 78, 216, var(--tw-bg-opacity));\n}\n.submitButton[data-v-f38b66b8] {\n  border-radius: 0.25rem;\n  font-weight: 700;\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n  padding: 0.5rem;\n  --tw-text-opacity: 1;\n  color: rgba(255, 255, 255, var(--tw-text-opacity));\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

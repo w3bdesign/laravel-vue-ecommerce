@@ -1,18 +1,18 @@
 <template>
-  <div class="p-6 flex-container">
+  <div class="p-4 flex-container">
     <section class="text-gray-700">
-      <div class="mx-auto lg:w-1/2 md:w-2/3">
-        <div class="flex flex-wrap -m-2">
-          <div class="w-full p-2 lg:w-1/2">
+      <div class="mx-auto md:w-2/3 lg:w-1/2">
+        <div class="flex flex-wrap">
+          <div class="p-2 lg:w-1/2">
             <input
-              name="firstName"
+              name="first_name"
               class="text-input"
               label="First name"
               :validation="[['required'], ['min', 3]]"
               type="text"
             >
           </div>
-          <div class="w-full p-2 lg:w-1/2">
+          <div class="p-2 lg:w-1/2">
             <input
               name="lastName"
               class="text-input"
@@ -21,7 +21,7 @@
               type="text"
             >
           </div>
-          <div class="w-full p-2 lg:w-1/2">
+          <div class="p-2 lg:w-1/2">
             <input
               name="address1"
               class="text-input"
@@ -30,7 +30,7 @@
               type="text"
             >
           </div>
-          <div class="w-full p-2 lg:w-1/2">
+          <div class="p-2 lg:w-1/2">
             <input
               name="postcode"
               class="text-input"
@@ -39,7 +39,7 @@
               type="text"
             >
           </div>
-          <div class="w-full p-2 lg:w-1/2">
+          <div class="p-2 lg:w-1/2">
             <input
               name="city"
               class="text-input"
@@ -48,7 +48,7 @@
               type="text"
             >
           </div>
-          <div class="w-full p-2 lg:w-1/2">
+          <div class="p-2 lg:w-1/2">
             <input
               name="email"
               class="text-input"
@@ -57,7 +57,7 @@
               type="text"
             >
           </div>
-          <div class="w-full p-2 lg:w-1/2">
+          <div class="p-2 lg:w-1/2">
             <input
               name="phone"
               class="text-input"
@@ -66,18 +66,8 @@
               type="text"
             >
           </div>
-          <div class="w-1/2 p-2">
-            <input
-              name="paymentMethod"
-              class="invisible"
-              value="cod"
-              type="hidden"
-            >
-          </div>
         </div>
-        <button class="submitButton">
-          Submit button comes here
-        </button>
+
         <input
           v-model="email"
           name="email"
@@ -118,7 +108,9 @@ export default defineComponent({
 
     // No need to define rules for fields
     const { value: email, errorMessage: emailError } = useField('email');
-    const { value: password, errorMessage: passwordError } = useField('password');
+    const { value: password, errorMessage: passwordError } = useField(
+      'password',
+    );
 
     return {
       email,
@@ -132,10 +124,10 @@ export default defineComponent({
 
 <style scoped>
 .text-input {
-  @apply p-2 text-gray-800 placeholder-gray-800 border border-gray-400 rounded shadow-md;
+    @apply w-full p-2 text-gray-800 placeholder-gray-800 border border-gray-400 rounded shadow-md;
 }
 
 .submitButton {
-  @apply p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700;
+    @apply p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700;
 }
 </style>
