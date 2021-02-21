@@ -84,6 +84,6 @@ export default defineComponent({
 
 <style scoped>
 .productButton {
-    @apply w-full p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700;
+  @apply w-full p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700;
 }
 </style>
