@@ -11,7 +11,6 @@
                 v-model="firstName"
                 name="firstName"
                 class="text-input"
-                :placeholder="customerDetails.firstName || 'First name'"
                 type="text"
               >
               <span class="text-lg text-red-500">{{
@@ -25,7 +24,6 @@
                 v-model="lastName"
                 name="lastName"
                 class="text-input"
-                :placeholder="customerDetails.lastName || 'Last name'"
                 type="text"
               >
               <span class="text-lg text-red-500">{{
@@ -39,7 +37,6 @@
                 v-model="address"
                 name="address"
                 class="text-input"
-                :placeholder="customerDetails.address || 'Address'"
                 type="text"
               >
               <span class="text-lg text-red-500">{{
@@ -53,7 +50,6 @@
                 v-model="zipcode"
                 name="zipcode"
                 class="text-input"
-                :placeholder="customerDetails.zipcode || 'Zip code'"
                 type="text"
               >
               <span class="text-lg text-red-500">{{
@@ -67,7 +63,6 @@
                 v-model="city"
                 name="city"
                 class="text-input"
-                :placeholder="customerDetails.city || 'City'"
                 type="text"
               >
               <span class="text-lg text-red-500">{{
@@ -81,7 +76,6 @@
                 v-model="state"
                 name="state"
                 class="text-input"
-                :placeholder="customerDetails.state || 'State'"
                 type="text"
               >
               <span class="text-lg text-red-500">{{
@@ -95,8 +89,6 @@
                 v-model="email"
                 name="email"
                 class="text-input"
-                placeholder="Email"
-                :value="customerDetails.email"
                 type="email"
               >
               <span class="text-lg text-red-500">{{
@@ -143,8 +135,9 @@ export default defineComponent({
       validationSchema: schema,
     });
 
-    const onSubmit = handleSubmit((values) => {
+    const onSubmit = handleSubmit((values, { resetForm }) => {
       store.dispatch('saveCustomerDetails', values);
+      resetForm();
     });
 
     const { value: firstName } = useField('firstName');
