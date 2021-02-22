@@ -11,119 +11,117 @@
           </h3>
           <br>
           <div class="p-2 lg:w-1/2">
-            <span>{{ customerDetails.firstName }} </span>
-
-            <span>{{ customerDetails.lastName }} </span>
-
-            <span>{{ customerDetails.address }} </span>
-            <span>{{ customerDetails.zipcode }} </span>
-            <span>{{ customerDetails.state }} </span>
-            <span>{{ customerDetails.email }} </span>
+            <span>First name: {{ customerDetails.firstName }} <br></span>
+            <span>Last name: {{ customerDetails.lastName }} <br></span>
+            <span>Address: {{ customerDetails.address }} <br></span>
+            <span>Zip: {{ customerDetails.zipcode }} <br></span>
+            <span>State: {{ customerDetails.state }} <br></span>
+            <span>Email: {{ customerDetails.email }} <br></span>
+            <br>
+            Valid: {{ meta.valid }}
           </div>
         </div>
-
-        <form @submit.prevent="onSubmit">
-          <div class="flex flex-wrap">
-            <div class="p-2 lg:w-1/2">
-              <label for="firstName">First name</label>
-              <input
-                id="firstName"
-                v-model="firstName"
-                name="firstName"
-                class="text-input"
-                type="text"
-              >
-              <span class="text-lg text-red-500">{{
-                errors.firstName
-              }}</span>
-            </div>
-            <div class="p-2 lg:w-1/2">
-              <label for="lastName">Last name</label>
-              <input
-                id="lastName"
-                v-model="lastName"
-                name="lastName"
-                class="text-input"
-                type="text"
-              >
-              <span class="text-lg text-red-500">{{
-                errors.lastName
-              }}</span>
-            </div>
-            <div class="p-2 lg:w-1/2">
-              <label for="address">Address</label>
-              <input
-                id="address"
-                v-model="address"
-                name="address"
-                class="text-input"
-                type="text"
-              >
-              <span class="text-lg text-red-500">{{
-                errors.address
-              }}</span>
-            </div>
-            <div class="p-2 lg:w-1/2">
-              <label for="zipcode">Zip code</label>
-              <input
-                id="zipcode"
-                v-model="zipcode"
-                name="zipcode"
-                class="text-input"
-                type="text"
-              >
-              <span class="text-lg text-red-500">{{
-                errors.zipcode
-              }}</span>
-            </div>
-            <div class="p-2 lg:w-1/2">
-              <label for="city">City</label>
-              <input
-                id="city"
-                v-model="city"
-                name="city"
-                class="text-input"
-                type="text"
-              >
-              <span class="text-lg text-red-500">{{
-                errors.city
-              }}</span>
-            </div>
-            <div class="p-2 lg:w-1/2">
-              <label for="state">State</label>
-              <input
-                id="state"
-                v-model="state"
-                name="state"
-                class="text-input"
-                type="text"
-              >
-              <span class="text-lg text-red-500">{{
-                errors.state
-              }}</span>
-            </div>
-            <div class="p-2 lg:w-1/2">
-              <label for="email">Email</label>
-              <input
-                id="email"
-                v-model="email"
-                name="email"
-                class="text-input"
-                type="email"
-              >
-              <span class="text-lg text-red-500">{{
-                errors.email
-              }}</span>
-            </div>
-          </div>
-          <div class="flex justify-center w-full align-center">
+        <div class="flex flex-wrap">
+          <div class="p-2 lg:w-1/2">
+            <label for="firstName">First name</label>
             <input
-              class="submitButton"
-              type="submit"
-              value="Save Details"
+              id="firstName"
+              v-model="firstName"
+              name="firstName"
+              class="text-input"
+              type="text"
+              :value="firstName"
+              @change="onSubmit"
             >
+            <span class="text-lg text-red-500">{{
+              errors.firstName
+            }}</span>
           </div>
-        </form>
+          <div class="p-2 lg:w-1/2">
+            <label for="lastName">Last name</label>
+            <input
+              id="lastName"
+              v-model="lastName"
+              name="lastName"
+              class="text-input"
+              type="text"
+              @change="onSubmit"
+            >
+            <span class="text-lg text-red-500">{{
+              errors.lastName
+            }}</span>
+          </div>
+          <div class="p-2 lg:w-1/2">
+            <label for="address">Address</label>
+            <input
+              id="address"
+              v-model="address"
+              name="address"
+              class="text-input"
+              type="text"
+              @change="onSubmit"
+            >
+            <span class="text-lg text-red-500">{{
+              errors.address
+            }}</span>
+          </div>
+          <div class="p-2 lg:w-1/2">
+            <label for="zipcode">Zip code</label>
+            <input
+              id="zipcode"
+              v-model="zipcode"
+              name="zipcode"
+              class="text-input"
+              type="text"
+              @change="onSubmit"
+            >
+            <span class="text-lg text-red-500">{{
+              errors.zipcode
+            }}</span>
+          </div>
+          <div class="p-2 lg:w-1/2">
+            <label for="city">City</label>
+            <input
+              id="city"
+              v-model="city"
+              name="city"
+              class="text-input"
+              type="text"
+              @change="onSubmit"
+            >
+            <span class="text-lg text-red-500">{{
+              errors.city
+            }}</span>
+          </div>
+          <div class="p-2 lg:w-1/2">
+            <label for="state">State</label>
+            <input
+              id="state"
+              v-model="state"
+              name="state"
+              class="text-input"
+              type="text"
+              @change="onSubmit"
+            >
+            <span class="text-lg text-red-500">{{
+              errors.state
+            }}</span>
+          </div>
+          <div class="p-2 lg:w-1/2">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              v-model="email"
+              name="email"
+              class="text-input"
+              type="email"
+              @change="onSubmit"
+            >
+            <span class="text-lg text-red-500">{{
+              errors.email
+            }}</span>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -151,7 +149,7 @@ export default defineComponent({
     });
 
     // Create a form context with the validation schema
-    const { errors, handleSubmit } = useForm({
+    const { meta, errors, handleSubmit } = useForm({
       validationSchema: schema,
     });
 
@@ -181,6 +179,7 @@ export default defineComponent({
       errors,
       onSubmit,
       customerDetails,
+      meta,
     };
   },
 });
