@@ -70,29 +70,32 @@
         Customer Details
       </h2>
       <div class="flex justify-center w-full p-4 align-center">
-        <customer-details />
+        <customer-details-form />
       </div>
-      <h2 class="h-10 p-4 text-2xl font-bold text-center">
-        Stripe payment
-      </h2>
-      <div class="flex justify-center w-full p-4 align-center">
-        <br>
-        <div
-          id="card-element"
-          class="w-full h-16 mt-4 lg:w-5/12 xl:w-5/12"
-        >
-          Stripe
+
+      <div v-show="customerDetails.firstName">
+        <h2 class="h-10 p-4 text-2xl font-bold text-center">
+          Stripe payment
+        </h2>
+        <div class="flex justify-center w-full p-4 align-center">
+          <br>
+          <div
+            id="card-element"
+            class="w-full h-16 mt-4 lg:w-5/12 xl:w-5/12"
+          >
+            Stripe
+          </div>
         </div>
-      </div>
-      <div class="flex justify-center w-full align-center">
-        <button
-          class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
-          :class="{ disabledButton: paymentIsProcessing }"
-          :disabled="paymentIsProcessing"
-          @click="checkout(products)"
-        >
-          Checkout
-        </button>
+        <div class="flex justify-center w-full align-center">
+          <button
+            class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+            :class="{ disabledButton: paymentIsProcessing }"
+            :disabled="paymentIsProcessing"
+            @click="checkout(products)"
+          >
+            Checkout
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -109,10 +112,10 @@ import { loadStripe } from '@stripe/stripe-js';
 
 import { formatPrice } from '../../utils/functions';
 
-import CustomerDetails from './CustomerDetails.vue';
+import CustomerDetailsForm from './CustomerDetailsForm.vue';
 
 export default defineComponent({
-  components: { CustomerDetails },
+  components: { CustomerDetailsForm },
   setup() {
     const store = useStore();
     const router = useRouter();
@@ -135,6 +138,7 @@ export default defineComponent({
     const cartLength = computed(() => store.state.cart.length);
     const cartTotal = computed(() => store.getters.cartTotal);
     const cartContent = computed(() => store.state.cart);
+    const customerDetails = computed(() => store.getters.customerDetails);
 
     const removeProductFromCart = (product) => {
       localState.removingCartItem = true;
@@ -217,7 +221,7 @@ export default defineComponent({
       removeProductFromCart,
       checkout,
       formatPrice,
-
+      customerDetails,
     };
   },
 });
@@ -261,4 +265,5 @@ export default defineComponent({
 .removing {
   @apply animate-spin cursor-not-allowed;
 }
+
 </style>
