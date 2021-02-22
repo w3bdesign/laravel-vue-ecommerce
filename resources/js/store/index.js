@@ -15,6 +15,7 @@ export default createStore({
     products: [],
     cart: [],
     order: {},
+    customer: {},
   },
   getters: {
     cartTotal: (state) => (state.cart.length
@@ -28,6 +29,7 @@ export default createStore({
         (accumulator, value) => accumulator.quantity + value.quantity,
       )
       : 0),
+    customerDetails: ({ customer }) => (customer),
   },
   actions: {
     getProductsFromApi({ commit }) {
@@ -46,6 +48,9 @@ export default createStore({
     },
     emptyCart({ commit }) {
       commit('UPDATE_CART', []);
+    },
+    saveCustomerDetails({ commit }, customer) {
+      commit('SAVE_CUSTOMER_DETAILS', customer);
     },
   },
   mutations: {
@@ -79,6 +84,10 @@ export default createStore({
     },
     REMOVE_PRODUCT_FROM_CART({ cart }, payload) {
       cart.splice(cart.indexOf(payload), 1);
+    },
+    SAVE_CUSTOMER_DETAILS(state, payload) {
+      const newCustomer = state;
+      newCustomer.customer = payload;
     },
   },
   strict: debug,
