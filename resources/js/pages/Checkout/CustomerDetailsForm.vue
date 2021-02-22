@@ -2,6 +2,26 @@
   <div class="p-4 flex-container">
     <section class="text-gray-700">
       <div class="mx-auto mt-2 md:w-2/3 lg:w-1/2">
+        <div
+          v-if="customerDetails.firstName"
+          class="flex justify-between"
+        >
+          <h3 class="h-10 p-4 text-xl font-bold text-center">
+            Saved details
+          </h3>
+          <br>
+          <div class="p-2 lg:w-1/2">
+            <span>{{ customerDetails.firstName }} </span>
+
+            <span>{{ customerDetails.lastName }} </span>
+
+            <span>{{ customerDetails.address }} </span>
+            <span>{{ customerDetails.zipcode }} </span>
+            <span>{{ customerDetails.state }} </span>
+            <span>{{ customerDetails.email }} </span>
+          </div>
+        </div>
+
         <form @submit.prevent="onSubmit">
           <div class="flex flex-wrap">
             <div class="p-2 lg:w-1/2">
