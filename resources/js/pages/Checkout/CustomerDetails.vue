@@ -2,84 +2,79 @@
   <div class="p-4 flex-container">
     <section class="text-gray-700">
       <div class="mx-auto md:w-2/3 lg:w-1/2">
-        <div class="flex flex-wrap">
-          <div class="p-2 lg:w-1/2">
-            <input
-              name="first_name"
-              class="text-input"
-              label="First name"
-              :validation="[['required'], ['min', 3]]"
-              type="text"
-            >
+        <form @submit.prevent="onSubmit">
+          <div class="flex flex-wrap">
+            <div class="p-2 lg:w-1/2">
+              <input
+                name="firstName"
+                class="text-input"
+                placeholder="First name"
+                type="text"
+              >
+              <span class="text-lg text-red-500">{{ errors.firstName }}</span>
+            </div>
+            <div class="p-2 lg:w-1/2">
+              <input
+                name="lastName"
+                class="text-input"
+                placeholder="Last name"
+                type="text"
+              >
+              <span class="text-lg text-red-500">{{ errors.lastName }}</span>
+            </div>
+            <div class="p-2 lg:w-1/2">
+              <input
+                name="address"
+                class="text-input"
+                placeholder="Address"
+                type="text"
+              >
+              <span class="text-lg text-red-500">{{ errors.address }}</span>
+            </div>
+            <div class="p-2 lg:w-1/2">
+              <input
+                name="zipcode"
+                class="text-input"
+                placeholder="Zip code"
+                type="text"
+              >
+              <span class="text-lg text-red-500">{{ errors.zipcode }}</span>
+            </div>
+            <div class="p-2 lg:w-1/2">
+              <input
+                name="city"
+                class="text-input"
+                placeholder="City"
+                type="text"
+              >
+              <span class="text-lg text-red-500">{{ errors.city }}</span>
+            </div>
+            <div class="p-2 lg:w-1/2">
+              <input
+                v-model="state"
+                name="state"
+                class="text-input"
+                placeholder="State"
+                type="text"
+              >
+              <span class="text-lg text-red-500">{{ errors.state }}</span>
+            </div>
+            <div class="p-2 lg:w-1/2">
+              <input
+                v-model="email"
+                name="email"
+                class="text-input"
+                placeholder="Email"
+                type="text"
+              >
+              <span class="text-lg text-red-500">{{ errors.email }}</span>
+            </div>
           </div>
-          <div class="p-2 lg:w-1/2">
-            <input
-              name="lastName"
-              class="text-input"
-              label="Last name"
-              :validation="[['required'], ['min', 3]]"
-              type="text"
-            >
-          </div>
-          <div class="p-2 lg:w-1/2">
-            <input
-              name="address1"
-              class="text-input"
-              label="Address"
-              :validation="[['required'], ['min', 3]]"
-              type="text"
-            >
-          </div>
-          <div class="p-2 lg:w-1/2">
-            <input
-              name="postcode"
-              class="text-input"
-              label="Postal code"
-              :validation="[['required'], ['number']]"
-              type="text"
-            >
-          </div>
-          <div class="p-2 lg:w-1/2">
-            <input
-              name="city"
-              class="text-input"
-              label="City"
-              :validation="[['required'], ['min', 2]]"
-              type="text"
-            >
-          </div>
-          <div class="p-2 lg:w-1/2">
-            <input
-              name="email"
-              class="text-input"
-              label="Email"
-              :validation="[['required'], ['email']]"
-              type="text"
-            >
-          </div>
-          <div class="p-2 lg:w-1/2">
-            <input
-              name="phone"
-              class="text-input"
-              label="Phone"
-              :validation="[['required'], ['number']]"
-              type="text"
-            >
-          </div>
-        </div>
-
-        <input
-          v-model="email"
-          name="email"
-        >
-        <span>{{ emailError }}</span>
-
-        <input
-          v-model="password"
-          name="password"
-          type="password"
-        >
-        <span>{{ passwordError }}</span>
+          <input
+            type="submit"
+            value="Submit"
+          >
+        </form>
       </div>
     </section>
   </div>
@@ -91,32 +86,48 @@ import {
 } from 'vue';
 
 import { useForm, useField } from 'vee-validate';
-import * as yup from 'yup';
+import { object, string } from 'yup';
 
 export default defineComponent({
   setup() {
-    const schema = yup.object({
-      email: yup.string().required().email(),
-      name: yup.string().required(),
-      password: yup.string().required().min(8),
+    const schema = object({
+      firstName: string().required().min(2),
+      lastName: string().required().min(2),
+      address: string().required().min(3),
+      city: string().required().min(2),
+      state: string().required(),
+      zipcode: string().required().min(4),
+      email: string().required().email(),
     });
 
     // Create a form context with the validation schema
-    useForm({
+    const { errors, handleSubmit } = useForm({
       validationSchema: schema,
     });
 
-    // No need to define rules for fields
-    const { value: email, errorMessage: emailError } = useField('email');
-    const { value: password, errorMessage: passwordError } = useField(
-      'password',
-    );
+    // const submitForm = () => { console.log('Submitted!'); };
+    const onSubmit = handleSubmit((values) => {
+      alert(JSON.stringify(values, null, 2));
+    });
+
+    const { value: firstName } = useField('firstName');
+    const { value: lastName } = useField('lastName');
+    const { value: address } = useField('address');
+    const { value: city } = useField('city');
+    const { value: state } = useField('state');
+    const { value: zipcode } = useField('state');
+    const { value: email } = useField('email');
 
     return {
+      firstName,
+      lastName,
+      address,
+      city,
+      state,
+      zipcode,
       email,
-      emailError,
-      password,
-      passwordError,
+      errors,
+      onSubmit,
     };
   },
 });

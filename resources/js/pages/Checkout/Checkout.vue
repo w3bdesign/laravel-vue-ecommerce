@@ -108,6 +108,7 @@ import { useRouter } from 'vue-router';
 import { loadStripe } from '@stripe/stripe-js';
 
 import { formatPrice } from '../../utils/functions';
+
 import CustomerDetails from './CustomerDetails.vue';
 
 export default defineComponent({
