@@ -69,39 +69,35 @@
       <h2 class="h-10 m-4 text-2xl font-bold text-center">
         Customer Details
       </h2>
-
-      Valid: {{ checkoutFormIsValid }}
-      <br>
-      First name: {{ customerDetails.firstName }}
-
       <div class="flex justify-center w-full p-4 align-center">
         <customer-details-form />
       </div>
-
-      <div v-show="customerDetails.firstName">
-        <h2 class="h-10 p-4 text-2xl font-bold text-center">
-          Stripe payment
-        </h2>
-        <div class="flex justify-center w-full p-4 align-center">
-          <br>
-          <div
-            id="card-element"
-            class="w-full h-16 mt-4 lg:w-5/12 xl:w-5/12"
-          >
-            Stripe
+      <transition name="fade">
+        <div v-show="customerDetails.firstName || checkoutFormIsValid">
+          <h2 class="h-10 p-4 text-2xl font-bold text-center">
+            Stripe payment
+          </h2>
+          <div class="flex justify-center w-full p-4 align-center">
+            <br>
+            <div
+              id="card-element"
+              class="w-full h-16 mt-4 lg:w-5/12 xl:w-5/12"
+            >
+              Stripe
+            </div>
+          </div>
+          <div class="flex justify-center w-full align-center">
+            <button
+              class="checkoutButton"
+              :class="{ disabledButton: paymentIsProcessing }"
+              :disabled="paymentIsProcessing"
+              @click="checkout(products)"
+            >
+              Checkout
+            </button>
           </div>
         </div>
-        <div class="flex justify-center w-full align-center">
-          <button
-            class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
-            :class="{ disabledButton: paymentIsProcessing }"
-            :disabled="paymentIsProcessing"
-            @click="checkout(products)"
-          >
-            Checkout
-          </button>
-        </div>
-      </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -129,22 +125,17 @@ export default defineComponent({
       paymentIsProcessing: false,
       stripe: {},
       cardElement: {},
-      customer: {
-        first_name: 'Firstname',
-        last_name: 'Lastname',
-        email: 'test@test.com',
-        address: 'Address',
-        city: 'City',
-        state: 'NA',
-        zipcode: '1234',
-      },
+      customer: {},
     });
 
     const cartLength = computed(() => store.state.cart.length);
     const cartTotal = computed(() => store.getters.cartTotal);
     const cartContent = computed(() => store.state.cart);
     const customerDetails = computed(() => store.getters.customerDetails);
-    const checkoutFormIsValid = computed(() => store.getters.checkoutFormIsValid);
+
+    const checkoutFormIsValid = computed(
+      () => store.getters.checkoutFormIsValid,
+    );
 
     const removeProductFromCart = (product) => {
       localState.removingCartItem = true;
@@ -153,6 +144,7 @@ export default defineComponent({
     };
 
     const checkout = async () => {
+      const { customer } = store.state;
       const {
         paymentMethod,
         error,
@@ -161,13 +153,13 @@ export default defineComponent({
         localState.cardElement,
         {
           billing_details: {
-            name: 'Firstname Lastname', // this.customer.first_name + ' ' + this.customer.last_name,
-            email: 'test@test.com', // this.customer.email,
+            name: `${customer.firstName} ${customer.lastName}`,
+            email: customer.email,
             address: {
-              line1: 'Address', // this.customer.address,
-              city: 'City', // this.customer.city,
-              state: 'State', // this.customer.state,
-              postal_code: '1234', // this.customer.zip_code
+              line1: customer.address,
+              city: customer.city,
+              state: customer.state,
+              postal_code: customer.zipcode,
             },
           },
         },
@@ -178,31 +170,30 @@ export default defineComponent({
         return;
       }
       localState.paymentIsProcessing = true;
+      localState.customer = { ...customer };
 
-      // const totalAmount = 99.00;
-      // const amount = totalAmount.toLocaleString('nb-NO', { style: 'currency', currency: 'NOK' });
-      // console.log('Currency locale: ');
-      // console.log(process.env.CASHIER_CURRENCY_LOCALE);
-
-      localState.customer.amount = 9900;
+      const stripeAmount = store.getters.cartTotal * 100;
+      localState.customer.amount = stripeAmount;
       localState.customer.cart = JSON.stringify(store.state.cart);
       localState.customer.payment_method_id = paymentMethod.id;
 
-      axios
-        .post('/api/purchase', localState.customer)
-        .then((response) => {
-          localState.paymentIsProcessing = false;
-          if (response.statusText === 'Created') {
-            store.dispatch('emptyCart');
-            store.commit('UPDATE_ORDER', response.data);
-            router.push('/thankyou');
-          }
-        })
-        .catch((orderError) => {
-          localState.paymentProcessing = false;
-          console.log('Order NOT placed. Error: ');
-          console.error(orderError);
-        });
+      // Stripe amount must be more than a minimum of 3 kr
+      if (stripeAmount > 300) {
+        axios
+          .post('/api/purchase', localState.customer)
+          .then((response) => {
+            localState.paymentIsProcessing = false;
+            if (response.statusText === 'Created') {
+              store.dispatch('emptyCart');
+              store.commit('UPDATE_ORDER', response.data);
+              router.push('/thankyou');
+            }
+          })
+          .catch((orderError) => {
+            localState.paymentProcessing = false;
+            console.error(orderError);
+          });
+      }
     };
 
     onMounted(async () => {
@@ -227,8 +218,8 @@ export default defineComponent({
       removeProductFromCart,
       checkout,
       formatPrice,
-      customerDetails,
       checkoutFormIsValid,
+      customerDetails,
     };
   },
 });
@@ -236,39 +227,52 @@ export default defineComponent({
 
 <style scoped>
 .disabledButton {
-  @apply cursor-not-allowed opacity-50;
+    @apply cursor-not-allowed opacity-50;
+}
+
+.checkoutButton {
+    @apply p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700;
 }
 
 .flex-container {
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  align-content: center;
-  max-width: 1380px;
-  @apply flex border border-gray-300 rounded-lg shadow;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    max-width: 1380px;
+    @apply flex border border-gray-300 rounded-lg shadow;
 }
 
 .flex-container-total {
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: flex-end;
-  align-content: center;
-  max-width: 1380px;
-  @apply flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    align-content: center;
+    max-width: 1380px;
+    @apply flex;
 }
 
 .item {
-  @apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
+    @apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
 }
 
 .item-content {
-  @apply inline-block mt-4 w-20 h-12 md:w-full lg:w-full xl:w-full;
+    @apply inline-block mt-4 w-20 h-12 md:w-full lg:w-full xl:w-full;
 }
 
 .removing {
-  @apply animate-spin cursor-not-allowed;
+    @apply animate-spin cursor-not-allowed;
 }
 
+.fade-enter-active,
+.fade-leave-active {
+    transition: all 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
 </style>
