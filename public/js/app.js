@@ -16814,6 +16814,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _Cart_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Cart.vue */ "./resources/js/components/Layout/Header/Cart.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -16821,8 +16822,12 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   name: 'MobileMenu',
+  components: {
+    Cart: _Cart_vue__WEBPACK_IMPORTED_MODULE_1__.default
+  },
   setup: function setup() {
     var state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       expandedMenu: false,
@@ -17515,47 +17520,39 @@ var _withId = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.withScopeId)("dat
 var _hoisted_1 = {
   "class": "relative"
 };
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_4 = {
-  "class": "text-xl linkStyle"
+var _hoisted_2 = {
+  "class": "z-50"
+};
+var _hoisted_3 = {
+  "class": "z-50 text-xl linkStyle"
 };
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Home ");
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Home ");
 
-var _hoisted_6 = {
-  "class": "text-xl linkStyle"
+var _hoisted_5 = {
+  "class": "z-50 text-xl linkStyle"
 };
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Products ");
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Products ");
 
-var _hoisted_8 = {
+var _hoisted_7 = {
   "class": "flex justify-center mt-6 text-lg linkStyleCart"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cart ");
-
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "w-5/12 lg:hidden"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_11 = {
+var _hoisted_9 = {
   "class": "flex flex-row w-2/12 px-2 my-2 lg:hidden"
 };
-var _hoisted_12 = {
+var _hoisted_10 = {
   "class": "self-center block w-full mr-4"
 };
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "burger-lines"
 }, null, -1
 /* HOISTED */
@@ -17566,46 +17563,44 @@ var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" firstRender: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.firstRender) + " ", 1
-  /* TEXT */
-  ), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Expanded: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.expandedMenu) + " ", 1
-  /* TEXT */
-  ), _hoisted_3, !_ctx.firstRender ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+  var _component_cart = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("cart");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [!_ctx.firstRender ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
     key: 0,
-    "class": ["fixed top-0 left-0 w-screen mt-40 bg-white z-100 h-96 animate__animated", {
+    "class": ["fixed top-0 left-0 z-50 w-screen mt-40 bg-white h-96 animate__animated", {
       animate__fadeInLeft: _ctx.expandedMenu,
       animate__fadeOutRight: !_ctx.expandedMenu && !_ctx.firstRender
     }]
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/",
     onClick: _ctx.displayMobileMenu
   }, {
     "default": _withId(function () {
-      return [_hoisted_5];
+      return [_hoisted_4];
     }),
     _: 1
     /* STABLE */
 
   }, 8
   /* PROPS */
-  , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/products",
     onClick: _ctx.displayMobileMenu
   }, {
     "default": _withId(function () {
-      return [_hoisted_7];
+      return [_hoisted_6];
     }),
     _: 1
     /* STABLE */
 
   }, 8
   /* PROPS */
-  , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/cart",
     onClick: _ctx.displayMobileMenu
   }, {
     "default": _withId(function () {
-      return [_hoisted_9];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_cart)];
     }),
     _: 1
     /* STABLE */
@@ -17614,7 +17609,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   /* PROPS */
   , ["onClick"])])])], 2
   /* CLASS */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     id: "nav-toggle",
     "class": ["mt-6 burger burger-squeeze", {
       open: _ctx.expandedMenu
@@ -17626,7 +17621,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     onClick: _cache[1] || (_cache[1] = function () {
       return _ctx.displayMobileMenu && _ctx.displayMobileMenu.apply(_ctx, arguments);
     })
-  }, [_hoisted_13], 10
+  }, [_hoisted_11], 10
   /* CLASS, PROPS */
   , ["aria-expanded"])])])]);
 });
@@ -18563,7 +18558,7 @@ var _hoisted_1 = {
   key: 0
 };
 var _hoisted_2 = {
-  "class": "container flex flex-wrap items-center pt-4 pb-12 mx-auto"
+  "class": "container z-0 flex flex-wrap items-center pt-4 pb-12 mx-auto"
 };
 var _hoisted_3 = {
   "class": "divGrid"
@@ -18665,7 +18660,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "/* Style for mobile menu links */\n.linkStyle[data-v-515362a9] {\n  border-width: 1px;\n  font-weight: 700;\n  margin: 1rem;\n  padding: 1rem;\n  text-align: center;\n  width: auto;\n  --tw-border-opacity: 1;\n  border-color: rgba(209, 213, 219, var(--tw-border-opacity));\n  --tw-border-opacity: 0.5;\n  border-radius: 0.25rem;\n  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n.linkStyleCart[data-v-515362a9] {\n  font-weight: 700;\n  margin: 1rem;\n  padding: 1rem;\n  text-align: center;\n  width: auto;\n}\n\n/* Main hamburger styling */\n.burger[data-v-515362a9] {\n  height: 3em;\n  width: 3em;\n  position: relative;\n  font-size: 14px;\n  cursor: pointer;\n  transition: 0.5s all;\n  -webkit-tap-highlight-color: transparent;\n}\n.burger .burger-lines[data-v-515362a9]::after {\n  left: 0;\n  top: -1em;\n}\n.burger .burger-lines[data-v-515362a9]::before {\n  left: 1em;\n  top: 1em;\n}\n.burger[data-v-515362a9]::after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  height: 150%;\n  width: 150%;\n  top: -25%;\n  left: -25%;\n}\n.burger .burger-lines[data-v-515362a9] {\n  top: 50%;\n  margin-top: -0.125em;\n}\n.burger .burger-lines[data-v-515362a9],\n.burger .burger-lines[data-v-515362a9]::after,\n.burger .burger-lines[data-v-515362a9]::before {\n  pointer-events: none;\n  display: block;\n  content: \"\";\n  width: 100%;\n  border-radius: 0.25em;\n  background-color: #000;\n  height: 0.25em;\n  position: absolute;\n  transform: rotate(0);\n}\n\n/* Burger animations classes */\n.burger.burger-squeeze .burger-lines[data-v-515362a9],\n.burger.burger-squeeze .burger-lines[data-v-515362a9]::after,\n.burger.burger-squeeze .burger-lines[data-v-515362a9]::before {\n  transition:\n    0.2s top 0.2s,\n    0.1s left,\n    0.2s transform,\n    0.4s background-color 0.2s;\n}\n.burger.burger-squeeze .burger-lines[data-v-515362a9]::after,\n.burger.burger-squeeze .burger-lines[data-v-515362a9]::before {\n  width: 2em;\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9],\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::after,\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::before {\n  transition: 0.2s background-color, 0.2s top, 0.2s left, 0.2s transform 0.15s;\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9] {\n  background-color: transparent;\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::before,\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::after {\n  left: 0.5em;\n  top: 0;\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::before {\n  transform: rotate(-45deg);\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::after {\n  transform: rotate(45deg);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "/* Style for mobile menu links */\n.linkStyle[data-v-515362a9] {\n  border-width: 1px;\n  font-weight: 700;\n  margin: 1rem;\n  padding: 1rem;\n  text-align: center;\n  width: auto;\n  --tw-border-opacity: 1;\n  border-color: rgba(209, 213, 219, var(--tw-border-opacity));\n  --tw-border-opacity: 0.5;\n  border-radius: 0.25rem;\n  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n.linkStyleCart[data-v-515362a9] {\n  font-weight: 700;\n  margin: 1rem;\n  padding: 1rem;\n  text-align: center;\n  width: auto;\n}\n\n/* Main hamburger styling */\n.burger[data-v-515362a9] {\n  height: 3em;\n  width: 3em;\n  position: relative;\n  font-size: 14px;\n  cursor: pointer;\n  transition: 0.5s all;\n  -webkit-tap-highlight-color: transparent;\n}\n.burger .burger-lines[data-v-515362a9]::after {\n  left: 0;\n  top: -1em;\n}\n.burger .burger-lines[data-v-515362a9]::before {\n  left: 1em;\n  top: 1em;\n}\n.burger[data-v-515362a9]::after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  height: 150%;\n  width: 150%;\n  top: -25%;\n  left: -25%;\n}\n.burger .burger-lines[data-v-515362a9] {\n  top: 50%;\n  margin-top: -0.125em;\n}\n.burger .burger-lines[data-v-515362a9],\n.burger .burger-lines[data-v-515362a9]::after,\n.burger .burger-lines[data-v-515362a9]::before {\n  pointer-events: none;\n  display: block;\n  content: \"\";\n  width: 100%;\n  border-radius: 0.25em;\n  background-color: #000;\n  height: 0.25em;\n  position: absolute;\n  transform: rotate(0);\n}\n\n/* Burger animations classes */\n.burger.burger-squeeze .burger-lines[data-v-515362a9],\n.burger.burger-squeeze .burger-lines[data-v-515362a9]::after,\n.burger.burger-squeeze .burger-lines[data-v-515362a9]::before {\n  transition: 0.2s top 0.2s, 0.1s left, 0.2s transform,\n        0.4s background-color 0.2s;\n}\n.burger.burger-squeeze .burger-lines[data-v-515362a9]::after,\n.burger.burger-squeeze .burger-lines[data-v-515362a9]::before {\n  width: 2em;\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9],\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::after,\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::before {\n  transition: 0.2s background-color, 0.2s top, 0.2s left, 0.2s transform 0.15s;\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9] {\n  background-color: transparent;\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::before,\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::after {\n  left: 0.5em;\n  top: 0;\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::before {\n  transform: rotate(-45deg);\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::after {\n  transform: rotate(45deg);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

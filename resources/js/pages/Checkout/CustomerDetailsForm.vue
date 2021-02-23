@@ -224,11 +224,11 @@ export default defineComponent({
 
 <style scoped>
 .text-input {
-    @apply w-full p-2 text-gray-800 placeholder-gray-800 border border-gray-400 rounded shadow-md;
+  @apply w-full p-2 text-gray-800 placeholder-gray-800 border border-gray-400 rounded shadow-md;
 }
 
 .submitButton {
-    @apply p-2 mt-4 mx-auto mb-4 text-lg font-bold text-white bg-blue-500;
-    @apply rounded hover:bg-blue-700 cursor-pointer;
+  @apply p-2 mt-4 mx-auto mb-4 text-lg font-bold text-white bg-blue-500;
+  @apply rounded hover:bg-blue-700 cursor-pointer;
 }
 </style>
