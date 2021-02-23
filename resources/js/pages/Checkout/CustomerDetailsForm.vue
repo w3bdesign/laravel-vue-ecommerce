@@ -1,26 +1,55 @@
 <template>
   <div class="p-4 flex-container">
     <section class="text-gray-700">
-      <div class="mx-auto mt-2 md:w-2/3 lg:w-1/2">
-        <div
-          v-if="customerDetails.firstName"
-          class="flex justify-between"
-        >
-          <h3 class="h-10 p-4 text-xl font-bold text-center">
-            Saved details
-          </h3>
-          <br>
-          <div class="p-2 lg:w-1/2">
-            <span>First name: {{ customerDetails.firstName }} <br></span>
-            <span>Last name: {{ customerDetails.lastName }} <br></span>
-            <span>Address: {{ customerDetails.address }} <br></span>
-            <span>Zip: {{ customerDetails.zipcode }} <br></span>
-            <span>State: {{ customerDetails.state }} <br></span>
-            <span>Email: {{ customerDetails.email }} <br></span>
-            <br>
-            Valid: {{ meta.valid }}
+      <div
+        v-if="customerDetails.firstName"
+      >
+        <h3 class="h-10 p-4 text-xl font-bold text-center">
+          Saved details
+        </h3>
+        <br>
+        <div class="mx-auto mt-2 md:w-2/3 lg:w-1/2">
+          <div class="flex flex-wrap">
+            <div class="p-2 lg:w-1/2">
+              First name:
+            </div>
+            <div class="p-2 lg:w-1/2">
+              {{ customerDetails.firstName }}
+            </div>
+            <div class="p-2 lg:w-1/2">
+              Last name:
+            </div>
+            <div class="p-2 lg:w-1/2">
+              {{ customerDetails.lastName }}
+            </div>
+            <div class="p-2 lg:w-1/2">
+              Address:
+            </div>
+            <div class="p-2 lg:w-1/2">
+              {{ customerDetails.address }}
+            </div>
+            <div class="p-2 lg:w-1/2">
+              Zip:
+            </div>
+            <div class="p-2 lg:w-1/2">
+              {{ customerDetails.zipcode }}
+            </div>
+            <div class="p-2 lg:w-1/2">
+              State:
+            </div>
+            <div class="p-2 lg:w-1/2">
+              {{ customerDetails.state }}
+            </div>
+            <div class="p-2 lg:w-1/2">
+              Email:
+            </div>
+            <div class="p-2 lg:w-1/2">
+              {{ customerDetails.email }}
+            </div>
           </div>
         </div>
+      </div>
+      <div class="mx-auto mt-2 md:w-2/3 lg:w-1/2">
         <div class="flex flex-wrap">
           <div class="p-2 lg:w-1/2">
             <label for="firstName">First name</label>
@@ -30,8 +59,7 @@
               name="firstName"
               class="text-input"
               type="text"
-              :value="firstName"
-              @change="onSubmit"
+              @input="onSubmit"
             >
             <span class="text-lg text-red-500">{{
               errors.firstName
@@ -45,7 +73,7 @@
               name="lastName"
               class="text-input"
               type="text"
-              @change="onSubmit"
+              @input="onSubmit"
             >
             <span class="text-lg text-red-500">{{
               errors.lastName
@@ -59,7 +87,7 @@
               name="address"
               class="text-input"
               type="text"
-              @change="onSubmit"
+              @input="onSubmit"
             >
             <span class="text-lg text-red-500">{{
               errors.address
@@ -73,7 +101,7 @@
               name="zipcode"
               class="text-input"
               type="text"
-              @change="onSubmit"
+              @input="onSubmit"
             >
             <span class="text-lg text-red-500">{{
               errors.zipcode
@@ -87,7 +115,7 @@
               name="city"
               class="text-input"
               type="text"
-              @change="onSubmit"
+              @input="onSubmit"
             >
             <span class="text-lg text-red-500">{{
               errors.city
@@ -101,7 +129,7 @@
               name="state"
               class="text-input"
               type="text"
-              @change="onSubmit"
+              @input="onSubmit"
             >
             <span class="text-lg text-red-500">{{
               errors.state
@@ -115,7 +143,7 @@
               name="email"
               class="text-input"
               type="email"
-              @change="onSubmit"
+              @input="onSubmit"
             >
             <span class="text-lg text-red-500">{{
               errors.email
@@ -155,7 +183,10 @@ export default defineComponent({
 
     const onSubmit = handleSubmit((values, { resetForm }) => {
       store.dispatch('saveCustomerDetails', values);
-      resetForm();
+      if (meta.value.valid) {
+        store.dispatch('setCheckoutFormToValid', true);
+        resetForm();
+      }
     });
 
     const { value: firstName } = useField('firstName');

@@ -69,6 +69,11 @@
       <h2 class="h-10 m-4 text-2xl font-bold text-center">
         Customer Details
       </h2>
+
+      Valid: {{ checkoutFormIsValid }}
+      <br>
+      First name: {{ customerDetails.firstName }}
+
       <div class="flex justify-center w-full p-4 align-center">
         <customer-details-form />
       </div>
@@ -139,6 +144,7 @@ export default defineComponent({
     const cartTotal = computed(() => store.getters.cartTotal);
     const cartContent = computed(() => store.state.cart);
     const customerDetails = computed(() => store.getters.customerDetails);
+    const checkoutFormIsValid = computed(() => store.getters.checkoutFormIsValid);
 
     const removeProductFromCart = (product) => {
       localState.removingCartItem = true;
@@ -222,6 +228,7 @@ export default defineComponent({
       checkout,
       formatPrice,
       customerDetails,
+      checkoutFormIsValid,
     };
   },
 });
@@ -239,18 +246,16 @@ export default defineComponent({
   align-items: center;
   align-content: center;
   max-width: 1380px;
-
   @apply flex border border-gray-300 rounded-lg shadow;
 }
 
 .flex-container-total {
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: flex-end;
   align-content: center;
   max-width: 1380px;
-
   @apply flex;
 }
 
