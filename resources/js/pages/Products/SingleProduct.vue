@@ -2,7 +2,7 @@
   <div v-if="product">
     <section>
       <div
-        class="container flex flex-wrap items-center pt-4 pb-12 mx-auto"
+        class="container z-0 flex flex-wrap items-center pt-4 pb-12 mx-auto"
       >
         <div class="divGrid">
           <img
