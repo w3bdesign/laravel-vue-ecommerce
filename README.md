@@ -74,8 +74,6 @@
 
 ## TODO
 
--   Finish implementing Vee Validate
-
 -   Finish implementing Laravel Scout
 
 -   Add some tests to verify that the cart and checkout works correctly
