@@ -85,7 +85,8 @@ export default defineComponent({
 <style scoped>
 /* Style for mobile menu links */
 .linkStyle {
-  @apply w-auto p-4 m-4 font-bold text-center border border-gray-300 border-opacity-50 shadow-md rounded;
+  @apply w-auto p-4 m-4 font-bold text-center border;
+  @apply border-gray-300 border-opacity-50 shadow-md rounded;
 }
 
 .linkStyleCart {

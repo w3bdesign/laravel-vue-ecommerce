@@ -16839,17 +16839,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
   }
 }));
-/* data() {
-    return {
-      expandedMenu: false,
-      firstRender: true,
-    };
-  },
-  methods: {
-    displayMobileMenu() {
-      this.expandedMenu = !this.expandedMenu;
-      this.firstRender = false;
-    }, */
 
 /***/ }),
 
@@ -17541,20 +17530,32 @@ var _hoisted_4 = {
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Home ");
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_6 = {
+  "class": "text-xl linkStyle"
+};
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Products ");
+
+var _hoisted_8 = {
+  "class": "flex justify-center mt-6 text-lg linkStyleCart"
+};
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cart ");
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "w-5/12 lg:hidden"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_7 = {
+var _hoisted_11 = {
   "class": "flex flex-row w-2/12 px-2 my-2 lg:hidden"
 };
-var _hoisted_8 = {
+var _hoisted_12 = {
   "class": "self-center block w-full mr-4"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "burger-lines"
 }, null, -1
 /* HOISTED */
@@ -17587,9 +17588,33 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
 
   }, 8
   /* PROPS */
+  , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/products",
+    onClick: _ctx.displayMobileMenu
+  }, {
+    "default": _withId(function () {
+      return [_hoisted_7];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
+  , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/cart",
+    onClick: _ctx.displayMobileMenu
+  }, {
+    "default": _withId(function () {
+      return [_hoisted_9];
+    }),
+    _: 1
+    /* STABLE */
+
+  }, 8
+  /* PROPS */
   , ["onClick"])])])], 2
   /* CLASS */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     id: "nav-toggle",
     "class": ["mt-6 burger burger-squeeze", {
       open: _ctx.expandedMenu
@@ -17601,7 +17626,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     onClick: _cache[1] || (_cache[1] = function () {
       return _ctx.displayMobileMenu && _ctx.displayMobileMenu.apply(_ctx, arguments);
     })
-  }, [_hoisted_9], 10
+  }, [_hoisted_13], 10
   /* CLASS, PROPS */
   , ["aria-expanded"])])])]);
 });
@@ -18640,7 +18665,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "/* Style for mobile menu links */\n.linkStyle[data-v-515362a9] {\n  --tw-border-opacity: 1;\n  border-color: rgba(209, 213, 219, var(--tw-border-opacity));\n  --tw-border-opacity: 0.5;\n  border-radius: 0.25rem;\n  border-width: 1px;\n  font-weight: 700;\n  margin: 1rem;\n  padding: 1rem;\n  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n  text-align: center;\n  width: auto;\n}\n.linkStyleCart[data-v-515362a9] {\n  font-weight: 700;\n  margin: 1rem;\n  padding: 1rem;\n  text-align: center;\n  width: auto;\n}\n\n/* Main hamburger styling */\n.burger[data-v-515362a9] {\n  height: 3em;\n  width: 3em;\n  position: relative;\n  font-size: 14px;\n  cursor: pointer;\n  transition: 0.5s all;\n  -webkit-tap-highlight-color: transparent;\n}\n.burger .burger-lines[data-v-515362a9]::after {\n  left: 0;\n  top: -1em;\n}\n.burger .burger-lines[data-v-515362a9]::before {\n  left: 1em;\n  top: 1em;\n}\n.burger[data-v-515362a9]::after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  height: 150%;\n  width: 150%;\n  top: -25%;\n  left: -25%;\n}\n.burger .burger-lines[data-v-515362a9] {\n  top: 50%;\n  margin-top: -0.125em;\n}\n.burger .burger-lines[data-v-515362a9],\n.burger .burger-lines[data-v-515362a9]::after,\n.burger .burger-lines[data-v-515362a9]::before {\n  pointer-events: none;\n  display: block;\n  content: \"\";\n  width: 100%;\n  border-radius: 0.25em;\n  background-color: #000;\n  height: 0.25em;\n  position: absolute;\n  transform: rotate(0);\n}\n\n/* Burger animations classes */\n.burger.burger-squeeze .burger-lines[data-v-515362a9],\n.burger.burger-squeeze .burger-lines[data-v-515362a9]::after,\n.burger.burger-squeeze .burger-lines[data-v-515362a9]::before {\n  transition:\n    0.2s top 0.2s,\n    0.1s left,\n    0.2s transform,\n    0.4s background-color 0.2s;\n}\n.burger.burger-squeeze .burger-lines[data-v-515362a9]::after,\n.burger.burger-squeeze .burger-lines[data-v-515362a9]::before {\n  width: 2em;\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9],\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::after,\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::before {\n  transition: 0.2s background-color, 0.2s top, 0.2s left, 0.2s transform 0.15s;\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9] {\n  background-color: transparent;\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::before,\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::after {\n  left: 0.5em;\n  top: 0;\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::before {\n  transform: rotate(-45deg);\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::after {\n  transform: rotate(45deg);\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "/* Style for mobile menu links */\n.linkStyle[data-v-515362a9] {\n  border-width: 1px;\n  font-weight: 700;\n  margin: 1rem;\n  padding: 1rem;\n  text-align: center;\n  width: auto;\n  --tw-border-opacity: 1;\n  border-color: rgba(209, 213, 219, var(--tw-border-opacity));\n  --tw-border-opacity: 0.5;\n  border-radius: 0.25rem;\n  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n}\n.linkStyleCart[data-v-515362a9] {\n  font-weight: 700;\n  margin: 1rem;\n  padding: 1rem;\n  text-align: center;\n  width: auto;\n}\n\n/* Main hamburger styling */\n.burger[data-v-515362a9] {\n  height: 3em;\n  width: 3em;\n  position: relative;\n  font-size: 14px;\n  cursor: pointer;\n  transition: 0.5s all;\n  -webkit-tap-highlight-color: transparent;\n}\n.burger .burger-lines[data-v-515362a9]::after {\n  left: 0;\n  top: -1em;\n}\n.burger .burger-lines[data-v-515362a9]::before {\n  left: 1em;\n  top: 1em;\n}\n.burger[data-v-515362a9]::after {\n  content: \"\";\n  display: block;\n  position: absolute;\n  height: 150%;\n  width: 150%;\n  top: -25%;\n  left: -25%;\n}\n.burger .burger-lines[data-v-515362a9] {\n  top: 50%;\n  margin-top: -0.125em;\n}\n.burger .burger-lines[data-v-515362a9],\n.burger .burger-lines[data-v-515362a9]::after,\n.burger .burger-lines[data-v-515362a9]::before {\n  pointer-events: none;\n  display: block;\n  content: \"\";\n  width: 100%;\n  border-radius: 0.25em;\n  background-color: #000;\n  height: 0.25em;\n  position: absolute;\n  transform: rotate(0);\n}\n\n/* Burger animations classes */\n.burger.burger-squeeze .burger-lines[data-v-515362a9],\n.burger.burger-squeeze .burger-lines[data-v-515362a9]::after,\n.burger.burger-squeeze .burger-lines[data-v-515362a9]::before {\n  transition:\n    0.2s top 0.2s,\n    0.1s left,\n    0.2s transform,\n    0.4s background-color 0.2s;\n}\n.burger.burger-squeeze .burger-lines[data-v-515362a9]::after,\n.burger.burger-squeeze .burger-lines[data-v-515362a9]::before {\n  width: 2em;\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9],\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::after,\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::before {\n  transition: 0.2s background-color, 0.2s top, 0.2s left, 0.2s transform 0.15s;\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9] {\n  background-color: transparent;\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::before,\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::after {\n  left: 0.5em;\n  top: 0;\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::before {\n  transform: rotate(-45deg);\n}\n.burger.burger-squeeze.open .burger-lines[data-v-515362a9]::after {\n  transform: rotate(45deg);\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

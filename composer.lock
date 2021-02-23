@@ -966,16 +966,16 @@
         },
         {
             "name": "laravel/cashier",
-            "version": "v12.7.1",
+            "version": "v12.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/cashier-stripe.git",
-                "reference": "21fde50bb734ab0aa63daef9f3a7ce8389127fac"
+                "reference": "5fe13795749bff5f2e76fc657150f8ea2a7ec084"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/cashier-stripe/zipball/21fde50bb734ab0aa63daef9f3a7ce8389127fac",
-                "reference": "21fde50bb734ab0aa63daef9f3a7ce8389127fac",
+                "url": "https://api.github.com/repos/laravel/cashier-stripe/zipball/5fe13795749bff5f2e76fc657150f8ea2a7ec084",
+                "reference": "5fe13795749bff5f2e76fc657150f8ea2a7ec084",
                 "shasum": ""
             },
             "require": {
@@ -1040,7 +1040,7 @@
                 "issues": "https://github.com/laravel/cashier/issues",
                 "source": "https://github.com/laravel/cashier"
             },
-            "time": "2021-02-04T16:01:33+00:00"
+            "time": "2021-02-19T08:31:15+00:00"
         },
         {
             "name": "laravel/framework",
@@ -2798,16 +2798,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v7.71.0",
+            "version": "v7.75.0",
             "source": {
                 "type": "git",
-                "url": "git@github.com:stripe/stripe-php.git",
-                "reference": "5ebe39d814411594b1ff9d79f0598a0de7faa30b"
+                "url": "https://github.com/stripe/stripe-php.git",
+                "reference": "d377a667cd789b99ccab768441a5a2160cc4ea80"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/5ebe39d814411594b1ff9d79f0598a0de7faa30b",
-                "reference": "5ebe39d814411594b1ff9d79f0598a0de7faa30b",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/d377a667cd789b99ccab768441a5a2160cc4ea80",
+                "reference": "d377a667cd789b99ccab768441a5a2160cc4ea80",
                 "shasum": ""
             },
             "require": {
@@ -2851,7 +2851,11 @@
                 "payment processing",
                 "stripe"
             ],
-            "time": "2021-02-05T21:29:10+00:00"
+            "support": {
+                "issues": "https://github.com/stripe/stripe-php/issues",
+                "source": "https://github.com/stripe/stripe-php/tree/v7.75.0"
+            },
+            "time": "2021-02-22T14:31:21+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -4127,16 +4131,16 @@
         },
         {
             "name": "symfony/polyfill-intl-icu",
-            "version": "v1.22.0",
+            "version": "v1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-icu.git",
-                "reference": "b2b1e732a6c039f1a3ea3414b3379a2433e183d6"
+                "reference": "af1842919c7e7364aaaa2798b29839e3ba168588"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-intl-icu/zipball/b2b1e732a6c039f1a3ea3414b3379a2433e183d6",
-                "reference": "b2b1e732a6c039f1a3ea3414b3379a2433e183d6",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-icu/zipball/af1842919c7e7364aaaa2798b29839e3ba168588",
+                "reference": "af1842919c7e7364aaaa2798b29839e3ba168588",
                 "shasum": ""
             },
             "require": {
@@ -4194,7 +4198,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-intl-icu/tree/v1.22.0"
+                "source": "https://github.com/symfony/polyfill-intl-icu/tree/v1.22.1"
             },
             "funding": [
                 {
@@ -4210,7 +4214,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-07T16:49:33+00:00"
+            "time": "2021-01-22T09:19:47+00:00"
         },
         {
             "name": "symfony/polyfill-intl-idn",
@@ -6600,16 +6604,16 @@
         },
         {
             "name": "facade/flare-client-php",
-            "version": "1.3.7",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/flare-client-php.git",
-                "reference": "fd688d3c06658f2b3b5f7bb19f051ee4ddf02492"
+                "reference": "ef0f5bce23b30b32d98fd9bb49c6fa37b40eb546"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/flare-client-php/zipball/fd688d3c06658f2b3b5f7bb19f051ee4ddf02492",
-                "reference": "fd688d3c06658f2b3b5f7bb19f051ee4ddf02492",
+                "url": "https://api.github.com/repos/facade/flare-client-php/zipball/ef0f5bce23b30b32d98fd9bb49c6fa37b40eb546",
+                "reference": "ef0f5bce23b30b32d98fd9bb49c6fa37b40eb546",
                 "shasum": ""
             },
             "require": {
@@ -6653,7 +6657,7 @@
             ],
             "support": {
                 "issues": "https://github.com/facade/flare-client-php/issues",
-                "source": "https://github.com/facade/flare-client-php/tree/1.3.7"
+                "source": "https://github.com/facade/flare-client-php/tree/1.4.0"
             },
             "funding": [
                 {
@@ -6661,20 +6665,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-21T16:02:39+00:00"
+            "time": "2021-02-16T12:42:06+00:00"
         },
         {
             "name": "facade/ignition",
-            "version": "2.5.11",
+            "version": "2.5.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "e91d67353054bf827c64687fcac5ea44e4dcec54"
+                "reference": "5e9ef386aaad9985cee2ac23281a27568d083b7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/e91d67353054bf827c64687fcac5ea44e4dcec54",
-                "reference": "e91d67353054bf827c64687fcac5ea44e4dcec54",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/5e9ef386aaad9985cee2ac23281a27568d083b7e",
+                "reference": "5e9ef386aaad9985cee2ac23281a27568d083b7e",
                 "shasum": ""
             },
             "require": {
@@ -6738,7 +6742,7 @@
                 "issues": "https://github.com/facade/ignition/issues",
                 "source": "https://github.com/facade/ignition"
             },
-            "time": "2021-02-05T12:52:11+00:00"
+            "time": "2021-02-16T12:46:19+00:00"
         },
         {
             "name": "facade/ignition-contracts",
@@ -7039,16 +7043,16 @@
         },
         {
             "name": "laravel/dusk",
-            "version": "v6.11.2",
+            "version": "v6.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/dusk.git",
-                "reference": "be45bc6e6e3cec6f617a422aa0bd92877afc8695"
+                "reference": "c35a844029370abdfbf667072a938c25f07d23eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/dusk/zipball/be45bc6e6e3cec6f617a422aa0bd92877afc8695",
-                "reference": "be45bc6e6e3cec6f617a422aa0bd92877afc8695",
+                "url": "https://api.github.com/repos/laravel/dusk/zipball/c35a844029370abdfbf667072a938c25f07d23eb",
+                "reference": "c35a844029370abdfbf667072a938c25f07d23eb",
                 "shasum": ""
             },
             "require": {
@@ -7066,6 +7070,7 @@
             },
             "require-dev": {
                 "mockery/mockery": "^1.0",
+                "orchestra/testbench": "^4.16|^5.17.1|^6.12.1",
                 "phpunit/phpunit": "^7.5.15|^8.4|^9.0"
             },
             "suggest": {
@@ -7105,22 +7110,22 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/dusk/issues",
-                "source": "https://github.com/laravel/dusk/tree/v6.11.2"
+                "source": "https://github.com/laravel/dusk/tree/v6.12.0"
             },
-            "time": "2021-01-26T19:22:07+00:00"
+            "time": "2021-02-16T15:01:32+00:00"
         },
         {
             "name": "laravel/sail",
-            "version": "v1.3.0",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "ce4861be1a528a36c98416c9954f3014d2500415"
+                "reference": "a18519e96c32894ac3f8775fa8eb6de5750aca5a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/ce4861be1a528a36c98416c9954f3014d2500415",
-                "reference": "ce4861be1a528a36c98416c9954f3014d2500415",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/a18519e96c32894ac3f8775fa8eb6de5750aca5a",
+                "reference": "a18519e96c32894ac3f8775fa8eb6de5750aca5a",
                 "shasum": ""
             },
             "require": {
@@ -7166,7 +7171,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2021-01-26T19:38:10+00:00"
+            "time": "2021-02-09T16:44:58+00:00"
         },
         {
             "name": "maximebf/debugbar",
