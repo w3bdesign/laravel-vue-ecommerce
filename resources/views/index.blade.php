@@ -8,6 +8,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <!-- Main CSS -->
         <link type="text/css" rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <!-- Custom built Animate CSS -->
+        <link type="text/css" rel="stylesheet" href="{{ mix('css/animate.min.css') }}">
     </head>
     <body class="antialiased">
         <div>
