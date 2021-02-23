@@ -69,39 +69,35 @@
       <h2 class="h-10 m-4 text-2xl font-bold text-center">
         Customer Details
       </h2>
-
-      Valid: {{ checkoutFormIsValid }}
-      <br>
-      First name: {{ customerDetails.firstName }}
-
       <div class="flex justify-center w-full p-4 align-center">
         <customer-details-form />
       </div>
-
-      <div v-show="customerDetails.firstName">
-        <h2 class="h-10 p-4 text-2xl font-bold text-center">
-          Stripe payment
-        </h2>
-        <div class="flex justify-center w-full p-4 align-center">
-          <br>
-          <div
-            id="card-element"
-            class="w-full h-16 mt-4 lg:w-5/12 xl:w-5/12"
-          >
-            Stripe
+      <transition name="fade">
+        <div v-show="customerDetails.firstName || checkoutFormIsValid">
+          <h2 class="h-10 p-4 text-2xl font-bold text-center">
+            Stripe payment
+          </h2>
+          <div class="flex justify-center w-full p-4 align-center">
+            <br>
+            <div
+              id="card-element"
+              class="w-full h-16 mt-4 lg:w-5/12 xl:w-5/12"
+            >
+              Stripe
+            </div>
+          </div>
+          <div class="flex justify-center w-full align-center">
+            <button
+              class="checkoutButton"
+              :class="{ disabledButton: paymentIsProcessing }"
+              :disabled="paymentIsProcessing"
+              @click="checkout(products)"
+            >
+              Checkout
+            </button>
           </div>
         </div>
-        <div class="flex justify-center w-full align-center">
-          <button
-            class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
-            :class="{ disabledButton: paymentIsProcessing }"
-            :disabled="paymentIsProcessing"
-            @click="checkout(products)"
-          >
-            Checkout
-          </button>
-        </div>
-      </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -144,7 +140,9 @@ export default defineComponent({
     const cartTotal = computed(() => store.getters.cartTotal);
     const cartContent = computed(() => store.state.cart);
     const customerDetails = computed(() => store.getters.customerDetails);
-    const checkoutFormIsValid = computed(() => store.getters.checkoutFormIsValid);
+    const checkoutFormIsValid = computed(
+      () => store.getters.checkoutFormIsValid,
+    );
 
     const removeProductFromCart = (product) => {
       localState.removingCartItem = true;
@@ -178,11 +176,6 @@ export default defineComponent({
         return;
       }
       localState.paymentIsProcessing = true;
-
-      // const totalAmount = 99.00;
-      // const amount = totalAmount.toLocaleString('nb-NO', { style: 'currency', currency: 'NOK' });
-      // console.log('Currency locale: ');
-      // console.log(process.env.CASHIER_CURRENCY_LOCALE);
 
       localState.customer.amount = 9900;
       localState.customer.cart = JSON.stringify(store.state.cart);
@@ -236,39 +229,52 @@ export default defineComponent({
 
 <style scoped>
 .disabledButton {
-  @apply cursor-not-allowed opacity-50;
+    @apply cursor-not-allowed opacity-50;
+}
+
+.checkoutButton {
+    @apply p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700;
 }
 
 .flex-container {
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  align-content: center;
-  max-width: 1380px;
-  @apply flex border border-gray-300 rounded-lg shadow;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    max-width: 1380px;
+    @apply flex border border-gray-300 rounded-lg shadow;
 }
 
 .flex-container-total {
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: flex-end;
-  align-content: center;
-  max-width: 1380px;
-  @apply flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    align-content: center;
+    max-width: 1380px;
+    @apply flex;
 }
 
 .item {
-  @apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
+    @apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
 }
 
 .item-content {
-  @apply inline-block mt-4 w-20 h-12 md:w-full lg:w-full xl:w-full;
+    @apply inline-block mt-4 w-20 h-12 md:w-full lg:w-full xl:w-full;
 }
 
 .removing {
-  @apply animate-spin cursor-not-allowed;
+    @apply animate-spin cursor-not-allowed;
 }
 
+.fade-enter-active,
+.fade-leave-active {
+    transition: all 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
 </style>

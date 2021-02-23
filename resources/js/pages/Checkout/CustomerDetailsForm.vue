@@ -1,13 +1,12 @@
 <template>
   <div class="p-4 flex-container">
-    <section class="text-gray-700">
+    <section>
       <div
         v-if="customerDetails.firstName"
       >
         <h3 class="h-10 p-4 text-xl font-bold text-center">
           Saved details
         </h3>
-        <br>
         <div class="mx-auto mt-2 md:w-2/3 lg:w-1/2">
           <div class="flex flex-wrap">
             <div class="p-2 lg:w-1/2">
@@ -49,8 +48,15 @@
           </div>
         </div>
       </div>
-      <div class="mx-auto mt-2 md:w-2/3 lg:w-1/2">
-        <div class="flex flex-wrap">
+      <div class="mx-auto md:w-2/3 lg:w-1/2">
+        <h3
+          v-if="customerDetails.firstName"
+          class="h-10 p-4 text-xl font-bold text-center"
+        >
+          Modify details
+          <br>
+        </h3>
+        <div class="flex flex-wrap mt-2">
           <div class="p-2 lg:w-1/2">
             <label for="firstName">First name</label>
             <input
