@@ -125,21 +125,14 @@ export default defineComponent({
       paymentIsProcessing: false,
       stripe: {},
       cardElement: {},
-      customer: {
-        first_name: 'Firstname',
-        last_name: 'Lastname',
-        email: 'test@test.com',
-        address: 'Address',
-        city: 'City',
-        state: 'NA',
-        zipcode: '1234',
-      },
+      customer: {},
     });
 
     const cartLength = computed(() => store.state.cart.length);
     const cartTotal = computed(() => store.getters.cartTotal);
     const cartContent = computed(() => store.state.cart);
     const customerDetails = computed(() => store.getters.customerDetails);
+
     const checkoutFormIsValid = computed(
       () => store.getters.checkoutFormIsValid,
     );
@@ -151,6 +144,7 @@ export default defineComponent({
     };
 
     const checkout = async () => {
+      const { customer } = store.state;
       const {
         paymentMethod,
         error,
@@ -159,13 +153,13 @@ export default defineComponent({
         localState.cardElement,
         {
           billing_details: {
-            name: 'Firstname Lastname', // this.customer.first_name + ' ' + this.customer.last_name,
-            email: 'test@test.com', // this.customer.email,
+            name: `${customer.firstName} ${customer.lastName}`,
+            email: customer.email,
             address: {
-              line1: 'Address', // this.customer.address,
-              city: 'City', // this.customer.city,
-              state: 'State', // this.customer.state,
-              postal_code: '1234', // this.customer.zip_code
+              line1: customer.address,
+              city: customer.city,
+              state: customer.state,
+              postal_code: customer.zipcode,
             },
           },
         },
@@ -176,26 +170,30 @@ export default defineComponent({
         return;
       }
       localState.paymentIsProcessing = true;
+      localState.customer = { ...customer };
 
-      localState.customer.amount = 9900;
+      const stripeAmount = store.getters.cartTotal * 100;
+      localState.customer.amount = stripeAmount;
       localState.customer.cart = JSON.stringify(store.state.cart);
       localState.customer.payment_method_id = paymentMethod.id;
 
-      axios
-        .post('/api/purchase', localState.customer)
-        .then((response) => {
-          localState.paymentIsProcessing = false;
-          if (response.statusText === 'Created') {
-            store.dispatch('emptyCart');
-            store.commit('UPDATE_ORDER', response.data);
-            router.push('/thankyou');
-          }
-        })
-        .catch((orderError) => {
-          localState.paymentProcessing = false;
-          console.log('Order NOT placed. Error: ');
-          console.error(orderError);
-        });
+      // Stripe amount must be more than a minimum of 3 kr
+      if (stripeAmount > 300) {
+        axios
+          .post('/api/purchase', localState.customer)
+          .then((response) => {
+            localState.paymentIsProcessing = false;
+            if (response.statusText === 'Created') {
+              store.dispatch('emptyCart');
+              store.commit('UPDATE_ORDER', response.data);
+              router.push('/thankyou');
+            }
+          })
+          .catch((orderError) => {
+            localState.paymentProcessing = false;
+            console.error(orderError);
+          });
+      }
     };
 
     onMounted(async () => {
@@ -220,8 +218,8 @@ export default defineComponent({
       removeProductFromCart,
       checkout,
       formatPrice,
-      customerDetails,
       checkoutFormIsValid,
+      customerDetails,
     };
   },
 });

@@ -16933,15 +16933,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       paymentIsProcessing: false,
       stripe: {},
       cardElement: {},
-      customer: {
-        first_name: 'Firstname',
-        last_name: 'Lastname',
-        email: 'test@test.com',
-        address: 'Address',
-        city: 'City',
-        state: 'NA',
-        zipcode: '1234'
-      }
+      customer: {}
     });
     var cartLength = (0,vue__WEBPACK_IMPORTED_MODULE_1__.computed)(function () {
       return store.state.cart.length;
@@ -16967,65 +16959,64 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var checkout = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var _yield$localState$str, paymentMethod, error;
+        var customer, _yield$localState$str, paymentMethod, error, stripeAmount;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                customer = store.state.customer;
+                _context.next = 3;
                 return localState.stripe.createPaymentMethod('card', localState.cardElement, {
                   billing_details: {
-                    name: 'Firstname Lastname',
-                    // this.customer.first_name + ' ' + this.customer.last_name,
-                    email: 'test@test.com',
-                    // this.customer.email,
+                    name: "".concat(customer.firstName, " ").concat(customer.lastName),
+                    email: customer.email,
                     address: {
-                      line1: 'Address',
-                      // this.customer.address,
-                      city: 'City',
-                      // this.customer.city,
-                      state: 'State',
-                      // this.customer.state,
-                      postal_code: '1234' // this.customer.zip_code
-
+                      line1: customer.address,
+                      city: customer.city,
+                      state: customer.state,
+                      postal_code: customer.zipcode
                     }
                   }
                 });
 
-              case 2:
+              case 3:
                 _yield$localState$str = _context.sent;
                 paymentMethod = _yield$localState$str.paymentMethod;
                 error = _yield$localState$str.error;
 
                 if (!error) {
-                  _context.next = 8;
+                  _context.next = 9;
                   break;
                 }
 
                 localState.paymentIsProcessing = false;
                 return _context.abrupt("return");
 
-              case 8:
+              case 9:
                 localState.paymentIsProcessing = true;
-                localState.customer.amount = 9900;
+                localState.customer = _objectSpread({}, customer);
+                stripeAmount = store.getters.cartTotal * 100;
+                localState.customer.amount = stripeAmount;
                 localState.customer.cart = JSON.stringify(store.state.cart);
-                localState.customer.payment_method_id = paymentMethod.id;
-                axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/purchase', localState.customer).then(function (response) {
-                  localState.paymentIsProcessing = false;
+                localState.customer.payment_method_id = paymentMethod.id; // Stripe amount must be more than a minimum of 3 kr
 
-                  if (response.statusText === 'Created') {
-                    store.dispatch('emptyCart');
-                    store.commit('UPDATE_ORDER', response.data);
-                    router.push('/thankyou');
-                  }
-                })["catch"](function (orderError) {
-                  localState.paymentProcessing = false;
-                  console.log('Order NOT placed. Error: ');
-                  console.error(orderError);
-                });
+                if (stripeAmount > 300) {
+                  axios__WEBPACK_IMPORTED_MODULE_2___default().post('/api/purchase', localState.customer).then(function (response) {
+                    localState.paymentIsProcessing = false;
 
-              case 13:
+                    if (response.statusText === 'Created') {
+                      store.dispatch('emptyCart');
+                      store.commit('UPDATE_ORDER', response.data);
+                      router.push('/thankyou');
+                    }
+                  })["catch"](function (orderError) {
+                    localState.paymentProcessing = false;
+                    console.error(orderError);
+                  });
+                }
+
+              case 16:
               case "end":
                 return _context.stop();
             }
@@ -17073,8 +17064,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       removeProductFromCart: removeProductFromCart,
       checkout: checkout,
       formatPrice: _utils_functions__WEBPACK_IMPORTED_MODULE_4__.formatPrice,
-      customerDetails: customerDetails,
-      checkoutFormIsValid: checkoutFormIsValid
+      checkoutFormIsValid: checkoutFormIsValid,
+      customerDetails: customerDetails
     });
   }
 }));
