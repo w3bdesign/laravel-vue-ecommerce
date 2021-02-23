@@ -6,6 +6,6 @@
   @apply ease-in-out transform cursor-pointer hover:scale-105;
 }
 
-@import "animate.min.css";
+@import "animate.css";
 
 @tailwind utilities;
