@@ -6,9 +6,13 @@
 
  Creating an eCommerce site with Laravel 8, Vue 3 and Stripe.
 
+ ### Screenshot:
+ 
  <img src="https://user-images.githubusercontent.com/45217974/108638044-9b523980-748d-11eb-9a24-0b58baffecc8.png" alt="Project screenshot" />
  
  <br />
+ 
+ ### Stripe screenshot: 
  
  <img src="https://user-images.githubusercontent.com/45217974/108796168-670f7380-7588-11eb-87d5-bc28276f0b35.png" alt="Stripe screenshot" /> 
  
