@@ -15,6 +15,7 @@ const mutations = {
   ADD_PRODUCT_TO_CART({ cart }, payload) {
     // ESLint complains if we modify the state directly
     const cartCopy = cart;
+
     const foundProductInCartIndex = cart.findIndex(
       (item) => item.slug === payload.slug,
     );

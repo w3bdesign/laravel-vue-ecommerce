@@ -23,15 +23,12 @@
             <p class="text-3xl font-bold text-left">
               {{ product.name }}
             </p>
-
             <p class="pt-1 mt-4 text-2xl text-gray-900">
               {{ formatPrice(product.price) }}
             </p>
-            <br>
             <p class="pt-1 mt-4 text-2xl text-gray-900">
               {{ product.description }}
             </p>
-
             <div class="pt-1 mt-2">
               <button
                 class="productButton"
@@ -55,7 +52,7 @@ import {
   computed,
   onBeforeMount,
 } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 
 import { formatPrice } from '../../utils/functions';
@@ -65,6 +62,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const route = useRoute();
+    const router = useRouter();
     const localState = reactive({
       loading: true,
       product: null,
@@ -81,7 +79,10 @@ export default defineComponent({
       localState.loading = false;
     };
 
-    const addProductToCart = (product) => store.dispatch('addProductToCart', product);
+    const addProductToCart = (product) => {
+      store.dispatch('addProductToCart', product);
+      router.push('/checkout');
+    };
 
     onBeforeMount(fetchProduct);
 

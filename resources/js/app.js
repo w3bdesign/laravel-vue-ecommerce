@@ -46,13 +46,11 @@ createApp({
     Checkout,
     Summary,
   },
-
   created() {
     if (store.state.products.length === 0) {
       store.dispatch('getProductsFromApi');
     }
   },
-
 })
   .use(store)
   .use(router)
