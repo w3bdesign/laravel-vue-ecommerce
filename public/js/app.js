@@ -18128,7 +18128,7 @@ var _hoisted_17 = {
   "class": "p-2 lg:w-1/2"
 };
 var _hoisted_18 = {
-  "class": "mx-auto md:w-2/3 lg:w-1/2"
+  "class": "mx-auto md:w-64 lg:w-1/2"
 };
 var _hoisted_19 = {
   key: 0,
