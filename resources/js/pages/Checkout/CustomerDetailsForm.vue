@@ -7,48 +7,48 @@
         <h3 class="h-10 p-4 text-xl font-bold text-center">
           Saved details
         </h3>
-        <div class="mx-auto mt-2 md:w-2/3 lg:w-1/2">
+        <div class="mx-auto mt-2 md:w-1/2 lg:w-1/2">
           <div class="flex flex-wrap">
-            <div class="p-2 lg:w-1/2">
+            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
               First name:
             </div>
-            <div class="p-2 lg:w-1/2">
+            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
               {{ customerDetails.firstName }}
             </div>
-            <div class="p-2 lg:w-1/2">
+            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
               Last name:
             </div>
-            <div class="p-2 lg:w-1/2">
+            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
               {{ customerDetails.lastName }}
             </div>
-            <div class="p-2 lg:w-1/2">
+            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
               Address:
             </div>
-            <div class="p-2 lg:w-1/2">
+            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
               {{ customerDetails.address }}
             </div>
-            <div class="p-2 lg:w-1/2">
+            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
               Zip:
             </div>
-            <div class="p-2 lg:w-1/2">
+            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
               {{ customerDetails.zipcode }}
             </div>
-            <div class="p-2 lg:w-1/2">
+            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
               State:
             </div>
-            <div class="p-2 lg:w-1/2">
+            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
               {{ customerDetails.state }}
             </div>
-            <div class="p-2 lg:w-1/2">
+            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
               Email:
             </div>
-            <div class="p-2 lg:w-1/2">
+            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
               {{ customerDetails.email }}
             </div>
           </div>
         </div>
       </div>
-      <div class="mx-auto md:w-2/3 lg:w-1/2">
+      <div class="w-64 mx-auto lg:w-1/2">
         <h3
           v-if="customerDetails.firstName"
           class="h-10 p-4 text-xl font-bold text-center"

@@ -75,7 +75,7 @@
       <h2 class="h-10 m-4 text-2xl font-bold text-center">
         Customer Details
       </h2>
-      <div class="flex justify-center w-full p-4 align-center">
+      <div class="flex justify-center w-full align-center">
         <customer-details-form />
       </div>
       <transition name="fade">
@@ -268,7 +268,7 @@ export default defineComponent({
 }
 
 .item-content {
-  @apply inline-block mt-4 w-20 h-12 md:w-full lg:w-full xl:w-full;
+  @apply inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;
 }
 
 .removing {
