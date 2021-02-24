@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 flex-container">
+  <div class="container p-4 mx-auto mt-4 flex-container">
     <section>
       <div
         v-if="customerDetails.firstName"

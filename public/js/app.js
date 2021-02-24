@@ -18049,7 +18049,7 @@ var _withId = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.withScopeId)("dat
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-5774d588");
 
 var _hoisted_1 = {
-  "class": "p-4 flex-container"
+  "class": "container p-4 mx-auto mt-4 flex-container"
 };
 var _hoisted_2 = {
   key: 0

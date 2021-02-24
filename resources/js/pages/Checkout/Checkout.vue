@@ -248,7 +248,6 @@ export default defineComponent({
   align-items: center;
   align-content: center;
   max-width: 1380px;
-
   @apply flex border border-gray-300 rounded-lg shadow;
 }
 
@@ -259,7 +258,6 @@ export default defineComponent({
   align-items: flex-end;
   align-content: center;
   max-width: 1380px;
-
   @apply flex;
 }
 
