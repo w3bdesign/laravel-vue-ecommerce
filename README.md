@@ -38,6 +38,8 @@
 
 -   CSS animations
 
+-   Responsive mobile menu
+
 -   SonarCloud code quality scanner integration on all pull requests
 
 -   Laravel tests with CircleCI integration
