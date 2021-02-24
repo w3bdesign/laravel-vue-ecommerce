@@ -17347,6 +17347,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   setup: function setup() {
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.useStore)();
     var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.useRoute)();
+    var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_3__.useRouter)();
     var localState = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       loading: true,
       product: null
@@ -17364,7 +17365,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
 
     var addProductToCart = function addProductToCart(product) {
-      return store.dispatch('addProductToCart', product);
+      store.dispatch('addProductToCart', product);
+      router.push('/checkout');
     };
 
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeMount)(fetchProduct);
@@ -18572,15 +18574,10 @@ var _hoisted_5 = {
 var _hoisted_6 = {
   "class": "pt-1 mt-4 text-2xl text-gray-900"
 };
-
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
-/* HOISTED */
-);
-
-var _hoisted_8 = {
+var _hoisted_7 = {
   "class": "pt-1 mt-4 text-2xl text-gray-900"
 };
-var _hoisted_9 = {
+var _hoisted_8 = {
   "class": "pt-1 mt-2"
 };
 
@@ -18607,9 +18604,9 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.formatPrice(_ctx.product.price)), 1
   /* TEXT */
-  ), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.product.description), 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.product.description), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "productButton",
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return _ctx.addProductToCart(_ctx.product);
