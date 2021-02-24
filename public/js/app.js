@@ -17950,7 +17950,7 @@ var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 );
 
 var _hoisted_22 = {
-  "class": "flex justify-center w-full p-4 align-center"
+  "class": "flex justify-center w-full align-center"
 };
 
 var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
@@ -18062,70 +18062,70 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 );
 
 var _hoisted_4 = {
-  "class": "mx-auto mt-2 md:w-2/3 lg:w-1/2"
+  "class": "mx-auto mt-2 md:w-1/2 lg:w-1/2"
 };
 var _hoisted_5 = {
   "class": "flex flex-wrap"
 };
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "p-2 lg:w-1/2"
+  "class": "w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0"
 }, " First name: ", -1
 /* HOISTED */
 );
 
 var _hoisted_7 = {
-  "class": "p-2 lg:w-1/2"
+  "class": "w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0"
 };
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "p-2 lg:w-1/2"
+  "class": "w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0"
 }, " Last name: ", -1
 /* HOISTED */
 );
 
 var _hoisted_9 = {
-  "class": "p-2 lg:w-1/2"
+  "class": "w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0"
 };
 
 var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "p-2 lg:w-1/2"
+  "class": "w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0"
 }, " Address: ", -1
 /* HOISTED */
 );
 
 var _hoisted_11 = {
-  "class": "p-2 lg:w-1/2"
+  "class": "w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0"
 };
 
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "p-2 lg:w-1/2"
+  "class": "w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0"
 }, " Zip: ", -1
 /* HOISTED */
 );
 
 var _hoisted_13 = {
-  "class": "p-2 lg:w-1/2"
+  "class": "w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0"
 };
 
 var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "p-2 lg:w-1/2"
+  "class": "w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0"
 }, " State: ", -1
 /* HOISTED */
 );
 
 var _hoisted_15 = {
-  "class": "p-2 lg:w-1/2"
+  "class": "w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0"
 };
 
 var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "p-2 lg:w-1/2"
+  "class": "w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0"
 }, " Email: ", -1
 /* HOISTED */
 );
 
 var _hoisted_17 = {
-  "class": "p-2 lg:w-1/2"
+  "class": "w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0"
 };
 var _hoisted_18 = {
   "class": "w-64 mx-auto lg:w-1/2"
