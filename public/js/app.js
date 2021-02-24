@@ -16501,10 +16501,9 @@ var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_11__.createRouter)({
     Summary: _pages_Checkout_Summary_vue__WEBPACK_IMPORTED_MODULE_10__.default
   },
   created: function created() {
-    _store_index__WEBPACK_IMPORTED_MODULE_1__.default.dispatch('getProductsFromApi') // Do we need a then here?
-    ["catch"](function (error) {
-      return console.error(error);
-    });
+    if (_store_index__WEBPACK_IMPORTED_MODULE_1__.default.state.products.length === 0) {
+      _store_index__WEBPACK_IMPORTED_MODULE_1__.default.dispatch('getProductsFromApi');
+    }
   }
 }).use(_store_index__WEBPACK_IMPORTED_MODULE_1__.default).use(router).mount('#app');
 
@@ -16674,6 +16673,7 @@ var mutations = {
   FETCH_PRODUCTS_FROM_API: function FETCH_PRODUCTS_FROM_API(state, products) {
     var newState = state;
     newState.products = products;
+    window.location.reload();
   },
   UPDATE_CART: function UPDATE_CART(state, cart) {
     var newState = state;

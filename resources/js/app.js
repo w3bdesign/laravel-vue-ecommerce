@@ -48,11 +48,11 @@ createApp({
   },
 
   created() {
-    store
-      .dispatch('getProductsFromApi')
-    // Do we need a then here?
-      .catch((error) => console.error(error));
+    if (store.state.products.length === 0) {
+      store.dispatch('getProductsFromApi');
+    }
   },
+
 })
   .use(store)
   .use(router)
