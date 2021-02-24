@@ -2,6 +2,7 @@ const mutations = {
   FETCH_PRODUCTS_FROM_API(state, products) {
     const newState = state;
     newState.products = products;
+    window.location.reload();
   },
   UPDATE_CART(state, cart) {
     const newState = state;
