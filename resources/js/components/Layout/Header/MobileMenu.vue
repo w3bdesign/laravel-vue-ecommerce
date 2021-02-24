@@ -55,7 +55,7 @@
   </div>
 </template>
 
-<script>s
+<script>
 import { defineComponent, reactive, toRefs } from 'vue';
 
 import Cart from './Cart.vue';
