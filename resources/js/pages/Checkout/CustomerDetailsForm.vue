@@ -48,7 +48,7 @@
           </div>
         </div>
       </div>
-      <div class="mx-auto md:w-64 lg:w-1/2">
+      <div class="w-64 mx-auto lg:w-1/2">
         <h3
           v-if="customerDetails.firstName"
           class="h-10 p-4 text-xl font-bold text-center"
