@@ -4,7 +4,7 @@
       class="px-6 text-center bg-white border border-gray-200 rounded-lg shadow-md"
     >
       <div class="p-6">
-        Copyright &copy; {{ todayDate }} Daniel / w3bdesign
+        Copyright &copy; {{ todayDate }} Daniel
       </div>
     </footer>
   </div>

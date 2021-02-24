@@ -72,7 +72,7 @@
       Cart is currently empty
     </h2>
     <div v-if="cartLength">
-      <h2 class="h-10 m-4 text-2xl font-bold text-center">
+      <h2 class="h-10 m-2 text-2xl font-bold text-center">
         Customer Details
       </h2>
       <div class="flex justify-center w-full align-center">
