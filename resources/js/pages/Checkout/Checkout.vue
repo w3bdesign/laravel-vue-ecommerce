@@ -5,6 +5,12 @@
     </h1>
     <section class="mt-10">
       <div
+        v-if="orderError"
+        class="h-10 p-4"
+      >
+        <span class="text-lg text-center text-red-500">Error during order. Please retry</span>
+      </div>
+      <div
         v-for="products in cartContent"
         :key="products.id"
         class="container mx-auto mt-4 flex-container"
@@ -126,6 +132,7 @@ export default defineComponent({
       stripe: {},
       cardElement: {},
       customer: {},
+      orderError: false,
     });
 
     const cartLength = computed(() => store.state.cart.length);
@@ -177,7 +184,7 @@ export default defineComponent({
       localState.customer.cart = JSON.stringify(store.state.cart);
       localState.customer.payment_method_id = paymentMethod.id;
 
-      // Stripe amount must be more than a minimum of 3 kr
+      // Stripe amount must be a minimum of 3 kr
       if (stripeAmount > 300) {
         axios
           .post('/api/purchase', localState.customer)
@@ -189,9 +196,9 @@ export default defineComponent({
               router.push('/thankyou');
             }
           })
-          .catch((orderError) => {
-            localState.paymentProcessing = false;
-            console.error(orderError);
+          .catch(() => {
+            localState.paymentIsProcessing = false;
+            localState.orderError = true;
           });
       }
     };
