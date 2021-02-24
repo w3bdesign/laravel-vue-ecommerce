@@ -268,7 +268,7 @@ export default defineComponent({
 }
 
 .item-content {
-  @apply inline-block mt-4 w-20 h-12 md:w-full lg:w-full xl:w-full;
+  @apply inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;
 }
 
 .removing {
