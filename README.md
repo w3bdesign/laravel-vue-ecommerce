@@ -38,6 +38,8 @@
 
 -   CSS animations
 
+-   Responsive mobile menu
+
 -   SonarCloud code quality scanner integration on all pull requests
 
 -   Laravel tests with CircleCI integration
@@ -81,6 +83,8 @@
 -   Open up `http://localhost:8000` in your browser
 
 ## TODO
+
+-   Refactor and cleanup code
 
 -   Finish implementing Laravel Scout
 
