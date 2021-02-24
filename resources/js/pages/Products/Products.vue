@@ -7,7 +7,7 @@
       <div
         v-for="product in products"
         :key="product.id"
-        class="flex flex-col mt-6 xl:pr-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4"
+        class="flex flex-col mt-6 md:pr-6 xl:pr-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4"
       >
         <router-link
           :to="{
