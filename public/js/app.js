@@ -18972,7 +18972,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/Cart.svg?4c5936120c756fb8cbca398c6d542bb3");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/Cart.svg?ea6d80008929415ec7bb42c40a571d4e");
 
 /***/ }),
 
@@ -18987,7 +18987,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/Logo.svg?3e6427f5344cbd2d3346b19366ec5fa5");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/Logo.svg?83eef76f698f6bf6b4a349895f928699");
 
 /***/ }),
 
@@ -19002,7 +19002,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/Remove.svg?a43883c1ff3c1229447a60a360f341d4");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/Remove.svg?098f636e7eb11df6ee16bd2033d7de95");
 
 /***/ }),
 
