@@ -10,6 +10,7 @@ const getters = {
       (accumulator, value) => accumulator.quantity + value.quantity,
     )
     : 0),
+  productStateLength: ({ products }) => products.length,
   customerDetails: ({ customer }) => customer,
   checkoutFormIsValid: ({ checkoutFormIsValid }) => checkoutFormIsValid,
 };

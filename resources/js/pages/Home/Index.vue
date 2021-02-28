@@ -1,5 +1,6 @@
 <template>
   <div>
+    <error />
     <hero />
     <products />
   </div>
@@ -9,9 +10,10 @@
 import { defineComponent } from 'vue';
 
 import Hero from './Hero.vue';
+import Error from './Error.vue';
 import Products from '../Products/Products.vue';
 
 export default defineComponent({
-  components: { Hero, Products },
+  components: { Hero, Products, Error },
 });
 </script>
