@@ -8,7 +8,9 @@
         v-if="orderError"
         class="h-10 p-4"
       >
-        <span class="text-lg text-center text-red-500">Error during order. Please retry</span>
+        <span
+          class="text-lg text-center text-red-500"
+        >Error during order. Please retry</span>
       </div>
       <div
         v-for="products in cartContent"
@@ -80,14 +82,16 @@
       </div>
       <transition name="fade">
         <div v-show="customerDetails.firstName || checkoutFormIsValid">
-        <span class="h-6 p-4 text-xl font-bold text-center">Use the following card details for testing: 
-          <br>4242424242424242 
-          <br>Visa
-          <br>CVC any 3 digits
-          <br>Any future date
-          <br>
-          </span>
-          <h2 class="h-10 p-4 text-2xl font-bold text-center">
+          <div class="flex justify-center w-full align-center">
+            <span
+              class="h-10 p-4 text-lg font-bold text-center text-red-500"
+            >Use the following card details for testing:
+              <br>4242424242424242 <br>Visa <br>CVC any 3
+              digits <br>Any future date
+              <br>
+            </span>
+          </div>
+          <h2 class="h-10 p-4 mt-32 text-2xl font-bold text-center">
             Stripe payment
           </h2>
           <div class="flex justify-center w-full p-4 align-center">
@@ -241,52 +245,52 @@ export default defineComponent({
 
 <style scoped>
 .disabledButton {
-  @apply cursor-not-allowed opacity-50;
+    @apply cursor-not-allowed opacity-50;
 }
 
 .checkoutButton {
-  @apply p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700;
+    @apply p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700;
 }
 
 .flex-container {
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  align-content: center;
-  max-width: 1380px;
-  @apply flex border border-gray-300 rounded-lg shadow;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    max-width: 1380px;
+    @apply flex border border-gray-300 rounded-lg shadow;
 }
 
 .flex-container-total {
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: flex-end;
-  align-content: center;
-  max-width: 1380px;
-  @apply flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    align-content: center;
+    max-width: 1380px;
+    @apply flex;
 }
 
 .item {
-  @apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
+    @apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
 }
 
 .item-content {
-  @apply inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;
+    @apply inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;
 }
 
 .removing {
-  @apply animate-spin cursor-not-allowed;
+    @apply animate-spin cursor-not-allowed;
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
-  opacity: 0;
+    opacity: 0;
 }
 </style>

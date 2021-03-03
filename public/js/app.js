@@ -17995,22 +17995,9 @@ var _hoisted_22 = {
   "class": "flex justify-center w-full align-center"
 };
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
-  "class": "h-10 p-4 text-2xl font-bold text-center"
-}, " Stripe payment ", -1
-/* HOISTED */
-);
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex justify-center w-full align-center\" data-v-67966e56><span class=\"h-10 p-4 text-lg font-bold text-center text-red-500\" data-v-67966e56>Use the following card details for testing: <br data-v-67966e56>4242424242424242 <br data-v-67966e56>Visa <br data-v-67966e56>CVC any 3 digits <br data-v-67966e56>Any future date <br data-v-67966e56></span></div><h2 class=\"h-10 p-4 mt-32 text-2xl font-bold text-center\" data-v-67966e56> Stripe payment </h2><div class=\"flex justify-center w-full p-4 align-center\" data-v-67966e56><br data-v-67966e56><div id=\"card-element\" class=\"w-full h-16 mt-4 lg:w-5/12 xl:w-5/12\" data-v-67966e56> Stripe </div></div>", 3);
 
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "flex justify-center w-full p-4 align-center"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  id: "card-element",
-  "class": "w-full h-16 mt-4 lg:w-5/12 xl:w-5/12"
-}, " Stripe ")], -1
-/* HOISTED */
-);
-
-var _hoisted_25 = {
+var _hoisted_26 = {
   "class": "flex justify-center w-full align-center"
 };
 
@@ -18050,7 +18037,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     name: "fade"
   }, {
     "default": _withId(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [_hoisted_23, _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
         "class": ["checkoutButton", {
           disabledButton: _ctx.paymentIsProcessing
         }],
