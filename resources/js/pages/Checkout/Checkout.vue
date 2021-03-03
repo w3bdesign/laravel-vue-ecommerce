@@ -80,6 +80,13 @@
       </div>
       <transition name="fade">
         <div v-show="customerDetails.firstName || checkoutFormIsValid">
+        <span class="h-6 p-4 text-xl font-bold text-center">Use the following card details for testing: 
+          <br>4242424242424242 
+          <br>Visa
+          <br>CVC any 3 digits
+          <br>Any future date
+          <br>
+          </span>
           <h2 class="h-10 p-4 text-2xl font-bold text-center">
             Stripe payment
           </h2>
