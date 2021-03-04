@@ -86,7 +86,7 @@
             <span
               class="h-10 p-4 text-lg font-bold text-center text-red-500"
             >Use the following card details for testing:
-              <br>4242424242424242 <br>Visa <br>CVC any 3
+              <br>4242424242424242 <br>CVC any 3
               digits <br>Any future date
               <br>
             </span>
@@ -150,10 +150,7 @@ export default defineComponent({
     const cartTotal = computed(() => store.getters.cartTotal);
     const cartContent = computed(() => store.state.cart);
     const customerDetails = computed(() => store.getters.customerDetails);
-
-    const checkoutFormIsValid = computed(
-      () => store.getters.checkoutFormIsValid,
-    );
+    const checkoutFormIsValid = computed(() => store.getters.checkoutFormIsValid);
 
     const removeProductFromCart = (product) => {
       localState.removingCartItem = true;
