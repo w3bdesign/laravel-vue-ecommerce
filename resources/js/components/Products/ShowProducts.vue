@@ -57,7 +57,7 @@ import {
 
 import { formatPrice } from '../../utils/functions';
 
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner.vue';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.vue';
 
 export default defineComponent({
   components: { LoadingSpinner },

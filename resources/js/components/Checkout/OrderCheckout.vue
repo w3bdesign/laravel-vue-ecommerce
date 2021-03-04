@@ -201,7 +201,7 @@ export default defineComponent({
             if (response.statusText === 'Created') {
               store.dispatch('emptyCart');
               store.commit('UPDATE_ORDER', response.data);
-              router.push('/thankyou');
+              router.push('/success');
             }
           })
           .catch(() => {
