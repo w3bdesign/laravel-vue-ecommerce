@@ -88,7 +88,7 @@
             >Use the following card details for testing:
               <br>4242424242424242 <br>CVC any 3
               digits <br>Any future date
-              <br>
+              <br>Any zip code
             </span>
           </div>
           <h2 class="h-10 p-4 mt-32 text-2xl font-bold text-center">
