@@ -84,9 +84,7 @@
 
 ## TODO
 
--   Refactor and cleanup code
-
--   Finish implementing Laravel Scout
+-   Finish implementing search with meilisearch-vue or vue-instantsearch when Vue 3 is supported
 
 -   Add some tests to verify that the cart and checkout works correctly
 

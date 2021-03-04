@@ -33,16 +33,6 @@
               <li
                 class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
               >
-                <input
-                  class="inputSearch"
-                  placeholder="Search ..."
-                  aria-placeholder="Search ..."
-                  type="text"
-                >
-              </li>
-              <li
-                class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
-              >
                 <router-link to="/">
                   <span
                     class="text-xl text-white no-underline lg:text-black is-active"
