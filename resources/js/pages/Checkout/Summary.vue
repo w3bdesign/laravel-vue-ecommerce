@@ -4,6 +4,9 @@
       Order summary
     </h1>
     <div class="mt-4">
+      <h2 class="h-10 p-6 text-2xl font-bold text-center">
+        Thank you for your order with transaction ID #
+      </h2>
       <pre>{{ order }}</pre>
     </div>
   </div>
@@ -26,5 +29,3 @@ export default {
 
 };
 </script>
-
-<style></style>

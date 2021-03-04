@@ -17995,7 +17995,7 @@ var _hoisted_22 = {
   "class": "flex justify-center w-full align-center"
 };
 
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex justify-center w-full align-center\" data-v-67966e56><span class=\"h-10 p-4 text-lg font-bold text-center text-red-500\" data-v-67966e56>Use the following card details for testing: <br data-v-67966e56>4242424242424242 <br data-v-67966e56>Visa <br data-v-67966e56>CVC any 3 digits <br data-v-67966e56>Any future date <br data-v-67966e56></span></div><h2 class=\"h-10 p-4 mt-32 text-2xl font-bold text-center\" data-v-67966e56> Stripe payment </h2><div class=\"flex justify-center w-full p-4 align-center\" data-v-67966e56><br data-v-67966e56><div id=\"card-element\" class=\"w-full h-16 mt-4 lg:w-5/12 xl:w-5/12\" data-v-67966e56> Stripe </div></div>", 3);
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"flex justify-center w-full align-center\" data-v-67966e56><span class=\"h-10 p-4 text-lg font-bold text-center text-red-500\" data-v-67966e56>Use the following card details for testing: <br data-v-67966e56>4242424242424242 <br data-v-67966e56>CVC any 3 digits <br data-v-67966e56>Any future date <br data-v-67966e56></span></div><h2 class=\"h-10 p-4 mt-32 text-2xl font-bold text-center\" data-v-67966e56> Stripe payment </h2><div class=\"flex justify-center w-full p-4 align-center\" data-v-67966e56><br data-v-67966e56><div id=\"card-element\" class=\"w-full h-16 mt-4 lg:w-5/12 xl:w-5/12\" data-v-67966e56> Stripe </div></div>", 3);
 
 var _hoisted_26 = {
   "class": "flex justify-center w-full align-center"
@@ -18413,8 +18413,15 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 var _hoisted_2 = {
   "class": "mt-4"
 };
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", {
+  "class": "h-10 p-6 text-2xl font-bold text-center"
+}, " Thank you for your order with transaction ID # ", -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("pre", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.order), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("pre", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.order), 1
   /* TEXT */
   )])]);
 }
