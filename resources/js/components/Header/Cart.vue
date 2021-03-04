@@ -10,7 +10,7 @@
             alt="Cart icon"
             class="h-12 ml-4 lg:ml-2"
             aria-label="Cart"
-            src="../../../../img/svg/Cart.svg"
+            src="../../../img/svg/Cart.svg"
           >
         </router-link>
       </span>
@@ -32,7 +32,7 @@
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 
-import { formatPrice } from '../../../utils/functions';
+import { formatPrice } from '../../utils/functions';
 
 export default {
   setup() {

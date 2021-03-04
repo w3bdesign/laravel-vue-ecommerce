@@ -1,9 +1,12 @@
-import Index from '../pages/Home/Index.vue';
-import Products from '../pages/Products/Products.vue';
-import SingleProduct from '../pages/Products/SingleProduct.vue';
-import Categories from '../pages/Categories/Categories.vue';
-import Checkout from '../pages/Checkout/Checkout.vue';
-import Summary from '../pages/Checkout/Summary.vue';
+// Pages
+import Index from '../pages/Index.vue';
+import Products from '../pages/Products.vue';
+import Categories from '../pages/Categories.vue';
+import Checkout from '../pages/Checkout.vue';
+import Success from '../pages/Success.vue';
+
+// Components
+import SingleProduct from '../components/Products/SingleProduct.vue';
 
 const routes = [
   { path: '/', component: Index },
@@ -15,7 +18,7 @@ const routes = [
   },
   { path: '/categories', component: Categories },
   { path: '/checkout', component: Checkout },
-  { path: '/thankyou', component: Summary },
+  { path: '/success', component: Success },
 ];
 
 export default routes;
