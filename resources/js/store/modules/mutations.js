@@ -1,16 +1,13 @@
 const mutations = {
   FETCH_PRODUCTS_FROM_API(state, products) {
-    const newState = state;
-    newState.products = products;
+    Object.assign(state.products, products);
     window.location.reload();
   },
   UPDATE_CART(state, cart) {
-    const newState = state;
-    newState.cart = cart;
+    Object.assign(state.cart, cart);
   },
   UPDATE_ORDER(state, order) {
-    const newState = state;
-    newState.order = order;
+    Object.assign(state.order, order);
   },
   ADD_PRODUCT_TO_CART({ cart }, payload) {
     // ESLint complains if we modify the state directly
@@ -32,13 +29,11 @@ const mutations = {
   REMOVE_PRODUCT_FROM_CART({ cart }, payload) {
     cart.splice(cart.indexOf(payload), 1);
   },
-  SAVE_CUSTOMER_DETAILS(state, payload) {
-    const newCustomer = state;
-    newCustomer.customer = payload;
+  SAVE_CUSTOMER_DETAILS({ customer }, payload) {
+    Object.assign(customer, payload);
   },
-  SET_CHECKOUT_FORM_VALID(state, payload) {
-    const newForm = state;
-    newForm.checkoutFormIsValid = payload;
+  SET_CHECKOUT_FORM_VALID({ checkoutFormIsValid }, payload) {
+    Object.assign(checkoutFormIsValid, payload);
   },
 };
 
