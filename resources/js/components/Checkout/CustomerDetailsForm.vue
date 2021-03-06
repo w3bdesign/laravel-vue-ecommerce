@@ -1,61 +1,7 @@
 <template>
   <div class="container p-4 mx-auto mt-2 flex-container">
     <section>
-      <div
-        v-if="customerDetails.firstName"
-      >
-        <h3 class="h-10 p-4 text-xl font-bold text-center">
-          Saved details
-        </h3>
-        <div class="mx-auto mt-2 md:w-1/2 lg:w-1/2">
-          <div class="flex flex-wrap">
-            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
-              First name:
-            </div>
-            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
-              {{ customerDetails.firstName }}
-            </div>
-            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
-              Last name:
-            </div>
-            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
-              {{ customerDetails.lastName }}
-            </div>
-            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
-              Address:
-            </div>
-            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
-              {{ customerDetails.address }}
-            </div>
-            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
-              Zip:
-            </div>
-            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
-              {{ customerDetails.zipcode }}
-            </div>
-            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
-              State:
-            </div>
-            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
-              {{ customerDetails.state }}
-            </div>
-            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
-              Email:
-            </div>
-            <div class="w-1/2 p-2 -ml-2 lg:w-1/2 md:ml-0 xl:ml-0">
-              {{ customerDetails.email }}
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="w-64 mx-auto lg:w-1/2">
-        <h3
-          v-if="customerDetails.firstName"
-          class="h-10 p-4 text-xl font-bold text-center"
-        >
-          Modify details
-          <br>
-        </h3>
         <div class="flex flex-wrap mt-2">
           <div class="p-2 lg:w-1/2">
             <label for="firstName">First name</label>
@@ -65,7 +11,6 @@
               name="firstName"
               class="text-input"
               type="text"
-              @input="onSubmit"
             >
             <span class="text-lg text-red-500">{{
               errors.firstName
@@ -79,7 +24,6 @@
               name="lastName"
               class="text-input"
               type="text"
-              @input="onSubmit"
             >
             <span class="text-lg text-red-500">{{
               errors.lastName
@@ -93,7 +37,6 @@
               name="address"
               class="text-input"
               type="text"
-              @input="onSubmit"
             >
             <span class="text-lg text-red-500">{{
               errors.address
@@ -107,7 +50,6 @@
               name="zipcode"
               class="text-input"
               type="text"
-              @input="onSubmit"
             >
             <span class="text-lg text-red-500">{{
               errors.zipcode
@@ -121,7 +63,6 @@
               name="city"
               class="text-input"
               type="text"
-              @input="onSubmit"
             >
             <span class="text-lg text-red-500">{{
               errors.city
@@ -135,7 +76,6 @@
               name="state"
               class="text-input"
               type="text"
-              @input="onSubmit"
             >
             <span class="text-lg text-red-500">{{
               errors.state
@@ -149,11 +89,18 @@
               name="email"
               class="text-input"
               type="email"
-              @input="onSubmit"
             >
             <span class="text-lg text-red-500">{{
               errors.email
             }}</span>
+          </div>
+          <div class="flex justify-center w-full align-center">
+            <button
+              class="submitButton"
+              @click="onSubmit"
+            >
+              Save Details
+            </button>
           </div>
         </div>
       </div>
@@ -187,11 +134,15 @@ export default defineComponent({
       validationSchema: schema,
     });
 
-    const onSubmit = handleSubmit((values, { resetForm }) => {
+    const onSubmit = handleSubmit((values) => {
       store.dispatch('saveCustomerDetails', values);
+
       if (meta.value.valid) {
+        console.log('Valid!');
         store.dispatch('setCheckoutFormToValid', true);
-        resetForm();
+      } else {
+        console.log('Not valid');
+        store.dispatch('setCheckoutFormToValid', false);
       }
     });
 
