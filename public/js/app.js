@@ -16724,7 +16724,8 @@ var mutations = {
     window.location.reload();
   },
   UPDATE_CART: function UPDATE_CART(state, cart) {
-    Object.assign(state.cart, cart);
+    var newState = state;
+    newState.cart = cart;
   },
   UPDATE_ORDER: function UPDATE_ORDER(state, order) {
     Object.assign(state.order, order);
