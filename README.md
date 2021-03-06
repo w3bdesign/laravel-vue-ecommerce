@@ -6,7 +6,8 @@
 
  Creating an eCommerce site with Laravel 8, Vue 3 and Stripe.
 
- ### Screenshot:
+### Screenshot:
+
  <br /> 
  <img src="https://user-images.githubusercontent.com/45217974/108638044-9b523980-748d-11eb-9a24-0b58baffecc8.png" alt="Project screenshot" /> 
  <br />
@@ -32,7 +33,7 @@
 
 -   Stripe for payments
 
--   Easily change currency by editing two environment variables
+-   Easily change currency by setting two environment variables: `CASHIER_CURRENCY` and `CASHIER_CURRENCY_LOCALE`
 
 -   ESLint code linting with AirBnB ruleset
 
