@@ -94,6 +94,14 @@
               errors.email
             }}</span>
           </div>
+          <div class="flex justify-center w-full align-center">
+            <button
+              class="submitButton"
+              @click="onSubmit"
+            >
+              Save Details
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -126,11 +134,15 @@ export default defineComponent({
       validationSchema: schema,
     });
 
-    const onSubmit = handleSubmit((values, { resetForm }) => {
+    const onSubmit = handleSubmit((values) => {
       store.dispatch('saveCustomerDetails', values);
+
       if (meta.value.valid) {
+        console.log('Valid!');
         store.dispatch('setCheckoutFormToValid', true);
-        resetForm();
+      } else {
+        console.log('Not valid');
+        store.dispatch('setCheckoutFormToValid', false);
       }
     });
 

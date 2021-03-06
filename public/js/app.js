@@ -16755,9 +16755,9 @@ var mutations = {
     var customer = _ref3.customer;
     Object.assign(customer, payload);
   },
-  SET_CHECKOUT_FORM_VALID: function SET_CHECKOUT_FORM_VALID(_ref4, payload) {
-    var checkoutFormIsValid = _ref4.checkoutFormIsValid;
-    Object.assign(checkoutFormIsValid, payload);
+  SET_CHECKOUT_FORM_VALID: function SET_CHECKOUT_FORM_VALID(state, payload) {
+    var copyState = state;
+    copyState.checkoutFormIsValid = payload;
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mutations);
@@ -16851,13 +16851,15 @@ __webpack_require__.r(__webpack_exports__);
         errors = _useForm.errors,
         handleSubmit = _useForm.handleSubmit;
 
-    var onSubmit = handleSubmit(function (values, _ref) {
-      var resetForm = _ref.resetForm;
+    var onSubmit = handleSubmit(function (values) {
       store.dispatch('saveCustomerDetails', values);
 
       if (meta.value.valid) {
+        console.log('Valid!');
         store.dispatch('setCheckoutFormToValid', true);
-        resetForm();
+      } else {
+        console.log('Not valid');
+        store.dispatch('setCheckoutFormToValid', false);
       }
     });
 
@@ -17674,6 +17676,9 @@ var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 var _hoisted_24 = {
   "class": "text-lg text-red-500"
 };
+var _hoisted_25 = {
+  "class": "flex justify-center w-full align-center"
+};
 
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)();
 
@@ -17762,7 +17767,12 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.email]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.errors.email), 1
   /* TEXT */
-  )])])])])]);
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    "class": "submitButton",
+    onClick: _cache[8] || (_cache[8] = function () {
+      return _ctx.onSubmit && _ctx.onSubmit.apply(_ctx, arguments);
+    })
+  }, " Save Details ")])])])])]);
 });
 
 /***/ }),
@@ -17938,7 +17948,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
       /* CLASS, PROPS */
       , ["disabled"])])], 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.checkoutFormIsValid]])];
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, _ctx.customerDetails.firstName && _ctx.checkoutFormIsValid]])];
     }),
     _: 1
     /* STABLE */

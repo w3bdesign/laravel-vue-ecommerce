@@ -32,8 +32,9 @@ const mutations = {
   SAVE_CUSTOMER_DETAILS({ customer }, payload) {
     Object.assign(customer, payload);
   },
-  SET_CHECKOUT_FORM_VALID({ checkoutFormIsValid }, payload) {
-    Object.assign(checkoutFormIsValid, payload);
+  SET_CHECKOUT_FORM_VALID(state, payload) {
+    const copyState = state;
+    copyState.checkoutFormIsValid = payload;
   },
 };
 

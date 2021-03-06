@@ -81,7 +81,7 @@
         <customer-details-form />
       </div>
       <transition name="fade">
-        <div v-show="checkoutFormIsValid">
+        <div v-show="customerDetails.firstName && checkoutFormIsValid">
           <div class="flex justify-center w-full align-center">
             <span
               class="h-10 p-4 text-lg font-bold text-center text-red-500"
