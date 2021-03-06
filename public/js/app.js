@@ -16855,10 +16855,8 @@ __webpack_require__.r(__webpack_exports__);
       store.dispatch('saveCustomerDetails', values);
 
       if (meta.value.valid) {
-        console.log('Valid!');
         store.dispatch('setCheckoutFormToValid', true);
       } else {
-        console.log('Not valid');
         store.dispatch('setCheckoutFormToValid', false);
       }
     });
