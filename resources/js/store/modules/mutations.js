@@ -4,7 +4,8 @@ const mutations = {
     window.location.reload();
   },
   UPDATE_CART(state, cart) {
-    Object.assign(state.cart, cart);
+    const newState = state;
+    newState.cart = cart;
   },
   UPDATE_ORDER(state, order) {
     Object.assign(state.order, order);
@@ -12,11 +13,9 @@ const mutations = {
   ADD_PRODUCT_TO_CART({ cart }, payload) {
     // ESLint complains if we modify the state directly
     const cartCopy = cart;
-
     const foundProductInCartIndex = cart.findIndex(
       (item) => item.slug === payload.slug,
     );
-
     if (foundProductInCartIndex > -1) {
       cartCopy[foundProductInCartIndex].quantity += 1;
       return cartCopy;
