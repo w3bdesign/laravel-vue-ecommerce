@@ -7,6 +7,10 @@ const mutations = {
     const newState = state;
     newState.cart = cart;
   },
+  DELETE_CUSTOMER(state, customer) {
+    const newState = state;
+    newState.customer = customer;
+  },
   UPDATE_ORDER(state, order) {
     Object.assign(state.order, order);
   },

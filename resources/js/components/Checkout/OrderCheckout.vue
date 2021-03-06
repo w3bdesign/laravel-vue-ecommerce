@@ -199,6 +199,7 @@ export default defineComponent({
             localState.paymentIsProcessing = false;
             if (response.statusText === 'Created') {
               store.dispatch('emptyCart');
+              store.dispatch('deleteCustomer');
               store.commit('UPDATE_ORDER', response.data);
               router.push('/success');
             }
