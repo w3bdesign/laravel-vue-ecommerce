@@ -16655,12 +16655,16 @@ var actions = {
     var commit = _ref4.commit;
     commit('UPDATE_CART', []);
   },
-  saveCustomerDetails: function saveCustomerDetails(_ref5, customer) {
+  deleteCustomer: function deleteCustomer(_ref5) {
     var commit = _ref5.commit;
+    commit('DELETE_CUSTOMER', []);
+  },
+  saveCustomerDetails: function saveCustomerDetails(_ref6, customer) {
+    var commit = _ref6.commit;
     commit('SAVE_CUSTOMER_DETAILS', customer);
   },
-  setCheckoutFormToValid: function setCheckoutFormToValid(_ref6, value) {
-    var commit = _ref6.commit;
+  setCheckoutFormToValid: function setCheckoutFormToValid(_ref7, value) {
+    var commit = _ref7.commit;
     commit('SET_CHECKOUT_FORM_VALID', value);
   }
 };
@@ -16726,6 +16730,10 @@ var mutations = {
   UPDATE_CART: function UPDATE_CART(state, cart) {
     var newState = state;
     newState.cart = cart;
+  },
+  DELETE_CUSTOMER: function DELETE_CUSTOMER(state, customer) {
+    var newState = state;
+    newState.customer = customer;
   },
   UPDATE_ORDER: function UPDATE_ORDER(state, order) {
     Object.assign(state.order, order);
@@ -17029,6 +17037,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                     if (response.statusText === 'Created') {
                       store.dispatch('emptyCart');
+                      store.dispatch('deleteCustomer');
                       store.commit('UPDATE_ORDER', response.data);
                       router.push('/success');
                     }

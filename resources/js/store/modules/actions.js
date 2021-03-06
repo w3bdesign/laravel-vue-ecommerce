@@ -18,6 +18,9 @@ const actions = {
   emptyCart({ commit }) {
     commit('UPDATE_CART', []);
   },
+  deleteCustomer({ commit }) {
+    commit('DELETE_CUSTOMER', []);
+  },
   saveCustomerDetails({ commit }, customer) {
     commit('SAVE_CUSTOMER_DETAILS', customer);
   },
