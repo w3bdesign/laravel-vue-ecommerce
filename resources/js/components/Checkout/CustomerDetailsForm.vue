@@ -136,12 +136,9 @@ export default defineComponent({
 
     const onSubmit = handleSubmit((values) => {
       store.dispatch('saveCustomerDetails', values);
-
       if (meta.value.valid) {
-        console.log('Valid!');
         store.dispatch('setCheckoutFormToValid', true);
       } else {
-        console.log('Not valid');
         store.dispatch('setCheckoutFormToValid', false);
       }
     });
