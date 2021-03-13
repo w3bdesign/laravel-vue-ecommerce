@@ -17915,18 +17915,22 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       key: products.id,
       "class": "container mx-auto mt-4 flex-container"
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+      tabindex: "0",
+      onClick: function onClick($event) {
+        return _ctx.removeProductFromCart(products);
+      }
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("img", {
       "class": ["mt-2 ml-4 cursor-pointer", {
         removing: _ctx.localState.removingCartItem
       }],
       alt: "Remove icon",
       "aria-label": "Remove",
-      src: _img_svg_Remove_svg__WEBPACK_IMPORTED_MODULE_1__.default,
-      onClick: function onClick($event) {
-        return _ctx.removeProductFromCart(products);
-      }
-    }, null, 10
-    /* CLASS, PROPS */
+      src: _img_svg_Remove_svg__WEBPACK_IMPORTED_MODULE_1__.default
+    }, null, 2
+    /* CLASS */
+    )], 8
+    /* PROPS */
     , ["onClick"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(products.name), 1
     /* TEXT */
     )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(products.quantity), 1
@@ -18309,6 +18313,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_cart = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("cart");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("header", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_mobile_menu), _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("nav", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("ul", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    tabindex: "0",
     to: "/"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -18318,6 +18323,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
 
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("li", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    tabindex: "0",
     to: "/products"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -18776,7 +18782,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".text-input[data-v-5aa0c92c] {\n  --tw-border-opacity: 1;\n  border-color: rgba(156, 163, 175, var(--tw-border-opacity));\n  border-radius: 0.25rem;\n  border-width: 1px;\n  padding: 0.5rem;\n}\n.text-input[data-v-5aa0c92c]::-moz-placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-placeholder-opacity));\n}\n.text-input[data-v-5aa0c92c]:-ms-input-placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-placeholder-opacity));\n}\n.text-input[data-v-5aa0c92c]::placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-placeholder-opacity));\n}\n.text-input[data-v-5aa0c92c] {\n  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n  --tw-text-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-text-opacity));\n  width: 100%;\n}\n.submitButton[data-v-5aa0c92c] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(59, 130, 246, var(--tw-bg-opacity));\n  font-weight: 700;\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n  margin-left: auto;\n  margin-right: auto;\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n  padding: 0.5rem;\n  --tw-text-opacity: 1;\n  color: rgba(255, 255, 255, var(--tw-text-opacity));\n}\n.submitButton[data-v-5aa0c92c]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgba(29, 78, 216, var(--tw-bg-opacity));\n}\n.submitButton[data-v-5aa0c92c] {\n  border-radius: 0.25rem;\n  cursor: pointer;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".text-input[data-v-5aa0c92c] {\n  --tw-border-opacity: 1;\n  border-color: rgba(156, 163, 175, var(--tw-border-opacity));\n  border-radius: 0.25rem;\n  border-width: 1px;\n  padding: 0.5rem;\n}\n.text-input[data-v-5aa0c92c]::-moz-placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-placeholder-opacity));\n}\n.text-input[data-v-5aa0c92c]:-ms-input-placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-placeholder-opacity));\n}\n.text-input[data-v-5aa0c92c]::placeholder {\n  --tw-placeholder-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-placeholder-opacity));\n}\n.text-input[data-v-5aa0c92c] {\n  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n  --tw-text-opacity: 1;\n  color: rgba(31, 41, 55, var(--tw-text-opacity));\n  width: 100%;\n}\n.submitButton[data-v-5aa0c92c] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(29, 78, 216, var(--tw-bg-opacity));\n  font-weight: 700;\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n  margin-left: auto;\n  margin-right: auto;\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n  padding: 0.5rem;\n  --tw-text-opacity: 1;\n  color: rgba(255, 255, 255, var(--tw-text-opacity));\n}\n.submitButton[data-v-5aa0c92c]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgba(29, 78, 216, var(--tw-bg-opacity));\n}\n.submitButton[data-v-5aa0c92c] {\n  border-radius: 0.25rem;\n  cursor: pointer;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -18926,7 +18932,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".productButton[data-v-7f10f9de] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(59, 130, 246, var(--tw-bg-opacity));\n}\n.productButton[data-v-7f10f9de]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgba(29, 78, 216, var(--tw-bg-opacity));\n}\n.productButton[data-v-7f10f9de] {\n  border-radius: 0.25rem;\n  font-weight: 700;\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n  padding: 0.5rem;\n  --tw-text-opacity: 1;\n  color: rgba(255, 255, 255, var(--tw-text-opacity));\n  width: 100%;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".productButton[data-v-7f10f9de] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(29, 78, 216, var(--tw-bg-opacity));\n}\n.productButton[data-v-7f10f9de]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgba(30, 64, 175, var(--tw-bg-opacity));\n}\n.productButton[data-v-7f10f9de] {\n  border-radius: 0.25rem;\n  font-weight: 700;\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n  padding: 0.5rem;\n  --tw-text-opacity: 1;\n  color: rgba(255, 255, 255, var(--tw-text-opacity));\n  width: 100%;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -18950,7 +18956,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".divGrid[data-v-6ae4dfb2] {\n  display: grid;\n  margin-top: 2rem;\n  gap: 1rem;\n  grid-template-columns: repeat(1, minmax(0, 1fr));\n}\n@media (min-width: 640px) {\n.divGrid[data-v-6ae4dfb2] {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n}\n}\n@media (min-width: 768px) {\n.divGrid[data-v-6ae4dfb2] {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n}\n}\n@media (min-width: 1024px) {\n.divGrid[data-v-6ae4dfb2] {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n}\n}\n@media (min-width: 1280px) {\n.divGrid[data-v-6ae4dfb2] {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n}\n}\n.productImage[data-v-6ae4dfb2] {\n  height: auto;\n  padding: 2rem;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 500ms;\n}\n.productImage[data-v-6ae4dfb2]:hover {\n  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n  --tw-scale-x: 1.05;\n  --tw-scale-y: 1.05;\n}\n@media (min-width: 768px) {\n.productImage[data-v-6ae4dfb2] {\n    padding: 0.5rem;\n}\n}\n@media (min-width: 1024px) {\n.productImage[data-v-6ae4dfb2] {\n    padding: 0.5rem;\n}\n}\n@media (min-width: 1280px) {\n.productImage[data-v-6ae4dfb2] {\n    padding: 0.5rem;\n}\n}\n.productButton[data-v-6ae4dfb2] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(59, 130, 246, var(--tw-bg-opacity));\n}\n.productButton[data-v-6ae4dfb2]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgba(29, 78, 216, var(--tw-bg-opacity));\n}\n.productButton[data-v-6ae4dfb2] {\n  border-radius: 0.25rem;\n  font-weight: 700;\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n  padding: 0.5rem;\n  --tw-text-opacity: 1;\n  color: rgba(255, 255, 255, var(--tw-text-opacity));\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".divGrid[data-v-6ae4dfb2] {\n  display: grid;\n  margin-top: 2rem;\n  gap: 1rem;\n  grid-template-columns: repeat(1, minmax(0, 1fr));\n}\n@media (min-width: 640px) {\n.divGrid[data-v-6ae4dfb2] {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n}\n}\n@media (min-width: 768px) {\n.divGrid[data-v-6ae4dfb2] {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n}\n}\n@media (min-width: 1024px) {\n.divGrid[data-v-6ae4dfb2] {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n}\n}\n@media (min-width: 1280px) {\n.divGrid[data-v-6ae4dfb2] {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n}\n}\n.productImage[data-v-6ae4dfb2] {\n  height: auto;\n  padding: 2rem;\n  --tw-translate-x: 0;\n  --tw-translate-y: 0;\n  --tw-rotate: 0;\n  --tw-skew-x: 0;\n  --tw-skew-y: 0;\n  --tw-scale-x: 1;\n  --tw-scale-y: 1;\n  transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));\n  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 150ms;\n  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);\n  transition-duration: 500ms;\n}\n.productImage[data-v-6ae4dfb2]:hover {\n  --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);\n  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);\n  --tw-scale-x: 1.05;\n  --tw-scale-y: 1.05;\n}\n@media (min-width: 768px) {\n.productImage[data-v-6ae4dfb2] {\n    padding: 0.5rem;\n}\n}\n@media (min-width: 1024px) {\n.productImage[data-v-6ae4dfb2] {\n    padding: 0.5rem;\n}\n}\n@media (min-width: 1280px) {\n.productImage[data-v-6ae4dfb2] {\n    padding: 0.5rem;\n}\n}\n.productButton[data-v-6ae4dfb2] {\n  --tw-bg-opacity: 1;\n  background-color: rgba(29, 78, 216, var(--tw-bg-opacity));\n}\n.productButton[data-v-6ae4dfb2]:hover {\n  --tw-bg-opacity: 1;\n  background-color: rgba(30, 64, 175, var(--tw-bg-opacity));\n}\n.productButton[data-v-6ae4dfb2] {\n  border-radius: 0.25rem;\n  font-weight: 700;\n  font-size: 1.125rem;\n  line-height: 1.75rem;\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n  padding: 0.5rem;\n  --tw-text-opacity: 1;\n  color: rgba(255, 255, 255, var(--tw-text-opacity));\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

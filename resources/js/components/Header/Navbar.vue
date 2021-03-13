@@ -33,7 +33,10 @@
               <li
                 class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
               >
-                <router-link to="/">
+                <router-link
+                  tabindex="0"
+                  to="/"
+                >
                   <span
                     class="text-xl text-white no-underline lg:text-black is-active"
                   >
@@ -44,7 +47,10 @@
               <li
                 class="inline-block py-2 text-xl font-semibold no-underline lg:text-base lg:px-4"
               >
-                <router-link to="/products">
+                <router-link
+                  tabindex="0"
+                  to="/products"
+                >
                   <span
                     class="text-xl text-white no-underline lg:text-black"
                   >Products</span>

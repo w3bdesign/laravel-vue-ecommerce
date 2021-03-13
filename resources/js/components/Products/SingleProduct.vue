@@ -104,6 +104,6 @@ export default defineComponent({
 }
 
 .productButton {
-  @apply p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700;
+  @apply p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-700 rounded hover:bg-blue-800;
 }
 </style>
