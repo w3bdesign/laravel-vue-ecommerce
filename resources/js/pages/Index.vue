@@ -2,7 +2,7 @@
   <div>
     <error />
     <hero />
-    <show-products />
+    <show-all-products />
   </div>
 </template>
 
@@ -11,9 +11,9 @@ import { defineComponent } from 'vue';
 
 import Hero from '../components/Home/Hero.vue';
 import Error from '../components/Home/Error.vue';
-import ShowProducts from '../components/Products/ShowProducts.vue';
+import ShowAllProducts from '../components/Products/ShowAllProducts.vue';
 
 export default defineComponent({
-  components: { Hero, ShowProducts, Error },
+  components: { Hero, ShowAllProducts, Error },
 });
 </script>
