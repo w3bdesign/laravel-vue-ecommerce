@@ -22,14 +22,18 @@
             class="block mt-2 text-xl font-bold"
           >Remove: <br></span>
           <span class="item-content">
-            <img
-              class="mt-2 ml-4 cursor-pointer"
-              :class="{ removing: localState.removingCartItem }"
-              alt="Remove icon"
-              aria-label="Remove"
-              src="../../../img/svg/Remove.svg"
+            <a
+              tabindex="0"
               @click="removeProductFromCart(products)"
             >
+              <img
+                class="mt-2 ml-4 cursor-pointer"
+                :class="{ removing: localState.removingCartItem }"
+                alt="Remove icon"
+                aria-label="Remove"
+                src="../../../img/svg/Remove.svg"
+              >
+            </a>
           </span>
         </div>
         <div class="item">
