@@ -2,7 +2,9 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=w3bdesign_laravel-vue&metric=alert_status)](https://sonarcloud.io/dashboard?id=w3bdesign_laravel-vue)
 [![CircleCI](https://circleci.com/gh/w3bdesign/laravel-vue.svg?style=svg)](https://circleci.com/gh/w3bdesign/laravel-vue)
 
-## Live URL: https://laravel-vue3.herokuapp.com (initial pageload may be slow because of the Heroku container needing to bootup)
+## Live URL: https://laravel-vue3.herokuapp.com 
+
+(initial pageload may be slow because of the Heroku container needing to bootup)
 
 # Laravel eCommerce
 
