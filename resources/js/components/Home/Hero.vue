@@ -7,7 +7,7 @@
       class="flex flex-col items-start justify-center w-full px-6 tracking-wide lg:w-1/2"
     >
       <span class="p-4 my-4 text-2xl text-black bg-white rounded-lg">
-        MacBook Air 13 In Store now!
+        MacBook Air 14 In Store now!
       </span>
     </div>
   </div>
