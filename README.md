@@ -6,7 +6,7 @@
 
  Ecommerce site with Laravel 8, Vue 3 and Stripe.
  
- ## Live URL: https://laravel-vue3.herokuapp.com 
+ ## Live URL: https://laravel-vue3-ecommerce.herokuapp.com
 
 (initial pageload may be slow because of the Heroku container needing to bootup)
 
