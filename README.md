@@ -1,4 +1,3 @@
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/w3bdesign/laravel-vue/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/w3bdesign/laravel-vue/?branch=main)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=w3bdesign_laravel-vue&metric=alert_status)](https://sonarcloud.io/dashboard?id=w3bdesign_laravel-vue)
 [![CircleCI](https://circleci.com/gh/w3bdesign/laravel-vue.svg?style=svg)](https://circleci.com/gh/w3bdesign/laravel-vue)
 

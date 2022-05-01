@@ -35,7 +35,7 @@
         "lodash": "^4.17.21",
         "tailwindcss": "^2.2.19",
         "vee-validate": "^4.5.10",
-        "vue": "^3.2.31",
+        "vue": "^3.2.33",
         "vue-router": "^4.0.14",
         "vuex": "^4.0.2",
         "vuex-composition-helpers": "^2.0.0",
