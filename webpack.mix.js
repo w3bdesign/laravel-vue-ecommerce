@@ -8,7 +8,6 @@ mix.options({
   postCss: [require('tailwindcss')('./tailwind.config.js')],
 });
 
-// config eslint
 mix.webpackConfig({
   module: {
     rules: [
