@@ -20,7 +20,7 @@
         "eslint": "7.32.0",
         "eslint-config-airbnb-base": "14.2.1",
         "eslint-loader": "4.0.2",
-        "eslint-plugin-import": "2.25.4",
+        "eslint-plugin-import": "2.26.0",
         "eslint-plugin-vue": "7.20.0",
         "postcss": "8.4.13",
         "resolve-url-loader": "3.1.4",
