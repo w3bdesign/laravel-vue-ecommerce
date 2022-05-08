@@ -22,7 +22,7 @@
         "eslint-loader": "4.0.2",
         "eslint-plugin-import": "2.25.4",
         "eslint-plugin-vue": "7.20.0",
-        "postcss": "8.4.12",
+        "postcss": "8.4.13",
         "resolve-url-loader": "3.1.4",
         "stylelint": "13.13.1",
         "stylelint-config-standard": "21.0.0",
