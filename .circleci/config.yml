@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: 'cimg/php:7.4.29-node'
+      - image: 'cimg/php:7.4.29-browsers'
     steps:
       - checkout
       - run:
