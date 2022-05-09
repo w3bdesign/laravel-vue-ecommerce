@@ -13,6 +13,8 @@
         // "import/no-extraneous-dependencies": "warn",
         "no-console": "warn",
         "global-require": "off",
-        "max-len": "warn"
+        "max-len": "warn",
+        "vue/multi-word-component-names": "warn",
+        "linebreak-style": "warn"
     }
 }
