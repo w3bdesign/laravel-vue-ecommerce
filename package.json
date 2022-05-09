@@ -33,7 +33,7 @@
         "axios": "0.27.2",
         "laravel-mix": "6.0.43",
         "lodash": "4.17.21",
-        "tailwindcss": "2.2.19",
+        "tailwindcss": "3.0.24",
         "vee-validate": "4.5.11",
         "vue": "3.2.33",
         "vue-router": "4.0.15",
