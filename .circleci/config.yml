@@ -54,5 +54,5 @@ jobs:
           command: php artisan serve
           background: true
       - run:
-          name: Run Browser Tests Tests
+          name: Run Browser Tests
           command: php artisan dusk
