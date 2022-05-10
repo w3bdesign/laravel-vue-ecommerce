@@ -4,7 +4,7 @@
 
 # Laravel eCommerce
 
- Ecommerce site with Laravel 8, Vue 3 and Stripe. brr
+ Ecommerce site with Laravel 8, Vue 3 and Stripe.
 
 ### Screenshot:
 
