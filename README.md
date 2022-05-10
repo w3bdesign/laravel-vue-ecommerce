@@ -1,92 +1,64 @@
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=w3bdesign_laravel-vue&metric=alert_status)](https://sonarcloud.io/dashboard?id=w3bdesign_laravel-vue)
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-# Laravel webshop
+<p align="center">
+<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
- Ecommerce site with Laravel 8, Vue 3 and Stripe.
+## About Laravel
 
-### Screenshot:
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
- <br /> 
- <img src="https://user-images.githubusercontent.com/45217974/108638044-9b523980-748d-11eb-9a24-0b58baffecc8.png" alt="Project screenshot" /> 
- <br />
- 
- ### Stripe screenshot: 
- <br /> 
- <img src="https://user-images.githubusercontent.com/45217974/108796168-670f7380-7588-11eb-87d5-bc28276f0b35.png" alt="Stripe screenshot" />
- <br />
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-## Features 
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
--   Laravel 8
+## Learning Laravel
 
--   Vue 3 with composition API
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
--   Vuex 4 state management
+If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
--   Form validation with Vee Validate and Yup
+## Laravel Sponsors
 
--   Vuex-persist for persisting cart after page refresh
+We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
--   Stripe for payments
+### Premium Partners
 
--   Easily change currency by setting two environment variables: `CASHIER_CURRENCY` and `CASHIER_CURRENCY_LOCALE`
+- **[Vehikl](https://vehikl.com/)**
+- **[Tighten Co.](https://tighten.co)**
+- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+- **[64 Robots](https://64robots.com)**
+- **[Cubet Techno Labs](https://cubettech.com)**
+- **[Cyber-Duck](https://cyber-duck.co.uk)**
+- **[Many](https://www.many.co.uk)**
+- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
+- **[DevSquad](https://devsquad.com)**
+- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+- **[OP.GG](https://op.gg)**
+- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
+- **[Lendio](https://lendio.com)**
 
--   ESLint code linting with AirBnB ruleset
+## Contributing
 
--   CSS animations
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
--   Responsive mobile menu
+## Code of Conduct
 
--   SonarCloud code quality scanner integration on all pull requests
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
--   Laravel tests with CircleCI integration
+## Security Vulnerabilities
 
-## Setup
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
--   Fork or clone the project
+## License
 
--   Ensure you have PHP 7.4 or newer installed and setup properly (alternatively use Docker, see <https://laravel.com/docs/8.x/sail>)
-
--   Ensure you have access to a PostgreSQL database
-
--   Ensure you have Node installed
-
--   Rename `.env.example` to `.env` and modify the values
-
--   Run `composer install` to install the PHP dependencies with Composer. Check out <https://getcomposer.org/> if necessary
-
--   Run `npm install` to install the Node dependencies needed by the project. Check out <https://nodejs.org/en/> if necessary
-
--   Run `php artisan:migrate` to setup the Laravel database migrations
-
--   You should create at least one sample product. Although you can use the builtin factory seeders, I prefer to do manual creation for testing purposes.
-
-    To do so run these commands after running `php artisan tinker`: 
-
-    ```php
-    $product = new App\Models\Product();
-    $product->name = 'Example Product';
-    $product->slug = 'example-product';
-    $product->description = 'Example product description';
-    $product->imageUrl = 'url to image';
-    $product->price = 99;
-    $product->save();
-    ```
-
--   Run `npm run watch` to serve the Vue 3 files
-
--   Run `php artisan serve` to serve the PHP files
-
--   Open up `http://localhost:8000` in your browser
-
-## TODO
-
--   Do WCAG analysis and ensure there are no issues
- 
--   Finish implementing search with meilisearch-vue or vue-instantsearch when Vue 3 is supported
-
--   Add some tests to verify that the cart and checkout works correctly
-
--   Consider adding an admin dashboard 
-
--   Look into performance optimization
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
