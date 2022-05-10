@@ -42,17 +42,17 @@ jobs:
       - run:
           name: Install Dusk and Update Chrome Drivers
           command: |
-            composer require --dev laravel/dusk:"6.24"
-            composer require --dev staudenmeir/dusk-updater:"1.2.2"
+            composer require --dev laravel/dusk:"^6.11"
+            composer require --dev staudenmeir/dusk-updater
             php artisan dusk:update --detect
       - run:
           name: Start Chrome Driver
-          command: ./vendor/laravel/dusk/bin/chromedriver-linux --verbose
+          command: ./vendor/laravel/dusk/bin/chromedriver-linux
           background: true
       - run:
           name: Run Laravel Server
           command: php artisan serve
           background: true
       - run:
-          name: Run Browser Tests
+          name: Run Browser Tests Tests
           command: php artisan dusk
