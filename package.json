@@ -19,6 +19,8 @@
         "vue-loader": "^17.0.0"
     },
     "dependencies": {
+        "@stripe/stripe-js": "^1.29.0",
+        "pinia": "^2.0.14",
         "vue": "^3.2.33"
     }
 }
