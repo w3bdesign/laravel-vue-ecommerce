@@ -13,6 +13,7 @@
     },
     "require-dev": {
         "fakerphp/faker": "^v1.9.2",
+        "laravel/dusk": "^6.24",
         "laravel/sail": "^v1.9.0",
         "mockery/mockery": "^1.5.0",
         "nunomaduro/collision": "^v6.2.0",
