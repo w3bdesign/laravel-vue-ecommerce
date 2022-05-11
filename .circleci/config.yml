@@ -1,60 +1,41 @@
 version: 2.1
-jobs:
-  build:
-    docker:
-      - image: 'cimg/php:8.0.14-browsers'
-    steps:
-      - checkout
-      - run:
-          name: Prepare Environment
-          command: |
-            sudo apt update
-            sudo docker-php-ext-install zip
-      - run:
-          name: Create Environment file
-          command: |
-            mv .env.testing .env
-      - restore_cache:
+orbs:
+  browser-tools: circleci/browser-tools@1.2
+
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
+    docker: # run the steps with Docker
+      - image: cimg/php:8.0.14-browsers # ...with this image as the primary container; this is where all `steps` will run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: ~/laravel # directory where steps will run
+    steps: # a set of executable commands
+      - checkout # special step to check out source code to working directory
+      - run: sudo pecl install pcov
+      - run: sudo composer selfupdate
+      - restore_cache: # special step to restore the dependency cache if `composer.lock` does not change
           keys:
-            - 'v1-dependencies-{{ checksum "composer.json" }}'
-            - v1-dependencies-
-      - run:
-          name: Install Dependencies
-          command: composer install -n --prefer-dist
-      - save_cache:
-          key: 'v1-dependencies-{{ checksum "composer.json" }}'
+            - composer-v1-{{ checksum "composer.lock" }}
+            # fallback to using the latest cache if no exact match is found (See https://circleci.com/docs/2.0/caching/)
+            - composer-v1-
+      - run: composer install -n --prefer-dist
+      - save_cache: # special step to save the dependency cache with the `composer.lock` cache key template
+          key: composer-v1-{{ checksum "composer.lock" }}
           paths:
-            - ./vendor
-      - run:
-          name: Generate App key
-          command: 'php artisan key:generate'
-      - run:
-          name: Run Unit Tests
-          command: ./vendor/bin/phpunit tests/Unit
-      - run:
-          name: Create database and run migration
-          command: |
-            touch database/database.sqlite
-            php artisan migrate --env=testing
-      - run:
-          name: Run Http Tests
-          command: ./vendor/bin/phpunit tests/Feature
-      - run:
-          name: Install Dusk and Update Chrome Drivers
-          command: |
-            composer require --dev laravel/dusk:"^6.11"
-            composer require --dev staudenmeir/dusk-updater
-            php artisan dusk:update --detect
-      - run:
-          name: Start Chrome Driver
-          command: ./vendor/laravel/dusk/bin/chromedriver-linux
-          background: true
-      - run:
-          name: Run Laravel Server
-          command: php artisan serve
-          background: true
-      - run:
-          name: Run Browser Tests Tests
-          command: php artisan dusk
-    # The resource_class feature allows configuring CPU and RAM resources for each job. Different resource classes are available for different executors. https://circleci.com/docs/2.0/configuration-reference/#resourceclass
-    resource_class: large
+            - vendor
+      - restore_cache: # special step to restore the dependency cache if `package-lock.json` does not change
+          keys:
+            - node-v1-{{ checksum "package-lock.json" }}
+            # fallback to using the latest cache if no exact match is found (See https://circleci.com/docs/2.0/caching/)
+            - node-v1-
+      - run: yarn install
+      - save_cache: # special step to save the dependency cache with the `package-lock.json` cache key template
+          key: node-v1-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - run: touch storage/testing.sqlite
+      - run: php artisan migrate --env=testing --database=sqlite_testing --force
+      - run: ./vendor/bin/codecept build
+      - run: ./vendor/bin/codecept run
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
