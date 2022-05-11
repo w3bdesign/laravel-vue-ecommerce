@@ -10,10 +10,10 @@
         "production": "mix --production"
     },
     "devDependencies": {
-        "axios": "^0.25",
-        "laravel-mix": "^6.0.6",
-        "lodash": "^4.17.19",
-        "postcss": "^8.1.14",
+        "axios": "^0.27.2",
+        "laravel-mix": "^6.0.43",
+        "lodash": "^4.17.21",
+        "postcss": "^8.4.13",
         "vue-loader": "^17.0.0"
     },
     "dependencies": {
