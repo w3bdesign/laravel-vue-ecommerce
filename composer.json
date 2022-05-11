@@ -22,7 +22,7 @@
         "barryvdh/laravel-ide-helper": "2.12.3",
         "facade/ignition": "2.17.5",
         "fakerphp/faker": "1.19.0",
-        "laravel/dusk": "6.23.1",
+        "laravel/dusk": "6.24.0",
         "laravel/sail": "1.14.2",
         "mockery/mockery": "1.5.0",
         "nunomaduro/collision": "5.11.0",
