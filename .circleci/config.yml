@@ -36,7 +36,7 @@ jobs: # a collection of steps
             - node_modules
       - run: touch database/testing.sqlite
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
-      - run: php artisan dusk:chrome-driver `/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
+      - run: php artisan dusk:chrome-driver #`/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
       - run: ./vendor/laravel/dusk/bin/chromedriver-linux &
       - run:
           name: Start Laravel Server
