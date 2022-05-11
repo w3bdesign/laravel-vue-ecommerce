@@ -36,13 +36,16 @@ jobs: # a collection of steps
             - node_modules
       - run: touch database/testing.sqlite
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
-      # - run: php artisan dusk:update --detect
-      #- run: php artisan serve
       - run:
-          name: Install Chrome
-          # command: ./vendor/laravel/dusk/bin/chromedriver-linux
-          command: php artisan dusk:chrome-driver
-          background: false
+          name: Install Dusk and Update Chrome Drivers
+          command: |
+            composer require --dev laravel/dusk
+            composer require --dev staudenmeir/dusk-updater
+            php artisan dusk:update --detect
+      - run:
+          name: Start Chrome Driver
+          command: ./vendor/laravel/dusk/bin/chromedriver-linux
+          background: true
       - run:
           name: Start Laravel Server
           command: php artisan serve
