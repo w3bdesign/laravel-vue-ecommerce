@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: 'circleci/php:8.0.0-node-browsers'
+      - image: 'cimg/php:8.1.0-node-browsers'
     steps:
       - checkout
       - run:
