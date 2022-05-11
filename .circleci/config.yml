@@ -39,7 +39,7 @@ jobs: # a collection of steps
       - run:
           name: Install Dusk and Update Chrome Drivers
           command: |
-            composer require --dev laravel/dusk
+            composer require --dev laravel/dusk:"^6.11"
             composer require --dev staudenmeir/dusk-updater
             php artisan dusk:update --detect
       - run:
