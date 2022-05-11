@@ -1,0 +1,60 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: 'circleci/php:7.4-node-browsers'
+    steps:
+      - checkout
+      - run:
+          name: Prepare Environment
+          command: |
+            sudo apt update
+            sudo docker-php-ext-install zip
+      - run:
+          name: Create Environment file
+          command: |
+            mv .env.testing .env
+      - restore_cache:
+          keys:
+            - 'v1-dependencies-{{ checksum "composer.json" }}'
+            - v1-dependencies-
+      - run:
+          name: Install Dependencies
+          command: composer install -n --prefer-dist
+      - save_cache:
+          key: 'v1-dependencies-{{ checksum "composer.json" }}'
+          paths:
+            - ./vendor
+      - run:
+          name: Generate App key
+          command: 'php artisan key:generate'
+      - run:
+          name: Run Unit Tests
+          command: ./vendor/bin/phpunit tests/Unit
+      - run:
+          name: Create database and run migration
+          command: |
+            touch database/database.sqlite
+            php artisan migrate --env=testing
+      - run:
+          name: Run Http Tests
+          command: ./vendor/bin/phpunit tests/Feature
+      - run:
+          name: Install Dusk and Update Chrome Drivers
+          command: |
+            composer require --dev laravel/dusk:"^6.11"
+            composer require --dev staudenmeir/dusk-updater
+            php artisan dusk:update --detect
+      - run:
+          name: Start Chrome Driver
+          command: ./vendor/laravel/dusk/bin/chromedriver-linux
+          background: true
+      - run:
+          name: Run Laravel Server
+          command: php artisan serve
+          background: true
+      - run:
+          name: Run Browser Tests Tests
+          command: php artisan dusk
+    # The resource_class feature allows configuring CPU and RAM resources for each job. Different resource classes are available for different executors. https://circleci.com/docs/2.0/configuration-reference/#resourceclass
+    resource_class: large
