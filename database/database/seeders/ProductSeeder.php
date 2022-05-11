@@ -39,7 +39,7 @@ class ProductSeeder extends Seeder
         Product::all()->each(function ($product) use ($orders) {
             $orderIds = $orders->random(3)->pluck('id')->toArray();
             foreach ($orderIds as $orderId) {
-                $product->orders()->attach($orderId, ['quantity' => rand(1, 5)]);
+                $product->orders()->attach($orderId, ['quantity' => random_int(0, 9)]);
             }
         });
     }
