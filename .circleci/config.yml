@@ -39,6 +39,11 @@ jobs: # a collection of steps
       # - run: php artisan dusk:update --detect
       #- run: php artisan serve
       - run:
+          name: Install Chrome
+          # command: ./vendor/laravel/dusk/bin/chromedriver-linux
+          command: php artisan dusk:chrome-driver
+          background: false
+      - run:
           name: Start Laravel Server
           command: php artisan serve
           background: true
