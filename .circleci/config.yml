@@ -43,8 +43,8 @@ jobs: # a collection of steps
       - run: chmod -R 0755 vendor/laravel/dusk/bin/chromedriver-linux
       - run: chmod -R 0755 ./vendor/laravel/dusk/bin/chromedriver-linux
       - run:
-          name: Start Chrome Driver
-          command: ./vendor/laravel/dusk/bin/chromedriver-linux --no-sandbox --allowed-ips 127.0.0.1
+          name: Start Chrome Browser
+          command: ./usr/bin/chromium-browser
           background: true
       - run: php artisan serve --no-reload &
       - run: php artisan dusk
