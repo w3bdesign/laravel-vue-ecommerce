@@ -38,7 +38,6 @@ jobs: # a collection of steps
       - run: touch database/testing.sqlite
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
       - run: php artisan dusk:chrome-driver 70
-      - run: php artisan key:generate
       - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
       - run: sudo dpkg -i google-chrome-stable_current_amd64.deb
       - run: sudo apt-get install -f
