@@ -19,7 +19,7 @@ class ExampleTest extends DuskTestCase
 
             $browser->visit('/')
             ->screenshot('home-page')
-            ->assertSee('Laravel');
+            ->assertSee('Laravelx');
             //->assertPathIs('/');
 
             // ->assertSee('Blade test dusk');
