@@ -37,7 +37,7 @@ jobs: # a collection of steps
             - node_modules
       - run: touch database/testing.sqlite
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
-      #- run: php artisan dusk:chrome-driver --all #--detect #`/vendor/laravel/dusk/bin/chromedriver-linux`
+      - run: php artisan dusk:chrome-driver 70
       - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
       - run: sudo dpkg -i google-chrome-stable_current_amd64.deb
       - run: sudo apt-get install -f
