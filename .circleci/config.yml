@@ -40,15 +40,8 @@ jobs: # a collection of steps
       - run: php artisan dusk:chrome-driver --detect #`/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
       - run: chmod -R 0755 vendor/laravel/dusk/bin/chromedriver-linux
       - run: chmod -R 0755 ./vendor/laravel/dusk/bin/chromedriver-linux
-      # - run: ./vendor/laravel/dusk/bin/chromedriver-linux &
-      - run:
-          name: Start Laravel Server
-          command: php artisan serve
-          background: true
-      - run:
-          name: Start Chrome Driver
-          command: ./vendor/laravel/dusk/bin/chromedriver-linux
-          background: true
+      - run: php artisan serve --no-reload &
+      - run: google-chrome-stable --headless --disable-gpu &
       - run: php artisan dusk
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
     resource_class: large
