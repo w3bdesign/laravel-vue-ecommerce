@@ -37,14 +37,14 @@ jobs: # a collection of steps
             - node_modules
       - run: touch database/testing.sqlite
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
-      - run: php artisan dusk:chrome-driver --detect #`/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
+      - run: php artisan dusk:chrome-driver --detect `/vendor/laravel/dusk/bin/chromedriver-linux`
       - run: sudo apt-get update
       - run: sudo apt-get install chromium-browser
       - run: chmod -R 0755 vendor/laravel/dusk/bin/chromedriver-linux
       - run: chmod -R 0755 ./vendor/laravel/dusk/bin/chromedriver-linux
       - run:
           name: Start Chrome Driver
-          command: ./vendor/laravel/dusk/bin/chromedriver-linux
+          command: ./vendor/laravel/dusk/bin/chromedriver-linux --port 9000
           background: true
       - run: php artisan serve --no-reload &
       - run: php artisan dusk
