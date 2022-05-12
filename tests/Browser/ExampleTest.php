@@ -18,7 +18,7 @@ class ExampleTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
            
             $browser->visit('/')
-                    ->assertSee('Dette skal være stoooor tekst');
+                    ->assertSee('Blade test dusk');
         });
     }
 }
