@@ -16,10 +16,12 @@ class ExampleTest extends DuskTestCase
     public function testBasicExample()
     {
         $this->browse(function (Browser $browser) {
-           
+
             $browser->visit('/')
-            ->assertPathIs('/');
-                   // ->assertSee('Blade test dusk');
+                ->assertSee("Vue");
+            //->assertPathIs('/');
+
+            // ->assertSee('Blade test dusk');
         });
     }
 }
