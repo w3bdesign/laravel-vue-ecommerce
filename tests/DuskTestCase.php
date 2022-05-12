@@ -20,7 +20,7 @@ abstract class DuskTestCase extends BaseTestCase
     public static function prepare()
     {
         if (! static::runningInSail()) {
-            // static::startChromeDriver();
+            static::startChromeDriver();
         }
     }
 
@@ -37,6 +37,7 @@ abstract class DuskTestCase extends BaseTestCase
             return $items->merge([
                 '--disable-gpu',
                 '--headless',
+                '--no-sandbox'
             ]);
         })->all());
         
