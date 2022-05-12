@@ -39,11 +39,11 @@ jobs: # a collection of steps
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
       - run: php artisan dusk:chrome-driver --detect `/vendor/laravel/dusk/bin/chromedriver-linux`
       - run: sudo apt-get update
-      - run: sudo apt-get install chromedriver-linux
+      - run: sudo apt-get install chromium-browser
       - run: chmod -R 0755 vendor/laravel/dusk/bin/chromedriver-linux
       - run: chmod -R 0755 ./vendor/laravel/dusk/bin/chromedriver-linux
       - run: php artisan serve --no-reload &
-      - run: ./vendor/laravel/dusk/bin/chromedriver-linux --headless &
+      - run: chromium-browser --headless --no-sandbox &
       - run: php artisan dusk
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
     resource_class: large
