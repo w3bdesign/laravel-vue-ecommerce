@@ -16,9 +16,9 @@ class ExampleTest extends DuskTestCase
     public function testBasicExample()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/')->screenshot('filename');
+           
             $browser->visit('/')
-                    ->assertSee('How To Install Vue 3 in Laravel 9 From Scratch');
+                    ->assertSee('Dette skal være stoooor tekst');
         });
     }
 }
