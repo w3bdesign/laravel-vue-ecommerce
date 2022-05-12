@@ -19797,7 +19797,7 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   className: "container mx-auto mt-64"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
   className: "text-2xl text-orange-200"
-}, "Dette skal være stoooor tekst")], -1
+}, "koko")], -1
 /* HOISTED */
 );
 
