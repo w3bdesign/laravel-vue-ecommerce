@@ -40,6 +40,8 @@ jobs: # a collection of steps
       - run: php artisan dusk:chrome-driver --detect #`/opt/google/chrome/chrome --version | cut -d " " -f3 | cut -d "." -f1`
       - run: chmod -R 0755 vendor/laravel/dusk/bin/chromedriver-linux
       - run: chmod -R 0755 ./vendor/laravel/dusk/bin/chromedriver-linux
+      - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      - run: sudo apt install ./google-chrome-stable_current_amd64.deb
       - run: php artisan serve --no-reload &
       - run: google-chrome-stable --headless --disable-gpu &
       - run: php artisan dusk
