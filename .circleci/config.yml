@@ -41,18 +41,7 @@ jobs: # a collection of steps
       - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
       - run: sudo dpkg -i google-chrome-stable_current_amd64.deb
       - run: sudo apt-get install -f
-      #- run: chmod -R 0755 vendor/laravel/dusk/bin/chromedriver-linux
-      #- run: chmod -R 0755 ./vendor/laravel/dusk/bin/chromedriver-linux
-      - run: php artisan serve --no-reload &
-      - run:
-          name: Creating Dummy Artifacts
-          command: |
-          echo "my artifact file" > /tmp/art-1;
-          mkdir /tmp/artifacts;
-          echo "my artifact files in a dir" > /tmp/artifacts/art-2;
-      - store_artifacts:
-        path: /tmp/art-1
-        destination: artifact-file      
+      - run: php artisan serve --no-reload &     
       - run: php artisan dusk
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
     resource_class: large 
