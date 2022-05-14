@@ -1,12 +1,16 @@
 <template>
-    <h1>{{ title }}</h1>
     <div className="container mx-auto mt-64">
-        <h2 className="text-2xl text-orange-200">koko</h2></div>
+        <h2 className="text-2xl text-orange-200">koko</h2>
+        Cart: {{ cart }}
+        Name: {{ name }}
+    </div>
 </template>
-<script>
-export default {
-    setup: () => ({
-        title: "How To Install Vue 3 in Laravel 9 From Scratch",
-    }),
-};
+
+<script setup>
+import { storeToRefs } from "pinia";
+import { useCart } from "../store/useCart";
+
+const store = useCart();
+
+const { cart, name } = storeToRefs(store);
 </script>
