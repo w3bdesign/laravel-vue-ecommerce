@@ -2,9 +2,9 @@
     <div className="container mx-auto mt-64">
         <h2 className="text-2xl text-orange-200">koko</h2>
         <button className="button" @click="store.addToCart({ item: 'test' })">
-            Add to cart
+            Test Add to cart
         </button>
-        Cart: {{ cart }} Name: {{ name }}
+        Test Cart: {{ cart }} Name: {{ name }}
     </div>
 </template>
 
