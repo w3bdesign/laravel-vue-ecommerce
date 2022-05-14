@@ -20081,7 +20081,14 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cart: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.cart) + " Name: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.name), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    className: "text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800",
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $setup.store.addToCart({
+        item: 'test'
+      });
+    })
+  }, " Add to cart "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cart: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.cart) + " Name: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.name), 1
   /* TEXT */
   )]);
 }
