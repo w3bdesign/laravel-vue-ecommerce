@@ -5,10 +5,9 @@ import { createPinia } from "pinia";
 
 import Layout from "./layout/Layout.vue";
 
-import HelloWorld from "./components/Welcome";
-import ModalComponent from "./components/Modal.vue";
+//import HelloWorld from "./components/Welcome";
 
-import MainComponent from "./components/Main.vue";
+import Hero from "./components/Hero.vue";
 
 import Navbar from "./components/Navbar.vue";
 import FooterContent from "./components/Footer.vue";
@@ -19,10 +18,7 @@ import "flowbite";
 
 const app = createApp({});
 
-app.component("hello-world", HelloWorld);
-app.component("modal-component", ModalComponent);
-
-app.component("main-component", MainComponent);
+app.component("hero-component", Hero);
 
 app.component("nav-bar", Navbar);
 app.component("footer-content", FooterContent);
