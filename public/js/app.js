@@ -20180,6 +20180,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _img_svg_Logo_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../img/svg/Logo.svg */ "./resources/img/svg/Logo.svg");
+
 
 var _hoisted_1 = {
   role: "banner",
@@ -20193,7 +20195,12 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   "class": "w-9/12 pr-2 my-2 overflow-hidden lg:w-3/12 md:w-10/12"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "ml-4 lg:ml-0"
-}, "Logo")], -1
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  alt: "Logo",
+  "class": "h-20 lg:h-24",
+  "aria-label": "Nettbutikk logo",
+  src: _img_svg_Logo_svg__WEBPACK_IMPORTED_MODULE_1__["default"]
+})])], -1
 /* HOISTED */
 );
 
@@ -22495,6 +22502,21 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
+
+/***/ }),
+
+/***/ "./resources/img/svg/Logo.svg":
+/*!************************************!*\
+  !*** ./resources/img/svg/Logo.svg ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/Logo.svg?3e6427f5344cbd2d3346b19366ec5fa5");
 
 /***/ }),
 
