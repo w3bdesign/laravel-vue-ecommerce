@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto mt-64">
+    <div class="container mx-auto mt-12">
         <h2 class="text-2xl text-orange-200">koko</h2>
         Cart: {{ cart }}
         <button class="button" @click="store.addToCart({ item: 'test' })">
