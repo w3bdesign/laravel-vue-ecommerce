@@ -24,7 +24,6 @@ app.component("nav-bar", Navbar);
 app.component("footer-content", FooterContent);
 app.component("cart-component", Cart);
 
-
 app.component("layout", Layout);
 
 app.use(createPinia());
