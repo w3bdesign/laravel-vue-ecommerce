@@ -10,7 +10,7 @@
 
 <style scoped>
 #hero {
-    background-image: url("../../img/jpg/Hero.jpg");
+    background-image: url("../../../img/jpg/Hero.jpg");
     height: 24rem;
 }
 </style>

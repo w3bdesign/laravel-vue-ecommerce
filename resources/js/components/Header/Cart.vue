@@ -14,7 +14,7 @@
 
 <script setup>
 import { storeToRefs } from "pinia";
-import { useCart } from "../store/useCart";
+import { useCart } from "../../store/useCart";
 
 const store = useCart();
 
