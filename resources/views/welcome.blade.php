@@ -20,9 +20,7 @@
 
 <body class="antialiased">
     <div id="app" class="container p-4 mx-auto">
-        <div>
-        <layout-component />
-        </div>
+       koko
         <script src="{{ mix('js/app.js') }}"></script>
 </body>
 
