@@ -8,6 +8,8 @@ import ModalComponent from "./components/Modal.vue";
 import TestComponent from "./components/Test.vue";
 import MainComponent from "./components/Main.vue";
 
+import router from "./router/index";
+
 import "flowbite";
 
 const app = createApp({});
@@ -18,4 +20,5 @@ app.component("test-component", TestComponent);
 app.component("main-component", MainComponent);
 
 app.use(createPinia());
+app.use(router);
 app.mount("#app");
