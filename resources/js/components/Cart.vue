@@ -1,10 +1,14 @@
 <template>
     <div class="container mx-auto mt-64">
         <h2 class="text-2xl text-orange-200">koko</h2>
+        Cart: {{ cart }}
         <button class="button" @click="store.addToCart({ item: 'test' })">
             Add to cart
         </button>
-        Cart: {{ cart }} Name: {{ name }}
+
+        <button class="button" @click="store.getProductsFromApi()">
+            Get all products
+        </button>
     </div>
 </template>
 
@@ -14,5 +18,5 @@ import { useCart } from "../store/useCart";
 
 const store = useCart();
 
-const { cart, name } = storeToRefs(store);
+const { cart } = storeToRefs(store);
 </script>
