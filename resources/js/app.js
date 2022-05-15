@@ -14,7 +14,7 @@ import FooterContent from "./components/Footer.vue";
 
 import router from "./router/index";
 
-import "flowbite";
+//import "flowbite";
 
 const app = createApp({});
 
