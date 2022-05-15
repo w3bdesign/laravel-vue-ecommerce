@@ -20,7 +20,7 @@
 
 <body class="antialiased">
     <div id="app" class="container p-4 mx-auto">
-        <layout-component />
+        layout-component
         <script src="{{ mix('js/app.js') }}"></script>
 </body>
 
