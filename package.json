@@ -1,6 +1,6 @@
 {
     "private": true,
-    "version": "0.0.1",
+    "version": "0.0.2",
     "scripts": {
         "dev": "npm run development",
         "development": "mix",
@@ -23,6 +23,7 @@
         "@stripe/stripe-js": "^1.29.0",
         "flowbite": "^1.4.5",
         "pinia": "^2.0.14",
-        "vue": "^3.2.33"
+        "vue": "^3.2.33",
+        "vue-router": "^4.0.15"
     }
 }
