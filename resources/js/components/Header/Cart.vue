@@ -3,11 +3,10 @@
         <h2 class="text-2xl text-orange-200">koko</h2>
         Cart: {{ cart }}
         <button class="button" @click="store.addToCart({ item: 'test' })">
-            Add to cart
+            Add to my cart
         </button>
-
         <button class="button" @click="store.getProductsFromApi()">
-            Get all products
+            Get all API products
         </button>
     </div>
 </template>
