@@ -20,9 +20,11 @@ const app = createApp({});
 
 app.component("hero-component", Hero);
 
+
 app.component("nav-bar", Navbar);
 app.component("footer-content", FooterContent);
 app.component("cart-component", Cart);
+
 
 app.component("layout", Layout);
 
