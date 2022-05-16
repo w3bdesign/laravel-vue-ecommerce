@@ -1,7 +1,3 @@
-// https://www.youtube.com/watch?v=Ok6vO98RV_Q&t=335s
-
-// https://www.youtube.com/watch?v=9whgkjxoCME
-
 import { defineStore } from "pinia";
 
 import axios from "axios";
@@ -33,6 +29,14 @@ export const useCart = defineStore("shopState", {
         },
         clearCart() {
             this.cart.length = 0;
+        },
+    },
+    getters: {
+        getCartQuantity() {
+            return this.cart.length;
+        },
+        getCartContent() {
+            return this.cart;
         },
     },
 });
