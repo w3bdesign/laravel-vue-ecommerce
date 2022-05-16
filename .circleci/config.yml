@@ -46,7 +46,8 @@ jobs: # a collection of steps
           name: Serve Application
           background: true
           command: php artisan serve  
-      - run: php artisan dusk      
+      - run: php artisan dusk
+      - run: php artisan test      
       - store_artifacts:
           path: ./tests/Browser/console
           destination: console
