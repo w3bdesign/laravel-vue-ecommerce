@@ -15,7 +15,7 @@
  <img src="https://user-images.githubusercontent.com/45217974/108796168-670f7380-7588-11eb-87d5-bc28276f0b35.png" alt="Stripe screenshot" />
  <br />
 
-## Features 
+## Features
 
 -   Laravel 9
 
@@ -82,7 +82,7 @@
 ## TODO
 
 -   Do WCAG analysis and ensure there are no issues
- 
+
 -   Finish implementing search with meilisearch-vue or vue-instantsearch when Vue 3 is supported
 
 -   Add some tests to verify that the cart and checkout works correctly
