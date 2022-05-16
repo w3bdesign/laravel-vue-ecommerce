@@ -19,7 +19,7 @@ class ExampleTest extends DuskTestCase
 
             $browser->visit('/')
             //->screenshot('home-page')
-            ->assertSee('koko');
+            ->assertSee('MacBook');
             //->assertPathIs('/');
            
         });
