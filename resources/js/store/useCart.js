@@ -12,25 +12,27 @@ const state = {
     order: {},
     customer: {},
     checkoutFormIsValid: false,
+    error: null,
 };
 
-export const useCart = defineStore("cart", {
+export const useCart = defineStore("shopState", {
     state: () => state,
     actions: {
         async getProductsFromApi() {
             axios
                 .get("/api/products")
                 .then((response) => {
-                    console.log(response.data);
-                    //commit('FETCH_PRODUCTS_FROM_API', response.data);
+                    if (response.data) {
+                        this.products = response.data;
+                    }
                 })
-                .catch((error) => console.error(error));
+                .catch((error) => (this.error = error));
         },
         addToCart(item) {
             this.cart.push(item);
         },
         clearCart() {
-            this.cart = null;
+            this.cart.length = 0;
         },
     },
 });
