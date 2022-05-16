@@ -1,7 +1,8 @@
 <template>
     <div class="container mx-auto mt-12">
         <h2 class="text-2xl text-orange-200">koko</h2>
-        Cart: <pre>{{ cart }}</pre>
+        <div v-if="store.cart.length">Cart: <pre>{{ cart }}</pre>
+        </div>
 
         <div v-if="store.products">
             <div id="product-container" class="flex flex-wrap items-center">
