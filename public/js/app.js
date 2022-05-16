@@ -20384,7 +20384,7 @@ var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
     "class": "flex flex-col items-start justify-center w-full px-6 tracking-wide lg:w-1/2"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     "class": "p-4 my-4 text-2xl text-black bg-white rounded-lg mt-4"
-  }, " MacBook Air 14 In Store now!11 ")], -1
+  }, " MacBook Air 14 In Store now! Tailwind CSS Carousel - Flowbite ")], -1
   /* HOISTED */
   );
 });
