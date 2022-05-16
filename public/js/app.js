@@ -20427,7 +20427,7 @@ var _hoisted_6 = {
   "class": "flex justify-center mt-2"
 };
 var _hoisted_7 = {
-  "class": "ml-4 text-xl text-gray-900"
+  "class": "text-xl text-gray-900"
 };
 var _hoisted_8 = {
   "class": "flex justify-center pt-3"
