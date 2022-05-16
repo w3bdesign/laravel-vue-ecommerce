@@ -20208,7 +20208,7 @@ var _withScopeId = function _withScopeId(n) {
 };
 
 var _hoisted_1 = {
-  "class": "container mx-auto mt-12"
+  "class": "container mx-auto"
 };
 var _hoisted_2 = {
   key: 0

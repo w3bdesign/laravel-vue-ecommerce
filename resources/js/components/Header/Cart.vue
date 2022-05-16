@@ -1,5 +1,5 @@
 <template>
-    <div class="container mx-auto mt-12">
+    <div class="container mx-auto">
         <transition name="fade">
             <div v-if="store.getCartQuantity">
                 <img alt="Cart icon" class="h-12 ml-4 lg:ml-2" aria-label="Cart" src="../../../img/svg/Cart.svg" />
