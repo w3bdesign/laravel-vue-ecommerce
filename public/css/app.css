@@ -583,6 +583,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 1.5rem;
 }
 
+.h-12 {
+  height: 3rem;
+}
+
 .w-9\/12 {
   width: 75%;
 }
@@ -814,6 +818,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
   .lg\:mt-0 {
     margin-top: 0px;
+  }
+
+  .lg\:ml-2 {
+    margin-left: 0.5rem;
   }
 
   .lg\:block {
