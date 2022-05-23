@@ -1,58 +1,56 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image: 'circleci/php:7.4-node-browsers'
-    steps:
-      - checkout
-      - run:
-          name: Prepare Environment
-          command: |
-            sudo apt update
-            sudo docker-php-ext-install zip
-      - run:
-          name: Create Environment file
-          command: |
-            mv .env.testing .env
-      - restore_cache:
+version: 2.1
+orbs:
+  browser-tools: circleci/browser-tools@1.3.0
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
+    docker: # run the steps with Docker
+      #- image: cimg/php:8.0.14-browsers # ...with this image as the primary container; this is where all `steps` will run
+      - image: cimg/php:8.0.19-browsers # ...with this image as the primary container; this is where all `steps` will run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: ~/laravel # directory where steps will run
+    steps: # a set of executable commands
+      - checkout # special step to check out source code to working directory
+      - run: sudo pecl install pcov
+      - run: sudo composer selfupdate
+      - restore_cache: # special step to restore the dependency cache if `composer.lock` does not change
           keys:
-            - 'v1-dependencies-{{ checksum "composer.json" }}'
-            - v1-dependencies-
-      - run:
-          name: Install Dependencies
-          command: composer install -n --prefer-dist
-      - save_cache:
-          key: 'v1-dependencies-{{ checksum "composer.json" }}'
+            - composer-v1-{{ checksum "composer.lock" }}
+            # fallback to using the latest cache if no exact match is found (See https://circleci.com/docs/2.0/caching/)
+            - composer-v1-
+      - run: composer install -n --prefer-dist
+      - save_cache: # special step to save the dependency cache with the `composer.lock` cache key template
+          key: composer-v1-{{ checksum "composer.lock" }}
           paths:
-            - ./vendor
+            - vendor
+      - restore_cache: # special step to restore the dependency cache if `package-lock.json` does not change
+          keys:
+            - node-v1-{{ checksum "package-lock.json" }}
+            # fallback to using the latest cache if no exact match is found (See https://circleci.com/docs/2.0/caching/)
+            - node-v1-
+      - run: npm ci
+      - save_cache: # special step to save the dependency cache with the `package-lock.json` cache key template
+          key: node-v1-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - run: touch database/database.sqlite
+      - run: php artisan migrate --env=testing
+      - run: php artisan dusk:chrome-driver 70
+      - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      - run: sudo dpkg -i google-chrome-stable_current_amd64.deb
+      - run: sudo apt-get install -f
+      - run: npm run prod
       - run:
-          name: Generate App key
-          command: 'php artisan key:generate'
-      - run:
-          name: Run Unit Tests
-          command: ./vendor/bin/phpunit tests/Unit
-      - run:
-          name: Create database and run migration
-          command: |
-            touch database/database.sqlite
-            php artisan migrate --env=testing
-      - run:
-          name: Run Http Tests
-          command: ./vendor/bin/phpunit tests/Feature
-      - run:
-          name: Install Dusk and Update Chrome Drivers
-          command: |
-            composer require --dev laravel/dusk:"^6.11"
-            composer require --dev staudenmeir/dusk-updater
-            php artisan dusk:update --detect
-      - run:
-          name: Start Chrome Driver
-          command: ./vendor/laravel/dusk/bin/chromedriver-linux --verbose
+          name: Serve Application
           background: true
-      - run:
-          name: Run Laravel Server
-          command: php artisan serve
-          background: true
-      - run:
-          name: Run Browser Tests Tests
-          command: php artisan dusk
+          command: php artisan serve  
+      - run: php artisan dusk      
+      - store_artifacts:
+          path: ./tests/Browser/console
+          destination: console
+      - store_artifacts:
+          path: ./tests/Browser/screenshots
+          destination: screenshots
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+    resource_class: large 
