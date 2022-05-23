@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'Footer',
+  name: 'FooterContent',
   computed: {
     todayDate() {
       return new Date().getFullYear();
