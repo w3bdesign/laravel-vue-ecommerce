@@ -18,7 +18,7 @@ class BuyProductTest extends DuskTestCase
     public function testWeSeeVue()
     {
         $this->browse(function (Browser $browser) {
-            $browser->assertTrue()
+           
             /*$browser->visit('http://127.0.0.1:8000')
                     ->assertSee('Laravel');*/
         });
