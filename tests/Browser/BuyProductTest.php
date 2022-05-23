@@ -17,7 +17,7 @@ class BuyProductTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('http://127.0.0.1:8000')
-                    ->assertSee('MacBook Air 13 In Store now!');
+                    ->assertSee('Laravel');
         });
     }
 }
