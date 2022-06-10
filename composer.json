@@ -11,7 +11,7 @@
         "php": "^8.0",
         "fideloper/proxy": "4.4.1",
         "fruitcake/laravel-cors": "3.0.0",
-        "guzzlehttp/guzzle": "7.4.3",
+        "guzzlehttp/guzzle": "7.4.4",
         "laravel/cashier": "13.11.0",
         "laravel/framework": "8.83.16",
         "laravel/scout": "9.4.9",
