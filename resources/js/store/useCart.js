@@ -30,6 +30,15 @@ export const useCart = defineStore("shopState", {
         clearCart() {
             this.cart.length = 0;
         },
+
+
+        getSingleProduct(slug) {
+            return this.products.find((product) => product.slug === slug)
+
+        }
+
+
+
     },
     getters: {
         getCartQuantity() {

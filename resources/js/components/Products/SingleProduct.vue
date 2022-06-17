@@ -1,17 +1,18 @@
 <template>
     <div v-if="product">
-        <section>
+
+   <section>
             <div class="container z-0 flex flex-wrap items-center pt-4 pb-12 mx-auto">
                 <div class="divGrid">
                     <img v-if="product.imageUrl !== undefined" id="product-image" class="productImage"
-                        :alt="product.name" :src="product.imageUrl">
-                    <img v-else id="product-image" class="productImage" :alt="product.name" :src="placeholderImage">
+                        :alt="product.name" :src="product.imageUrl" />
+                    <img v-else id="product-image" class="productImage" :alt="product.name" :src="placeholderImage" />
                     <div class="ml-8">
                         <p class="text-3xl font-bold text-left">
                             {{ product.name }}
                         </p>
                         <p class="pt-1 mt-4 text-2xl text-gray-900">
-                            {{ formatPrice(product.price) }}
+                             formatPrice(product.price) 
                         </p>
                         <p class="pt-1 mt-4 text-2xl text-gray-900">
                             {{ product.description }}
@@ -25,16 +26,31 @@
                 </div>
             </div>
         </section>
+
+       
+
     </div>
 </template>
 
 <script setup>
+//import { computed, reactive, onBeforeMount } from "vue";
+import { useRoute, useRouter } from "vue-router";
+
+
+import { useCart } from "../../store/useCart";
+
+const store = useCart();
+const route = useRoute();
+
+
+const product =  store.getSingleProduct(route.params.slug);
+
 
 </script>
 
 <style scoped>
 .divGrid {
-    @apply grid grid-cols-1 gap-4 mt-8 lg: grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-2;
+    @apply grid grid-cols-1 gap-4 mt-8 lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-2;
 }
 
 .productImage {
@@ -43,6 +59,6 @@
 }
 
 .productButton {
-    @apply p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-700 rounded hover: bg-blue-800;
+    @apply p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-700 rounded hover:bg-blue-800;
 }
 </style>

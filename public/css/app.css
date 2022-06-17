@@ -1088,10 +1088,6 @@ video {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .xl\:p-2 {
-    padding: 0.5rem;
-  }
-
   .xl\:pt-7 {
     padding-top: 1.75rem;
   }
