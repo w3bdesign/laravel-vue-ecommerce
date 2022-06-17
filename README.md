@@ -2,7 +2,7 @@
 
 # Laravel webshop
 
- Ecommerce site with Laravel 8, Vue 3 and Stripe.
+ Ecommerce site with Laravel 9, Vue 3 and Stripe.
 
 ### Screenshot:
 
