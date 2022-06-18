@@ -2,4 +2,3 @@
     <hero-component />
     <showall-products />
 </template>
-

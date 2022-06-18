@@ -1,0 +1,4 @@
+<template>
+  <order-checkout />
+</template>
+
