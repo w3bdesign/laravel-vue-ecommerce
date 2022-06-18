@@ -1,10 +1,11 @@
 // Pages
 import Index from "../pages/Index.vue";
 import Products from "../pages/Products.vue";
+import Checkout from "../pages/Checkout.vue";
 
 /*
 import Categories from '../pages/Categories.vue';
-import Checkout from '../pages/Checkout.vue';
+
 import Success from '../pages/Success.vue';*/
 
 // Components
@@ -18,6 +19,7 @@ const routes = [
         path: "/product/:slug",
         component: SingleProduct,
     },
+    { path: "/checkout", component: Checkout },
     /*
 { path: '/categories', component: Categories },
 { path: '/checkout', component: Checkout },
