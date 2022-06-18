@@ -2,6 +2,9 @@ import { defineStore } from "pinia";
 
 import axios from "axios";
 
+
+// TODO https://seb-l.github.io/pinia-plugin-persist/#install
+
 const state = {
     products: [],
     cart: [],
@@ -31,14 +34,9 @@ export const useCart = defineStore("shopState", {
             this.cart.length = 0;
         },
 
-
         getSingleProduct(slug) {
-            return this.products.find((product) => product.slug === slug)
-
-        }
-
-
-
+            return this.products.find((product) => product.slug === slug);
+        },
     },
     getters: {
         getCartQuantity() {

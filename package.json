@@ -23,6 +23,7 @@
         "@stripe/stripe-js": "^1.32.0",
         "flowbite": "^1.4.7",
         "pinia": "^2.0.14",
+        "pinia-plugin-persist": "^1.0.0",
         "vue": "^3.2.37",
         "vue-router": "^4.0.16"
     }
