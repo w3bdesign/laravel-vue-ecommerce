@@ -22,7 +22,7 @@
                                 </router-link>
                             </li>
                             <li class="inline-block py-2 text-xl font-semibold no-underline lg:text-base pl-6">
-                                <router-link tabindex="0" to="/">
+                                <router-link tabindex="0" to="/products">
                                     <span class="text-2xl text-white no-underline lg:text-black is-active">
                                         Products
                                     </span>

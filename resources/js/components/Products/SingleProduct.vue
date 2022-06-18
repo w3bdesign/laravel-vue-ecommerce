@@ -14,7 +14,7 @@
                             {{ product.name }}
                         </p>
                         <p class="pt-1 mt-4 text-2xl text-gray-900">
-                            formatPrice(product.price)
+                            {{ formatPrice(product.price) }}
                         </p>
                         <p class="pt-1 mt-4 text-2xl text-gray-900">
                             {{ product.description }}
@@ -40,6 +40,7 @@ import { useRoute, useRouter } from "vue-router";
 
 
 import { useCart } from "../../store/useCart";
+import { formatPrice } from "../../utils/functions"
 
 const store = useCart();
 const route = useRoute();
