@@ -22,7 +22,7 @@ const routes = [
     { path: "/checkout", component: Checkout },
     /*
 { path: '/categories', component: Categories },
-{ path: '/checkout', component: Checkout },
+
 { path: '/success', component: Success },*/
 ];
 
