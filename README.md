@@ -2,7 +2,7 @@
 
 # Laravel webshop
 
- Ecommerce site with Laravel 9, Vue 3 and Stripe.
+Ecommerce site with Laravel 9, Vue 3 and Stripe.
 
 ### Screenshot:
 
@@ -19,9 +19,11 @@
 
 -   Laravel 9
 
--   Vue 3 with composition API
+-   Vue 3 with SFC and script setup syntax
 
 -   Pinia state management
+
+-   State persist with pinia-plugin-persist
 
 -   Form validation with Vee Validate and Yup
 
@@ -45,7 +47,7 @@
 
 -   Fork or clone the project
 
--   Ensure you have PHP 7.4 or newer installed and setup properly (alternatively use Docker, see <https://laravel.com/docs/8.x/sail>)
+-   Ensure you have PHP 7.4 or newer installed and setup properly (alternatively use Docker, see <https://laravel.com/docs/9.x/sail>)
 
 -   Ensure you have access to a PostgreSQL database
 
@@ -61,7 +63,7 @@
 
 -   You should create at least one sample product. Although you can use the builtin factory seeders, I prefer to do manual creation for testing purposes.
 
-    To do so run these commands after running `php artisan tinker`: 
+    To do so run these commands after running `php artisan tinker`:
 
     ```php
     $product = new App\Models\Product();
@@ -87,6 +89,6 @@
 
 -   Add some tests to verify that the cart and checkout works correctly
 
--   Consider adding an admin dashboard 
+-   Consider adding an admin dashboard
 
 -   Look into performance optimization
