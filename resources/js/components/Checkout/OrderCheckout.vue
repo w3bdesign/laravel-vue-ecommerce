@@ -5,12 +5,12 @@
             <div v-if="localState.orderError" class="h-10 p-4">
                 <span class="text-lg text-center text-red-500">Error during order. Please retry</span>
             </div>
-            <div v-for="products in cartContent" :key="products.id"
+            <div v-for="product in cartContent" :key="product.id"
                 class="container mx-auto mt-4 flex border border-gray-300 rounded-lg shadow flex-wrap flex-row justify-around items-center content-center">
                 <div class="item">
                     <span class="block mt-2 text-xl font-bold">Remove: <br /></span>
                     <span class="item-content">
-                        <a tabindex="0" @click="removeProductFromCart(products)">
+                        <a tabindex="0" @click="removeProductFromCart(product)">
                             <img class="mt-2 ml-4 cursor-pointer" :class="{
                                 removing: localState.removingCartItem,
                             }" alt="Remove icon" aria-label="Remove" src="../../../img/svg/Remove.svg" />
@@ -20,23 +20,24 @@
                 <div class="item">
                     <span class="block mt-2 text-xl font-bold">Name: <br /></span>
                     <span class="text-lg item-content">{{
-                            products.name
+                            product.item.name
                     }}</span>
                 </div>
                 <div class="item">
                     <span class="block mt-2 text-xl font-bold">Quantity: <br />
                     </span>
                     <span class="text-lg item-content">
-                        {{ products.quantity }}
+                        {{ product.item.quantity }}
                     </span>
                 </div>
                 <div class="item">
                     <span class="block mt-2 text-xl font-bold">Price: <br /></span>
                     <span class="text-lg item-content">
-                        {{ formatPrice(products.price) }}
+                        {{ formatPrice(product.item.price) }}
                     </span>
                 </div>
             </div>
+
             <div v-if="cartLength"
                 class="container mx-auto mt-2 flex flex-wrap flex-row justify-end items-end content-center">
                 <span class="p-4 text-2xl font-extrabold text-right">Total: {{ formatPrice(localState.cartTotal)
@@ -79,7 +80,7 @@
                             class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700;"
                             :class="{
                                 disabledButton: localState.paymentIsProcessing,
-                            }" :disabled="localState.paymentIsProcessing" @click="checkout(products)">
+                            }" :disabled="localState.paymentIsProcessing" @click="checkout(product)">
                             Checkout
                         </button>
                     </div>
@@ -111,6 +112,8 @@ const cartLength = store.getCartQuantity;
 const cartContent = store.getCartContent;
 
 const customerDetails = store.getCustomerDetails;
+
+console.log("cartContent", cartContent);
 </script>
 
 <style>
@@ -118,13 +121,9 @@ const customerDetails = store.getCustomerDetails;
     @apply cursor-not-allowed opacity-50;
 }
 
-
-
 .flex-container {
     @apply container mx-auto mt-4 flex border border-gray-300 rounded-lg shadow flex-wrap flex-row justify-around items-center content-center;
 }
-
-
 
 .item {
     @apply lg: m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
