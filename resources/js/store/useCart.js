@@ -44,6 +44,9 @@ export const useCart = defineStore("shopState", {
         getCartContent() {
             return this.cart;
         },
+        getCustomerDetails() {
+            return this.customer;
+        }
     },
     persist: {
         enabled: true,
