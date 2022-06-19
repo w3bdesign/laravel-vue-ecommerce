@@ -20539,11 +20539,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* CLASS */
     )], 8
     /* PROPS */
-    , _hoisted_9)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.item.name), 1
+    , _hoisted_9)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.name), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.item.quantity), 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.quantity), 1
     /* TEXT */
-    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formatPrice(product.item.price)), 1
+    )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formatPrice(product.price)), 1
     /* TEXT */
     )])]);
   }), 128
@@ -21294,8 +21294,24 @@ var useCart = (0,pinia__WEBPACK_IMPORTED_MODULE_1__.defineStore)("shopState", {
         }, _callee);
       }))();
     },
-    addToCart: function addToCart(item) {
-      this.cart.push(item);
+    //addToCart(item) {
+    addToCart: function addToCart(_ref) {
+      var item = _ref.item;
+      var foundProductInCartIndex = this.cart.findIndex(function (cartItem) {
+        return item.slug === cartItem.slug;
+      });
+
+      if (foundProductInCartIndex > -1) {
+        console.log("foundProductInCartIndex", this.cart[foundProductInCartIndex].quantity);
+        this.cart[foundProductInCartIndex].quantity += 1; // this.cart[foundProductInCartIndex].item.quantity += 1;
+        //this.cart.push(item);
+      } else {
+        //  item.item.quantity = 1;
+        item.quantity = 1;
+        console.log("Pushing item ...", item);
+        this.cart.push(item);
+      } // this.cart.push(item);
+
     },
     clearCart: function clearCart() {
       this.cart.length = 0;

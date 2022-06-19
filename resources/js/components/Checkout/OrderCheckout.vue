@@ -20,20 +20,20 @@
                 <div class="item">
                     <span class="block mt-2 text-xl font-bold">Name: <br /></span>
                     <span class="text-lg item-content">{{
-                            product.item.name
+                            product.name
                     }}</span>
                 </div>
                 <div class="item">
                     <span class="block mt-2 text-xl font-bold">Quantity: <br />
                     </span>
                     <span class="text-lg item-content">
-                        {{ product.item.quantity }}
+                        {{ product.quantity }}
                     </span>
                 </div>
                 <div class="item">
                     <span class="block mt-2 text-xl font-bold">Price: <br /></span>
                     <span class="text-lg item-content">
-                        {{ formatPrice(product.item.price) }}
+                        {{ formatPrice(product.price) }}
                     </span>
                 </div>
             </div>
