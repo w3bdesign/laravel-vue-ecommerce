@@ -37,7 +37,6 @@
                     </span>
                 </div>
             </div>
-
             <div v-if="getCartQuantity"
                 class="container mx-auto mt-2 flex flex-wrap flex-row justify-end items-end content-center">
                 <span class="p-4 text-2xl font-extrabold text-right">Total: {{ formatPrice(getCartTotal) }}</span>
@@ -91,7 +90,7 @@
 
 <script setup>
 import { reactive } from "vue";
-import { storeToRefs } from 'pinia';
+import { storeToRefs } from "pinia";
 
 import { formatPrice } from "../../utils/functions";
 import { useCart } from "../../store/useCart";

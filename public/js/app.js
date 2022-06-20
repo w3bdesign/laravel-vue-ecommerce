@@ -20249,16 +20249,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
 /* harmony import */ var _store_useCart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../store/useCart */ "./resources/js/store/useCart.js");
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'Cart',
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var store = (0,_store_useCart__WEBPACK_IMPORTED_MODULE_0__.useCart)();
+
+    var _storeToRefs = (0,pinia__WEBPACK_IMPORTED_MODULE_1__.storeToRefs)((0,_store_useCart__WEBPACK_IMPORTED_MODULE_0__.useCart)()),
+        getCartQuantity = _storeToRefs.getCartQuantity;
+
     var __returned__ = {
-      store: store,
+      getCartQuantity: getCartQuantity,
+      storeToRefs: pinia__WEBPACK_IMPORTED_MODULE_1__.storeToRefs,
       useCart: _store_useCart__WEBPACK_IMPORTED_MODULE_0__.useCart
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
@@ -20669,18 +20675,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     name: "fade"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+      return [$setup.getCartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
         to: "/checkout"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [$setup.store.getCartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, " Quantity: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.store.getCartQuantity), 1
+          return [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, " Quantity: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.getCartQuantity), 1
           /* TEXT */
-          )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+          )];
         }),
         _: 1
         /* STABLE */
 
-      })];
+      })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
     }),
     _: 1
     /* STABLE */
@@ -23366,7 +23372,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.disabledButton {\n@apply cursor-not-allowed opacity-50;\n}\n.flex-container {\n@apply container mx-auto mt-4 flex border border-gray-300 rounded-lg shadow flex-wrap flex-row justify-around items-center content-center;\n}\n.item {\n@apply lg: m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;\n}\n.inline-block {\n@apply inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;\n}\n.removing {\n@apply animate-spin cursor-not-allowed;\n}\n.fade-enter-active,\r\n.fade-leave-active {\r\n    transition: all 0.5s ease;\n}\n.fade-enter-from,\r\n.fade-leave-to {\r\n    opacity: 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.disabledButton {\n@apply cursor-not-allowed opacity-50;\n}\n.flex-container {\n@apply container mx-auto mt-4 flex border border-gray-300 rounded-lg shadow flex-wrap flex-row justify-around items-center content-center;\n}\n.item {\n@apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;\n}\n.inline-block {\n@apply inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;\n}\n.removing {\n@apply animate-spin cursor-not-allowed;\n}\n.fade-enter-active,\r\n.fade-leave-active {\r\n    transition: all 0.5s ease;\n}\n.fade-enter-from,\r\n.fade-leave-to {\r\n    opacity: 0;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -23390,7 +23396,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.cartQuantity[data-v-a5f35132] {\n@apply absolute w-6 h-6 pb-2 ml-16 -mt-12 text-center text-white bg-black rounded-full lg: ml-14;\n}\n.fade-enter-active[data-v-a5f35132],\r\n.fade-leave-active[data-v-a5f35132] {\r\n    transition: all 0.5s ease;\n}\n.fade-enter-from[data-v-a5f35132],\r\n.fade-leave-to[data-v-a5f35132] {\r\n    opacity: 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.cartQuantity[data-v-a5f35132] {\n@apply absolute w-6 h-6 pb-2 ml-16 -mt-12 text-center text-white bg-black rounded-full lg:ml-14;\n}\n.fade-enter-active[data-v-a5f35132],\r\n.fade-leave-active[data-v-a5f35132] {\r\n    transition: all 1.5s ease;\n}\n.fade-enter-from[data-v-a5f35132],\r\n.fade-leave-to[data-v-a5f35132] {\r\n    opacity: 0;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
