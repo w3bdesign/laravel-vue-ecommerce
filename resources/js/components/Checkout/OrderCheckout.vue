@@ -126,7 +126,7 @@ const removeProductFromCart = (product) => {
 }
 
 .item {
-    @apply lg: m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
+    @apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
 }
 
 .inline-block {
