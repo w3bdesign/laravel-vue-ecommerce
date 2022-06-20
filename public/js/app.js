@@ -20178,13 +20178,6 @@ __webpack_require__.r(__webpack_exports__);
         getCartContent = _storeToRefs.getCartContent,
         getCartTotal = _storeToRefs.getCartTotal,
         getCustomerDetails = _storeToRefs.getCustomerDetails;
-    /*
-    const cartLength = store.getCartQuantity;
-    const cartContent = store.getCartContent;
-    const cartTotal = store.getCartTotal;
-    const customerDetails = store.getCustomerDetails;
-    */
-
 
     var removeProductFromCart = function removeProductFromCart(product) {
       localState.removingCartItem = true;

@@ -109,13 +109,6 @@ const store = useCart();
 
 const { getCartQuantity, getCartContent, getCartTotal, getCustomerDetails } = storeToRefs(useCart());
 
-/*
-const cartLength = store.getCartQuantity;
-const cartContent = store.getCartContent;
-const cartTotal = store.getCartTotal;
-const customerDetails = store.getCustomerDetails;
-*/
-
 const removeProductFromCart = (product) => {
     localState.removingCartItem = true;
     store.removeFromCart(product);
