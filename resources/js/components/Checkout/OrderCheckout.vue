@@ -5,7 +5,7 @@
             <div v-if="localState.orderError" class="h-10 p-4">
                 <span class="text-lg text-center text-red-500">Error during order. Please retry</span>
             </div>
-            <div v-for="product in cartContent" :key="product.id"
+            <div v-for="product in getCartContent" :key="product.id"
                 class="container mx-auto mt-4 flex border border-gray-300 rounded-lg shadow flex-wrap flex-row justify-around items-center content-center">
                 <div class="lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto">
                     <span class="block mt-2 text-xl font-bold">Remove: <br /></span>
@@ -38,15 +38,15 @@
                 </div>
             </div>
 
-            <div v-if="cartLength"
+            <div v-if="getCartQuantity"
                 class="container mx-auto mt-2 flex flex-wrap flex-row justify-end items-end content-center">
-                <span class="p-4 text-2xl font-extrabold text-right">Total: {{ formatPrice(cartTotal) }}</span>
+                <span class="p-4 text-2xl font-extrabold text-right">Total: {{ formatPrice(getCartTotal) }}</span>
             </div>
         </section>
-        <h2 v-if="!cartLength" class="m-4 text-3xl text-center">
+        <h2 v-if="!getCartQuantity" class="m-4 text-3xl text-center">
             Cart is currently empty
         </h2>
-        <div v-if="cartLength">
+        <div v-if="getCartQuantity">
             <h2 class="h-10 m-2 text-2xl font-bold text-center">
                 Customer Details
             </h2>
@@ -55,7 +55,7 @@
             </div>
             <transition name="fade">
                 <div v-show="
-                    customerDetails.firstName &&
+                    getCustomerDetails.firstName &&
                     localState.checkoutFormIsValid
                 ">
                     <div class="flex justify-center w-full align-center">
@@ -107,7 +107,7 @@ const localState = reactive({
 
 const store = useCart();
 
-const { cartLength, cartContent, cartTotal, customerDetails } = storeToRefs(useCart());
+const { getCartQuantity, getCartContent, getCartTotal, getCustomerDetails } = storeToRefs(useCart());
 
 /*
 const cartLength = store.getCartQuantity;
