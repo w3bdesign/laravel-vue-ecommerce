@@ -91,6 +91,7 @@
 
 <script setup>
 import { reactive } from "vue";
+import { storeToRefs } from 'pinia';
 
 import { formatPrice } from "../../utils/functions";
 import { useCart } from "../../store/useCart";
@@ -106,10 +107,14 @@ const localState = reactive({
 
 const store = useCart();
 
+const {cartLength, cartContent, cartTotal, customerDetails } = storeToRefs(useCart());
+
+/*
 const cartLength = store.getCartQuantity;
 const cartContent = store.getCartContent;
 const cartTotal = store.getCartTotal;
 const customerDetails = store.getCustomerDetails;
+*/
 
 const removeProductFromCart = (product) => {
     localState.removingCartItem = true;
