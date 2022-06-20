@@ -744,6 +744,10 @@ video {
   width: 75%;
 }
 
+.w-auto {
+  width: auto;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -1118,6 +1122,10 @@ video {
 
 @media (min-width: 1024px) {
 
+  .lg\:m-2 {
+    margin: 0.5rem;
+  }
+
   .lg\:ml-2 {
     margin-left: 0.5rem;
   }
@@ -1140,6 +1148,10 @@ video {
 
   .lg\:h-24 {
     height: 6rem;
+  }
+
+  .lg\:h-12 {
+    height: 3rem;
   }
 
   .lg\:w-5\/12 {
@@ -1223,6 +1235,10 @@ video {
 
   .xl\:w-1\/4 {
     width: 25%;
+  }
+
+  .xl\:w-full {
+    width: 100%;
   }
 
   .xl\:grid-cols-2 {

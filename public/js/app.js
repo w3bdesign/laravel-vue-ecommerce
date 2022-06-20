@@ -20414,7 +20414,7 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 var _hoisted_5 = [_hoisted_4];
 var _hoisted_6 = {
-  "class": "item"
+  "class": "lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto"
 };
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
@@ -20424,11 +20424,11 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_8 = {
-  "class": "item-content"
+  "class": "inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full"
 };
 var _hoisted_9 = ["onClick"];
 var _hoisted_10 = {
-  "class": "item"
+  "class": "lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto"
 };
 
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
@@ -20438,10 +20438,10 @@ var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_12 = {
-  "class": "text-lg item-content"
+  "class": "text-lg inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full"
 };
 var _hoisted_13 = {
-  "class": "item"
+  "class": "lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto"
 };
 
 var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
@@ -20451,7 +20451,7 @@ var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_15 = {
-  "class": "text-lg item-content"
+  "class": "text-lg inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full"
 };
 var _hoisted_16 = {
   "class": "item"
@@ -20464,7 +20464,7 @@ var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_18 = {
-  "class": "text-lg item-content"
+  "class": "text-lg inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full"
 };
 var _hoisted_19 = {
   key: 1,
@@ -23351,7 +23351,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.disabledButton {\n@apply cursor-not-allowed opacity-50;\n}\n.flex-container {\n@apply container mx-auto mt-4 flex border border-gray-300 rounded-lg shadow flex-wrap flex-row justify-around items-center content-center;\n}\n.item {\n@apply lg: m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;\n}\n.item-content {\n@apply inline-block mt-4 lg: h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;\n}\n.removing {\n@apply animate-spin cursor-not-allowed;\n}\n.fade-enter-active,\r\n.fade-leave-active {\r\n    transition: all 0.5s ease;\n}\n.fade-enter-from,\r\n.fade-leave-to {\r\n    opacity: 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.disabledButton {\n@apply cursor-not-allowed opacity-50;\n}\n.flex-container {\n@apply container mx-auto mt-4 flex border border-gray-300 rounded-lg shadow flex-wrap flex-row justify-around items-center content-center;\n}\n.item {\n@apply lg: m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;\n}\n.inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full {\n@apply inline-block mt-4 lg: h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;\n}\n.removing {\n@apply animate-spin cursor-not-allowed;\n}\n.fade-enter-active,\r\n.fade-leave-active {\r\n    transition: all 0.5s ease;\n}\n.fade-enter-from,\r\n.fade-leave-to {\r\n    opacity: 0;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

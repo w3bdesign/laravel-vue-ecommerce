@@ -7,9 +7,9 @@
             </div>
             <div v-for="product in cartContent" :key="product.id"
                 class="container mx-auto mt-4 flex border border-gray-300 rounded-lg shadow flex-wrap flex-row justify-around items-center content-center">
-                <div class="item">
+                <div class="lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto">
                     <span class="block mt-2 text-xl font-bold">Remove: <br /></span>
-                    <span class="item-content">
+                    <span class="inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full">
                         <a tabindex="0" @click="removeProductFromCart(product)">
                             <img class="mt-2 ml-4 cursor-pointer" :class="{
                                 removing: localState.removingCartItem,
@@ -17,20 +17,20 @@
                         </a>
                     </span>
                 </div>
-                <div class="item">
+                <div class="lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto">
                     <span class="block mt-2 text-xl font-bold">Name: <br /></span>
-                    <span class="text-lg item-content">{{ product.name }}</span>
+                    <span class="text-lg inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full">{{ product.name }}</span>
                 </div>
-                <div class="item">
+                <div class="lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto">
                     <span class="block mt-2 text-xl font-bold">Quantity: <br />
                     </span>
-                    <span class="text-lg item-content">
+                    <span class="text-lg inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full">
                         {{ product.quantity }}
                     </span>
                 </div>
                 <div class="item">
                     <span class="block mt-2 text-xl font-bold">Price: <br /></span>
-                    <span class="text-lg item-content">
+                    <span class="text-lg inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full">
                         {{ formatPrice(product.price) }}
                     </span>
                 </div>
@@ -127,7 +127,7 @@ console.log("cartContent", cartContent);
     @apply lg: m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
 }
 
-.item-content {
+.inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full {
     @apply inline-block mt-4 lg: h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;
 }
 
