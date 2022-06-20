@@ -107,7 +107,7 @@ const localState = reactive({
 
 const store = useCart();
 
-const {cartLength, cartContent, cartTotal, customerDetails } = storeToRefs(useCart());
+const { cartLength, cartContent, cartTotal, customerDetails } = storeToRefs(useCart());
 
 /*
 const cartLength = store.getCartQuantity;
@@ -137,7 +137,7 @@ const removeProductFromCart = (product) => {
 }
 
 .inline-block {
-    @apply inline-block mt-4 lg: h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;
+    @apply inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;
 }
 
 .removing {
