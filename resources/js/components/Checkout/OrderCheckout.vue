@@ -19,7 +19,9 @@
                 </div>
                 <div class="lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto">
                     <span class="block mt-2 text-xl font-bold">Name: <br /></span>
-                    <span class="text-lg inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full">{{ product.name }}</span>
+                    <span class="text-lg inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full">{{
+                            product.name
+                    }}</span>
                 </div>
                 <div class="lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto">
                     <span class="block mt-2 text-xl font-bold">Quantity: <br />
@@ -111,7 +113,7 @@ const cartTotal = store.getCartTotal;
 
 const customerDetails = store.getCustomerDetails;
 
-console.log("cartContent", cartContent);
+
 </script>
 
 <style>
@@ -124,11 +126,11 @@ console.log("cartContent", cartContent);
 }
 
 .item {
-    @apply lg: m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
+    @apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
 }
 
-.inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full {
-    @apply inline-block mt-4 lg: h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;
+.inline-block {
+    @apply inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;
 }
 
 .removing {
