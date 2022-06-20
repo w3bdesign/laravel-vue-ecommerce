@@ -20172,6 +20172,7 @@ __webpack_require__.r(__webpack_exports__);
     var store = (0,_store_useCart__WEBPACK_IMPORTED_MODULE_2__.useCart)();
     var cartLength = store.getCartQuantity;
     var cartContent = store.getCartContent;
+    var cartTotal = store.getCartTotal;
     var customerDetails = store.getCustomerDetails;
     console.log("cartContent", cartContent);
     var __returned__ = {
@@ -20179,6 +20180,7 @@ __webpack_require__.r(__webpack_exports__);
       store: store,
       cartLength: cartLength,
       cartContent: cartContent,
+      cartTotal: cartTotal,
       customerDetails: customerDetails,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
       formatPrice: _utils_functions__WEBPACK_IMPORTED_MODULE_1__.formatPrice,
@@ -20548,7 +20550,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     )])]);
   }), 128
   /* KEYED_FRAGMENT */
-  )), $setup.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_20, "Total: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formatPrice($setup.localState.cartTotal)), 1
+  )), $setup.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_20, "Total: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formatPrice($setup.cartTotal)), 1
   /* TEXT */
   )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), !$setup.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h2", _hoisted_21, " Cart is currently empty ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.cartLength ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, [_hoisted_23, _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
     name: "fade",
@@ -21319,8 +21321,8 @@ var useCart = (0,pinia__WEBPACK_IMPORTED_MODULE_1__.defineStore)("shopState", {
   },
   getters: {
     getCartQuantity: function getCartQuantity() {
-      var cartTotalQuantity = this.cart.reduce(function (accumulator, object) {
-        return accumulator + object.quantity;
+      var cartTotalQuantity = this.cart.reduce(function (total, product) {
+        return total + product.quantity;
       }, 0);
       return cartTotalQuantity;
     },
@@ -21329,6 +21331,12 @@ var useCart = (0,pinia__WEBPACK_IMPORTED_MODULE_1__.defineStore)("shopState", {
     },
     getCustomerDetails: function getCustomerDetails() {
       return this.customer;
+    },
+    getCartTotal: function getCartTotal() {
+      var cartTotalAmount = this.cart.reduce(function (total, product) {
+        return total + product.price * product.quantity;
+      }, 0);
+      return cartTotalAmount;
     }
   },
   persist: {

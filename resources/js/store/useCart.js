@@ -50,12 +50,9 @@ export const useCart = defineStore("shopState", {
     getters: {
         getCartQuantity() {
             const cartTotalQuantity = this.cart.reduce(
-                (accumulator, object) => {
-                    return accumulator + object.quantity;
-                },
+                (total, product) => total + product.quantity,
                 0
             );
-
             return cartTotalQuantity;
         },
         getCartContent() {
@@ -63,6 +60,13 @@ export const useCart = defineStore("shopState", {
         },
         getCustomerDetails() {
             return this.customer;
+        },
+        getCartTotal() {
+            const cartTotalAmount = this.cart.reduce(
+                (total, product) => total + product.price * product.quantity,
+                0
+            );
+            return cartTotalAmount;
         },
     },
     persist: {

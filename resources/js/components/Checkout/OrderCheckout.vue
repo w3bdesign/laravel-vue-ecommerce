@@ -19,9 +19,7 @@
                 </div>
                 <div class="item">
                     <span class="block mt-2 text-xl font-bold">Name: <br /></span>
-                    <span class="text-lg item-content">{{
-                            product.name
-                    }}</span>
+                    <span class="text-lg item-content">{{ product.name }}</span>
                 </div>
                 <div class="item">
                     <span class="block mt-2 text-xl font-bold">Quantity: <br />
@@ -40,7 +38,7 @@
 
             <div v-if="cartLength"
                 class="container mx-auto mt-2 flex flex-wrap flex-row justify-end items-end content-center">
-                <span class="p-4 text-2xl font-extrabold text-right">Total: {{ formatPrice(localState.cartTotal)
+                <span class="p-4 text-2xl font-extrabold text-right">Total: {{ formatPrice(cartTotal)
                 }}</span>
             </div>
         </section>
@@ -108,8 +106,8 @@ const localState = reactive({
 const store = useCart();
 
 const cartLength = store.getCartQuantity;
-
 const cartContent = store.getCartContent;
+const cartTotal = store.getCartTotal;
 
 const customerDetails = store.getCustomerDetails;
 
