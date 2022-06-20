@@ -21302,16 +21302,11 @@ var useCart = (0,pinia__WEBPACK_IMPORTED_MODULE_1__.defineStore)("shopState", {
       });
 
       if (foundProductInCartIndex > -1) {
-        console.log("foundProductInCartIndex", this.cart[foundProductInCartIndex].quantity);
-        this.cart[foundProductInCartIndex].quantity += 1; // this.cart[foundProductInCartIndex].item.quantity += 1;
-        //this.cart.push(item);
+        this.cart[foundProductInCartIndex].quantity += 1;
       } else {
-        //  item.item.quantity = 1;
         item.quantity = 1;
-        console.log("Pushing item ...", item);
         this.cart.push(item);
-      } // this.cart.push(item);
-
+      }
     },
     clearCart: function clearCart() {
       this.cart.length = 0;
@@ -21324,7 +21319,10 @@ var useCart = (0,pinia__WEBPACK_IMPORTED_MODULE_1__.defineStore)("shopState", {
   },
   getters: {
     getCartQuantity: function getCartQuantity() {
-      return this.cart.length;
+      var cartTotalQuantity = this.cart.reduce(function (accumulator, object) {
+        return accumulator + object.quantity;
+      }, 0);
+      return cartTotalQuantity;
     },
     getCartContent: function getCartContent() {
       return this.cart;

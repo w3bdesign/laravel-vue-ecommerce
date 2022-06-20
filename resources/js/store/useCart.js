@@ -33,23 +33,11 @@ export const useCart = defineStore("shopState", {
             );
 
             if (foundProductInCartIndex > -1) {
-                console.log(
-                    "foundProductInCartIndex",
-                    this.cart[foundProductInCartIndex].quantity
-                );
-
                 this.cart[foundProductInCartIndex].quantity += 1;
-
-               // this.cart[foundProductInCartIndex].item.quantity += 1;
-                //this.cart.push(item);
             } else {
-                //  item.item.quantity = 1;
                 item.quantity = 1;
-                console.log("Pushing item ...", item);
                 this.cart.push(item);
             }
-
-            // this.cart.push(item);
         },
         clearCart() {
             this.cart.length = 0;
@@ -61,7 +49,14 @@ export const useCart = defineStore("shopState", {
     },
     getters: {
         getCartQuantity() {
-            return this.cart.length;
+            const cartTotalQuantity = this.cart.reduce(
+                (accumulator, object) => {
+                    return accumulator + object.quantity;
+                },
+                0
+            );
+
+            return cartTotalQuantity;
         },
         getCartContent() {
             return this.cart;
