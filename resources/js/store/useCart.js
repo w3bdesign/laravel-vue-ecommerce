@@ -26,7 +26,7 @@ export const useCart = defineStore("shopState", {
                 })
                 .catch((error) => (this.error = error));
         },
-        //addToCart(item) {
+
         addToCart({ item }) {
             const foundProductInCartIndex = this.cart.findIndex(
                 (cartItem) => item.slug === cartItem.slug
@@ -39,6 +39,10 @@ export const useCart = defineStore("shopState", {
                 this.cart.push(item);
             }
         },
+        removeFromCart({ item }) {
+            this.cart.splice(this.cart.indexOf(item), 1);
+        },
+
         clearCart() {
             this.cart.length = 0;
         },

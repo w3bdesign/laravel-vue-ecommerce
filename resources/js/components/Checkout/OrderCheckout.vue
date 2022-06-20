@@ -40,8 +40,7 @@
 
             <div v-if="cartLength"
                 class="container mx-auto mt-2 flex flex-wrap flex-row justify-end items-end content-center">
-                <span class="p-4 text-2xl font-extrabold text-right">Total: {{ formatPrice(cartTotal)
-                }}</span>
+                <span class="p-4 text-2xl font-extrabold text-right">Total: {{ formatPrice(cartTotal) }}</span>
             </div>
         </section>
         <h2 v-if="!cartLength" class="m-4 text-3xl text-center">
@@ -110,10 +109,13 @@ const store = useCart();
 const cartLength = store.getCartQuantity;
 const cartContent = store.getCartContent;
 const cartTotal = store.getCartTotal;
-
 const customerDetails = store.getCustomerDetails;
 
-
+const removeProductFromCart = (product) => {
+    localState.removingCartItem = true;
+    store.removeFromCart(product);
+    localState.removingCartItem = false;
+};
 </script>
 
 <style>
@@ -126,11 +128,11 @@ const customerDetails = store.getCustomerDetails;
 }
 
 .item {
-    @apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
+    @apply lg: m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;
 }
 
 .inline-block {
-    @apply inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;
+    @apply inline-block mt-4 lg: h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;
 }
 
 .removing {
