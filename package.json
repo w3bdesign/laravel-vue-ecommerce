@@ -1,6 +1,6 @@
 {
     "private": true,
-    "version": "0.0.6",
+    "version": "0.0.7",
     "scripts": {
         "dev": "npm run development",
         "development": "mix",
@@ -25,6 +25,7 @@
         "pinia": "^2.0.14",
         "pinia-plugin-persist": "^1.0.0",
         "vue": "^3.2.37",
-        "vue-router": "^4.0.16"
+        "vue-router": "^4.0.16",
+        "lodash": "^4.17.21"
     }
 }

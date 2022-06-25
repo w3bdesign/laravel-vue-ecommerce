@@ -21186,7 +21186,7 @@ function render(_ctx, _cache) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
+/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
 /* harmony import */ var _layout_Layout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layout/Layout.vue */ "./resources/js/layout/Layout.vue");
 /* harmony import */ var _components_Header_Cart_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Header/Cart.vue */ "./resources/js/components/Header/Cart.vue");
 /* harmony import */ var _components_Products_ShowAllProducts_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Products/ShowAllProducts.vue */ "./resources/js/components/Products/ShowAllProducts.vue");
@@ -21195,10 +21195,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Footer_Footer_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Footer/Footer.vue */ "./resources/js/components/Footer/Footer.vue");
 /* harmony import */ var _components_Checkout_OrderCheckout_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Checkout/OrderCheckout.vue */ "./resources/js/components/Checkout/OrderCheckout.vue");
 /* harmony import */ var _components_base_BaseButton_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/base/BaseButton.vue */ "./resources/js/components/base/BaseButton.vue");
-/* harmony import */ var _router_index__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./router/index */ "./resources/js/router/index.js");
-/* harmony import */ var flowbite__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! flowbite */ "./node_modules/flowbite/dist/flowbite.js");
-/* harmony import */ var flowbite__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(flowbite__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var pinia_plugin_persist__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! pinia-plugin-persist */ "./node_modules/pinia-plugin-persist/dist/pinia-persist.es.js");
+/* harmony import */ var _helpers_registerBaseComponents__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./helpers/registerBaseComponents */ "./resources/js/helpers/registerBaseComponents.js");
+/* harmony import */ var _router_index__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./router/index */ "./resources/js/router/index.js");
+/* harmony import */ var flowbite__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! flowbite */ "./node_modules/flowbite/dist/flowbite.js");
+/* harmony import */ var flowbite__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(flowbite__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var pinia_plugin_persist__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! pinia-plugin-persist */ "./node_modules/pinia-plugin-persist/dist/pinia-persist.es.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
@@ -21214,19 +21215,21 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
+
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
-var pinia = (0,pinia__WEBPACK_IMPORTED_MODULE_12__.createPinia)();
+var pinia = (0,pinia__WEBPACK_IMPORTED_MODULE_13__.createPinia)();
+(0,_helpers_registerBaseComponents__WEBPACK_IMPORTED_MODULE_9__.registerBaseComponents)(app);
 app.component("hero-component", _components_Index_Hero_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
 app.component("nav-bar", _components_Header_Navbar_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
 app.component("footer-content", _components_Footer_Footer_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
 app.component("cart-component", _components_Header_Cart_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
 app.component("layout-component", _layout_Layout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
 app.component("showall-products", _components_Products_ShowAllProducts_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
-app.component("order-checkout", _components_Checkout_OrderCheckout_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
-app.component("base-button", _components_base_BaseButton_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
+app.component("order-checkout", _components_Checkout_OrderCheckout_vue__WEBPACK_IMPORTED_MODULE_7__["default"]); //app.component("base-button", BaseButton);
+
 app.use(pinia);
-app.use(_router_index__WEBPACK_IMPORTED_MODULE_9__["default"]);
-pinia.use(pinia_plugin_persist__WEBPACK_IMPORTED_MODULE_11__["default"]);
+app.use(_router_index__WEBPACK_IMPORTED_MODULE_10__["default"]);
+pinia.use(pinia_plugin_persist__WEBPACK_IMPORTED_MODULE_12__["default"]);
 app.mount("#app");
 
 /***/ }),
@@ -21259,6 +21262,43 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/helpers/registerBaseComponents.js":
+/*!********************************************************!*\
+  !*** ./resources/js/helpers/registerBaseComponents.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "registerBaseComponents": () => (/* binding */ registerBaseComponents)
+/* harmony export */ });
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+
+var registerBaseComponents = function registerBaseComponents(vm) {
+  try {
+    // Require base component context
+    var requireComponent = __webpack_require__("./resources/js/components/base sync recursive Base[\\w-]+\\.vue$");
+
+    requireComponent.keys().forEach(function (filePath) {
+      // Get component config
+      var componentConfig = requireComponent(filePath); // Get filename from the filePath
+
+      var fileName = filePath.split("/").slice(-1)[0]; // Remove file extension and convert component name to pascal case
+
+      var componentName = (0,lodash__WEBPACK_IMPORTED_MODULE_0__.upperFirst)((0,lodash__WEBPACK_IMPORTED_MODULE_0__.camelCase)(fileName.replace(/\.\w+$/, ""))); // Register component globally
+
+      vm.component(componentName, componentConfig["default"] || componentConfig);
+    });
+  } catch (err) {
+    console.log("Base component registration failed");
+    console.error(err);
+  }
+};
 
 /***/ }),
 
@@ -51439,6 +51479,38 @@ function compileToFunction(template, options) {
 
 
 
+
+/***/ }),
+
+/***/ "./resources/js/components/base sync recursive Base[\\w-]+\\.vue$":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/base/ sync Base[\w-]+\.vue$ ***!
+  \*************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var map = {
+	"./BaseButton.vue": "./resources/js/components/base/BaseButton.vue"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./resources/js/components/base sync recursive Base[\\w-]+\\.vue$";
 
 /***/ }),
 

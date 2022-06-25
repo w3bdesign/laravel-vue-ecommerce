@@ -14,6 +14,8 @@ import OrderCheckout from "./components/Checkout/OrderCheckout.vue";
 
 import BaseButton from "./components/base/BaseButton.vue";
 
+import { registerBaseComponents } from "./helpers/registerBaseComponents";
+
 import router from "./router/index";
 
 import "flowbite";
@@ -21,6 +23,8 @@ import piniaPersist from "pinia-plugin-persist";
 
 const app = createApp({});
 const pinia = createPinia();
+
+registerBaseComponents(app);
 
 app.component("hero-component", Hero);
 app.component("nav-bar", Navbar);
@@ -30,7 +34,7 @@ app.component("layout-component", Layout);
 app.component("showall-products", ShowAllProducts);
 app.component("order-checkout", OrderCheckout);
 
-app.component("base-button", BaseButton);
+//app.component("base-button", BaseButton);
 
 app.use(pinia);
 app.use(router);
