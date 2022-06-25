@@ -12,6 +12,8 @@ import Navbar from "./components/Header/Navbar.vue";
 import FooterContent from "./components/Footer/Footer.vue";
 import OrderCheckout from "./components/Checkout/OrderCheckout.vue";
 
+import BaseButton from "./components/base/BaseButton.vue";
+
 import router from "./router/index";
 
 import "flowbite";
@@ -27,6 +29,8 @@ app.component("cart-component", Cart);
 app.component("layout-component", Layout);
 app.component("showall-products", ShowAllProducts);
 app.component("order-checkout", OrderCheckout);
+
+app.component("base-button", BaseButton);
 
 app.use(pinia);
 app.use(router);

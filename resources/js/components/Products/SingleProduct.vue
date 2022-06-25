@@ -1,6 +1,5 @@
 <template>
     <div v-if="product">
-
         <section>
             <div class="container z-0 flex flex-wrap items-center pt-4 pb-12 mx-auto">
                 <div class="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 sm:grid-cols-2">
@@ -20,9 +19,8 @@
                             {{ product.description }}
                         </p>
                         <div class="pt-1 mt-2">
-                            <button class="button" @click="store.addToCart({ item: product })">
-                                Add To Cart
-                            </button>
+                            <base-button backgroundColor="bg-blue-500" @click="store.addToCart({ item: product })">Add
+                                To Cart</base-button>
                         </div>
                     </div>
                 </div>

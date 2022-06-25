@@ -3,7 +3,6 @@
         <div id="product-container" class="flex flex-wrap items-center">
             <div v-for="product in store.products" :key="product.id"
                 class="flex flex-col mt-6 md:pr-6 xl:pr-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4">
-
                 <router-link :to="{
                     name: 'single.product',
                     params: { slug: product.slug },
@@ -21,9 +20,7 @@
                         </div>
                     </div>
                     <div class="flex justify-center pt-3">
-                        <button class="button">
-                            View product
-                        </button>
+                        <base-button backgroundColor="bg-blue-500">View Product</base-button>
                     </div>
                 </router-link>
             </div>
@@ -32,7 +29,6 @@
 </template>
 
 <script setup>
-
 import { useCart } from "../../store/useCart";
 
 const store = useCart();
