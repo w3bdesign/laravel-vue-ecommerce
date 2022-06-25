@@ -21218,15 +21218,15 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
 var pinia = (0,pinia__WEBPACK_IMPORTED_MODULE_13__.createPinia)();
-(0,_helpers_registerBaseComponents__WEBPACK_IMPORTED_MODULE_9__.registerBaseComponents)(app);
+(0,_helpers_registerBaseComponents__WEBPACK_IMPORTED_MODULE_9__.registerBaseComponents)(app); // TODO Remove these and replace with BaseComponent syntax above
+
 app.component("hero-component", _components_Index_Hero_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
 app.component("nav-bar", _components_Header_Navbar_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
 app.component("footer-content", _components_Footer_Footer_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
 app.component("cart-component", _components_Header_Cart_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
 app.component("layout-component", _layout_Layout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
 app.component("showall-products", _components_Products_ShowAllProducts_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
-app.component("order-checkout", _components_Checkout_OrderCheckout_vue__WEBPACK_IMPORTED_MODULE_7__["default"]); //app.component("base-button", BaseButton);
-
+app.component("order-checkout", _components_Checkout_OrderCheckout_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
 app.use(pinia);
 app.use(_router_index__WEBPACK_IMPORTED_MODULE_10__["default"]);
 pinia.use(pinia_plugin_persist__WEBPACK_IMPORTED_MODULE_12__["default"]);

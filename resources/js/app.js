@@ -26,6 +26,8 @@ const pinia = createPinia();
 
 registerBaseComponents(app);
 
+// TODO Remove these and replace with BaseComponent syntax above
+
 app.component("hero-component", Hero);
 app.component("nav-bar", Navbar);
 app.component("footer-content", FooterContent);
@@ -33,8 +35,6 @@ app.component("cart-component", Cart);
 app.component("layout-component", Layout);
 app.component("showall-products", ShowAllProducts);
 app.component("order-checkout", OrderCheckout);
-
-//app.component("base-button", BaseButton);
 
 app.use(pinia);
 app.use(router);
