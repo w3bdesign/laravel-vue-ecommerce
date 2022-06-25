@@ -26,8 +26,6 @@ const pinia = createPinia();
 
 registerBaseComponents(app);
 
-// TODO Remove these and replace with BaseComponent syntax above
-
 app.component("hero-component", Hero);
 app.component("nav-bar", Navbar);
 app.component("footer-content", FooterContent);
