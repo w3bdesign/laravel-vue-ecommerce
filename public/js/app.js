@@ -20226,16 +20226,22 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var formData = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({});
+    var formSubmitted = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+    var formData = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
+      firstName: ""
+    });
 
     var submitHandler = function submitHandler() {
+      formSubmitted.value = true;
       alert("Submitted!");
       console.log("Form data: ", formData);
     };
 
     var __returned__ = {
+      formSubmitted: formSubmitted,
       formData: formData,
       submitHandler: submitHandler,
+      ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
@@ -20683,35 +20689,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  key: 0
+};
+
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Form Submission", -1
+/* HOISTED */
+);
+
+var _hoisted_3 = {
+  wrap: ""
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_form_kit = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("form-kit");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
     type: "form",
-    modelValue: $setup.formData,
-    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return $setup.formData = $event;
-    }),
-    "form-class": _ctx.submitted ? 'hide' : 'show',
-    "submit-label": "Register",
     onSubmit: $setup.submitHandler
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
         type: "text",
-        name: "name",
-        label: "Your name",
-        placeholder: "Jane Doe",
-        help: "What do people call you?",
-        validation: "required"
+        modelValue: $setup.formData.firstName,
+        "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+          return $setup.formData.firstName = $event;
+        }),
+        placeholder: "First name",
+        "outer-class": "mb-5",
+        "label-class": "block mb-1 font-bold text-sm",
+        "inner-class": "max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500",
+        "input-class": "w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400",
+        "help-class": "text-xs text-gray-500"
+      }, null, 8
+      /* PROPS */
+      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
+        type: "submit",
+        label: "Checkout",
+        "input-class": "px-6 py-2 font-semibold text-white rounded-md\r\n      hover:opacity-90      \r\n      transition-all\r\n      duration-500\r\n      ease-in-out      \r\n      focus:outline-none \r\n      bg-blue-600"
       })];
     }),
     _: 1
     /* STABLE */
 
-  }, 8
-  /* PROPS */
-  , ["modelValue", "form-class"])]);
+  }), $setup.formSubmitted ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("pre", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formData), 1
+  /* TEXT */
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
 
 /***/ }),
