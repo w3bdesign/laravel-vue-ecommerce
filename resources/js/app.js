@@ -2,6 +2,7 @@ require("./bootstrap");
 
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+import { plugin, defaultConfig } from "@formkit/vue";
 
 import Layout from "./layout/Layout.vue";
 
@@ -36,5 +37,8 @@ app.component("order-form", OrderForm);
 
 app.use(pinia);
 app.use(router);
+app.use(plugin, defaultConfig);
+
 pinia.use(piniaPersist);
+
 app.mount("#app");
