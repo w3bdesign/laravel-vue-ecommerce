@@ -19,7 +19,7 @@
                             {{ product.description }}
                         </p>
                         <div class="pt-1 mt-2">
-                            <base-button backgroundColor="bg-blue-500" @click="store.addToCart({ item: product })">Add
+                            <base-button backgroundColor="bg-blue-600" @click="store.addToCart({ item: product })">Add
                                 To Cart</base-button>
                         </div>
                     </div>

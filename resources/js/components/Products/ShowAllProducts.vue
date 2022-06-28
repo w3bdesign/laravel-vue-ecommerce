@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="flex justify-center pt-3">
-                        <base-button backgroundColor="bg-blue-500">View Product</base-button>
+                        <base-button backgroundColor="bg-blue-600">View Product</base-button>
                     </div>
                 </router-link>
             </div>
