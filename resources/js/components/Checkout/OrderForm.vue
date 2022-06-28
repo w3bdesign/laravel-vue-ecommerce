@@ -3,7 +3,10 @@
         <form-kit type="form" @submit="submitHandler">
             <form-kit
                 type="text"
+                label="First name"
                 v-model="formData.firstName"
+                validation="required|alphanumeric"
+                validation-visibility="live"
                 placeholder="First name"
                 outer-class="mb-5"
                 label-class="block mb-1 font-bold text-sm"

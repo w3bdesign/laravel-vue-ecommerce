@@ -20710,10 +20710,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
         type: "text",
+        label: "First name",
         modelValue: $setup.formData.firstName,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $setup.formData.firstName = $event;
         }),
+        validation: "required|alphanumeric",
+        "validation-visibility": "live",
         placeholder: "First name",
         "outer-class": "mb-5",
         "label-class": "block mb-1 font-bold text-sm",
