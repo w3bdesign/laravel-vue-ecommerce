@@ -25,7 +25,7 @@ Ecommerce site with Laravel 9, Vue 3 and Stripe.
 
 -   State persist with pinia-plugin-persist
 
--   Form validation with Vee Validate and Yup
+-   Order form setup with FormKit and builtin validation
 
 -   Vuex-persist for persisting cart after page refresh
 
