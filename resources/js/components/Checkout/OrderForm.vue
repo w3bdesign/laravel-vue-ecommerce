@@ -1,6 +1,6 @@
 <template>
     <section>
-        <form-kit type="form" @submit="submitHandler">
+        <form-kit type="form" @submit="submitHandler" :actions="false">
             <form-kit
                 type="text"
                 label="First name"
