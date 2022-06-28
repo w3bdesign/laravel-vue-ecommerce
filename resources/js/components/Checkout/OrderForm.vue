@@ -5,7 +5,7 @@
                 type="text"
                 label="First name"
                 v-model="formData.firstName"
-                validation="required|alphanumeric"
+                validation="required|alpha"
                 validation-visibility="live"
                 placeholder="First name"
                 outer-class="mb-5"

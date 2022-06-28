@@ -20715,7 +20715,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $setup.formData.firstName = $event;
         }),
-        validation: "required|alphanumeric",
+        validation: "required|alpha",
         "validation-visibility": "live",
         placeholder: "First name",
         "outer-class": "mb-5",
