@@ -5,7 +5,10 @@
       font-semibold
       text-white      
       rounded-md
-      hover:opacity-95
+      hover:opacity-90      
+      transition-all
+      duration-500
+      ease-in-out      
       focus:outline-none" 
       :class="props.backgroundColor">
     <slot></slot>
