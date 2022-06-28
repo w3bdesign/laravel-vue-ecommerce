@@ -79,7 +79,7 @@
                 Customer Details
             </h2>
             <div class="flex justify-center w-full align-center">
-                customer-details-form
+                <order-form></order-form>
             </div>
             <transition name="fade">
                 <div

@@ -11,8 +11,7 @@ import Hero from "./components/Index/Hero.vue";
 import Navbar from "./components/Header/Navbar.vue";
 import FooterContent from "./components/Footer/Footer.vue";
 import OrderCheckout from "./components/Checkout/OrderCheckout.vue";
-
-import BaseButton from "./components/base/BaseButton.vue";
+import OrderForm from "./components/Checkout/OrderForm.vue";
 
 import { registerBaseComponents } from "./helpers/registerBaseComponents";
 
@@ -33,6 +32,7 @@ app.component("cart-component", Cart);
 app.component("layout-component", Layout);
 app.component("showall-products", ShowAllProducts);
 app.component("order-checkout", OrderCheckout);
+app.component("order-form", OrderForm);
 
 app.use(pinia);
 app.use(router);

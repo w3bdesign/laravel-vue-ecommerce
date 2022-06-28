@@ -20538,11 +20538,9 @@ var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_24 = {
   "class": "flex justify-center w-full align-center"
-}, " customer-details-form ", -1
-/* HOISTED */
-);
+};
 
 var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "flex justify-center w-full align-center"
@@ -20572,6 +20570,8 @@ var _hoisted_28 = {
 };
 var _hoisted_29 = ["disabled"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_order_form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("order-form");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_2, [$setup.localState.orderError ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, _hoisted_5)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.getCartContent, function (product) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: product.id,
@@ -20603,7 +20603,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   )), $setup.getCartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_20, "Total: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formatPrice($setup.getCartTotal)), 1
   /* TEXT */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), !$setup.getCartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h2", _hoisted_21, " Cart is currently empty ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.getCartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, [_hoisted_23, _hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), !$setup.getCartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h2", _hoisted_21, " Cart is currently empty ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.getCartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_order_form)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
     name: "fade",
     persisted: ""
   }, {
@@ -20626,6 +20626,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
 
   })])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/Checkout/OrderForm.vue?vue&type=template&id=7ee4fe98":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/Checkout/OrderForm.vue?vue&type=template&id=7ee4fe98 ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+function render(_ctx, _cache) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h1", null, "Order form comes here");
 }
 
 /***/ }),
@@ -21194,7 +21213,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Header_Navbar_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Header/Navbar.vue */ "./resources/js/components/Header/Navbar.vue");
 /* harmony import */ var _components_Footer_Footer_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Footer/Footer.vue */ "./resources/js/components/Footer/Footer.vue");
 /* harmony import */ var _components_Checkout_OrderCheckout_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Checkout/OrderCheckout.vue */ "./resources/js/components/Checkout/OrderCheckout.vue");
-/* harmony import */ var _components_base_BaseButton_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/base/BaseButton.vue */ "./resources/js/components/base/BaseButton.vue");
+/* harmony import */ var _components_Checkout_OrderForm_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Checkout/OrderForm.vue */ "./resources/js/components/Checkout/OrderForm.vue");
 /* harmony import */ var _helpers_registerBaseComponents__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./helpers/registerBaseComponents */ "./resources/js/helpers/registerBaseComponents.js");
 /* harmony import */ var _router_index__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./router/index */ "./resources/js/router/index.js");
 /* harmony import */ var flowbite__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! flowbite */ "./node_modules/flowbite/dist/flowbite.js");
@@ -21226,6 +21245,7 @@ app.component("cart-component", _components_Header_Cart_vue__WEBPACK_IMPORTED_MO
 app.component("layout-component", _layout_Layout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
 app.component("showall-products", _components_Products_ShowAllProducts_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
 app.component("order-checkout", _components_Checkout_OrderCheckout_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
+app.component("order-form", _components_Checkout_OrderForm_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
 app.use(pinia);
 app.use(_router_index__WEBPACK_IMPORTED_MODULE_10__["default"]);
 pinia.use(pinia_plugin_persist__WEBPACK_IMPORTED_MODULE_12__["default"]);
@@ -47092,6 +47112,32 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/components/Checkout/OrderForm.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/Checkout/OrderForm.vue ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _OrderForm_vue_vue_type_template_id_7ee4fe98__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./OrderForm.vue?vue&type=template&id=7ee4fe98 */ "./resources/js/components/Checkout/OrderForm.vue?vue&type=template&id=7ee4fe98");
+/* harmony import */ var C_GitHub_laravel_vue_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+const script = {}
+
+;
+const __exports__ = /*#__PURE__*/(0,C_GitHub_laravel_vue_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_1__["default"])(script, [['render',_OrderForm_vue_vue_type_template_id_7ee4fe98__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/Checkout/OrderForm.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/components/Footer/Footer.vue":
 /*!***************************************************!*\
   !*** ./resources/js/components/Footer/Footer.vue ***!
@@ -47520,6 +47566,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_OrderCheckout_vue_vue_type_template_id_89817794__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_OrderCheckout_vue_vue_type_template_id_89817794__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./OrderCheckout.vue?vue&type=template&id=89817794 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/Checkout/OrderCheckout.vue?vue&type=template&id=89817794");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Checkout/OrderForm.vue?vue&type=template&id=7ee4fe98":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/Checkout/OrderForm.vue?vue&type=template&id=7ee4fe98 ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_OrderForm_vue_vue_type_template_id_7ee4fe98__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_OrderForm_vue_vue_type_template_id_7ee4fe98__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./OrderForm.vue?vue&type=template&id=7ee4fe98 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/Checkout/OrderForm.vue?vue&type=template&id=7ee4fe98");
 
 
 /***/ }),
