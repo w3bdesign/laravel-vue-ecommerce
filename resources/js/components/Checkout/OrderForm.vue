@@ -27,7 +27,7 @@
             />
         </form-kit>
         <div v-if="formSubmitted">
-            <h2>Form Submission</h2>
+            <h2>Form Submission: </h2>
             <pre wrap>{{ formData }}</pre>
         </div>
     </section>
