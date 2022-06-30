@@ -20228,7 +20228,8 @@ __webpack_require__.r(__webpack_exports__);
     expose();
     var formSubmitted = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var formData = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
-      firstName: ""
+      firstName: "",
+      lastName: ""
     });
 
     var submitHandler = function submitHandler() {
@@ -20693,7 +20694,7 @@ var _hoisted_1 = {
   key: 0
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Form Submission: ", -1
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Form Submission:", -1
 /* HOISTED */
 );
 
@@ -20711,6 +20712,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
         type: "text",
+        name: "firstName",
         label: "First name",
         modelValue: $setup.formData.firstName,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
@@ -20719,6 +20721,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         validation: "required|alpha",
         "validation-visibility": "live",
         placeholder: "First name",
+        "outer-class": "mb-5",
+        "label-class": "block mb-1 font-bold text-sm",
+        "inner-class": "max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500",
+        "input-class": "w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400",
+        "help-class": "text-xs text-gray-500"
+      }, null, 8
+      /* PROPS */
+      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
+        type: "text",
+        name: "lastName",
+        label: "Last name",
+        modelValue: $setup.formData.lastName,
+        "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+          return $setup.formData.lastName = $event;
+        }),
+        validation: "required|alpha",
+        "validation-visibility": "live",
+        placeholder: "Last name",
         "outer-class": "mb-5",
         "label-class": "block mb-1 font-bold text-sm",
         "inner-class": "max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500",

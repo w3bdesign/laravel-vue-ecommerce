@@ -3,6 +3,7 @@
         <form-kit type="form" @submit="submitHandler" :actions="false">
             <form-kit
                 type="text"
+                name="firstName"
                 label="First name"
                 v-model="formData.firstName"
                 validation="required|alpha"
@@ -14,6 +15,22 @@
                 input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
                 help-class="text-xs text-gray-500"
             />
+
+            <form-kit
+                type="text"
+                name="lastName"
+                label="Last name"
+                v-model="formData.lastName"
+                validation="required|alpha"
+                validation-visibility="live"
+                placeholder="Last name"
+                outer-class="mb-5"
+                label-class="block mb-1 font-bold text-sm"
+                inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500"
+                input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                help-class="text-xs text-gray-500"
+            />
+
             <form-kit
                 type="submit"
                 label="Checkout"
@@ -27,7 +44,7 @@
             />
         </form-kit>
         <div v-if="formSubmitted">
-            <h2>Form Submission: </h2>
+            <h2>Form Submission:</h2>
             <pre wrap>{{ formData }}</pre>
         </div>
     </section>
@@ -38,7 +55,7 @@ import { ref, reactive } from "vue";
 
 const formSubmitted = ref(false);
 
-const formData = reactive({ firstName: "" });
+const formData = reactive({ firstName: "", lastName: "" });
 
 const submitHandler = () => {
     formSubmitted.value = true;
