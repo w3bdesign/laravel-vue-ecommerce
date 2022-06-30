@@ -20692,26 +20692,44 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
+  "class": "container p-4 mx-auto mt-2 flex-container"
+};
+var _hoisted_2 = {
+  "class": "w-64 mx-auto lg:w-1/2"
+};
+var _hoisted_3 = {
+  "class": "flex flex-wrap mt-2"
+};
+var _hoisted_4 = {
+  "class": "p-2 lg:w-1/2"
+};
+var _hoisted_5 = {
+  "class": "p-2 lg:w-1/2"
+};
+var _hoisted_6 = {
+  "class": "p-2 lg:w-1/2"
+};
+var _hoisted_7 = {
   key: 0
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Form Submission:", -1
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Form Submission:", -1
 /* HOISTED */
 );
 
-var _hoisted_3 = {
+var _hoisted_9 = {
   wrap: ""
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_form_kit = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("form-kit");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
     type: "form",
     onSubmit: $setup.submitHandler,
     actions: false
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
         type: "text",
         name: "firstName",
         label: "First name",
@@ -20729,7 +20747,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "help-class": "text-xs text-gray-500"
       }, null, 8
       /* PROPS */
-      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
+      , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
         type: "text",
         name: "lastName",
         label: "Last name",
@@ -20747,7 +20765,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "help-class": "text-xs text-gray-500"
       }, null, 8
       /* PROPS */
-      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
+      , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
         type: "text",
         name: "address",
         label: "Address",
@@ -20765,16 +20783,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "help-class": "text-xs text-gray-500"
       }, null, 8
       /* PROPS */
-      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
+      , ["modelValue"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
         type: "submit",
         label: "Checkout",
         "input-class": "px-6 py-2 font-semibold text-white rounded-md\r\n      hover:opacity-90      \r\n      transition-all\r\n      duration-500\r\n      ease-in-out      \r\n      focus:outline-none \r\n      bg-blue-600"
-      })];
+      })])])];
     }),
     _: 1
     /* STABLE */
 
-  }), $setup.formSubmitted ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("pre", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formData), 1
+  })]), $setup.formSubmitted ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("pre", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formData), 1
   /* TEXT */
   )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
