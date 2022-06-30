@@ -53,8 +53,74 @@
                                     help-class="text-xs text-gray-500"
                                 />
                             </div>
-                        </div>
 
+                            <div class="p-2 lg:w-1/2">
+                                <form-kit
+                                    type="text"
+                                    name="zipcode"
+                                    label="Zip code"
+                                    v-model="formData.zipcode"
+                                    validation="required|alpha"
+                                    validation-visibility="live"
+                                    placeholder="Zip code"
+                                    outer-class="mb-5"
+                                    label-class="block mb-1 font-bold text-sm"
+                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500"
+                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                                    help-class="text-xs text-gray-500"
+                                />
+                            </div>
+
+                            <div class="p-2 lg:w-1/2">
+                                <form-kit
+                                    type="text"
+                                    name="city"
+                                    label="City"
+                                    v-model="formData.city"
+                                    validation="required|alpha"
+                                    validation-visibility="live"
+                                    placeholder="City"
+                                    outer-class="mb-5"
+                                    label-class="block mb-1 font-bold text-sm"
+                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500"
+                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                                    help-class="text-xs text-gray-500"
+                                />
+                            </div>
+
+                            <div class="p-2 lg:w-1/2">
+                                <form-kit
+                                    type="text"
+                                    name="state"
+                                    label="State"
+                                    v-model="formData.state"
+                                    validation="required|alpha"
+                                    validation-visibility="live"
+                                    placeholder="State"
+                                    outer-class="mb-5"
+                                    label-class="block mb-1 font-bold text-sm"
+                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500"
+                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                                    help-class="text-xs text-gray-500"
+                                />
+                            </div>
+                            <div class="p-2 lg:w-1/2">
+                                <form-kit
+                                    type="text"
+                                    name="email"
+                                    label="Email"
+                                    v-model="formData.email"
+                                    validation="required|alpha"
+                                    validation-visibility="live"
+                                    placeholder="Email"
+                                    outer-class="mb-5"
+                                    label-class="block mb-1 font-bold text-sm"
+                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500"
+                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                                    help-class="text-xs text-gray-500"
+                                />
+                            </div>
+                        </div>
                         <form-kit
                             type="submit"
                             label="Checkout"
@@ -82,7 +148,15 @@ import { ref, reactive } from "vue";
 
 const formSubmitted = ref(false);
 
-const formData = reactive({ firstName: "", lastName: "", address: "" });
+const formData = reactive({
+    firstName: "",
+    lastName: "",
+    address: "",
+    zipcode: "",
+    city: "",
+    state: "",
+    email: "",
+});
 
 const submitHandler = () => {
     formSubmitted.value = true;

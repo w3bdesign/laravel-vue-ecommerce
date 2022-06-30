@@ -20230,7 +20230,11 @@ __webpack_require__.r(__webpack_exports__);
     var formData = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       firstName: "",
       lastName: "",
-      address: ""
+      address: "",
+      zipcode: "",
+      city: "",
+      state: "",
+      email: ""
     });
 
     var submitHandler = function submitHandler() {
@@ -20710,14 +20714,26 @@ var _hoisted_6 = {
   "class": "p-2 lg:w-1/2"
 };
 var _hoisted_7 = {
+  "class": "p-2 lg:w-1/2"
+};
+var _hoisted_8 = {
+  "class": "p-2 lg:w-1/2"
+};
+var _hoisted_9 = {
+  "class": "p-2 lg:w-1/2"
+};
+var _hoisted_10 = {
+  "class": "p-2 lg:w-1/2"
+};
+var _hoisted_11 = {
   key: 0
 };
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Form Submission:", -1
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Form Submission:", -1
 /* HOISTED */
 );
 
-var _hoisted_9 = {
+var _hoisted_13 = {
   wrap: ""
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -20783,6 +20799,78 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "help-class": "text-xs text-gray-500"
       }, null, 8
       /* PROPS */
+      , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
+        type: "text",
+        name: "zipcode",
+        label: "Zip code",
+        modelValue: $setup.formData.zipcode,
+        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+          return $setup.formData.zipcode = $event;
+        }),
+        validation: "required|alpha",
+        "validation-visibility": "live",
+        placeholder: "Zip code",
+        "outer-class": "mb-5",
+        "label-class": "block mb-1 font-bold text-sm",
+        "inner-class": "max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500",
+        "input-class": "w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400",
+        "help-class": "text-xs text-gray-500"
+      }, null, 8
+      /* PROPS */
+      , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
+        type: "text",
+        name: "city",
+        label: "City",
+        modelValue: $setup.formData.city,
+        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+          return $setup.formData.city = $event;
+        }),
+        validation: "required|alpha",
+        "validation-visibility": "live",
+        placeholder: "City",
+        "outer-class": "mb-5",
+        "label-class": "block mb-1 font-bold text-sm",
+        "inner-class": "max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500",
+        "input-class": "w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400",
+        "help-class": "text-xs text-gray-500"
+      }, null, 8
+      /* PROPS */
+      , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
+        type: "text",
+        name: "state",
+        label: "State",
+        modelValue: $setup.formData.state,
+        "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+          return $setup.formData.state = $event;
+        }),
+        validation: "required|alpha",
+        "validation-visibility": "live",
+        placeholder: "State",
+        "outer-class": "mb-5",
+        "label-class": "block mb-1 font-bold text-sm",
+        "inner-class": "max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500",
+        "input-class": "w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400",
+        "help-class": "text-xs text-gray-500"
+      }, null, 8
+      /* PROPS */
+      , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
+        type: "text",
+        name: "email",
+        label: "Email",
+        modelValue: $setup.formData.email,
+        "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+          return $setup.formData.email = $event;
+        }),
+        validation: "required|alpha",
+        "validation-visibility": "live",
+        placeholder: "Email",
+        "outer-class": "mb-5",
+        "label-class": "block mb-1 font-bold text-sm",
+        "inner-class": "max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500",
+        "input-class": "w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400",
+        "help-class": "text-xs text-gray-500"
+      }, null, 8
+      /* PROPS */
       , ["modelValue"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
         type: "submit",
         label: "Checkout",
@@ -20792,7 +20880,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })]), $setup.formSubmitted ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("pre", _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formData), 1
+  })]), $setup.formSubmitted ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("pre", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formData), 1
   /* TEXT */
   )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }

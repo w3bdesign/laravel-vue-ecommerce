@@ -748,16 +748,16 @@ video {
   width: 100%;
 }
 
+.w-64 {
+  width: 16rem;
+}
+
 .w-6 {
   width: 1.5rem;
 }
 
 .w-9\/12 {
   width: 75%;
-}
-
-.w-64 {
-  width: 16rem;
 }
 
 .max-w-md {
@@ -1265,6 +1265,10 @@ video {
     width: 41.666667%;
   }
 
+  .lg\:w-1\/2 {
+    width: 50%;
+  }
+
   .lg\:w-3\/12 {
     width: 25%;
   }
@@ -1275,10 +1279,6 @@ video {
 
   .lg\:w-8\/12 {
     width: 66.666667%;
-  }
-
-  .lg\:w-1\/2 {
-    width: 50%;
   }
 
   .lg\:grid-cols-2 {
