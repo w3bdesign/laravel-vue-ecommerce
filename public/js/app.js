@@ -20229,7 +20229,8 @@ __webpack_require__.r(__webpack_exports__);
     var formSubmitted = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var formData = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       firstName: "",
-      lastName: ""
+      lastName: "",
+      address: ""
     });
 
     var submitHandler = function submitHandler() {
@@ -20739,6 +20740,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         validation: "required|alpha",
         "validation-visibility": "live",
         placeholder: "Last name",
+        "outer-class": "mb-5",
+        "label-class": "block mb-1 font-bold text-sm",
+        "inner-class": "max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500",
+        "input-class": "w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400",
+        "help-class": "text-xs text-gray-500"
+      }, null, 8
+      /* PROPS */
+      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
+        type: "text",
+        name: "address",
+        label: "Address",
+        modelValue: $setup.formData.address,
+        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+          return $setup.formData.address = $event;
+        }),
+        validation: "required|alpha",
+        "validation-visibility": "live",
+        placeholder: "Address",
         "outer-class": "mb-5",
         "label-class": "block mb-1 font-bold text-sm",
         "inner-class": "max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500",

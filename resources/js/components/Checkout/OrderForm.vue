@@ -32,6 +32,21 @@
             />
 
             <form-kit
+                type="text"
+                name="address"
+                label="Address"
+                v-model="formData.address"
+                validation="required|alpha"
+                validation-visibility="live"
+                placeholder="Address"
+                outer-class="mb-5"
+                label-class="block mb-1 font-bold text-sm"
+                inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500"
+                input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
+                help-class="text-xs text-gray-500"
+            />
+
+            <form-kit
                 type="submit"
                 label="Checkout"
                 input-class="px-6 py-2 font-semibold text-white rounded-md
@@ -55,7 +70,7 @@ import { ref, reactive } from "vue";
 
 const formSubmitted = ref(false);
 
-const formData = reactive({ firstName: "", lastName: "" });
+const formData = reactive({ firstName: "", lastName: "", address: "" });
 
 const submitHandler = () => {
     formSubmitted.value = true;
