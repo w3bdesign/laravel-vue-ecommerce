@@ -82,12 +82,6 @@
                 <order-form></order-form>
             </div>
 
-
-            Stripe:
-             {{ getCustomerDetails }} - {{ getCustomerDetails.firstName }}
-
-
-
             <transition name="fade">
                 <div v-show="getCustomerDetails.firstName">
                     <div class="flex justify-center w-full align-center">
@@ -102,10 +96,9 @@
                         Stripe payment
                     </h2>
                     <div class="flex justify-center w-full p-4 align-center">
-                        <br />
                         <div
                             id="card-element"
-                            class="w-full h-16 mt-4 lg:w-5/12 xl:w-5/12"
+                            class="w-full h-16 mt-6 lg:w-5/12 xl:w-5/12"
                         >
                             Stripe
                         </div>
@@ -131,6 +124,7 @@
 <script setup>
 import { reactive } from "vue";
 import { storeToRefs } from "pinia";
+import { loadStripe } from "@stripe/stripe-js";
 
 import { formatPrice } from "../../utils/functions";
 import { useCart } from "../../store/useCart";
@@ -154,6 +148,20 @@ const removeProductFromCart = (product) => {
     store.removeFromCart(product);
     localState.removingCartItem = false;
 };
+
+onMounted(async () => {
+    // localState.stripe =
+    await loadStripe(process.env.MIX_STRIPE_KEY);
+    // const elements = localState.stripe.elements();
+    /* 
+   localState.cardElement = elements.create("card", {
+        classes: {
+            base: "bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 p-3 leading-8 transition-colors duration-200 ease-in-out",
+        },
+    });
+    */
+    // localState.cardElement.mount("#card-element");
+});
 </script>
 
 <style>

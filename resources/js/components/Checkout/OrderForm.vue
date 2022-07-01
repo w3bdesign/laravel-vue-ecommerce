@@ -141,13 +141,11 @@
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
+import { reactive } from "vue";
 
 import { useCart } from "../../store/useCart";
 
 const store = useCart();
-
-//const { saveCustomerDetails } = storeToRefs(useCart());
 
 const formData = reactive({
     firstName: "",
