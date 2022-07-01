@@ -121,17 +121,19 @@
                                 />
                             </div>
                         </div>
-                        <form-kit
-                            type="submit"
-                            label="Checkout"
-                            input-class="px-6 py-2 font-semibold text-white rounded-md
+                        <div class="flex justify-center w-full align-center">
+                            <form-kit
+                                type="submit"
+                                label="Checkout"
+                                input-class="px-6 py-2 font-semibold text-white rounded-md
       hover:opacity-90      
       transition-all
       duration-500
       ease-in-out      
       focus:outline-none 
       bg-blue-600"
-                        />
+                            />
+                        </div>
                     </div>
                 </section>
             </form-kit>

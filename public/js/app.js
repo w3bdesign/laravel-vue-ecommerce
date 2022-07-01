@@ -20726,14 +20726,17 @@ var _hoisted_10 = {
   "class": "p-2 lg:w-1/2"
 };
 var _hoisted_11 = {
+  "class": "flex justify-center w-full align-center"
+};
+var _hoisted_12 = {
   key: 0
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Form Submission:", -1
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Form Submission:", -1
 /* HOISTED */
 );
 
-var _hoisted_13 = {
+var _hoisted_14 = {
   wrap: ""
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -20871,16 +20874,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "help-class": "text-xs text-gray-500"
       }, null, 8
       /* PROPS */
-      , ["modelValue"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
+      , ["modelValue"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
         type: "submit",
         label: "Checkout",
         "input-class": "px-6 py-2 font-semibold text-white rounded-md\r\n      hover:opacity-90      \r\n      transition-all\r\n      duration-500\r\n      ease-in-out      \r\n      focus:outline-none \r\n      bg-blue-600"
-      })])])];
+      })])])])];
     }),
     _: 1
     /* STABLE */
 
-  })]), $setup.formSubmitted ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("pre", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formData), 1
+  })]), $setup.formSubmitted ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("pre", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formData), 1
   /* TEXT */
   )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
 }
