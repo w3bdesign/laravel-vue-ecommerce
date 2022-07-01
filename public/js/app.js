@@ -20220,9 +20220,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
 /* harmony import */ var _store_useCart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../store/useCart */ "./resources/js/store/useCart.js");
-
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -20230,7 +20228,6 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var formSubmitted = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     var store = (0,_store_useCart__WEBPACK_IMPORTED_MODULE_1__.useCart)(); //const { saveCustomerDetails } = storeToRefs(useCart());
 
     var formData = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
@@ -20244,18 +20241,15 @@ __webpack_require__.r(__webpack_exports__);
     });
 
     var submitHandler = function submitHandler() {
-      formSubmitted.value = true;
       store.saveCustomerDetails(formData);
     };
 
     var __returned__ = {
-      formSubmitted: formSubmitted,
       store: store,
       formData: formData,
       submitHandler: submitHandler,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
-      storeToRefs: pinia__WEBPACK_IMPORTED_MODULE_2__.storeToRefs,
       useCart: _store_useCart__WEBPACK_IMPORTED_MODULE_1__.useCart
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
@@ -20738,17 +20732,6 @@ var _hoisted_10 = {
 var _hoisted_11 = {
   "class": "flex justify-center w-full align-center"
 };
-var _hoisted_12 = {
-  key: 0
-};
-
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Form Submission:", -1
-/* HOISTED */
-);
-
-var _hoisted_14 = {
-  wrap: ""
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_form_kit = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("form-kit");
 
@@ -20893,9 +20876,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })]), $setup.formSubmitted ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("pre", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formData), 1
-  /* TEXT */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
+  })])]);
 }
 
 /***/ }),

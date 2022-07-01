@@ -137,20 +137,13 @@
                 </section>
             </form-kit>
         </div>
-        <div v-if="formSubmitted">
-            <h2>Form Submission:</h2>
-            <pre wrap>{{ formData }}</pre>
-        </div>
     </section>
 </template>
 
 <script setup>
 import { ref, reactive } from "vue";
-import { storeToRefs } from "pinia";
 
 import { useCart } from "../../store/useCart";
-
-const formSubmitted = ref(false);
 
 const store = useCart();
 
@@ -167,7 +160,6 @@ const formData = reactive({
 });
 
 const submitHandler = () => {
-    formSubmitted.value = true;
     store.saveCustomerDetails(formData);
 };
 </script>
