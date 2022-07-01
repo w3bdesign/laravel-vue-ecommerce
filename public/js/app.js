@@ -20340,15 +20340,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       localState.removingCartItem = false;
     };
 
-    onMounted( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              // localState.stripe =
+              console.log("Stripe key: ", process.env.MIX_STRIPE_KEY);
+              _context.next = 3;
               return (0,_stripe_stripe_js__WEBPACK_IMPORTED_MODULE_1__.loadStripe)(process.env.MIX_STRIPE_KEY);
 
-            case 2:
+            case 3:
             case "end":
               return _context.stop();
           }
@@ -20364,6 +20366,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       getCustomerDetails: getCustomerDetails,
       removeProductFromCart: removeProductFromCart,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
+      onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       storeToRefs: pinia__WEBPACK_IMPORTED_MODULE_4__.storeToRefs,
       loadStripe: _stripe_stripe_js__WEBPACK_IMPORTED_MODULE_1__.loadStripe,
       formatPrice: _utils_functions__WEBPACK_IMPORTED_MODULE_2__.formatPrice,

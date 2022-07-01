@@ -122,7 +122,7 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -151,6 +151,8 @@ const removeProductFromCart = (product) => {
 
 onMounted(async () => {
     // localState.stripe =
+
+    console.log("Stripe key: ", process.env.MIX_STRIPE_KEY);
     await loadStripe(process.env.MIX_STRIPE_KEY);
     // const elements = localState.stripe.elements();
     /* 
