@@ -21443,21 +21443,22 @@ function render(_ctx, _cache) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
+/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
 /* harmony import */ var _formkit_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @formkit/vue */ "./node_modules/@formkit/vue/dist/index.mjs");
-/* harmony import */ var _layout_Layout_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./layout/Layout.vue */ "./resources/js/layout/Layout.vue");
-/* harmony import */ var _components_Header_Cart_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Header/Cart.vue */ "./resources/js/components/Header/Cart.vue");
-/* harmony import */ var _components_Products_ShowAllProducts_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Products/ShowAllProducts.vue */ "./resources/js/components/Products/ShowAllProducts.vue");
-/* harmony import */ var _components_Index_Hero_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Index/Hero.vue */ "./resources/js/components/Index/Hero.vue");
-/* harmony import */ var _components_Header_Navbar_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Header/Navbar.vue */ "./resources/js/components/Header/Navbar.vue");
-/* harmony import */ var _components_Footer_Footer_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Footer/Footer.vue */ "./resources/js/components/Footer/Footer.vue");
-/* harmony import */ var _components_Checkout_OrderCheckout_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Checkout/OrderCheckout.vue */ "./resources/js/components/Checkout/OrderCheckout.vue");
-/* harmony import */ var _components_Checkout_OrderForm_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Checkout/OrderForm.vue */ "./resources/js/components/Checkout/OrderForm.vue");
-/* harmony import */ var _helpers_registerBaseComponents__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./helpers/registerBaseComponents */ "./resources/js/helpers/registerBaseComponents.js");
-/* harmony import */ var _router_index__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./router/index */ "./resources/js/router/index.js");
-/* harmony import */ var flowbite__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! flowbite */ "./node_modules/flowbite/dist/flowbite.js");
-/* harmony import */ var flowbite__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(flowbite__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var pinia_plugin_persist__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! pinia-plugin-persist */ "./node_modules/pinia-plugin-persist/dist/pinia-persist.es.js");
+/* harmony import */ var _formkit_addons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @formkit/addons */ "./node_modules/@formkit/addons/dist/index.mjs");
+/* harmony import */ var _layout_Layout_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./layout/Layout.vue */ "./resources/js/layout/Layout.vue");
+/* harmony import */ var _components_Header_Cart_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Header/Cart.vue */ "./resources/js/components/Header/Cart.vue");
+/* harmony import */ var _components_Products_ShowAllProducts_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Products/ShowAllProducts.vue */ "./resources/js/components/Products/ShowAllProducts.vue");
+/* harmony import */ var _components_Index_Hero_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Index/Hero.vue */ "./resources/js/components/Index/Hero.vue");
+/* harmony import */ var _components_Header_Navbar_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Header/Navbar.vue */ "./resources/js/components/Header/Navbar.vue");
+/* harmony import */ var _components_Footer_Footer_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Footer/Footer.vue */ "./resources/js/components/Footer/Footer.vue");
+/* harmony import */ var _components_Checkout_OrderCheckout_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Checkout/OrderCheckout.vue */ "./resources/js/components/Checkout/OrderCheckout.vue");
+/* harmony import */ var _components_Checkout_OrderForm_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Checkout/OrderForm.vue */ "./resources/js/components/Checkout/OrderForm.vue");
+/* harmony import */ var _helpers_registerBaseComponents__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./helpers/registerBaseComponents */ "./resources/js/helpers/registerBaseComponents.js");
+/* harmony import */ var _router_index__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./router/index */ "./resources/js/router/index.js");
+/* harmony import */ var flowbite__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! flowbite */ "./node_modules/flowbite/dist/flowbite.js");
+/* harmony import */ var flowbite__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(flowbite__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var pinia_plugin_persist__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! pinia-plugin-persist */ "./node_modules/pinia-plugin-persist/dist/pinia-persist.es.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
@@ -21475,21 +21476,24 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
+
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
-var pinia = (0,pinia__WEBPACK_IMPORTED_MODULE_14__.createPinia)();
-(0,_helpers_registerBaseComponents__WEBPACK_IMPORTED_MODULE_10__.registerBaseComponents)(app);
-app.component("hero-component", _components_Index_Hero_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
-app.component("nav-bar", _components_Header_Navbar_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
-app.component("footer-content", _components_Footer_Footer_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
-app.component("cart-component", _components_Header_Cart_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
-app.component("layout-component", _layout_Layout_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
-app.component("showall-products", _components_Products_ShowAllProducts_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
-app.component("order-checkout", _components_Checkout_OrderCheckout_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
-app.component("order-form", _components_Checkout_OrderForm_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
+var pinia = (0,pinia__WEBPACK_IMPORTED_MODULE_15__.createPinia)();
+(0,_helpers_registerBaseComponents__WEBPACK_IMPORTED_MODULE_11__.registerBaseComponents)(app);
+app.component("hero-component", _components_Index_Hero_vue__WEBPACK_IMPORTED_MODULE_6__["default"]);
+app.component("nav-bar", _components_Header_Navbar_vue__WEBPACK_IMPORTED_MODULE_7__["default"]);
+app.component("footer-content", _components_Footer_Footer_vue__WEBPACK_IMPORTED_MODULE_8__["default"]);
+app.component("cart-component", _components_Header_Cart_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
+app.component("layout-component", _layout_Layout_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
+app.component("showall-products", _components_Products_ShowAllProducts_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
+app.component("order-checkout", _components_Checkout_OrderCheckout_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
+app.component("order-form", _components_Checkout_OrderForm_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
 app.use(pinia);
-app.use(_router_index__WEBPACK_IMPORTED_MODULE_11__["default"]);
-app.use(_formkit_vue__WEBPACK_IMPORTED_MODULE_1__.plugin, _formkit_vue__WEBPACK_IMPORTED_MODULE_1__.defaultConfig);
-pinia.use(pinia_plugin_persist__WEBPACK_IMPORTED_MODULE_13__["default"]);
+app.use(_router_index__WEBPACK_IMPORTED_MODULE_12__["default"]);
+app.use(_formkit_vue__WEBPACK_IMPORTED_MODULE_1__.plugin, (0,_formkit_vue__WEBPACK_IMPORTED_MODULE_1__.defaultConfig)({
+  plugins: [(0,_formkit_addons__WEBPACK_IMPORTED_MODULE_2__.createAutoAnimatePlugin)()]
+}));
+pinia.use(pinia_plugin_persist__WEBPACK_IMPORTED_MODULE_14__["default"]);
 app.mount("#app");
 
 /***/ }),
@@ -51831,6 +51835,3897 @@ webpackContext.keys = function webpackContextKeys() {
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
 webpackContext.id = "./resources/js/components/base sync recursive Base[\\w-]+\\.vue$";
+
+/***/ }),
+
+/***/ "./node_modules/@formkit/addons/dist/index.mjs":
+/*!*****************************************************!*\
+  !*** ./node_modules/@formkit/addons/dist/index.mjs ***!
+  \*****************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createAutoAnimatePlugin": () => (/* binding */ createAutoAnimatePlugin)
+/* harmony export */ });
+/* harmony import */ var _formkit_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @formkit/core */ "./node_modules/@formkit/addons/node_modules/@formkit/core/dist/index.mjs");
+/* harmony import */ var _formkit_auto_animate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @formkit/auto-animate */ "./node_modules/@formkit/auto-animate/index.mjs");
+/* harmony import */ var _formkit_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @formkit/utils */ "./node_modules/@formkit/addons/node_modules/@formkit/utils/dist/index.mjs");
+
+
+
+
+const pendingIds = new Map();
+let observer = null;
+/**
+ * Create a new mutation observer that checks for the document for ids. We do
+ * this instead of iterating over the mutations because getElementById is by far
+ * the fastest way check for an element in the DOM, much faster that iterating
+ * over the mutations themselves.
+ */
+function createObserver() {
+    observeIds();
+    observer = new MutationObserver(() => {
+        observeIds();
+        if (!pendingIds.size && observer) {
+            observer.disconnect();
+            observer = null;
+        }
+    });
+    observer.observe(document, { childList: true, subtree: true });
+}
+function observeIds() {
+    pendingIds.forEach((options, id) => {
+        const outer = document.getElementById(id);
+        if (outer) {
+            pendingIds.delete(id);
+            (0,_formkit_auto_animate__WEBPACK_IMPORTED_MODULE_1__["default"])(outer, options || {});
+        }
+    });
+}
+/**
+ * Adds auto-animate to each input automatically.
+ * @param node - A formkit node
+ * @public
+ */
+function createAutoAnimatePlugin(options) {
+    return (node) => {
+        node.on('created', () => {
+            var _a;
+            if (typeof ((_a = node.props.definition) === null || _a === void 0 ? void 0 : _a.schema) === 'function') {
+                // add an outer wrapper id or get the current one
+                const original = node.props.definition.schema;
+                node.props.definition.schema = (extensions) => {
+                    extensions.outer = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_2__.extend)({ attrs: { id: `outer-${node.props.id}` } }, extensions.outer || {});
+                    const finalSchema = original(extensions);
+                    const outermostSchema = (0,_formkit_core__WEBPACK_IMPORTED_MODULE_0__.isConditional)(finalSchema[0])
+                        ? Array.isArray(finalSchema[0].else)
+                            ? finalSchema[0].else[0]
+                            : finalSchema[0].else
+                        : finalSchema[0];
+                    if (outermostSchema && (0,_formkit_core__WEBPACK_IMPORTED_MODULE_0__.isDOM)(outermostSchema) && outermostSchema.attrs && 'id' in outermostSchema.attrs) {
+                        pendingIds.set(String(outermostSchema.attrs.id === '$id' ? node.props.id : outermostSchema.attrs.id), options || undefined);
+                    }
+                    return finalSchema;
+                };
+            }
+            if (!observer)
+                createObserver();
+        });
+    };
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@formkit/addons/node_modules/@formkit/core/dist/index.mjs":
+/*!********************************************************************************!*\
+  !*** ./node_modules/@formkit/addons/node_modules/@formkit/core/dist/index.mjs ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FORMKIT_VERSION": () => (/* binding */ FORMKIT_VERSION),
+/* harmony export */   "bfs": () => (/* binding */ bfs),
+/* harmony export */   "clearErrors": () => (/* binding */ clearErrors),
+/* harmony export */   "compile": () => (/* binding */ compile),
+/* harmony export */   "createClasses": () => (/* binding */ createClasses),
+/* harmony export */   "createConfig": () => (/* binding */ createConfig$1),
+/* harmony export */   "createMessage": () => (/* binding */ createMessage),
+/* harmony export */   "createNode": () => (/* binding */ createNode),
+/* harmony export */   "createValue": () => (/* binding */ createValue),
+/* harmony export */   "deregister": () => (/* binding */ deregister),
+/* harmony export */   "error": () => (/* binding */ error),
+/* harmony export */   "errorHandler": () => (/* binding */ errorHandler),
+/* harmony export */   "generateClassList": () => (/* binding */ generateClassList),
+/* harmony export */   "getNode": () => (/* binding */ getNode$1),
+/* harmony export */   "isComponent": () => (/* binding */ isComponent),
+/* harmony export */   "isConditional": () => (/* binding */ isConditional),
+/* harmony export */   "isDOM": () => (/* binding */ isDOM),
+/* harmony export */   "isList": () => (/* binding */ isList),
+/* harmony export */   "isNode": () => (/* binding */ isNode),
+/* harmony export */   "isSugar": () => (/* binding */ isSugar),
+/* harmony export */   "names": () => (/* binding */ names),
+/* harmony export */   "register": () => (/* binding */ register),
+/* harmony export */   "reset": () => (/* binding */ reset),
+/* harmony export */   "resetCount": () => (/* binding */ resetCount),
+/* harmony export */   "resetRegistry": () => (/* binding */ resetRegistry),
+/* harmony export */   "setErrors": () => (/* binding */ setErrors),
+/* harmony export */   "submitForm": () => (/* binding */ submitForm),
+/* harmony export */   "sugar": () => (/* binding */ sugar),
+/* harmony export */   "use": () => (/* binding */ use),
+/* harmony export */   "useIndex": () => (/* binding */ useIndex),
+/* harmony export */   "valueInserted": () => (/* binding */ valueInserted),
+/* harmony export */   "valueMoved": () => (/* binding */ valueMoved),
+/* harmony export */   "valueRemoved": () => (/* binding */ valueRemoved),
+/* harmony export */   "warn": () => (/* binding */ warn),
+/* harmony export */   "warningHandler": () => (/* binding */ warningHandler),
+/* harmony export */   "watchRegistry": () => (/* binding */ watchRegistry)
+/* harmony export */ });
+/* harmony import */ var _formkit_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @formkit/utils */ "./node_modules/@formkit/addons/node_modules/@formkit/utils/dist/index.mjs");
+
+
+/**
+ * Creates a new dispatcher that allows the addition/removal of middleware
+ * functions, and the ability to dispatch a payload to all middleware.
+ * @returns FormKitDispatcher
+ */
+function createDispatcher() {
+    const middleware = [];
+    let currentIndex = 0;
+    const use = (dispatchable) => middleware.push(dispatchable);
+    const dispatch = (payload) => {
+        const current = middleware[currentIndex];
+        if (typeof current === 'function') {
+            return current(payload, (explicitPayload) => {
+                currentIndex++;
+                return dispatch(explicitPayload === undefined ? payload : explicitPayload);
+            });
+        }
+        currentIndex = 0;
+        return payload;
+    };
+    use.dispatch = dispatch;
+    use.unshift = (dispatchable) => middleware.unshift(dispatchable);
+    use.remove = (dispatchable) => {
+        const index = middleware.indexOf(dispatchable);
+        if (index > -1)
+            middleware.splice(index, 1);
+    };
+    return use;
+}
+
+/**
+ * Creates a new event emitter, each node uses one of these to allow it to emit
+ * events to local listeners and tree listeners.
+ * @returns FormKitEventEmitter
+ */
+function createEmitter() {
+    const listeners = new Map();
+    const receipts = new Map();
+    let buffer = undefined;
+    const emitter = (node, event) => {
+        if (buffer) {
+            buffer.set(event.name, [node, event]);
+            return;
+        }
+        if (listeners.has(event.name)) {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            listeners.get(event.name).forEach((wrapper) => {
+                if (event.origin === node || wrapper.modifiers.includes('deep')) {
+                    wrapper.listener(event);
+                }
+            });
+        }
+        if (event.bubble) {
+            node.bubble(event);
+        }
+    };
+    /**
+     * Add an event listener
+     * @param eventName - The name of the event to listen to
+     * @param listener - The callback
+     * @returns string
+     */
+    emitter.on = (eventName, listener) => {
+        const [event, ...modifiers] = eventName.split('.');
+        const receipt = listener.receipt || (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.token)();
+        const wrapper = {
+            modifiers,
+            event,
+            listener,
+            receipt,
+        };
+        /* eslint-disable @typescript-eslint/no-non-null-assertion */
+        listeners.has(event)
+            ? listeners.get(event).push(wrapper)
+            : listeners.set(event, [wrapper]);
+        receipts.has(receipt)
+            ? receipts.get(receipt).push(event)
+            : receipts.set(receipt, [event]);
+        /* eslint-enable @typescript-eslint/no-non-null-assertion */
+        return receipt;
+    };
+    /**
+     * Remove an event listener
+     * @param listenerOrReceipt - Either a receipt or the callback function.
+     */
+    emitter.off = (receipt) => {
+        var _a;
+        if (receipts.has(receipt)) {
+            (_a = receipts.get(receipt)) === null || _a === void 0 ? void 0 : _a.forEach((event) => {
+                const eventListeners = listeners.get(event);
+                if (Array.isArray(eventListeners)) {
+                    listeners.set(event, eventListeners.filter((wrapper) => wrapper.receipt !== receipt));
+                }
+            });
+            receipts.delete(receipt);
+        }
+    };
+    /**
+     * Pause emitting values. Any events emitted while paused will not be emitted
+     * but rather "stored" — and whichever events are emitted last will be output.
+     * For example:
+     * pause()
+     * emit('foo', 1)
+     * emit('foo', 2)
+     * emit('bar', 3)
+     * emit('bar', 4)
+     * play()
+     * // would result in
+     * emit('foo', 2)
+     * emit('bar', 4)
+     * Optionally pauses all children as well.
+     * @param node - A node to pause all children on.
+     */
+    emitter.pause = (node) => {
+        if (!buffer)
+            buffer = new Map();
+        if (node) {
+            node.walk((child) => child._e.pause());
+        }
+    };
+    /**
+     * Release the current event buffer.
+     * @param node - A node to unpause all children on.
+     */
+    emitter.play = (node) => {
+        if (!buffer)
+            return;
+        const events = buffer;
+        buffer = undefined;
+        events.forEach(([node, event]) => emitter(node, event));
+        if (node) {
+            node.walk((child) => child._e.play());
+        }
+    };
+    return emitter;
+}
+/**
+ * Emit an event from this node.
+ * @param node - The node that is emitting
+ * @param context - The context of that node
+ * @param name - The name of the event
+ * @param payload - The payload to emit
+ * @returns FormKitNode
+ */
+function emit$1(node, context, name, payload, // eslint-disable-line @typescript-eslint/explicit-module-boundary-types,
+bubble = true) {
+    context._e(node, {
+        payload,
+        name,
+        bubble,
+        origin: node,
+    });
+    return node;
+}
+/**
+ * Send an event from the given node up it's ancestor tree.
+ * @param node -
+ * @param _context -
+ * @param event -
+ */
+function bubble(node, _context, event) {
+    if (isNode(node.parent)) {
+        node.parent._e(node.parent, event);
+    }
+    return node;
+}
+/**
+ * Adds an event listener to the node for a specific event. The event name is a
+ * simple string matching the name of the event to listen to. It can optionally
+ * include modifiers like eventName.deep
+ * @param node -
+ * @param context -
+ * @param name -
+ * @param listener -
+ * @returns FormKitNode
+ */
+function on(_node, context, name, listener) {
+    return context._e.on(name, listener);
+}
+/**
+ * Removes an event listener from a node by the returned receipt from .on().
+ * @param node - The node to remote the listener from
+ * @param context - The context to remove
+ * @param receipt - The receipt returned by .on()
+ * @returns FormKitNode
+ */
+function off(node, context, receipt) {
+    context._e.off(receipt);
+    return node;
+}
+
+/**
+ * FormKit's global error handler.
+ * @public
+ */
+const errorHandler = createDispatcher();
+/**
+ * The default error handler just sets the error as the message.
+ */
+errorHandler((error, next) => {
+    if (!error.message)
+        error.message = String(`E${error.code}`);
+    return next(error);
+});
+/**
+ * FormKit's global warning handler.
+ * @public
+ */
+const warningHandler = createDispatcher();
+warningHandler((warning, next) => {
+    if (!warning.message)
+        warning.message = String(`W${warning.code}`);
+    const result = next(warning);
+    if (console && typeof console.warn === 'function')
+        console.warn(result.message);
+    return result;
+});
+/**
+ * Globally emits a warning.
+ * @param code - The integer error code.
+ * @param data - Usually an object of information to include.
+ * @public
+ */
+function warn(code, data = {}) {
+    warningHandler.dispatch({ code, data });
+}
+/**
+ * Emits an error, generally should result in an exception.
+ * @param code - The integer error code.
+ * @param data - Usually an object of information to include.
+ * @public
+ */
+function error(code, data = {}) {
+    throw Error(errorHandler.dispatch({ code, data }).message);
+}
+
+/**
+ * Creates a new FormKitMessage object.
+ * @param conf - The message configuration
+ * @returns FormKitMessage
+ * @public
+ */
+function createMessage(conf, node) {
+    const m = {
+        blocking: false,
+        key: (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.token)(),
+        meta: {},
+        type: 'state',
+        visible: true,
+        ...conf,
+    };
+    if (node && m.value && m.meta.localize !== false) {
+        m.value = node.t(m);
+        m.meta.locale = node.config.locale;
+    }
+    return m;
+}
+/**
+ * The available traps on the node's store.
+ */
+const storeTraps = {
+    apply: applyMessages,
+    set: setMessage,
+    remove: removeMessage,
+    filter: filterMessages,
+    reduce: reduceMessages,
+    release: releaseBuffer,
+    touch: touchMessages,
+};
+/**
+ * Creates a new FormKit message store.
+ * @returns FormKitStore
+ */
+function createStore(_buffer = false) {
+    const messages = {};
+    let node;
+    let buffer = _buffer;
+    let _b = [];
+    const _m = new Map();
+    let _r = undefined;
+    const store = new Proxy(messages, {
+        get(...args) {
+            const [_target, property] = args;
+            if (property === 'buffer')
+                return buffer;
+            if (property === '_b')
+                return _b;
+            if (property === '_m')
+                return _m;
+            if (property === '_r')
+                return _r;
+            if ((0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(storeTraps, property)) {
+                return storeTraps[property].bind(null, messages, store, node);
+            }
+            return Reflect.get(...args);
+        },
+        set(_t, prop, value) {
+            if (prop === '_n') {
+                node = value;
+                if (_r === '__n')
+                    releaseMissed(node, store);
+                return true;
+            }
+            else if (prop === '_b') {
+                _b = value;
+                return true;
+            }
+            else if (prop === 'buffer') {
+                buffer = value;
+                return true;
+            }
+            else if (prop === '_r') {
+                _r = value;
+                return true;
+            }
+            error(101, node);
+            return false;
+        },
+    });
+    return store;
+}
+/**
+ * Adds a new value to a FormKit message bag.
+ * @param store - The store itself
+ * @param store - The store interface
+ * @param node - The node this store belongs to
+ * @param message - The message object
+ * @returns FormKitStore
+ */
+function setMessage(messageStore, store, node, message) {
+    if (store.buffer) {
+        store._b.push([[message]]);
+        return store;
+    }
+    if (messageStore[message.key] !== message) {
+        if (typeof message.value === 'string' && message.meta.localize !== false) {
+            // Expose the value to translation
+            const previous = message.value;
+            message.value = node.t(message);
+            if (message.value !== previous) {
+                message.meta.locale = node.props.locale;
+            }
+        }
+        const e = `message-${(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(messageStore, message.key) ? 'updated' : 'added'}`;
+        messageStore[message.key] = Object.freeze(node.hook.message.dispatch(message));
+        node.emit(e, message);
+    }
+    return store;
+}
+/**
+ * Run through each message in the store, and ensure it has been translated
+ * to the proper language. This most frequently happens after a locale change.
+ */
+function touchMessages(messageStore, store) {
+    for (const key in messageStore) {
+        const message = { ...messageStore[key] };
+        store.set(message);
+    }
+}
+/**
+ * Remove a message from the store.
+ * @param store - The store itself
+ * @param store - The store interface
+ * @param node - The node this store belongs to
+ * @param key - The message key
+ * @returns FormKitStore
+ */
+function removeMessage(messageStore, store, node, key) {
+    if ((0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(messageStore, key)) {
+        const message = messageStore[key];
+        delete messageStore[key];
+        node.emit('message-removed', message);
+    }
+    if (store.buffer === true) {
+        store._b = store._b.filter((buffered) => {
+            buffered[0] = buffered[0].filter((m) => m.key !== key);
+            return buffered[1] || buffered[0].length;
+        });
+    }
+    return store;
+}
+/**
+ * Iterates over all messages removing those that are no longer wanted.
+ * @param messageStore - The store itself
+ * @param store - The store interface
+ * @param node - The node to filter for
+ * @param callback - A callback accepting a message and returning a boolean
+ * @param type - Pre filtered by a given message type
+ */
+function filterMessages(messageStore, store, node, callback, type) {
+    for (const key in messageStore) {
+        const message = messageStore[key];
+        if ((!type || message.type === type) && !callback(message)) {
+            removeMessage(messageStore, store, node, key);
+        }
+    }
+}
+/**
+ * Reduce the message store to some other generic value.
+ * @param messageStore - The store itself
+ * @param _store - Unused but curried — the store interface itself
+ * @param _node - The node owner of this store
+ * @param reducer - The callback that performs the reduction
+ * @param accumulator - The initial value
+ * @returns
+ */
+function reduceMessages(messageStore, _store, _node, reducer, accumulator) {
+    for (const key in messageStore) {
+        const message = messageStore[key];
+        accumulator = reducer(accumulator, message);
+    }
+    return accumulator;
+}
+/**
+ *
+ * @param messageStore - The store itself
+ * @param _store - Unused but curried — the store interface itself
+ * @param node - The node owner of this store
+ * @param messages - An array of FormKitMessages to apply to this input, or an object of messages to apply to children.
+ */
+function applyMessages(_messageStore, store, node, messages, clear) {
+    if (Array.isArray(messages)) {
+        if (store.buffer) {
+            store._b.push([messages, clear]);
+            return;
+        }
+        // In this case we are applying messages to this node’s store.
+        const applied = new Set(messages.map((message) => {
+            store.set(message);
+            return message.key;
+        }));
+        // Remove any messages that were not part of the initial apply:
+        if (typeof clear === 'string') {
+            store.filter((message) => message.type !== clear || applied.has(message.key));
+        }
+        else if (typeof clear === 'function') {
+            store.filter((message) => !clear(message) || applied.has(message.key));
+        }
+    }
+    else {
+        for (const address in messages) {
+            const child = node.at(address);
+            if (child) {
+                child.store.apply(messages[address], clear);
+            }
+            else {
+                missed(node, store, address, messages[address], clear);
+            }
+        }
+    }
+}
+/**
+ * Creates an array of message arrays from strings.
+ * @param errors - Arrays or objects of form errors or input errors
+ * @returns
+ * @internal
+ */
+function createMessages(node, ...errors) {
+    const sourceKey = `${node.name}-set`;
+    const make = (error) => createMessage({
+        key: (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.slugify)(error),
+        type: 'error',
+        value: error,
+        meta: { source: sourceKey, autoClear: true },
+    });
+    return errors
+        .filter((m) => !!m)
+        .map((errorSet) => {
+        if (typeof errorSet === 'string')
+            errorSet = [errorSet];
+        if (Array.isArray(errorSet)) {
+            return errorSet.map((error) => make(error));
+        }
+        else {
+            const errors = {};
+            for (const key in errorSet) {
+                if (Array.isArray(errorSet[key])) {
+                    errors[key] = errorSet[key].map((error) => make(error));
+                }
+                else {
+                    errors[key] = [make(errorSet[key])];
+                }
+            }
+            return errors;
+        }
+    });
+}
+/**
+ *
+ * @param store - The store to apply this missed applications.
+ * @param address - The address that was missed (a node path that didn't yet exist)
+ * @param messages - The messages that should have been applied.
+ * @param clear - The clearing function (if any)
+ */
+function missed(node, store, address, messages, clear) {
+    var _a;
+    const misses = store._m;
+    if (!misses.has(address))
+        misses.set(address, []);
+    // The created receipt
+    if (!store._r)
+        store._r = releaseMissed(node, store);
+    (_a = misses.get(address)) === null || _a === void 0 ? void 0 : _a.push([messages, clear]);
+}
+/**
+ * Releases messages that were applied to a child via parent, but the child did
+ * not exist. Once the child does exist, the created event for that child will
+ * bubble to this point, and any stored applications will be applied serially.
+ * @param store - The store object.
+ * @returns
+ */
+function releaseMissed(node, store) {
+    return node.on('child.deep', ({ payload: child }) => {
+        store._m.forEach((misses, address) => {
+            if (node.at(address) === child) {
+                misses.forEach(([messages, clear]) => {
+                    child.store.apply(messages, clear);
+                });
+                store._m.delete(address);
+            }
+        });
+        // If all the stored misses were applied, remove the listener.
+        if (store._m.size === 0 && store._r) {
+            node.off(store._r);
+            store._r = undefined;
+        }
+    });
+}
+/**
+ * Iterates over all buffered messages and applies them in sequence.
+ * @param messageStore - The store itself
+ * @param store - The store interface
+ * @param node - The node to filter for
+ */
+function releaseBuffer(_messageStore, store) {
+    store.buffer = false;
+    store._b.forEach(([messages, clear]) => store.apply(messages, clear));
+    store._b = [];
+}
+
+/**
+ * Creates a new ledger for use on a single node's context.
+ * @returns
+ */
+function createLedger() {
+    const ledger = {};
+    let n;
+    return {
+        count: (...args) => createCounter(n, ledger, ...args),
+        init(node) {
+            n = node;
+            node.on('message-added.deep', add(ledger, 1));
+            node.on('message-removed.deep', add(ledger, -1));
+        },
+        merge: (child) => merge(n, ledger, child),
+        settled(counterName) {
+            return (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(ledger, counterName)
+                ? ledger[counterName].promise
+                : Promise.resolve();
+        },
+        unmerge: (child) => merge(n, ledger, child, true),
+        value(counterName) {
+            return (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(ledger, counterName) ? ledger[counterName].count : 0;
+        },
+    };
+}
+/**
+ * Creates a new counter object in the counting ledger.
+ * @param ledger - The actual ledger storage object
+ * @param counterName - The name of the counter, can be arbitrary
+ * @param condition - The condition function (or string) that filters messages
+ * @param initialValue - The initial counter value
+ * @returns
+ */
+function createCounter(node, ledger, counterName, condition, increment = 0) {
+    condition = parseCondition(condition || counterName);
+    if (!(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(ledger, counterName)) {
+        const counter = {
+            condition,
+            count: 0,
+            name: counterName,
+            node,
+            promise: Promise.resolve(),
+            resolve: () => { }, // eslint-disable-line @typescript-eslint/no-empty-function
+        };
+        ledger[counterName] = counter;
+        increment = node.store.reduce((sum, m) => sum + counter.condition(m) * 1, increment);
+        node.each((child) => {
+            child.ledger.count(counter.name, counter.condition);
+            increment += child.ledger.value(counter.name);
+        });
+    }
+    return count(ledger[counterName], increment).promise;
+}
+/**
+ * We parse the condition to allow flexibility in how counters are specified.
+ * @param condition - The condition that, if true, allows a message to change a counter's value
+ * @returns
+ */
+function parseCondition(condition) {
+    if (typeof condition === 'function') {
+        return condition;
+    }
+    return (m) => m.type === condition;
+}
+/**
+ * Perform a counting action on the a given counter object of the ledger.
+ * @param counter - A counter object
+ * @param increment - The amount by which we are changing the count value
+ * @returns
+ */
+function count(counter, increment) {
+    const initial = counter.count;
+    const post = counter.count + increment;
+    counter.count = post;
+    if (initial === 0 && post !== 0) {
+        counter.node.emit(`unsettled:${counter.name}`, counter.count, false);
+        counter.promise = new Promise((r) => (counter.resolve = r));
+    }
+    else if (initial !== 0 && post === 0) {
+        counter.node.emit(`settled:${counter.name}`, counter.count, false);
+        counter.resolve();
+    }
+    counter.node.emit(`count:${counter.name}`, counter.count, false);
+    return counter;
+}
+/**
+ * Returns a function to be used as an event listener for message events.
+ * @param ledger - A ledger to operate on
+ * @param delta - The amount to add or subtract
+ * @returns
+ */
+function add(ledger, delta) {
+    return (e) => {
+        for (const name in ledger) {
+            const counter = ledger[name];
+            if (counter.condition(e.payload)) {
+                count(counter, delta);
+            }
+        }
+    };
+}
+/**
+ * Given a child node, add the parent node's counters to the child and then
+ * rectify the upstream ledger counts. Generally used when attaching a child
+ * to an already counted tree.
+ * @param parent - The parent that is "receiving" the child
+ * @param ledger - The ledger object
+ * @param child - The child (can be a subtree) that is being attached
+ */
+function merge(parent, ledger, child, remove = false) {
+    for (const key in ledger) {
+        const condition = ledger[key].condition;
+        if (!remove)
+            child.ledger.count(key, condition);
+        const increment = child.ledger.value(key) * (remove ? -1 : 1);
+        if (!parent)
+            continue;
+        do {
+            parent.ledger.count(key, condition, increment);
+            parent = parent.parent;
+        } while (parent);
+    }
+}
+
+/**
+ * A global registry of nodes by their alias or name (if root).
+ */
+const registry = new Map();
+const reflected = new Map();
+/**
+ * An event emitter for registered/set/unset nodes
+ */
+const emit = createEmitter();
+/**
+ * Receipts of listeners.
+ */
+const receipts = [];
+/**
+ * Registers a node to the registry _if_ the node is a root node, _or_ if the
+ * node has an explicit node.props.alias. If these two things are not true
+ * then no node is registered (idempotent).
+ *
+ * @param node - A node to register
+ * @public
+ */
+function register(node) {
+    if (node.props.id) {
+        registry.set(node.props.id, node);
+        reflected.set(node, node.props.id);
+        emit(node, {
+            payload: node,
+            name: node.props.id,
+            bubble: false,
+            origin: node,
+        });
+    }
+}
+/**
+ * Deregister a node from the registry.
+ * @param node - A node to remove
+ * @public
+ */
+function deregister(node) {
+    if (reflected.has(node)) {
+        const id = reflected.get(node); // eslint-disable-line @typescript-eslint/no-non-null-assertion
+        reflected.delete(node);
+        registry.delete(id);
+        emit(node, {
+            payload: null,
+            name: id,
+            bubble: false,
+            origin: node,
+        });
+    }
+}
+/**
+ * Get a node by a particular id.
+ * @param node - Get a node by a given id
+ * @public
+ */
+function getNode$1(id) {
+    return registry.get(id);
+}
+/**
+ * Reset the entire registry.
+ * @public
+ */
+function resetRegistry() {
+    registry.forEach((node) => {
+        deregister(node);
+    });
+    receipts.forEach((receipt) => emit.off(receipt));
+}
+/**
+ *
+ * @param id - An id to watch
+ * @param callback - A callback to notify when the node is set or removed.
+ * @public
+ */
+function watchRegistry(id, callback) {
+    // register a listener
+    receipts.push(emit.on(id, callback));
+}
+
+/**
+ * Applies a given config change to the node.
+ * @param node - The node to check for config change
+ * @param prop - Checks if this property exists in the local config or props
+ * @param value - The value to set
+ * @internal
+ */
+function configChange(node, prop, value) {
+    // When we return false, node.walk will not continue into that child.
+    let usingFallback = true;
+    !(prop in node.config._t)
+        ? node.emit(`config:${prop}`, value, false)
+        : (usingFallback = false);
+    if (!(prop in node.props)) {
+        node.emit('prop', { prop, value });
+        node.emit(`prop:${prop}`, value);
+    }
+    return usingFallback;
+}
+/**
+ * Creates a new instance of a global configuration option. This object is
+ * essentially just a FormKitOption object, but it can be used as the root for
+ * FormKitConfig's proxy and retain event "emitting".
+ *
+ * @param options - FormKit node options to be used globally.
+ * @public
+ */
+function createConfig$1(options = {}) {
+    const nodes = new Set();
+    const target = {
+        ...options,
+        ...{
+            _add: (node) => nodes.add(node),
+            _rm: (node) => node.remove(node),
+        },
+    };
+    const rootConfig = new Proxy(target, {
+        set(t, prop, value, r) {
+            if (typeof prop === 'string') {
+                nodes.forEach((node) => configChange(node, prop, value));
+            }
+            return Reflect.set(t, prop, value, r);
+        },
+    });
+    return rootConfig;
+}
+
+/**
+ * Submits a FormKit form programmatically.
+ * @param id - The id of the form
+ * @public
+ */
+function submitForm(id) {
+    const formElement = document.getElementById(id);
+    if (formElement instanceof HTMLFormElement) {
+        const event = new Event('submit', { cancelable: true, bubbles: true });
+        formElement.dispatchEvent(event);
+        return;
+    }
+    warn(151, id);
+}
+
+/**
+ * Clear all state and error messages.
+ */
+function clearState(node) {
+    const clear = (n) => {
+        for (const key in n.store) {
+            const message = n.store[key];
+            if (message.type === 'error' ||
+                (message.type === 'ui' && key === 'incomplete')) {
+                n.store.remove(key);
+            }
+            else if (message.type === 'state') {
+                n.store.set({ ...message, value: false });
+            }
+        }
+    };
+    clear(node);
+    node.walk(clear);
+}
+/**
+ * Resets an input to it’s "initial" value — if the input is a group or list it
+ * resets all the children as well.
+ * @param id - The id of an input to reset
+ * @returns
+ * @public
+ */
+function reset(id, resetTo) {
+    const node = typeof id === 'string' ? getNode$1(id) : id;
+    if (node) {
+        const initial = (n) => (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.cloneAny)(n.props.initial) ||
+            (n.type === 'group' ? {} : n.type === 'list' ? [] : undefined);
+        // pause all events in this tree.
+        node._e.pause(node);
+        // Set it back to basics
+        node.input((0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.cloneAny)(resetTo) || initial(node), false);
+        // Set children back to basics in case they were additive (had their own value for example)
+        node.walk((child) => child.input(initial(child), false));
+        // Finally we need to lay any values back on top (if it is a group/list) since group values
+        // take precedence over child values.
+        const finalInit = initial(node);
+        node.input(typeof finalInit === 'object'
+            ? (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.cloneAny)(resetTo) || (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.init)(finalInit)
+            : finalInit, false);
+        // release the events.
+        node._e.play(node);
+        clearState(node);
+        node.emit('reset', node);
+        return node;
+    }
+    warn(152, id);
+    return;
+}
+
+/**
+ * Default configuration options.
+ */
+const defaultConfig = {
+    delimiter: '.',
+    delay: 0,
+    locale: 'en',
+    rootClasses: (key) => ({ [`formkit-${(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.kebab)(key)}`]: true }),
+};
+/**
+ * If a node’s name is set to useIndex, it replaces the node’s name with the
+ * index of the node relative to its parent’s children.
+ * @public
+ */
+const useIndex = Symbol('index');
+/**
+ * When propagating values up a tree, this value indicates the child should be
+ * removed.
+ * @public
+ */
+const valueRemoved = Symbol('removed');
+/**
+ * When propagating values up a tree, this value indicates the child should be
+ * moved.
+ * @public
+ */
+const valueMoved = Symbol('moved');
+/**
+ * When creating a new node and having its value injected directly at a specific
+ * location.
+ * @public
+ */
+const valueInserted = Symbol('inserted');
+/**
+ * A simple type guard to determine if the context being evaluated is a list
+ * type.
+ * @param arg -
+ * @returns arg is FormKitListContext
+ * @public
+ */
+function isList(arg) {
+    return arg.type === 'list' && Array.isArray(arg._value);
+}
+/**
+ * Determine if a given object is a node
+ * @public
+ */
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+function isNode(node) {
+    return node && typeof node === 'object' && node.__FKNode__ === true;
+}
+/**
+ * The setter you are trying to access is invalid.
+ */
+const invalidSetter = (node, _context, property) => {
+    error(102, [node, property]);
+};
+const traps = {
+    _c: trap(getContext, invalidSetter, false),
+    add: trap(addChild),
+    addProps: trap(addProps),
+    address: trap(getAddress, invalidSetter, false),
+    at: trap(getNode),
+    bubble: trap(bubble),
+    clearErrors: trap(clearErrors$1),
+    calm: trap(calm),
+    config: trap(false),
+    define: trap(define),
+    disturb: trap(disturb),
+    destroy: trap(destroy),
+    hydrate: trap(hydrate),
+    index: trap(getIndex, setIndex, false),
+    input: trap(input),
+    each: trap(eachChild),
+    emit: trap(emit$1),
+    find: trap(find),
+    on: trap(on),
+    off: trap(off),
+    parent: trap(false, setParent),
+    plugins: trap(false),
+    remove: trap(removeChild),
+    root: trap(getRoot, invalidSetter, false),
+    reset: trap(resetValue),
+    resetConfig: trap(resetConfig),
+    setErrors: trap(setErrors$1),
+    submit: trap(submit),
+    t: trap(text),
+    use: trap(use),
+    name: trap(getName, false, false),
+    walk: trap(walkTree),
+};
+/**
+ * These are all the available "traps" for a given node. You can think of these
+ * a little bit like methods, but they are really Proxy interceptors.
+ */
+function createTraps() {
+    return new Map(Object.entries(traps));
+}
+/**
+ * Creates a getter/setter trap and curries the context/node pair
+ * @param getter - The getter function
+ * @param setter - The setter function
+ * @param curryGetter - Indicates if the getter should be curried or not
+ * @returns
+ */
+function trap(getter, setter, curryGetter = true) {
+    return {
+        get: getter
+            ? (node, context) => curryGetter
+                ? (...args) => getter(node, context, ...args)
+                : getter(node, context)
+            : false,
+        set: setter !== undefined ? setter : invalidSetter.bind(null),
+    };
+}
+/**
+ * Create all of the node's hook dispatchers.
+ */
+function createHooks() {
+    const hooks = new Map();
+    return new Proxy(hooks, {
+        get(_, property) {
+            if (!hooks.has(property)) {
+                hooks.set(property, createDispatcher());
+            }
+            return hooks.get(property);
+        },
+    });
+}
+/**
+ * This is a simple integer counter of every createName() where the name needs
+ * to be generated.
+ */
+let nameCount = 0;
+/**
+ * This is a simple integer counter of every default id created.
+ */
+let idCount = 0;
+/**
+ * Reports the global number of node registrations, useful for deterministic
+ * node naming.
+ * @public
+ */
+function resetCount() {
+    nameCount = 0;
+    idCount = 0;
+}
+/**
+ * Create a name based dictionary of all children in an array.
+ * @param children -
+ * @public
+ */
+function names(children) {
+    return children.reduce((named, child) => Object.assign(named, { [child.name]: child }), {});
+}
+/**
+ * This node is responsible for deterministically generating an id for this
+ * node. This cannot just be a random id, it _must_ be deterministic to ensure
+ * re-hydration of the form (like post-SSR) produces the same names/ids.
+ *
+ * @param options -
+ * @returns string
+ */
+function createName(options) {
+    var _a, _b;
+    if (((_a = options.parent) === null || _a === void 0 ? void 0 : _a.type) === 'list')
+        return useIndex;
+    return options.name || `${((_b = options.props) === null || _b === void 0 ? void 0 : _b.type) || 'input'}_${++nameCount}`;
+}
+/**
+ * Creates the initial value for a node based on the options passed in and the
+ * type of the input.
+ * @param options -
+ * @param type -
+ * @returns
+ * @internal
+ */
+function createValue(options) {
+    if (options.type === 'group') {
+        return (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.init)(options.value &&
+            typeof options.value === 'object' &&
+            !Array.isArray(options.value)
+            ? options.value
+            : {});
+    }
+    else if (options.type === 'list') {
+        return (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.init)(Array.isArray(options.value) ? options.value : []);
+    }
+    return options.value === null ? '' : options.value;
+}
+/**
+ * Sets the internal value of the node.
+ * @param node -
+ * @param context -
+ * @param value -
+ * @returns T
+ */
+function input(node, context, value, async = true) {
+    context._value = validateInput(node, node.hook.input.dispatch(value));
+    node.emit('input', context._value);
+    if (context.isSettled)
+        node.disturb();
+    if (async) {
+        if (context._tmo)
+            clearTimeout(context._tmo);
+        context._tmo = setTimeout(commit, node.props.delay, node, context);
+    }
+    else {
+        commit(node, context);
+    }
+    return context.settled;
+}
+/**
+ * Validate that the current input is allowed.
+ * @param type - The type of node (input, list, group)
+ * @param value - The value that is being set
+ */
+function validateInput(node, value) {
+    switch (node.type) {
+        // Inputs are allowed to have any type
+        case 'input':
+            break;
+        case 'group':
+            if (!value || typeof value !== 'object')
+                error(107, [node, value]);
+            break;
+        case 'list':
+            if (!Array.isArray(value))
+                error(108, [node, value]);
+            break;
+    }
+    return value;
+}
+/**
+ * Commits the working value to the node graph as the value of this node.
+ * @param node -
+ * @param context -
+ * @param calm -
+ * @param hydrate -
+ */
+function commit(node, context, calm = true, hydrate = true) {
+    context._value = context.value = node.hook.commit.dispatch(context._value);
+    if (node.type !== 'input' && hydrate)
+        node.hydrate();
+    node.emit('commit', context.value);
+    if (calm)
+        node.calm();
+}
+/**
+ * Perform a modification to a single element of a parent aggregate value. This
+ * is only performed on the pre-committed value (_value), although typically
+ * the value and _value are both linked in memory.
+ * @param context -
+ * @param name -
+ * @param value -
+ */
+function partial(context, { name, value, from }) {
+    if (Object.isFrozen(context._value))
+        return;
+    if (isList(context)) {
+        const insert = value === valueRemoved
+            ? []
+            : value === valueMoved && typeof from === 'number'
+                ? context._value.splice(from, 1)
+                : [value];
+        context._value.splice(name, value === valueMoved || from === valueInserted ? 0 : 1, ...insert);
+        return;
+    }
+    // In this case we know for sure we're dealing with a group, TS doesn't
+    // know that however, so we use some unpleasant casting here
+    if (value !== valueRemoved) {
+        context._value[name] = value;
+    }
+    else {
+        delete context._value[name];
+    }
+}
+/**
+ * Pass values down to children by calling hydrate on them.
+ * @param parent -
+ * @param child -
+ */
+function hydrate(node, context) {
+    const _value = context._value;
+    context.children.forEach((child) => {
+        if (typeof _value !== 'object')
+            return;
+        // if (has(context._value as FormKitGroupValue, child.name)) {
+        if (child.name in _value) {
+            // In this case, the parent has a value to give to the child, so we
+            // perform a down-tree synchronous input which will cascade values down
+            // and then ultimately back up.
+            const childValue = child.type !== 'input' ||
+                (_value[child.name] && typeof _value[child.name] === 'object')
+                ? (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.init)(_value[child.name])
+                : _value[child.name];
+            child.input(childValue, false);
+        }
+        else {
+            if (node.type !== 'list' || typeof child.name === 'number') {
+                // In this case, the parent’s values have no knowledge of the child
+                // value — this typically occurs on the commit at the end of addChild()
+                // we need to create a value reservation for this node’s name. This is
+                // especially important when dealing with lists where index matters.
+                partial(context, { name: child.name, value: child.value });
+            }
+            if (!_value.__init) {
+                // In this case, someone has explicitly set the value to an empty object
+                // with node.input({}) so we do not define the __init property:
+                if (child.type === 'group')
+                    child.input({}, false);
+                else if (child.type === 'list')
+                    child.input([], false);
+                else
+                    child.input(undefined, false);
+            }
+        }
+    });
+    return node;
+}
+/**
+ * Disturbs the state of a node from settled to unsettled — creating appropriate
+ * promises and resolutions.
+ * @param node -
+ * @param context -
+ */
+function disturb(node, context) {
+    var _a;
+    if (context._d <= 0) {
+        context.isSettled = false;
+        node.emit('settled', false, false);
+        context.settled = new Promise((resolve) => {
+            context._resolve = resolve;
+        });
+        if (node.parent)
+            (_a = node.parent) === null || _a === void 0 ? void 0 : _a.disturb();
+    }
+    context._d++;
+    return node;
+}
+/**
+ * Calms the given node's disturbed state by one.
+ * @param node -
+ * @param context -
+ */
+function calm(node, context, value) {
+    var _a;
+    if (value !== undefined && node.type !== 'input') {
+        partial(context, value);
+        // Commit the value up, but do not hydrate back down
+        return commit(node, context, true, false);
+    }
+    if (context._d > 0)
+        context._d--;
+    if (context._d === 0) {
+        context.isSettled = true;
+        node.emit('settled', true, false);
+        if (node.parent)
+            (_a = node.parent) === null || _a === void 0 ? void 0 : _a.calm({ name: node.name, value: context.value });
+        if (context._resolve)
+            context._resolve(context.value);
+    }
+}
+/**
+ * This node is being removed and needs to be cleaned up.
+ * @param node - The node to shut down
+ * @param context - The context to clean up
+ */
+function destroy(node, context) {
+    node.emit('destroying', node);
+    // flush all messages out
+    node.store.filter(() => false);
+    if (node.parent) {
+        node.parent.remove(node);
+    }
+    deregister(node);
+    context._value = context.value = undefined;
+    node.emit('destroyed', node);
+}
+/**
+ * Defines the current input type concretely.
+ * @param definition - The definition of the current input type.
+ */
+function define(node, context, definition) {
+    // Assign the type
+    context.type = definition.type;
+    // Assign the definition
+    context.props.definition = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.clone)(definition);
+    // Ensure the type is seeded with the `__init` value.
+    context.value = context._value = createValue({
+        type: node.type,
+        value: context.value,
+    });
+    // Apply any input features before resetting the props.
+    if (definition.features) {
+        definition.features.forEach((feature) => feature(node));
+    }
+    // Its possible that input-defined "props" have ended up in the context attrs
+    // these should be moved back out of the attrs object.
+    if (definition.props) {
+        node.addProps(definition.props);
+    }
+    node.emit('defined', definition);
+}
+/**
+ * Adds props to a given node by stripping them out of the node.props.attrs and
+ * then adding them to the nodes.
+ *
+ * @param node - The node to add props to
+ * @param context - The internal context object
+ * @param props - An array of prop strings (in camelCase!)
+ */
+function addProps(node, context, props) {
+    var _a;
+    if (node.props.attrs) {
+        const attrs = { ...node.props.attrs };
+        // Temporarily disable prop emits
+        node.props._emit = false;
+        for (const attr in attrs) {
+            const camelName = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.camel)(attr);
+            if (props.includes(camelName)) {
+                node.props[camelName] = attrs[attr];
+                delete attrs[attr];
+            }
+        }
+        const initial = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.cloneAny)(context._value);
+        node.props.initial =
+            node.type !== 'input' ? (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.init)(initial) : initial;
+        // Re-enable prop emits
+        node.props._emit = true;
+        node.props.attrs = attrs;
+        if (node.props.definition) {
+            node.props.definition.props = [
+                ...(((_a = node.props.definition) === null || _a === void 0 ? void 0 : _a.props) || []),
+                ...props,
+            ];
+        }
+    }
+    node.emit('added-props', props);
+    return node;
+}
+/**
+ * (node.add) Adds a child to the node.
+ * @param context -
+ * @param node -
+ * @param child -
+ */
+function addChild(parent, parentContext, child, listIndex) {
+    if (parent.type === 'input')
+        error(100, parent);
+    if (child.parent && child.parent !== parent) {
+        child.parent.remove(child);
+    }
+    // Synchronously set the initial value on the parent
+    if (!parentContext.children.includes(child)) {
+        if (listIndex !== undefined && parent.type === 'list') {
+            // Inject the child:
+            parentContext.children.splice(listIndex, 0, child);
+            if (Array.isArray(parent.value) &&
+                parent.value.length < parentContext.children.length) {
+                // When adding an node or value to a list it is absolutely critical to
+                // know if, at the moment of injection, the parent’s value or the node
+                // children are the source of truth. For example, if a user pushes or
+                // splices a new value onto the lists’s array then we want to use that
+                // value as the value of the new node, but if a user adds a node to the
+                // list then we want the node’s value. In this specific case, we
+                // assume (due to length) that a new node was injected into the list, so
+                // we want that new node’s value injected into the parent list value.
+                parent.disturb().calm({
+                    name: listIndex,
+                    value: child.value,
+                    from: valueInserted,
+                });
+            }
+        }
+        else {
+            parentContext.children.push(child);
+        }
+        if (!child.isSettled)
+            parent.disturb();
+    }
+    if (child.parent !== parent) {
+        child.parent = parent;
+        // In this edge case middleware changed the parent assignment so we need to
+        // re-add the child
+        if (child.parent !== parent) {
+            parent.remove(child);
+            child.parent.add(child);
+            return parent;
+        }
+    }
+    else {
+        // When a parent is properly assigned, we inject the parent's plugins on the
+        // child.
+        child.use(parent.plugins);
+    }
+    // Finally we call commit here, which sub-calls hydrate(), hydrate() will
+    // resolve any conflict between the parent and child values, and also ensure
+    // proper "placeholders" are made on the parent.
+    commit(parent, parentContext, false);
+    parent.ledger.merge(child);
+    parent.emit('child', child);
+    return parent;
+}
+/**
+ * The setter for node.parent = FormKitNode
+ * @param _context -
+ * @param node -
+ * @param _property -
+ * @param parent -
+ * @returns boolean
+ */
+function setParent(child, context, _property, parent) {
+    if (isNode(parent)) {
+        if (child.parent && child.parent !== parent) {
+            child.parent.remove(child);
+        }
+        context.parent = parent;
+        child.resetConfig();
+        !parent.children.includes(child)
+            ? parent.add(child)
+            : child.use(parent.plugins);
+        return true;
+    }
+    if (parent === null) {
+        context.parent = null;
+        return true;
+    }
+    return false;
+}
+/**
+ * (node.remove) Removes a child from the node.
+ * @param context -
+ * @param node -
+ * @param child -
+ */
+function removeChild(node, context, child) {
+    const childIndex = context.children.indexOf(child);
+    if (childIndex !== -1) {
+        if (child.isSettled)
+            node.disturb();
+        context.children.splice(childIndex, 1);
+        // If an ancestor uses the preserve prop, then we are expected to not remove
+        // our values on this node either, see #53
+        let preserve = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.undefine)(child.props.preserve);
+        let parent = child.parent;
+        while (preserve === undefined && parent) {
+            preserve = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.undefine)(parent.props.preserve);
+            parent = parent.parent;
+        }
+        if (!preserve) {
+            node.calm({
+                name: node.type === 'list' ? childIndex : child.name,
+                value: valueRemoved,
+            });
+        }
+        else {
+            node.calm();
+        }
+        child.parent = null;
+        // Remove the child from the config. Is this weird? Yes. Is it ok? Yes.
+        child.config._rmn = child;
+    }
+    node.ledger.unmerge(child);
+    return node;
+}
+/**
+ * Iterate over each immediate child and perform a callback.
+ * @param context -
+ * @param _node -
+ * @param callback -
+ */
+function eachChild(_node, context, callback) {
+    context.children.forEach((child) => callback(child));
+}
+/**
+ * Walk all nodes below this one and execute a callback.
+ * @param _node -
+ * @param context -
+ * @param callback -
+ */
+function walkTree(_node, context, callback, stopIfFalse = false) {
+    context.children.forEach((child) => {
+        if (callback(child) !== false || !stopIfFalse) {
+            child.walk(callback);
+        }
+    });
+}
+/**
+ * Set the configuration options of the node and it's subtree.
+ * @param node -
+ * @param context -
+ * @param _property -
+ * @param config -
+ */
+function resetConfig(node, context) {
+    const parent = node.parent || undefined;
+    context.config = createConfig(node.config._t, parent);
+    node.walk((n) => n.resetConfig());
+}
+/**
+ * Adds a plugin to the node, it’s children, and executes it.
+ * @param context -
+ * @param node -
+ * @param plugin -
+ * @public
+ */
+function use(node, context, plugin, run = true, library = true) {
+    if (Array.isArray(plugin) || plugin instanceof Set) {
+        plugin.forEach((p) => use(node, context, p));
+        return node;
+    }
+    if (!context.plugins.has(plugin)) {
+        if (library && typeof plugin.library === 'function')
+            plugin.library(node);
+        // When plugins return false, they are never added as to the plugins Set
+        // meaning they only ever have access to the single node they were added on.
+        if (run && plugin(node) !== false) {
+            context.plugins.add(plugin);
+            node.children.forEach((child) => child.use(plugin));
+        }
+    }
+    return node;
+}
+/**
+ * Moves a node in the parent’s children to the given index.
+ * @param node -
+ * @param _context -
+ * @param _property -
+ * @param setIndex -
+ */
+function setIndex(node, _context, _property, setIndex) {
+    if (isNode(node.parent)) {
+        const children = node.parent.children;
+        const index = setIndex >= children.length
+            ? children.length - 1
+            : setIndex < 0
+                ? 0
+                : setIndex;
+        const oldIndex = children.indexOf(node);
+        if (oldIndex === -1)
+            return false;
+        children.splice(oldIndex, 1);
+        children.splice(index, 0, node);
+        node.parent.children = children;
+        if (node.parent.type === 'list')
+            node.parent
+                .disturb()
+                .calm({ name: index, value: valueMoved, from: oldIndex });
+        return true;
+    }
+    return false;
+}
+/**
+ * Retrieves the index of a node from the parent’s children.
+ * @param node -
+ */
+function getIndex(node) {
+    if (node.parent) {
+        const index = [...node.parent.children].indexOf(node);
+        // If the index is currently -1 then the node isnt finished booting, so it
+        // must be the next node.
+        return index === -1 ? node.parent.children.length : index;
+    }
+    return -1;
+}
+/**
+ * Retrieves the context object of a given node. This is intended to be a
+ * private trap and should absolutely not be used in plugins or user-land code.
+ * @param _node -
+ * @param context -
+ */
+function getContext(_node, context) {
+    return context;
+}
+/**
+ * Get the name of the current node, allowing for slight mutations.
+ * @param node -
+ * @param context -
+ */
+function getName(node, context) {
+    var _a;
+    if (((_a = node.parent) === null || _a === void 0 ? void 0 : _a.type) === 'list')
+        return node.index;
+    return context.name !== useIndex ? context.name : node.index;
+}
+/**
+ * Returns the address of the current node.
+ * @param node -
+ * @param context -
+ */
+function getAddress(node, context) {
+    return context.parent
+        ? context.parent.address.concat([node.name])
+        : [node.name];
+}
+/**
+ * Fetches a node from the tree by its address.
+ * @param context -
+ * @param node -
+ * @param location -
+ * @returns FormKitNode
+ */
+function getNode(node, _context, locator) {
+    const address = typeof locator === 'string' ? locator.split(node.config.delimiter) : locator;
+    if (!address.length)
+        return undefined;
+    const first = address[0];
+    let pointer = node.parent;
+    if (!pointer) {
+        // This address names the root node, remove it to get child name:
+        if (String(address[0]) === String(node.name))
+            address.shift();
+        // All root nodes start at themselves ultimately:
+        pointer = node;
+    }
+    // Any addresses starting with $parent should discard it
+    if (first === '$parent')
+        address.shift();
+    while (pointer && address.length) {
+        const name = address.shift();
+        switch (name) {
+            case '$root':
+                pointer = node.root;
+                break;
+            case '$parent':
+                pointer = pointer.parent;
+                break;
+            case '$self':
+                pointer = node;
+                break;
+            default:
+                pointer =
+                    pointer.children.find((c) => String(c.name) === String(name)) ||
+                        select(pointer, name);
+        }
+    }
+    return pointer || undefined;
+}
+/**
+ * Perform selections on a subtree using the address "selector" methods.
+ * @param node -
+ * @param selector -
+ * @returns FormKitNode | undefined
+ */
+function select(node, selector) {
+    const matches = String(selector).match(/^(find)\((.*)\)$/);
+    if (matches) {
+        const [, action, argStr] = matches;
+        const args = argStr.split(',').map((arg) => arg.trim());
+        switch (action) {
+            case 'find':
+                return node.find(args[0], args[1]);
+            default:
+                return undefined;
+        }
+    }
+    return undefined;
+}
+/**
+ * Perform a breadth first search and return the first instance of a node that
+ * is found in the subtree or undefined.
+ * @param node - The node to start the search on/under
+ * @param _context - The context object
+ * @param searchTerm - The term we are searching for
+ * @param searcher - Either a key to search on, or a function
+ * @returns
+ */
+function find(node, _context, searchTerm, searcher) {
+    return bfs(node, searchTerm, searcher);
+}
+/**
+ * Perform a breadth-first-search on a node subtree and locate the first
+ * instance of a match.
+ * @param node -
+ * @param name -
+ * @returns FormKitNode
+ * @public
+ */
+function bfs(tree, searchValue, searchGoal = 'name') {
+    const search = typeof searchGoal === 'string'
+        ? (n) => n[searchGoal] == searchValue // non-strict comparison is intentional
+        : searchGoal;
+    const stack = [tree];
+    while (stack.length) {
+        const node = stack.shift(); // eslint-disable-line @typescript-eslint/no-non-null-assertion
+        if (search(node, searchValue))
+            return node;
+        stack.push(...node.children);
+    }
+    return undefined;
+}
+/**
+ * Get the root node of the tree.
+ */
+function getRoot(n) {
+    let node = n;
+    while (node.parent) {
+        node = node.parent;
+    }
+    return node;
+}
+/**
+ * Creates a new configuration option.
+ * @param parent -
+ * @param configOptions -
+ * @returns FormKitConfig
+ */
+function createConfig(target = {}, parent) {
+    let node = undefined;
+    return new Proxy(target, {
+        get(...args) {
+            const prop = args[1];
+            if (prop === '_t')
+                return target;
+            const localValue = Reflect.get(...args);
+            // Check our local values first
+            if (localValue !== undefined)
+                return localValue;
+            // Then check our parent values next
+            if (parent) {
+                const parentVal = parent.config[prop];
+                if (parentVal !== undefined)
+                    return parentVal;
+            }
+            if (target.rootConfig && typeof prop === 'string') {
+                const rootValue = target.rootConfig[prop];
+                if (rootValue !== undefined)
+                    return rootValue;
+            }
+            // The default delay value should be 20
+            if (prop === 'delay' && (node === null || node === void 0 ? void 0 : node.type) === 'input')
+                return 20;
+            // Finally check the default values
+            return defaultConfig[prop];
+        },
+        set(...args) {
+            const prop = args[1];
+            const value = args[2];
+            if (prop === '_n') {
+                node = value;
+                if (target.rootConfig)
+                    target.rootConfig._add(node);
+                return true;
+            }
+            if (prop === '_rmn') {
+                if (target.rootConfig)
+                    target.rootConfig._rm(node);
+                node = undefined;
+                return true;
+            }
+            if (!(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.eq)(target[prop], value, false)) {
+                const didSet = Reflect.set(...args);
+                if (node) {
+                    node.emit(`config:${prop}`, value, false);
+                    configChange(node, prop, value);
+                    // Walk the node tree and notify of config/prop changes where relevant
+                    node.walk((n) => configChange(n, prop, value), true);
+                }
+                return didSet;
+            }
+            return true;
+        },
+    });
+}
+/**
+ * Given a string of text, expose it for modification, translation, or full
+ * replacement.
+ * @param key - A message key, or generic string of text
+ * @returns
+ */
+function text(node, _context, key, type = 'ui') {
+    const fragment = typeof key === 'string' ? { key, value: key, type } : key;
+    const value = node.hook.text.dispatch(fragment);
+    node.emit('text', value, false);
+    return value.value;
+}
+/**
+ * Submits the nearest ancestor that is a FormKit "form". It determines which
+ * node is a form by locating an ancestor where node.props.isForm = true.
+ * @param node - The node to initiate the submit
+ */
+function submit(node) {
+    const name = node.name;
+    do {
+        if (node.props.isForm === true)
+            break;
+        if (!node.parent)
+            error(106, name);
+        node = node.parent;
+    } while (node);
+    if (node.props.id) {
+        submitForm(node.props.id);
+    }
+}
+/**
+ * Reset to the original value.
+ * @param node - The node to reset
+ * @param _context - The context
+ * @param value - The value to reset to
+ */
+function resetValue(node, _context, value) {
+    return reset(node, value);
+}
+/**
+ * Sets errors on the node and optionally its children.
+ * @param node - The node to set errors on
+ * @param _context - Not used
+ * @param localErrors - An array of errors to set on this node
+ * @param childErrors - An object of name to errors to set on children.
+ */
+function setErrors$1(node, _context, localErrors, childErrors) {
+    const sourceKey = `${node.name}-set`;
+    const errors = node.hook.setErrors.dispatch({ localErrors, childErrors });
+    createMessages(node, errors.localErrors, errors.childErrors).forEach((errors) => {
+        node.store.apply(errors, (message) => message.meta.source === sourceKey);
+    });
+    return node;
+}
+/**
+ * Clears errors on the node and optionally its children.
+ * @param node - The node to set errors on
+ * @param _context - Not used
+ * @param localErrors - An array of errors to set on this node
+ * @param childErrors - An object of name to errors to set on children.
+ */
+function clearErrors$1(node, context, clearChildErrors = true, sourceKey) {
+    setErrors$1(node, context, []);
+    if (clearChildErrors) {
+        sourceKey = sourceKey || `${node.name}-set`;
+        node.walk((child) => {
+            child.store.filter((message) => {
+                return !(message.type === 'error' &&
+                    message.meta &&
+                    message.meta.source === sourceKey);
+            });
+        });
+    }
+    return node;
+}
+/**
+ * Middleware to assign default prop values as issued by core.
+ * @param node - The node being registered
+ * @param next - Calls the next middleware.
+ * @returns
+ */
+function defaultProps(node) {
+    if (!(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(node.props, 'id'))
+        node.props.id = `input_${idCount++}`;
+    return node;
+}
+/**
+ * @param options -
+ * @param config -
+ */
+function createProps(initial) {
+    const props = {
+        initial: typeof initial === 'object' ? (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.cloneAny)(initial) : initial,
+    };
+    let node;
+    let isEmitting = true;
+    return new Proxy(props, {
+        get(...args) {
+            const [_t, prop] = args;
+            if ((0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(props, prop))
+                return Reflect.get(...args);
+            if (node && typeof prop === 'string' && node.config[prop] !== undefined)
+                return node.config[prop];
+            return undefined;
+        },
+        set(target, property, originalValue, receiver) {
+            if (property === '_n') {
+                node = originalValue;
+                return true;
+            }
+            if (property === '_emit') {
+                isEmitting = originalValue;
+                return true;
+            }
+            const { prop, value } = node.hook.prop.dispatch({
+                prop: property,
+                value: originalValue,
+            });
+            // Typescript compiler cannot handle a symbol index, even though js can:
+            if (!(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.eq)(props[prop], value, false) ||
+                typeof value === 'object') {
+                const didSet = Reflect.set(target, prop, value, receiver);
+                if (isEmitting) {
+                    node.emit('prop', { prop, value });
+                    if (typeof prop === 'string')
+                        node.emit(`prop:${prop}`, value);
+                }
+                return didSet;
+            }
+            return true;
+        },
+    });
+}
+/**
+ * A cheap function that iterates over all plugins and stops once node.define
+ * is called.
+ * @param node - A formkit node
+ * @param plugins - An array of plugins
+ * @returns
+ */
+function findDefinition(node, plugins) {
+    // If the definition is already there, force call to define.
+    if (node.props.definition)
+        return node.define(node.props.definition);
+    for (const plugin of plugins) {
+        if (node.props.definition)
+            return;
+        if (typeof plugin.library === 'function') {
+            plugin.library(node);
+        }
+    }
+}
+/**
+ * Create a new context object for our a FormKit node, given default information
+ * @param options - An options object to override the defaults.
+ * @returns FormKitContext
+ */
+function createContext(options) {
+    const value = createValue(options);
+    const config = createConfig(options.config || {}, options.parent);
+    return {
+        _d: 0,
+        _e: createEmitter(),
+        _resolve: false,
+        _tmo: false,
+        _value: value,
+        children: (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.dedupe)(options.children || []),
+        config,
+        hook: createHooks(),
+        isCreated: false,
+        isSettled: true,
+        ledger: createLedger(),
+        name: createName(options),
+        parent: options.parent || null,
+        plugins: new Set(),
+        props: createProps(value),
+        settled: Promise.resolve(value),
+        store: createStore(true),
+        traps: createTraps(),
+        type: options.type || 'input',
+        value,
+    };
+}
+/**
+ * Initialize a node object's internal properties.
+ * @param node - The node to initialize
+ * @returns FormKitNode
+ */
+function nodeInit(node, options) {
+    var _a;
+    // Set the internal node on the props, config, ledger and store
+    node.ledger.init((node.store._n = node.props._n = node.config._n = node));
+    // Apply given in options to the node.
+    node.props._emit = false;
+    if (options.props)
+        Object.assign(node.props, options.props);
+    node.props._emit = true;
+    // Attempt to find a definition from the pre-existing plugins.
+    findDefinition(node, new Set([
+        ...(options.plugins || []),
+        ...(node.parent ? node.parent.plugins : []),
+    ]));
+    // Then we apply each plugin's root code, we do this with an explicit loop
+    // for that ity-bitty performance bump.
+    if (options.plugins) {
+        for (const plugin of options.plugins) {
+            use(node, node._c, plugin, true, false);
+        }
+    }
+    // Initialize the default props
+    defaultProps(node);
+    // Apply the parent to each child.
+    node.each((child) => node.add(child));
+    // If the node has a parent, ensure it's properly nested bi-directionally.
+    if (node.parent)
+        node.parent.add(node, options.index);
+    // Inputs are leafs, and cannot have children
+    if (node.type === 'input' && node.children.length)
+        error(100, node);
+    // Apply the input hook to the initial value.
+    input(node, node._c, node._value, false);
+    // Release the store buffer
+    node.store.release();
+    // Register the node globally if someone explicitly gave it an id
+    if ((_a = options.props) === null || _a === void 0 ? void 0 : _a.id)
+        register(node);
+    // Our node is finally ready, emit it to the world
+    node.emit('created', node);
+    node.isCreated = true;
+    return node;
+}
+/**
+ * Creates a new instance of a FormKit Node. Nodes are the atomic unit of
+ * a FormKit graph.
+ *
+ * @param options - An object of options to define the node.
+ * @returns FormKitNode
+ * @public
+ */
+function createNode(options) {
+    const ops = options || {};
+    const context = createContext(ops);
+    // Note: The typing for the proxy object cannot be fully modeled, thus we are
+    // force-typing to a FormKitNode. See:
+    // https://github.com/microsoft/TypeScript/issues/28067
+    const node = new Proxy(context, {
+        get(...args) {
+            const [, property] = args;
+            if (property === '__FKNode__')
+                return true;
+            const trap = context.traps.get(property);
+            if (trap && trap.get)
+                return trap.get(node, context);
+            return Reflect.get(...args);
+        },
+        set(...args) {
+            const [, property, value] = args;
+            const trap = context.traps.get(property);
+            if (trap && trap.set)
+                return trap.set(node, context, property, value);
+            return Reflect.set(...args);
+        },
+    });
+    return nodeInit(node, ops);
+}
+
+/**
+ * Type narrow that a node is a DOM node.
+ * @param node - A schema node to check
+ * @returns
+ * @public
+ */
+function isDOM(node) {
+    return typeof node !== 'string' && (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(node, '$el');
+}
+/**
+ * Type narrow that a node is a DOM node.
+ * @param node - A schema node to check
+ * @returns
+ * @public
+ */
+function isComponent(node) {
+    return typeof node !== 'string' && (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(node, '$cmp');
+}
+/**
+ * Root declaration.
+ * @param node - An object to check
+ * @returns
+ * @public
+ */
+function isConditional(node) {
+    if (!node || typeof node === 'string')
+        return false;
+    return (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(node, 'if') && (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(node, 'then');
+}
+/**
+ * Determines if the node is syntactic sugar or not.
+ * @param node - Node
+ * @returns
+ * @public
+ */
+function isSugar(node) {
+    return typeof node !== 'string' && '$formkit' in node;
+}
+/**
+ * Converts syntactic sugar nodes to standard nodes.
+ * @param node - A node to covert
+ * @returns
+ * @public
+ */
+function sugar(node) {
+    if (typeof node === 'string') {
+        return {
+            $el: 'text',
+            children: node,
+        };
+    }
+    if (isSugar(node)) {
+        const { $formkit: type, for: iterator, if: condition, children, bind, ...props } = node;
+        return Object.assign({
+            $cmp: 'FormKit',
+            props: { ...props, type },
+        }, condition ? { if: condition } : {}, iterator ? { for: iterator } : {}, children ? { children } : {}, bind ? { bind } : {});
+    }
+    return node;
+}
+
+/**
+ * Compiles a logical string like "a != z || b == c" into a single function.
+ * The return value is an object with a "provide" method that iterates over all
+ * requirement tokens to use as replacements.
+ * ```typescript
+ * let name = {
+ *   value: 'jon'
+ * }
+ * const condition = compile("$name == 'bob'").provide((token) => {
+ *  return () => name.value // must return a function!
+ * })
+ *
+ * condition() // false
+ * ```
+ * @param expr - A string to compile
+ * @returns
+ * @public
+ */
+function compile(expr) {
+    /**
+     * These tokens are replacements used in evaluating a given condition.
+     */
+    // const tokens: FormKitTokens = {}
+    /**
+     * The value of the provide() callback. Used for late binding.
+     */
+    let provideTokens;
+    /**
+     * These are token requirements like "$name.value" that are need to fulfill
+     * a given condition call.
+     */
+    const requirements = new Set();
+    /**
+     * Expands the current value if it is a function.
+     * @param operand - A left or right hand operand
+     * @returns
+     */
+    const x = function expand(operand, tokens) {
+        return typeof operand === 'function' ? operand(tokens) : operand;
+    };
+    /**
+     * Comprehensive list of operators. This list MUST be
+     * ordered by the length of the operator characters in descending order.
+     */
+    const operatorRegistry = [
+        {
+            '&&': (l, r, t) => x(l, t) && x(r, t),
+            '||': (l, r, t) => x(l, t) || x(r, t),
+        },
+        {
+            '===': (l, r, t) => !!(x(l, t) === x(r, t)),
+            '!==': (l, r, t) => !!(x(l, t) !== x(r, t)),
+            '==': (l, r, t) => !!(x(l, t) == x(r, t)),
+            '!=': (l, r, t) => !!(x(l, t) != x(r, t)),
+            '>=': (l, r, t) => !!(x(l, t) >= x(r, t)),
+            '<=': (l, r, t) => !!(x(l, t) <= x(r, t)),
+            '>': (l, r, t) => !!(x(l, t) > x(r, t)),
+            '<': (l, r, t) => !!(x(l, t) < x(r, t)),
+        },
+        {
+            '+': (l, r, t) => x(l, t) + x(r, t),
+            '-': (l, r, t) => x(l, t) - x(r, t),
+        },
+        {
+            '*': (l, r, t) => x(l, t) * x(r, t),
+            '/': (l, r, t) => x(l, t) / x(r, t),
+            '%': (l, r, t) => x(l, t) % x(r, t),
+        },
+    ];
+    /**
+     * A full list of all operator symbols.
+     */
+    const operatorSymbols = operatorRegistry.reduce((s, g) => {
+        return s.concat(Object.keys(g));
+    }, []);
+    /**
+     * An array of the first character of each operator.
+     */
+    const operatorChars = new Set(operatorSymbols.map((key) => key.charAt(0)));
+    /**
+     * Determines if the current character is the start of an operator symbol, if it
+     * is, it returns that symbol.
+     * @param symbols - An array of symbols that are considered operators
+     * @param char - The current character being operated on
+     * @param p - The position of the pointer
+     * @param expression - The full string expression
+     * @returns
+     */
+    function getOp(symbols, char, p, expression) {
+        const candidates = symbols.filter((s) => s.startsWith(char));
+        if (!candidates.length)
+            return false;
+        return candidates.find((symbol) => {
+            if (expression.length >= p + symbol.length) {
+                const nextChars = expression.substring(p, p + symbol.length);
+                if (nextChars === symbol)
+                    return symbol;
+            }
+            return false;
+        });
+    }
+    /**
+     * Determines the step number of the right or left hand operator.
+     * @param p - The position of the pointer
+     * @param expression - The full string expression
+     * @param direction - 1 = right, 0 = left
+     */
+    function getStep(p, expression, direction = 1) {
+        let next = direction
+            ? expression.substring(p + 1).trim()
+            : expression.substring(0, p).trim();
+        if (!next.length)
+            return -1;
+        if (!direction) {
+            // left hand direction could include a function name we need to remove
+            const reversed = next.split('').reverse();
+            const start = reversed.findIndex((char) => operatorChars.has(char));
+            next = reversed.slice(start).join('');
+        }
+        const char = next[0];
+        return operatorRegistry.findIndex((operators) => {
+            const symbols = Object.keys(operators);
+            return !!getOp(symbols, char, 0, next);
+        });
+    }
+    /**
+     * Extracts a tail call. For example:
+     * ```
+     * $foo().bar(baz) + 7
+     * ```
+     * Would extract "bar(baz)" and return p of 15 (after the (baz)).
+     *
+     * @param p - The position of a closing parenthetical.
+     * @param expression - The full expression being parsed.
+     */
+    function getTail(pos, expression) {
+        let tail = '';
+        const length = expression.length;
+        let depth = 0;
+        for (let p = pos; p < length; p++) {
+            const char = expression.charAt(p);
+            if (char === '(') {
+                depth++;
+            }
+            else if (char === ')') {
+                depth--;
+            }
+            else if (depth === 0 && char === ' ') {
+                continue;
+            }
+            if (depth === 0 && getOp(operatorSymbols, char, p, expression)) {
+                return [tail, p - 1];
+            }
+            else {
+                tail += char;
+            }
+        }
+        return [tail, expression.length - 1];
+    }
+    /**
+     * Parse a string expression into a function that returns a boolean. This is
+     * the magic behind schema logic like $if.
+     * @param expression - A string expression to parse
+     * @returns
+     */
+    function parseLogicals(expression, step = 0) {
+        const operators = operatorRegistry[step];
+        const length = expression.length;
+        const symbols = Object.keys(operators);
+        let depth = 0;
+        let quote = false;
+        let op = null;
+        let operand = '';
+        let left = null;
+        let operation;
+        let lastChar = '';
+        let char = '';
+        let parenthetical = '';
+        let parenQuote = '';
+        let startP = 0;
+        const addTo = (depth, char) => {
+            depth ? (parenthetical += char) : (operand += char);
+        };
+        for (let p = 0; p < length; p++) {
+            lastChar = char;
+            char = expression.charAt(p);
+            if ((char === "'" || char === '"') &&
+                lastChar !== '\\' &&
+                ((depth === 0 && !quote) || (depth && !parenQuote))) {
+                if (depth) {
+                    parenQuote = char;
+                }
+                else {
+                    quote = char;
+                }
+                addTo(depth, char);
+                continue;
+            }
+            else if ((quote && (char !== quote || lastChar === '\\')) ||
+                (parenQuote && (char !== parenQuote || lastChar === '\\'))) {
+                addTo(depth, char);
+                continue;
+            }
+            else if (quote === char) {
+                quote = false;
+                addTo(depth, char);
+                continue;
+            }
+            else if (parenQuote === char) {
+                parenQuote = false;
+                addTo(depth, char);
+                continue;
+            }
+            else if (char === ' ') {
+                continue;
+            }
+            else if (char === '(') {
+                if (depth === 0) {
+                    startP = p;
+                }
+                else {
+                    parenthetical += char;
+                }
+                depth++;
+            }
+            else if (char === ')') {
+                depth--;
+                if (depth === 0) {
+                    // Parenthetical statements cannot be grouped up in the implicit order
+                    // of left/right statements based on which step they are on because
+                    // they are parsed on every step and then must be applied to the
+                    // operator. Example:
+                    //
+                    // 5 + (3) * 2
+                    //
+                    // This should yield 11 not 16. This order is normally implicit in the
+                    // sequence of operators being parsed, but with parenthesis the parse
+                    // happens each time. Instead we need to know if the resulting value
+                    // should be applied to the left or the right hand operator. The
+                    // general algorithm is:
+                    //
+                    // 1. Does this paren have an operator on the left or right side
+                    // 2. If not, it's unnecessarily wrapped (3 + 2)
+                    // 3. If it does, then which order of operation is highest?
+                    // 4. Wait for the highest order of operation to bind to an operator.
+                    // If the parenthetical has a preceding token like $fn(1 + 2) then we
+                    // need to subtract the existing operand length from the start
+                    // to determine if this is a left or right operation
+                    const fn = typeof operand === 'string' && operand.startsWith('$')
+                        ? operand
+                        : undefined;
+                    const hasTail = fn && expression.charAt(p + 1) === '.';
+                    // It's possible the function has a chained tail call:
+                    let tail = '';
+                    if (hasTail) {
+                        [tail, p] = getTail(p + 2, expression);
+                    }
+                    const lStep = op ? step : getStep(startP, expression, 0);
+                    const rStep = getStep(p, expression);
+                    if (lStep === -1 && rStep === -1) {
+                        // This parenthetical was unnecessarily wrapped at the root, or
+                        // these are args of a function call.
+                        operand = evaluate(parenthetical, -1, fn, tail);
+                    }
+                    else if (op && (lStep >= rStep || rStep === -1) && step === lStep) {
+                        // has a left hand operator with a higher order of operation
+                        left = op.bind(null, evaluate(parenthetical, -1, fn, tail));
+                        op = null;
+                        operand = '';
+                    }
+                    else if (rStep > lStep && step === rStep) {
+                        // should be applied to the right hand operator when it gets one
+                        operand = evaluate(parenthetical, -1, fn, tail);
+                    }
+                    else {
+                        operand += `(${parenthetical})${hasTail ? `.${tail}` : ''}`;
+                    }
+                    parenthetical = '';
+                }
+                else {
+                    parenthetical += char;
+                }
+            }
+            else if (depth === 0 &&
+                (operation = getOp(symbols, char, p, expression))) {
+                if (p === 0) {
+                    error(103, [operation, expression]);
+                }
+                // We identified the operator by looking ahead in the string, so we need
+                // our position to move past the operator
+                p += operation.length - 1;
+                if (p === expression.length - 1) {
+                    error(104, [operation, expression]);
+                }
+                if (!op) {
+                    // Bind the left hand operand
+                    if (left) {
+                        // In this case we've already parsed the left hand operator
+                        op = operators[operation].bind(null, evaluate(left, step));
+                        left = null;
+                    }
+                    else {
+                        op = operators[operation].bind(null, evaluate(operand, step));
+                        operand = '';
+                    }
+                }
+                else if (operand) {
+                    // Bind the right hand operand, and return the resulting expression as a new left hand operator
+                    left = op.bind(null, evaluate(operand, step));
+                    op = operators[operation].bind(null, left);
+                    operand = '';
+                }
+                continue;
+            }
+            else {
+                addTo(depth, char);
+            }
+        }
+        if (operand && op) {
+            // If we were left with an operand after the loop, and an op, it should
+            // be the right hand assignment.
+            op = op.bind(null, evaluate(operand, step));
+        }
+        // If we don't have an op, but we do have a left hand assignment, then that
+        // is actually our operator, so just re-assign it to op
+        op = !op && left ? left : op;
+        if (!op && operand) {
+            // If we don't have any op but we do have an operand so there is no boolean
+            // logic to perform, but that operand still means something so we need to
+            // evaluate it and return it as a function
+            op = (v, t) => {
+                return typeof v === 'function' ? v(t) : v;
+            };
+            op = op.bind(null, evaluate(operand, step));
+        }
+        if (!op && !operand) {
+            error(105, expression);
+        }
+        return op;
+    }
+    /**
+     * Given a string like '$name==bobby' evaluate it to true or false
+     * @param operand - A left or right boolean operand — usually conditions
+     * @param step - The current order of operation
+     * @param fnToken - The token (string) representation of a function being called
+     * @returns
+     */
+    function evaluate(operand, step, fnToken, tail //eslint-disable-line
+    ) {
+        if (fnToken) {
+            const fn = evaluate(fnToken, operatorRegistry.length);
+            let userFuncReturn;
+            // "Tail calls" are dot accessors after a function $foo().value. We need
+            // to compile tail calls, and then provide the function result to the
+            // exposed tokens.
+            let tailCall = tail
+                ? compile(`$${tail}`)
+                : false;
+            if (typeof fn === 'function') {
+                const args = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.parseArgs)(String(operand)).map((arg) => evaluate(arg, -1));
+                return (tokens) => {
+                    const userFunc = fn(tokens);
+                    if (typeof userFunc !== 'function') {
+                        warn(150, fnToken);
+                        return userFunc;
+                    }
+                    userFuncReturn = userFunc(...args.map((arg) => typeof arg === 'function' ? arg(tokens) : arg));
+                    if (tailCall) {
+                        tailCall = tailCall.provide((subTokens) => {
+                            const rootTokens = provideTokens(subTokens);
+                            const t = subTokens.reduce((tokenSet, token) => {
+                                const isTail = token === tail || (tail === null || tail === void 0 ? void 0 : tail.startsWith(`${token}(`));
+                                if (isTail) {
+                                    const value = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.getAt)(userFuncReturn, token);
+                                    tokenSet[token] = () => value;
+                                }
+                                else {
+                                    tokenSet[token] = rootTokens[token];
+                                }
+                                return tokenSet;
+                            }, {});
+                            return t;
+                        });
+                    }
+                    return tailCall ? tailCall() : userFuncReturn;
+                };
+            }
+        }
+        else if (typeof operand === 'string') {
+            // the word true or false will never contain further operations
+            if (operand === 'true')
+                return true;
+            if (operand === 'false')
+                return false;
+            if (operand === 'undefined')
+                return undefined;
+            // Truly quotes strings cannot contain an operation, return the string
+            if ((0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.isQuotedString)(operand))
+                return (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.rmEscapes)(operand.substring(1, operand.length - 1));
+            // Actual numbers cannot be contain an operation
+            if (!isNaN(+operand))
+                return Number(operand);
+            if (step < operatorRegistry.length - 1) {
+                return parseLogicals(operand, step + 1);
+            }
+            else {
+                if (operand.startsWith('$')) {
+                    const cleaned = operand.substring(1);
+                    requirements.add(cleaned);
+                    return function getToken(tokens) {
+                        return cleaned in tokens ? tokens[cleaned]() : undefined;
+                    };
+                }
+                // In this case we are dealing with an unquoted string, just treat it
+                // as a plain string.
+                return operand;
+            }
+        }
+        return operand;
+    }
+    /**
+     * Compile the string.
+     */
+    const compiled = parseLogicals(expr.startsWith('$:') ? expr.substring(2) : expr);
+    /**
+     * Convert compiled requirements to an array.
+     */
+    const reqs = Array.from(requirements);
+    /**
+     * Provides token values via callback to compiled output.
+     * @param callback - A callback that needs to provide all token requirements
+     * @returns
+     */
+    function provide(callback) {
+        provideTokens = callback;
+        return Object.assign(compiled.bind(null, callback(reqs)), {
+            provide,
+        });
+    }
+    return Object.assign(compiled, {
+        provide,
+    });
+}
+
+/**
+ * Function that produces a standardized object representation of CSS classes
+ * @param propertyKey - section key
+ * @param node - FormKit node
+ * @param sectionClassList - Things to turn into classes
+ * @returns
+ * @public
+ */
+function createClasses(propertyKey, node, sectionClassList) {
+    if (!sectionClassList)
+        return {};
+    if (typeof sectionClassList === 'string') {
+        const classKeys = sectionClassList.split(' ');
+        return classKeys.reduce((obj, key) => Object.assign(obj, { [key]: true }), {});
+    }
+    else if (typeof sectionClassList === 'function') {
+        return createClasses(propertyKey, node, sectionClassList(node, propertyKey));
+    }
+    return sectionClassList;
+}
+/**
+ * Combines multiple class lists into a single list
+ * @param node - the FormKit node being operated on
+ * @param property - The property key to which the class list will be applied
+ * @param args - CSS class list(s)
+ * @returns
+ * @public
+ */
+function generateClassList(node, property, ...args) {
+    const combinedClassList = args.reduce((finalClassList, currentClassList) => {
+        if (!currentClassList)
+            return finalClassList;
+        const { $reset, ...classList } = currentClassList;
+        if ($reset) {
+            return classList;
+        }
+        return Object.assign(finalClassList, classList);
+    }, {});
+    return (Object.keys(node.hook.classes.dispatch({ property, classes: combinedClassList })
+        .classes)
+        .filter((key) => combinedClassList[key])
+        .join(' ') || null);
+}
+
+/**
+ * Sets errors on a form, group, or input.
+ * @param formId - The id of a form
+ * @param localErrors - The errors to set on the form or the form’s inputs
+ * @param childErrors - (optional) The errors to set on the form or the form’s inputs
+ * @public
+ */
+function setErrors(id, localErrors, childErrors) {
+    const node = getNode$1(id);
+    if (node) {
+        node.setErrors(localErrors, childErrors);
+    }
+    else {
+        warn(651, id);
+    }
+}
+/**
+ * Clears child errors.
+ * @param id - The id of the node you want to clear errors for
+ * @param clearChildren - Determines if the the children of this node should have their errors cleared.
+ * @public
+ */
+function clearErrors(id, clearChildren = true) {
+    const node = getNode$1(id);
+    if (node) {
+        node.clearErrors(clearChildren);
+    }
+    else {
+        warn(652, id);
+    }
+}
+
+/**
+ * index.ts
+ *
+ * In this file we explicitly declare what should end up in the public API.
+ */
+/**
+ * The current version of FormKit at the time the package is published. Is replaced
+ * as part of the publishing script.
+ * @public
+ */
+const FORMKIT_VERSION = '1.0.0-beta.9';
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@formkit/addons/node_modules/@formkit/utils/dist/index.mjs":
+/*!*********************************************************************************!*\
+  !*** ./node_modules/@formkit/addons/node_modules/@formkit/utils/dist/index.mjs ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "assignDeep": () => (/* binding */ assignDeep),
+/* harmony export */   "camel": () => (/* binding */ camel),
+/* harmony export */   "clone": () => (/* binding */ clone),
+/* harmony export */   "cloneAny": () => (/* binding */ cloneAny),
+/* harmony export */   "dedupe": () => (/* binding */ dedupe),
+/* harmony export */   "empty": () => (/* binding */ empty),
+/* harmony export */   "eq": () => (/* binding */ eq),
+/* harmony export */   "escapeExp": () => (/* binding */ escapeExp),
+/* harmony export */   "except": () => (/* binding */ except),
+/* harmony export */   "extend": () => (/* binding */ extend),
+/* harmony export */   "getAt": () => (/* binding */ getAt),
+/* harmony export */   "has": () => (/* binding */ has),
+/* harmony export */   "init": () => (/* binding */ init),
+/* harmony export */   "isObject": () => (/* binding */ isObject),
+/* harmony export */   "isPojo": () => (/* binding */ isPojo),
+/* harmony export */   "isQuotedString": () => (/* binding */ isQuotedString),
+/* harmony export */   "isRecord": () => (/* binding */ isRecord),
+/* harmony export */   "kebab": () => (/* binding */ kebab),
+/* harmony export */   "nodeProps": () => (/* binding */ nodeProps),
+/* harmony export */   "nodeType": () => (/* binding */ nodeType),
+/* harmony export */   "only": () => (/* binding */ only),
+/* harmony export */   "parseArgs": () => (/* binding */ parseArgs),
+/* harmony export */   "regexForFormat": () => (/* binding */ regexForFormat),
+/* harmony export */   "rmEscapes": () => (/* binding */ rmEscapes),
+/* harmony export */   "setify": () => (/* binding */ setify),
+/* harmony export */   "shallowClone": () => (/* binding */ shallowClone),
+/* harmony export */   "slugify": () => (/* binding */ slugify),
+/* harmony export */   "spread": () => (/* binding */ spread),
+/* harmony export */   "token": () => (/* binding */ token),
+/* harmony export */   "undefine": () => (/* binding */ undefine)
+/* harmony export */ });
+/**
+ * Generates a random string.
+ * @returns string
+ * @public
+ */
+function token() {
+    return Math.random().toString(36).substring(2, 15);
+}
+/**
+ * Creates a new set of the specified type and uses the values from an Array or
+ * an existing Set.
+ * @param items -
+ * @returns Set
+ * @public
+ */
+function setify(items) {
+    return items instanceof Set ? items : new Set(items);
+}
+/**
+ * Given 2 arrays, return them as a combined array with no duplicates.
+ * @param arr1 -
+ * @param arr2 -
+ * @returns any[]
+ * @public
+ */
+function dedupe(arr1, arr2) {
+    const original = arr1 instanceof Set ? arr1 : new Set(arr1);
+    if (arr2)
+        arr2.forEach((item) => original.add(item));
+    return [...original];
+}
+/**
+ * Checks if the given property exists on the given object.
+ * @param obj -
+ * @param property -
+ * @public
+ */
+function has(obj, property) {
+    return Object.prototype.hasOwnProperty.call(obj, property);
+}
+/**
+ * Compare two values for equality optionally at depth.
+ * @param valA - Any type of input
+ * @param valB - Any type of output
+ * @param deep - Indicate if we should recurse into the object
+ * @param explicit - Explicit keys
+ * @returns boolean
+ * @public
+ */
+function eq(valA, // eslint-disable-line
+valB, // eslint-disable-line
+deep = true, explicit = ['__key']) {
+    if (valA === valB)
+        return true;
+    if (typeof valB === 'object' && typeof valA === 'object') {
+        if (valA instanceof Map)
+            return false;
+        if (valA instanceof Set)
+            return false;
+        if (valA instanceof Date)
+            return false;
+        if (valA === null || valB === null)
+            return false;
+        if (Object.keys(valA).length !== Object.keys(valB).length)
+            return false;
+        for (const k of explicit) {
+            if ((k in valA || k in valB) && valA[k] !== valB[k])
+                return false;
+        }
+        for (const key in valA) {
+            if (!(key in valB))
+                return false;
+            if (valA[key] !== valB[key] && !deep)
+                return false;
+            if (deep && !eq(valA[key], valB[key], deep, explicit))
+                return false;
+        }
+        return true;
+    }
+    return false;
+}
+/**
+ * Determines if a value is empty or not.
+ * @param value - any type of value that could be returned by an input.
+ * @public
+ */
+function empty(value // eslint-disable-line
+) {
+    const type = typeof value;
+    if (type === 'number')
+        return false;
+    if (value === undefined)
+        return true;
+    if (type === 'string') {
+        return value === '';
+    }
+    if (type === 'object') {
+        if (value === null)
+            return true;
+        for (const _i in value)
+            return false;
+        if (value instanceof RegExp)
+            return false;
+        if (value instanceof Date)
+            return false;
+        return true;
+    }
+    return false;
+}
+/**
+ * Escape a string for use in regular expressions.
+ * @param string - The string to escape.
+ * @public
+ */
+function escapeExp(string) {
+    // $& means the whole matched string
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+/**
+ * Given a string format (date) return a regex to match against.
+ * @param format - The format of the string
+ * @returns
+ * @public
+ */
+function regexForFormat(format) {
+    const escaped = `^${escapeExp(format)}$`;
+    const formats = {
+        MM: '(0[1-9]|1[012])',
+        M: '([1-9]|1[012])',
+        DD: '([012][0-9]|3[01])',
+        D: '([012]?[0-9]|3[01])',
+        YYYY: '\\d{4}',
+        YY: '\\d{2}',
+    };
+    const tokens = Object.keys(formats);
+    return new RegExp(tokens.reduce((regex, format) => {
+        return regex.replace(format, formats[format]);
+    }, escaped));
+}
+/**
+ * Given a FormKit input type
+ * @param type - Any FormKit input type
+ * @public
+ */
+function nodeType(type) {
+    const t = type.toLowerCase();
+    if (t === 'list')
+        return 'list';
+    if (t === 'group')
+        return 'group';
+    return 'input';
+}
+/**
+ * Determines if an object is an object or not.
+ * @param o - any value
+ * @returns
+ * @public
+ */
+// eslint-disable-next-line @typescript-eslint/ban-types
+function isRecord(o) {
+    return Object.prototype.toString.call(o) === '[object Object]';
+}
+/**
+ * Checks if an object is a simple array or record.
+ * @param o - A value to check
+ * @returns
+ * @public
+ */
+function isObject(o) {
+    return isRecord(o) || Array.isArray(o);
+}
+/**
+ * Attempts to determine if an object is a plain object. Mostly lifted from
+ * is-plain-object: https://github.com/jonschlinkert/is-plain-object
+ * Copyright (c) 2014-2017, Jon Schlinkert.
+ * @param o - any value
+ * @returns
+ * @public
+ */
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+function isPojo(o) {
+    if (isRecord(o) === false)
+        return false;
+    if (o.__FKNode__ || o.__POJO__ === false)
+        return false;
+    const ctor = o.constructor;
+    if (ctor === undefined)
+        return true;
+    const prot = ctor.prototype;
+    if (isRecord(prot) === false)
+        return false;
+    if (prot.hasOwnProperty('isPrototypeOf') === false) {
+        return false;
+    }
+    return true;
+}
+/**
+ * Recursively merge data from additional into original returning a new object.
+ * @param original - An object to extend
+ * @param additional - An object to modify the original object with.
+ * @param arrays - By default replaces arrays, but can also append to them.
+ * @param ignoreUndefined - when true it treats undefined values as if they dont exist
+ * @public
+ */
+function extend(original, additional, extendArrays = false, ignoreUndefined = false) {
+    if (additional === null)
+        return null;
+    const merged = {};
+    if (typeof additional === 'string')
+        return additional;
+    for (const key in original) {
+        if (has(additional, key) &&
+            (additional[key] !== undefined || !ignoreUndefined)) {
+            if (extendArrays &&
+                Array.isArray(original[key]) &&
+                Array.isArray(additional[key])) {
+                merged[key] = original[key].concat(additional[key]);
+                continue;
+            }
+            if (additional[key] === undefined) {
+                continue;
+            }
+            if (isPojo(original[key]) && isPojo(additional[key])) {
+                merged[key] = extend(original[key], additional[key], extendArrays, ignoreUndefined);
+            }
+            else {
+                merged[key] = additional[key];
+            }
+        }
+        else {
+            merged[key] = original[key];
+        }
+    }
+    for (const key in additional) {
+        if (!has(merged, key) && additional[key] !== undefined) {
+            merged[key] = additional[key];
+        }
+    }
+    return merged;
+}
+/**
+ * Determine if the given string is fully quoted. Examples:
+ * hello - false
+ * "hello" - true
+ * 'world' - true
+ * "hello"=="world" - false
+ * "hello'this'" - false
+ * "hello"'there' - false
+ * "hello""there" - false
+ * 'hello === world' - true
+ * @param str - A string to check.
+ * @public
+ */
+function isQuotedString(str) {
+    // quickly return false if the value is note quoted
+    if (str[0] !== '"' && str[0] !== "'")
+        return false;
+    if (str[0] !== str[str.length - 1])
+        return false;
+    const quoteType = str[0];
+    for (let p = 1; p < str.length; p++) {
+        if (str[p] === quoteType &&
+            (p === 1 || str[p - 1] !== '\\') &&
+            p !== str.length - 1) {
+            return false;
+        }
+    }
+    return true;
+}
+/**
+ * Remove extra escape characters.
+ * @param str - A string to remove escape characters from.
+ * @public
+ */
+function rmEscapes(str) {
+    if (!str.length)
+        return '';
+    let clean = '';
+    let lastChar = '';
+    for (let p = 0; p < str.length; p++) {
+        const char = str.charAt(p);
+        if (char !== '\\' || lastChar === '\\') {
+            clean += char;
+        }
+        lastChar = char;
+    }
+    return clean;
+}
+/**
+ * Performs a recursive Object.assign like operation.
+ * @param a - An object to be extended by object b
+ * @param b - An object to copy values from
+ * @public
+ */
+function assignDeep(a, b) {
+    for (const key in a) {
+        if (has(b, key) &&
+            a[key] !== b[key] &&
+            !(isPojo(a[key]) && isPojo(b[key]))) {
+            a[key] = b[key];
+        }
+        else if (isPojo(a[key]) && isPojo(b[key])) {
+            assignDeep(a[key], b[key]);
+        }
+    }
+    for (const key in b) {
+        if (!has(a, key)) {
+            a[key] = b[key];
+        }
+    }
+    return a;
+}
+/**
+ * Filters out values from an object that should not be considered "props" of
+ * a core node, like "value" and "name".
+ * @param attrs - An object to extract core node config from.
+ * @public
+ */
+function nodeProps(...sets) {
+    return sets.reduce((valid, props) => {
+        const { value, name, modelValue, config, plugins, ...validProps } = props; // eslint-disable-line
+        return Object.assign(valid, validProps);
+    }, {});
+}
+/**
+ * Parse a string for comma-separated arguments
+ * @param str - A string to parse
+ * @public
+ */
+function parseArgs(str) {
+    const args = [];
+    let arg = '';
+    let depth = 0;
+    let quote = '';
+    let lastChar = '';
+    for (let p = 0; p < str.length; p++) {
+        const char = str.charAt(p);
+        if (char === quote && lastChar !== '\\') {
+            quote = '';
+        }
+        else if ((char === "'" || char === '"') && !quote && lastChar !== '\\') {
+            quote = char;
+        }
+        else if (char === '(' && !quote) {
+            depth++;
+        }
+        else if (char === ')' && !quote) {
+            depth--;
+        }
+        if (char === ',' && !quote && depth === 0) {
+            args.push(arg);
+            arg = '';
+        }
+        else if (char !== ' ' || quote) {
+            arg += char;
+        }
+        lastChar = char;
+    }
+    if (arg) {
+        args.push(arg);
+    }
+    return args;
+}
+/**
+ * Return a new (shallow) object with all properties from a given object
+ * that are present in the array.
+ * @param obj - An object to clone
+ * @param toRemove - An array of keys to remove
+ * @public
+ */
+function except(obj, toRemove) {
+    const clean = {};
+    const exps = toRemove.filter((n) => n instanceof RegExp);
+    const keysToRemove = new Set(toRemove);
+    for (const key in obj) {
+        if (!keysToRemove.has(key) && !exps.some((exp) => exp.test(key))) {
+            clean[key] = obj[key];
+        }
+    }
+    return clean;
+}
+/**
+ * Extracts a set of keys from a given object. Importantly, this will extract
+ * values even if they are not set on the original object they will just have an
+ * undefined value.
+ * @param obj - An object to extract values from
+ * @param include - A set of keys to extract
+ * @returns
+ * @public
+ */
+function only(obj, include) {
+    const clean = {};
+    const exps = include.filter((n) => n instanceof RegExp);
+    include.forEach((key) => {
+        if (!(key instanceof RegExp)) {
+            clean[key] = obj[key];
+        }
+    });
+    Object.keys(obj).forEach((key) => {
+        if (exps.some((exp) => exp.test(key))) {
+            clean[key] = obj[key];
+        }
+    });
+    return clean;
+}
+/**
+ * This converts kebab-case to camelCase. It ONLY converts from kebab for
+ * efficiency stake.
+ * @param str - String to convert.
+ * @public
+ */
+function camel(str) {
+    return str.replace(/-([a-z0-9])/gi, (_s, g) => g.toUpperCase());
+}
+/**
+ * This converts camel-case to kebab case. It ONLY converts from camel to kebab.
+ * @param str - Converts camel to kebab
+ * @returns
+ * @public
+ */
+function kebab(str) {
+    return str
+        .replace(/([a-z0-9])([A-Z])/g, (_s, trail, cap) => trail + '-' + cap.toLowerCase())
+        .replace(' ', '-')
+        .toLowerCase();
+}
+/**
+ * Very shallowly clones the given object.
+ * @param obj - The object to shallow clone
+ * @returns
+ * @public
+ */
+function shallowClone(obj, explicit = ['__key', '__init']) {
+    if (obj !== null && typeof obj === 'object') {
+        let returnObject;
+        if (Array.isArray(obj))
+            returnObject = [...obj];
+        else if (isPojo(obj))
+            returnObject = { ...obj };
+        if (returnObject) {
+            applyExplicit(obj, returnObject, explicit);
+            return returnObject;
+        }
+    }
+    return obj;
+}
+/**
+ * Perform a recursive clone on a given object. This only intended to be used
+ * for simple objects like arrays and pojos.
+ * @param obj - Object to clone
+ * @public
+ */
+function clone(obj, explicit = ['__key', '__init']) {
+    if (obj === null ||
+        obj instanceof RegExp ||
+        obj instanceof Date ||
+        obj instanceof Map ||
+        obj instanceof Set ||
+        (typeof File === 'function' && obj instanceof File))
+        return obj;
+    let returnObject;
+    if (Array.isArray(obj)) {
+        returnObject = obj.map((value) => {
+            if (typeof value === 'object')
+                return clone(value, explicit);
+            return value;
+        });
+    }
+    else {
+        returnObject = Object.keys(obj).reduce((newObj, key) => {
+            newObj[key] =
+                typeof obj[key] === 'object'
+                    ? clone(obj[key], explicit)
+                    : obj[key];
+            return newObj;
+        }, {});
+    }
+    for (const key of explicit) {
+        if (key in obj) {
+            Object.defineProperty(returnObject, key, {
+                enumerable: false,
+                value: obj[key],
+            });
+        }
+    }
+    return returnObject;
+}
+/**
+ * Clones anything. If the item is scalar, no worries, it passes it back. if it
+ * is an object, it performs a (fast/loose) clone operation.
+ * @param obj - The object to clone
+ * @public
+ */
+function cloneAny(obj) {
+    return typeof obj === 'object'
+        ? clone(obj)
+        : obj;
+}
+/**
+ * Get a specific value via dot notation.
+ * @param obj - An object to fetch data from
+ * @param addr - An "address" in dot notation
+ * @public
+ */
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+function getAt(obj, addr) {
+    if (!obj || typeof obj !== 'object')
+        return null;
+    const segments = addr.split('.');
+    let o = obj;
+    for (const i in segments) {
+        const segment = segments[i];
+        if (has(o, segment)) {
+            o = o[segment];
+        }
+        if (+i === segments.length - 1)
+            return o;
+        if (!o || typeof o !== 'object')
+            return null;
+    }
+    return null;
+}
+/**
+ * Determines if the value of a prop that is either present (true) or not
+ * present (false). For example the prop disabled should disable
+ * by just existing, but what if it is set to the string "false" — then it
+ * should not be disabled.
+ * @param value - value to be checked
+ * @returns
+ * @public
+ */
+function undefine(value) {
+    return value !== undefined && value !== 'false' && value !== false
+        ? true
+        : undefined;
+}
+/**
+ * Defines an object as an initial value.
+ * @param obj - Object
+ * @returns
+ * @public
+ */
+/* eslint-disable-next-line @typescript-eslint/ban-types */
+function init(obj) {
+    return !Object.isFrozen(obj)
+        ? Object.defineProperty(obj, '__init', {
+            enumerable: false,
+            value: true,
+        })
+        : obj;
+}
+/**
+ * Turn any string into a URL/DOM safe string.
+ * @public
+ */
+function slugify(str) {
+    return str
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, ' ')
+        .trim()
+        .replace(/\s+/g, '-');
+}
+/**
+ * Spreads an object or an array, otherwise returns the same value.
+ * @param obj - Any value, but will spread objects and arrays
+ * @public
+ */
+function spread(obj, explicit = ['__key', '__init']) {
+    if (obj && typeof obj === 'object') {
+        if (obj instanceof RegExp)
+            return obj;
+        if (obj instanceof Date)
+            return obj;
+        let spread;
+        if (Array.isArray(obj)) {
+            spread = [...obj];
+        }
+        else {
+            spread = { ...obj };
+        }
+        // eslint-disable-next-line @typescript-eslint/ban-types
+        return applyExplicit(obj, spread, explicit);
+    }
+    return obj;
+}
+/**
+ * Apply non enumerable properties to an object.
+ * @param obj - The object to apply non-enumerable properties to
+ * @param explicit - An array of non-enumerable properties to apply
+ * @internal
+ */
+// eslint-disable-next-line @typescript-eslint/ban-types
+function applyExplicit(original, obj, explicit) {
+    for (const key of explicit) {
+        if (key in original) {
+            Object.defineProperty(obj, key, {
+                enumerable: false,
+                value: original[key],
+            });
+        }
+    }
+    return obj;
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@formkit/auto-animate/index.mjs":
+/*!******************************************************!*\
+  !*** ./node_modules/@formkit/auto-animate/index.mjs ***!
+  \******************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ autoAnimate),
+/* harmony export */   "getTransitionSizes": () => (/* binding */ getTransitionSizes),
+/* harmony export */   "vAutoAnimate": () => (/* binding */ vAutoAnimate)
+/* harmony export */ });
+/**
+ * A set of all the parents currently being observe. This is the only non weak
+ * registry.
+ */
+const parents = new Set();
+/**
+ * Element coordinates that is constantly kept up to date.
+ */
+const coords = new WeakMap();
+/**
+ * Siblings of elements that have been removed from the dom.
+ */
+const siblings = new WeakMap();
+/**
+ * Animations that are currently running.
+ */
+const animations = new WeakMap();
+/**
+ * A map of existing intersection observers used to track element movements.
+ */
+const intersections = new WeakMap();
+/**
+ * Intervals for automatically checking the position of elements occasionally.
+ */
+const intervals = new WeakMap();
+/**
+ * The configuration options for each group of elements.
+ */
+const options = new WeakMap();
+/**
+ * Debounce counters by id, used to debounce calls to update positions.
+ */
+const debounces = new WeakMap();
+/**
+ * The document used to calculate transitions.
+ */
+let root;
+/**
+ * Used to sign an element as the target.
+ */
+const TGT = "__aa_tgt";
+/**
+ * Used to sign an element as being part of a removal.
+ */
+const DEL = "__aa_del";
+/**
+ * Callback for handling all mutations.
+ * @param mutations - A mutation list
+ */
+const handleMutations = (mutations) => {
+    const elements = getElements(mutations);
+    // If elements is "false" that means this mutation that should be ignored.
+    if (elements) {
+        elements.forEach((el) => animate(el));
+    }
+};
+/**
+ *
+ * @param entries - Elements that have been resized.
+ */
+const handleResizes = (entries) => {
+    entries.forEach((entry) => {
+        if (entry.target === root)
+            updateAllPos();
+        if (coords.has(entry.target))
+            updatePos(entry.target);
+    });
+};
+/**
+ * Observe this elements position.
+ * @param el - The element to observe the position of.
+ */
+function observePosition(el) {
+    const oldObserver = intersections.get(el);
+    oldObserver === null || oldObserver === void 0 ? void 0 : oldObserver.disconnect();
+    let rect = coords.get(el);
+    let invocations = 0;
+    const buffer = 5;
+    if (!rect) {
+        rect = getCoords(el);
+        coords.set(el, rect);
+    }
+    const { offsetWidth, offsetHeight } = root;
+    const rootMargins = [
+        rect.top - buffer,
+        offsetWidth - (rect.left + buffer + rect.width),
+        offsetHeight - (rect.top + buffer + rect.height),
+        rect.left - buffer,
+    ];
+    const rootMargin = rootMargins
+        .map((px) => `${-1 * Math.floor(px)}px`)
+        .join(" ");
+    const observer = new IntersectionObserver(() => {
+        ++invocations > 1 && updatePos(el);
+    }, {
+        root,
+        threshold: 1,
+        rootMargin,
+    });
+    observer.observe(el);
+    intersections.set(el, observer);
+}
+/**
+ * Update the exact position of a given element.
+ * @param el - An element to update the position of.
+ */
+function updatePos(el) {
+    clearTimeout(debounces.get(el));
+    const optionsOrPlugin = getOptions(el);
+    const delay = typeof optionsOrPlugin === "function" ? 500 : optionsOrPlugin.duration;
+    debounces.set(el, setTimeout(() => {
+        const currentAnimation = animations.get(el);
+        if (!currentAnimation || currentAnimation.finished) {
+            coords.set(el, getCoords(el));
+            observePosition(el);
+        }
+    }, delay));
+}
+/**
+ * Updates all positions that are currently being tracked.
+ */
+function updateAllPos() {
+    clearTimeout(debounces.get(root));
+    debounces.set(root, setTimeout(() => {
+        parents.forEach((parent) => forEach(parent, (el) => lowPriority(() => updatePos(el))));
+    }, 100));
+}
+/**
+ * Its possible for a quick scroll or other fast events to get past the
+ * intersection observer, so occasionally we need want "cold-poll" for the
+ * latests and greatest position. We try to do this in the most non-disruptive
+ * fashion possible. First we only do this ever couple seconds, staggard by a
+ * random offset.
+ * @param el - Element
+ */
+function poll(el) {
+    setTimeout(() => {
+        intervals.set(el, setInterval(() => lowPriority(updatePos.bind(null, el)), 2000));
+    }, Math.round(2000 * Math.random()));
+}
+/**
+ * Perform some operation that is non critical at some point.
+ * @param callback
+ */
+function lowPriority(callback) {
+    if (typeof requestIdleCallback === "function") {
+        requestIdleCallback(() => callback());
+    }
+    else {
+        requestAnimationFrame(() => callback());
+    }
+}
+/**
+ * The mutation observer responsible for watching each root element.
+ */
+let mutations;
+/**
+ * A resize observer, responsible for recalculating elements on resize.
+ */
+let resize;
+/**
+ * If this is in a browser, initialize our Web APIs
+ */
+if (typeof window !== "undefined") {
+    root = document.documentElement;
+    mutations = new MutationObserver(handleMutations);
+    resize = new ResizeObserver(handleResizes);
+    resize.observe(root);
+}
+/**
+ * Retrieves all the elements that may have been affected by the last mutation
+ * including ones that have been removed and are no longer in the DOM.
+ * @param mutations - A mutation list.
+ * @returns
+ */
+function getElements(mutations) {
+    return mutations.reduce((elements, mutation) => {
+        // Short circuit if we find a purposefully deleted node.
+        if (elements === false)
+            return false;
+        if (mutation.target instanceof Element) {
+            target(mutation.target);
+            if (!elements.has(mutation.target)) {
+                elements.add(mutation.target);
+                for (let i = 0; i < mutation.target.children.length; i++) {
+                    const child = mutation.target.children.item(i);
+                    if (!child)
+                        continue;
+                    if (DEL in child)
+                        return false;
+                    target(mutation.target, child);
+                    elements.add(child);
+                }
+            }
+            if (mutation.removedNodes.length) {
+                for (let i = 0; i < mutation.removedNodes.length; i++) {
+                    const child = mutation.removedNodes[i];
+                    if (DEL in child)
+                        return false;
+                    if (child instanceof Element) {
+                        elements.add(child);
+                        target(mutation.target, child);
+                        siblings.set(child, [
+                            mutation.previousSibling,
+                            mutation.nextSibling,
+                        ]);
+                    }
+                }
+            }
+        }
+        return elements;
+    }, new Set());
+}
+/**
+ *
+ * @param el - The root element
+ * @param child
+ */
+function target(el, child) {
+    if (!child && !(TGT in el))
+        Object.defineProperty(el, TGT, { value: el });
+    else if (child && !(TGT in child))
+        Object.defineProperty(child, TGT, { value: el });
+}
+/**
+ * Determines what kind of change took place on the given element and then
+ * performs the proper animation based on that.
+ * @param el - The specific element to animate.
+ */
+function animate(el) {
+    var _a;
+    const isMounted = root.contains(el);
+    const preExisting = coords.has(el);
+    if (isMounted && siblings.has(el))
+        siblings.delete(el);
+    if (animations.has(el)) {
+        (_a = animations.get(el)) === null || _a === void 0 ? void 0 : _a.cancel();
+    }
+    if (preExisting && isMounted) {
+        remain(el);
+    }
+    else if (preExisting && !isMounted) {
+        remove(el);
+    }
+    else {
+        add(el);
+    }
+}
+/**
+ * Removes all non-digits from a string and casts to a number.
+ * @param str - A string containing a pixel value.
+ * @returns
+ */
+function raw(str) {
+    return Number(str.replace(/[^0-9.\-]/g, ""));
+}
+/**
+ * Get the coordinates of elements adjusted for scroll position.
+ * @param el - Element
+ * @returns
+ */
+function getCoords(el) {
+    const rect = el.getBoundingClientRect();
+    return {
+        top: rect.top + window.scrollY,
+        left: rect.left + window.scrollX,
+        width: rect.width,
+        height: rect.height,
+    };
+}
+/**
+ * Returns the width/height that the element should be transitioned between.
+ * This takes into account box-sizing.
+ * @param el - Element being animated
+ * @param oldCoords - Old set of Coordinates coordinates
+ * @param newCoords - New set of Coordinates coordinates
+ * @returns
+ */
+function getTransitionSizes(el, oldCoords, newCoords) {
+    let widthFrom = oldCoords.width;
+    let heightFrom = oldCoords.height;
+    let widthTo = newCoords.width;
+    let heightTo = newCoords.height;
+    const styles = getComputedStyle(el);
+    const sizing = styles.getPropertyValue("box-sizing");
+    if (sizing === "content-box") {
+        const paddingY = raw(styles.paddingTop) +
+            raw(styles.paddingBottom) +
+            raw(styles.borderTopWidth) +
+            raw(styles.borderBottomWidth);
+        const paddingX = raw(styles.paddingLeft) +
+            raw(styles.paddingRight) +
+            raw(styles.borderRightWidth) +
+            raw(styles.borderLeftWidth);
+        widthFrom -= paddingX;
+        widthTo -= paddingX;
+        heightFrom -= paddingY;
+        heightTo -= paddingY;
+    }
+    return [widthFrom, widthTo, heightFrom, heightTo].map(Math.round);
+}
+/**
+ * Retrieves animation options for the current element.
+ * @param el - Element to retrieve options for.
+ * @returns
+ */
+function getOptions(el) {
+    return TGT in el && options.has(el[TGT])
+        ? options.get(el[TGT])
+        : { duration: 250, easing: "ease-in-out" };
+}
+/**
+ * Iterate over the children of a given parent.
+ * @param parent - A parent element
+ * @param callback - A callback
+ */
+function forEach(parent, ...callbacks) {
+    callbacks.forEach((callback) => callback(parent, options.has(parent)));
+    for (let i = 0; i < parent.children.length; i++) {
+        const child = parent.children.item(i);
+        if (child) {
+            callbacks.forEach((callback) => callback(child, options.has(child)));
+        }
+    }
+}
+/**
+ * The element in question is remaining in the DOM.
+ * @param el - Element to flip
+ * @returns
+ */
+function remain(el) {
+    const oldCoords = coords.get(el);
+    const newCoords = getCoords(el);
+    let animation;
+    if (!oldCoords)
+        return;
+    const pluginOrOptions = getOptions(el);
+    if (typeof pluginOrOptions !== "function") {
+        const deltaX = oldCoords.left - newCoords.left;
+        const deltaY = oldCoords.top - newCoords.top;
+        const [widthFrom, widthTo, heightFrom, heightTo] = getTransitionSizes(el, oldCoords, newCoords);
+        const start = {
+            transform: `translate(${deltaX}px, ${deltaY}px)`,
+        };
+        const end = {
+            transform: `translate(0, 0)`,
+        };
+        if (widthFrom !== widthTo) {
+            start.width = `${widthFrom}px`;
+            end.width = `${widthTo}px`;
+        }
+        if (heightFrom !== heightTo) {
+            start.height = `${heightFrom}px`;
+            end.height = `${heightTo}px`;
+        }
+        animation = el.animate([start, end], pluginOrOptions);
+    }
+    else {
+        animation = new Animation(pluginOrOptions(el, "remain", oldCoords, newCoords));
+        animation.play();
+    }
+    animations.set(el, animation);
+    coords.set(el, newCoords);
+    animation.addEventListener("finish", updatePos.bind(null, el));
+}
+/**
+ * Adds the element with a transition.
+ * @param el - Animates the element being added.
+ */
+function add(el) {
+    const newCoords = getCoords(el);
+    coords.set(el, newCoords);
+    const pluginOrOptions = getOptions(el);
+    let animation;
+    if (typeof pluginOrOptions !== "function") {
+        animation = el.animate([
+            { transform: "scale(.98)", opacity: 0 },
+            { transform: "scale(0.98)", opacity: 0, offset: 0.5 },
+            { transform: "scale(1)", opacity: 1 },
+        ], {
+            duration: pluginOrOptions.duration * 1.5,
+            easing: "ease-in",
+        });
+    }
+    else {
+        animation = new Animation(pluginOrOptions(el, "add", newCoords));
+        animation.play();
+    }
+    animations.set(el, animation);
+    animation.addEventListener("finish", updatePos.bind(null, el));
+}
+/**
+ * Animates the removal of an element.
+ * @param el - Element to remove
+ */
+function remove(el) {
+    if (!siblings.has(el) || !coords.has(el))
+        return;
+    const [prev, next] = siblings.get(el);
+    Object.defineProperty(el, DEL, { value: true });
+    if (next && next.parentNode && next.parentNode instanceof Element) {
+        next.parentNode.insertBefore(el, next);
+    }
+    else if (prev && prev.parentNode) {
+        prev.parentNode.appendChild(el);
+    }
+    const [top, left, width, height] = deletePosition(el);
+    const optionsOrPlugin = getOptions(el);
+    const oldCoords = coords.get(el);
+    let animation;
+    Object.assign(el.style, {
+        position: "absolute",
+        top: `${top}px`,
+        left: `${left}px`,
+        width: `${width}px`,
+        height: `${height}px`,
+        margin: 0,
+        pointerEvents: "none",
+        transformOrigin: "center",
+        zIndex: 100,
+    });
+    if (typeof optionsOrPlugin !== "function") {
+        animation = el.animate([
+            {
+                transform: "scale(1)",
+                opacity: 1,
+            },
+            {
+                transform: "scale(.98)",
+                opacity: 0,
+            },
+        ], { duration: optionsOrPlugin.duration, easing: "ease-out" });
+    }
+    else {
+        animation = new Animation(optionsOrPlugin(el, "remove", oldCoords));
+        animation.play();
+    }
+    animations.set(el, animation);
+    animation.addEventListener("finish", () => {
+        var _a;
+        el.remove();
+        coords.delete(el);
+        siblings.delete(el);
+        animations.delete(el);
+        (_a = intersections.get(el)) === null || _a === void 0 ? void 0 : _a.disconnect();
+    });
+}
+function deletePosition(el) {
+    const oldCoords = coords.get(el);
+    const [width, , height] = getTransitionSizes(el, oldCoords, getCoords(el));
+    let offsetParent = el.parentElement;
+    while (offsetParent &&
+        (getComputedStyle(offsetParent).position === "static" ||
+            offsetParent instanceof HTMLBodyElement)) {
+        offsetParent = offsetParent.parentElement;
+    }
+    if (!offsetParent)
+        offsetParent = document.body;
+    const parentStyles = getComputedStyle(offsetParent);
+    const parentCoords = coords.get(offsetParent) || getCoords(offsetParent);
+    const top = Math.round(oldCoords.top - parentCoords.top) -
+        raw(parentStyles.borderTopWidth);
+    const left = Math.round(oldCoords.left - parentCoords.left) -
+        raw(parentStyles.borderLeftWidth);
+    return [top, left, width, height];
+}
+/**
+ * A function that automatically adds animation effects to itself and its
+ * immediate children. Specifically it adds effects for adding, moving, and
+ * removing DOM elements.
+ * @param el - A parent element to add animations to.
+ * @param options - An optional object of options.
+ */
+function autoAnimate(el, config = {}) {
+    if (mutations && resize) {
+        const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+        if (mediaQuery.matches)
+            return;
+        if (getComputedStyle(el).position === "static") {
+            Object.assign(el.style, { position: "relative" });
+        }
+        forEach(el, updatePos, poll, (element) => resize === null || resize === void 0 ? void 0 : resize.observe(element));
+        if (typeof config === "function") {
+            options.set(el, config);
+        }
+        else {
+            options.set(el, { duration: 250, easing: "ease-in-out", ...config });
+        }
+        mutations.observe(el, { childList: true });
+        parents.add(el);
+    }
+}
+/**
+ * The vue directive.
+ */
+const vAutoAnimate = {
+    mounted: (el, binding) => {
+        autoAnimate(el, binding.value || {});
+    },
+};
+
+
+
 
 /***/ }),
 
