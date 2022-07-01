@@ -20593,8 +20593,7 @@ __webpack_require__.r(__webpack_exports__);
   __name: 'SingleProduct',
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
-    expose(); //import { computed, reactive, onBeforeMount } from "vue";
-
+    expose();
     var store = (0,_store_useCart__WEBPACK_IMPORTED_MODULE_0__.useCart)();
     var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.useRoute)();
     var product = store.getSingleProduct(route.params.slug);
@@ -20603,7 +20602,6 @@ __webpack_require__.r(__webpack_exports__);
       route: route,
       product: product,
       useRoute: vue_router__WEBPACK_IMPORTED_MODULE_2__.useRoute,
-      useRouter: vue_router__WEBPACK_IMPORTED_MODULE_2__.useRouter,
       useCart: _store_useCart__WEBPACK_IMPORTED_MODULE_0__.useCart,
       formatPrice: _utils_functions__WEBPACK_IMPORTED_MODULE_1__.formatPrice
     };
@@ -21860,7 +21858,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
- // TODO https://seb-l.github.io/pinia-plugin-persist/#install
 
 var _state = {
   products: [],
@@ -21931,10 +21928,9 @@ var useCart = (0,pinia__WEBPACK_IMPORTED_MODULE_1__.defineStore)("shopState", {
   },
   getters: {
     getCartQuantity: function getCartQuantity() {
-      var cartTotalQuantity = this.cart.reduce(function (total, product) {
+      return this.cart.reduce(function (total, product) {
         return total + product.quantity;
       }, 0);
-      return cartTotalQuantity;
     },
     getCartContent: function getCartContent() {
       return this.cart;
@@ -21943,10 +21939,9 @@ var useCart = (0,pinia__WEBPACK_IMPORTED_MODULE_1__.defineStore)("shopState", {
       return this.customer;
     },
     getCartTotal: function getCartTotal() {
-      var cartTotalAmount = this.cart.reduce(function (total, product) {
+      return this.cart.reduce(function (total, product) {
         return total + product.price * product.quantity;
       }, 0);
-      return cartTotalAmount;
     }
   },
   persist: {
@@ -52052,9 +52047,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "createAutoAnimatePlugin": () => (/* binding */ createAutoAnimatePlugin)
 /* harmony export */ });
-/* harmony import */ var _formkit_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @formkit/core */ "./node_modules/@formkit/addons/node_modules/@formkit/core/dist/index.mjs");
+/* harmony import */ var _formkit_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @formkit/core */ "./node_modules/@formkit/core/dist/index.mjs");
 /* harmony import */ var _formkit_auto_animate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @formkit/auto-animate */ "./node_modules/@formkit/auto-animate/index.mjs");
-/* harmony import */ var _formkit_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @formkit/utils */ "./node_modules/@formkit/addons/node_modules/@formkit/utils/dist/index.mjs");
+/* harmony import */ var _formkit_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @formkit/utils */ "./node_modules/@formkit/utils/dist/index.mjs");
 
 
 
@@ -52124,10 +52119,529 @@ function createAutoAnimatePlugin(options) {
 
 /***/ }),
 
-/***/ "./node_modules/@formkit/addons/node_modules/@formkit/core/dist/index.mjs":
-/*!********************************************************************************!*\
-  !*** ./node_modules/@formkit/addons/node_modules/@formkit/core/dist/index.mjs ***!
-  \********************************************************************************/
+/***/ "./node_modules/@formkit/auto-animate/index.mjs":
+/*!******************************************************!*\
+  !*** ./node_modules/@formkit/auto-animate/index.mjs ***!
+  \******************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ autoAnimate),
+/* harmony export */   "getTransitionSizes": () => (/* binding */ getTransitionSizes),
+/* harmony export */   "vAutoAnimate": () => (/* binding */ vAutoAnimate)
+/* harmony export */ });
+/**
+ * A set of all the parents currently being observe. This is the only non weak
+ * registry.
+ */
+const parents = new Set();
+/**
+ * Element coordinates that is constantly kept up to date.
+ */
+const coords = new WeakMap();
+/**
+ * Siblings of elements that have been removed from the dom.
+ */
+const siblings = new WeakMap();
+/**
+ * Animations that are currently running.
+ */
+const animations = new WeakMap();
+/**
+ * A map of existing intersection observers used to track element movements.
+ */
+const intersections = new WeakMap();
+/**
+ * Intervals for automatically checking the position of elements occasionally.
+ */
+const intervals = new WeakMap();
+/**
+ * The configuration options for each group of elements.
+ */
+const options = new WeakMap();
+/**
+ * Debounce counters by id, used to debounce calls to update positions.
+ */
+const debounces = new WeakMap();
+/**
+ * The document used to calculate transitions.
+ */
+let root;
+/**
+ * Used to sign an element as the target.
+ */
+const TGT = "__aa_tgt";
+/**
+ * Used to sign an element as being part of a removal.
+ */
+const DEL = "__aa_del";
+/**
+ * Callback for handling all mutations.
+ * @param mutations - A mutation list
+ */
+const handleMutations = (mutations) => {
+    const elements = getElements(mutations);
+    // If elements is "false" that means this mutation that should be ignored.
+    if (elements) {
+        elements.forEach((el) => animate(el));
+    }
+};
+/**
+ *
+ * @param entries - Elements that have been resized.
+ */
+const handleResizes = (entries) => {
+    entries.forEach((entry) => {
+        if (entry.target === root)
+            updateAllPos();
+        if (coords.has(entry.target))
+            updatePos(entry.target);
+    });
+};
+/**
+ * Observe this elements position.
+ * @param el - The element to observe the position of.
+ */
+function observePosition(el) {
+    const oldObserver = intersections.get(el);
+    oldObserver === null || oldObserver === void 0 ? void 0 : oldObserver.disconnect();
+    let rect = coords.get(el);
+    let invocations = 0;
+    const buffer = 5;
+    if (!rect) {
+        rect = getCoords(el);
+        coords.set(el, rect);
+    }
+    const { offsetWidth, offsetHeight } = root;
+    const rootMargins = [
+        rect.top - buffer,
+        offsetWidth - (rect.left + buffer + rect.width),
+        offsetHeight - (rect.top + buffer + rect.height),
+        rect.left - buffer,
+    ];
+    const rootMargin = rootMargins
+        .map((px) => `${-1 * Math.floor(px)}px`)
+        .join(" ");
+    const observer = new IntersectionObserver(() => {
+        ++invocations > 1 && updatePos(el);
+    }, {
+        root,
+        threshold: 1,
+        rootMargin,
+    });
+    observer.observe(el);
+    intersections.set(el, observer);
+}
+/**
+ * Update the exact position of a given element.
+ * @param el - An element to update the position of.
+ */
+function updatePos(el) {
+    clearTimeout(debounces.get(el));
+    const optionsOrPlugin = getOptions(el);
+    const delay = typeof optionsOrPlugin === "function" ? 500 : optionsOrPlugin.duration;
+    debounces.set(el, setTimeout(() => {
+        const currentAnimation = animations.get(el);
+        if (!currentAnimation || currentAnimation.finished) {
+            coords.set(el, getCoords(el));
+            observePosition(el);
+        }
+    }, delay));
+}
+/**
+ * Updates all positions that are currently being tracked.
+ */
+function updateAllPos() {
+    clearTimeout(debounces.get(root));
+    debounces.set(root, setTimeout(() => {
+        parents.forEach((parent) => forEach(parent, (el) => lowPriority(() => updatePos(el))));
+    }, 100));
+}
+/**
+ * Its possible for a quick scroll or other fast events to get past the
+ * intersection observer, so occasionally we need want "cold-poll" for the
+ * latests and greatest position. We try to do this in the most non-disruptive
+ * fashion possible. First we only do this ever couple seconds, staggard by a
+ * random offset.
+ * @param el - Element
+ */
+function poll(el) {
+    setTimeout(() => {
+        intervals.set(el, setInterval(() => lowPriority(updatePos.bind(null, el)), 2000));
+    }, Math.round(2000 * Math.random()));
+}
+/**
+ * Perform some operation that is non critical at some point.
+ * @param callback
+ */
+function lowPriority(callback) {
+    if (typeof requestIdleCallback === "function") {
+        requestIdleCallback(() => callback());
+    }
+    else {
+        requestAnimationFrame(() => callback());
+    }
+}
+/**
+ * The mutation observer responsible for watching each root element.
+ */
+let mutations;
+/**
+ * A resize observer, responsible for recalculating elements on resize.
+ */
+let resize;
+/**
+ * If this is in a browser, initialize our Web APIs
+ */
+if (typeof window !== "undefined") {
+    root = document.documentElement;
+    mutations = new MutationObserver(handleMutations);
+    resize = new ResizeObserver(handleResizes);
+    resize.observe(root);
+}
+/**
+ * Retrieves all the elements that may have been affected by the last mutation
+ * including ones that have been removed and are no longer in the DOM.
+ * @param mutations - A mutation list.
+ * @returns
+ */
+function getElements(mutations) {
+    return mutations.reduce((elements, mutation) => {
+        // Short circuit if we find a purposefully deleted node.
+        if (elements === false)
+            return false;
+        if (mutation.target instanceof Element) {
+            target(mutation.target);
+            if (!elements.has(mutation.target)) {
+                elements.add(mutation.target);
+                for (let i = 0; i < mutation.target.children.length; i++) {
+                    const child = mutation.target.children.item(i);
+                    if (!child)
+                        continue;
+                    if (DEL in child)
+                        return false;
+                    target(mutation.target, child);
+                    elements.add(child);
+                }
+            }
+            if (mutation.removedNodes.length) {
+                for (let i = 0; i < mutation.removedNodes.length; i++) {
+                    const child = mutation.removedNodes[i];
+                    if (DEL in child)
+                        return false;
+                    if (child instanceof Element) {
+                        elements.add(child);
+                        target(mutation.target, child);
+                        siblings.set(child, [
+                            mutation.previousSibling,
+                            mutation.nextSibling,
+                        ]);
+                    }
+                }
+            }
+        }
+        return elements;
+    }, new Set());
+}
+/**
+ *
+ * @param el - The root element
+ * @param child
+ */
+function target(el, child) {
+    if (!child && !(TGT in el))
+        Object.defineProperty(el, TGT, { value: el });
+    else if (child && !(TGT in child))
+        Object.defineProperty(child, TGT, { value: el });
+}
+/**
+ * Determines what kind of change took place on the given element and then
+ * performs the proper animation based on that.
+ * @param el - The specific element to animate.
+ */
+function animate(el) {
+    var _a;
+    const isMounted = root.contains(el);
+    const preExisting = coords.has(el);
+    if (isMounted && siblings.has(el))
+        siblings.delete(el);
+    if (animations.has(el)) {
+        (_a = animations.get(el)) === null || _a === void 0 ? void 0 : _a.cancel();
+    }
+    if (preExisting && isMounted) {
+        remain(el);
+    }
+    else if (preExisting && !isMounted) {
+        remove(el);
+    }
+    else {
+        add(el);
+    }
+}
+/**
+ * Removes all non-digits from a string and casts to a number.
+ * @param str - A string containing a pixel value.
+ * @returns
+ */
+function raw(str) {
+    return Number(str.replace(/[^0-9.\-]/g, ""));
+}
+/**
+ * Get the coordinates of elements adjusted for scroll position.
+ * @param el - Element
+ * @returns
+ */
+function getCoords(el) {
+    const rect = el.getBoundingClientRect();
+    return {
+        top: rect.top + window.scrollY,
+        left: rect.left + window.scrollX,
+        width: rect.width,
+        height: rect.height,
+    };
+}
+/**
+ * Returns the width/height that the element should be transitioned between.
+ * This takes into account box-sizing.
+ * @param el - Element being animated
+ * @param oldCoords - Old set of Coordinates coordinates
+ * @param newCoords - New set of Coordinates coordinates
+ * @returns
+ */
+function getTransitionSizes(el, oldCoords, newCoords) {
+    let widthFrom = oldCoords.width;
+    let heightFrom = oldCoords.height;
+    let widthTo = newCoords.width;
+    let heightTo = newCoords.height;
+    const styles = getComputedStyle(el);
+    const sizing = styles.getPropertyValue("box-sizing");
+    if (sizing === "content-box") {
+        const paddingY = raw(styles.paddingTop) +
+            raw(styles.paddingBottom) +
+            raw(styles.borderTopWidth) +
+            raw(styles.borderBottomWidth);
+        const paddingX = raw(styles.paddingLeft) +
+            raw(styles.paddingRight) +
+            raw(styles.borderRightWidth) +
+            raw(styles.borderLeftWidth);
+        widthFrom -= paddingX;
+        widthTo -= paddingX;
+        heightFrom -= paddingY;
+        heightTo -= paddingY;
+    }
+    return [widthFrom, widthTo, heightFrom, heightTo].map(Math.round);
+}
+/**
+ * Retrieves animation options for the current element.
+ * @param el - Element to retrieve options for.
+ * @returns
+ */
+function getOptions(el) {
+    return TGT in el && options.has(el[TGT])
+        ? options.get(el[TGT])
+        : { duration: 250, easing: "ease-in-out" };
+}
+/**
+ * Iterate over the children of a given parent.
+ * @param parent - A parent element
+ * @param callback - A callback
+ */
+function forEach(parent, ...callbacks) {
+    callbacks.forEach((callback) => callback(parent, options.has(parent)));
+    for (let i = 0; i < parent.children.length; i++) {
+        const child = parent.children.item(i);
+        if (child) {
+            callbacks.forEach((callback) => callback(child, options.has(child)));
+        }
+    }
+}
+/**
+ * The element in question is remaining in the DOM.
+ * @param el - Element to flip
+ * @returns
+ */
+function remain(el) {
+    const oldCoords = coords.get(el);
+    const newCoords = getCoords(el);
+    let animation;
+    if (!oldCoords)
+        return;
+    const pluginOrOptions = getOptions(el);
+    if (typeof pluginOrOptions !== "function") {
+        const deltaX = oldCoords.left - newCoords.left;
+        const deltaY = oldCoords.top - newCoords.top;
+        const [widthFrom, widthTo, heightFrom, heightTo] = getTransitionSizes(el, oldCoords, newCoords);
+        const start = {
+            transform: `translate(${deltaX}px, ${deltaY}px)`,
+        };
+        const end = {
+            transform: `translate(0, 0)`,
+        };
+        if (widthFrom !== widthTo) {
+            start.width = `${widthFrom}px`;
+            end.width = `${widthTo}px`;
+        }
+        if (heightFrom !== heightTo) {
+            start.height = `${heightFrom}px`;
+            end.height = `${heightTo}px`;
+        }
+        animation = el.animate([start, end], pluginOrOptions);
+    }
+    else {
+        animation = new Animation(pluginOrOptions(el, "remain", oldCoords, newCoords));
+        animation.play();
+    }
+    animations.set(el, animation);
+    coords.set(el, newCoords);
+    animation.addEventListener("finish", updatePos.bind(null, el));
+}
+/**
+ * Adds the element with a transition.
+ * @param el - Animates the element being added.
+ */
+function add(el) {
+    const newCoords = getCoords(el);
+    coords.set(el, newCoords);
+    const pluginOrOptions = getOptions(el);
+    let animation;
+    if (typeof pluginOrOptions !== "function") {
+        animation = el.animate([
+            { transform: "scale(.98)", opacity: 0 },
+            { transform: "scale(0.98)", opacity: 0, offset: 0.5 },
+            { transform: "scale(1)", opacity: 1 },
+        ], {
+            duration: pluginOrOptions.duration * 1.5,
+            easing: "ease-in",
+        });
+    }
+    else {
+        animation = new Animation(pluginOrOptions(el, "add", newCoords));
+        animation.play();
+    }
+    animations.set(el, animation);
+    animation.addEventListener("finish", updatePos.bind(null, el));
+}
+/**
+ * Animates the removal of an element.
+ * @param el - Element to remove
+ */
+function remove(el) {
+    if (!siblings.has(el) || !coords.has(el))
+        return;
+    const [prev, next] = siblings.get(el);
+    Object.defineProperty(el, DEL, { value: true });
+    if (next && next.parentNode && next.parentNode instanceof Element) {
+        next.parentNode.insertBefore(el, next);
+    }
+    else if (prev && prev.parentNode) {
+        prev.parentNode.appendChild(el);
+    }
+    const [top, left, width, height] = deletePosition(el);
+    const optionsOrPlugin = getOptions(el);
+    const oldCoords = coords.get(el);
+    let animation;
+    Object.assign(el.style, {
+        position: "absolute",
+        top: `${top}px`,
+        left: `${left}px`,
+        width: `${width}px`,
+        height: `${height}px`,
+        margin: 0,
+        pointerEvents: "none",
+        transformOrigin: "center",
+        zIndex: 100,
+    });
+    if (typeof optionsOrPlugin !== "function") {
+        animation = el.animate([
+            {
+                transform: "scale(1)",
+                opacity: 1,
+            },
+            {
+                transform: "scale(.98)",
+                opacity: 0,
+            },
+        ], { duration: optionsOrPlugin.duration, easing: "ease-out" });
+    }
+    else {
+        animation = new Animation(optionsOrPlugin(el, "remove", oldCoords));
+        animation.play();
+    }
+    animations.set(el, animation);
+    animation.addEventListener("finish", () => {
+        var _a;
+        el.remove();
+        coords.delete(el);
+        siblings.delete(el);
+        animations.delete(el);
+        (_a = intersections.get(el)) === null || _a === void 0 ? void 0 : _a.disconnect();
+    });
+}
+function deletePosition(el) {
+    const oldCoords = coords.get(el);
+    const [width, , height] = getTransitionSizes(el, oldCoords, getCoords(el));
+    let offsetParent = el.parentElement;
+    while (offsetParent &&
+        (getComputedStyle(offsetParent).position === "static" ||
+            offsetParent instanceof HTMLBodyElement)) {
+        offsetParent = offsetParent.parentElement;
+    }
+    if (!offsetParent)
+        offsetParent = document.body;
+    const parentStyles = getComputedStyle(offsetParent);
+    const parentCoords = coords.get(offsetParent) || getCoords(offsetParent);
+    const top = Math.round(oldCoords.top - parentCoords.top) -
+        raw(parentStyles.borderTopWidth);
+    const left = Math.round(oldCoords.left - parentCoords.left) -
+        raw(parentStyles.borderLeftWidth);
+    return [top, left, width, height];
+}
+/**
+ * A function that automatically adds animation effects to itself and its
+ * immediate children. Specifically it adds effects for adding, moving, and
+ * removing DOM elements.
+ * @param el - A parent element to add animations to.
+ * @param options - An optional object of options.
+ */
+function autoAnimate(el, config = {}) {
+    if (mutations && resize) {
+        const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+        if (mediaQuery.matches)
+            return;
+        if (getComputedStyle(el).position === "static") {
+            Object.assign(el.style, { position: "relative" });
+        }
+        forEach(el, updatePos, poll, (element) => resize === null || resize === void 0 ? void 0 : resize.observe(element));
+        if (typeof config === "function") {
+            options.set(el, config);
+        }
+        else {
+            options.set(el, { duration: 250, easing: "ease-in-out", ...config });
+        }
+        mutations.observe(el, { childList: true });
+        parents.add(el);
+    }
+}
+/**
+ * The vue directive.
+ */
+const vAutoAnimate = {
+    mounted: (el, binding) => {
+        autoAnimate(el, binding.value || {});
+    },
+};
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@formkit/core/dist/index.mjs":
+/*!***************************************************!*\
+  !*** ./node_modules/@formkit/core/dist/index.mjs ***!
+  \***************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -52170,7 +52684,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "warningHandler": () => (/* binding */ warningHandler),
 /* harmony export */   "watchRegistry": () => (/* binding */ watchRegistry)
 /* harmony export */ });
-/* harmony import */ var _formkit_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @formkit/utils */ "./node_modules/@formkit/addons/node_modules/@formkit/utils/dist/index.mjs");
+/* harmony import */ var _formkit_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @formkit/utils */ "./node_modules/@formkit/utils/dist/index.mjs");
 
 
 /**
@@ -54762,3800 +55276,6 @@ const FORMKIT_VERSION = '1.0.0-beta.9';
 
 /***/ }),
 
-/***/ "./node_modules/@formkit/addons/node_modules/@formkit/utils/dist/index.mjs":
-/*!*********************************************************************************!*\
-  !*** ./node_modules/@formkit/addons/node_modules/@formkit/utils/dist/index.mjs ***!
-  \*********************************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "assignDeep": () => (/* binding */ assignDeep),
-/* harmony export */   "camel": () => (/* binding */ camel),
-/* harmony export */   "clone": () => (/* binding */ clone),
-/* harmony export */   "cloneAny": () => (/* binding */ cloneAny),
-/* harmony export */   "dedupe": () => (/* binding */ dedupe),
-/* harmony export */   "empty": () => (/* binding */ empty),
-/* harmony export */   "eq": () => (/* binding */ eq),
-/* harmony export */   "escapeExp": () => (/* binding */ escapeExp),
-/* harmony export */   "except": () => (/* binding */ except),
-/* harmony export */   "extend": () => (/* binding */ extend),
-/* harmony export */   "getAt": () => (/* binding */ getAt),
-/* harmony export */   "has": () => (/* binding */ has),
-/* harmony export */   "init": () => (/* binding */ init),
-/* harmony export */   "isObject": () => (/* binding */ isObject),
-/* harmony export */   "isPojo": () => (/* binding */ isPojo),
-/* harmony export */   "isQuotedString": () => (/* binding */ isQuotedString),
-/* harmony export */   "isRecord": () => (/* binding */ isRecord),
-/* harmony export */   "kebab": () => (/* binding */ kebab),
-/* harmony export */   "nodeProps": () => (/* binding */ nodeProps),
-/* harmony export */   "nodeType": () => (/* binding */ nodeType),
-/* harmony export */   "only": () => (/* binding */ only),
-/* harmony export */   "parseArgs": () => (/* binding */ parseArgs),
-/* harmony export */   "regexForFormat": () => (/* binding */ regexForFormat),
-/* harmony export */   "rmEscapes": () => (/* binding */ rmEscapes),
-/* harmony export */   "setify": () => (/* binding */ setify),
-/* harmony export */   "shallowClone": () => (/* binding */ shallowClone),
-/* harmony export */   "slugify": () => (/* binding */ slugify),
-/* harmony export */   "spread": () => (/* binding */ spread),
-/* harmony export */   "token": () => (/* binding */ token),
-/* harmony export */   "undefine": () => (/* binding */ undefine)
-/* harmony export */ });
-/**
- * Generates a random string.
- * @returns string
- * @public
- */
-function token() {
-    return Math.random().toString(36).substring(2, 15);
-}
-/**
- * Creates a new set of the specified type and uses the values from an Array or
- * an existing Set.
- * @param items -
- * @returns Set
- * @public
- */
-function setify(items) {
-    return items instanceof Set ? items : new Set(items);
-}
-/**
- * Given 2 arrays, return them as a combined array with no duplicates.
- * @param arr1 -
- * @param arr2 -
- * @returns any[]
- * @public
- */
-function dedupe(arr1, arr2) {
-    const original = arr1 instanceof Set ? arr1 : new Set(arr1);
-    if (arr2)
-        arr2.forEach((item) => original.add(item));
-    return [...original];
-}
-/**
- * Checks if the given property exists on the given object.
- * @param obj -
- * @param property -
- * @public
- */
-function has(obj, property) {
-    return Object.prototype.hasOwnProperty.call(obj, property);
-}
-/**
- * Compare two values for equality optionally at depth.
- * @param valA - Any type of input
- * @param valB - Any type of output
- * @param deep - Indicate if we should recurse into the object
- * @param explicit - Explicit keys
- * @returns boolean
- * @public
- */
-function eq(valA, // eslint-disable-line
-valB, // eslint-disable-line
-deep = true, explicit = ['__key']) {
-    if (valA === valB)
-        return true;
-    if (typeof valB === 'object' && typeof valA === 'object') {
-        if (valA instanceof Map)
-            return false;
-        if (valA instanceof Set)
-            return false;
-        if (valA instanceof Date)
-            return false;
-        if (valA === null || valB === null)
-            return false;
-        if (Object.keys(valA).length !== Object.keys(valB).length)
-            return false;
-        for (const k of explicit) {
-            if ((k in valA || k in valB) && valA[k] !== valB[k])
-                return false;
-        }
-        for (const key in valA) {
-            if (!(key in valB))
-                return false;
-            if (valA[key] !== valB[key] && !deep)
-                return false;
-            if (deep && !eq(valA[key], valB[key], deep, explicit))
-                return false;
-        }
-        return true;
-    }
-    return false;
-}
-/**
- * Determines if a value is empty or not.
- * @param value - any type of value that could be returned by an input.
- * @public
- */
-function empty(value // eslint-disable-line
-) {
-    const type = typeof value;
-    if (type === 'number')
-        return false;
-    if (value === undefined)
-        return true;
-    if (type === 'string') {
-        return value === '';
-    }
-    if (type === 'object') {
-        if (value === null)
-            return true;
-        for (const _i in value)
-            return false;
-        if (value instanceof RegExp)
-            return false;
-        if (value instanceof Date)
-            return false;
-        return true;
-    }
-    return false;
-}
-/**
- * Escape a string for use in regular expressions.
- * @param string - The string to escape.
- * @public
- */
-function escapeExp(string) {
-    // $& means the whole matched string
-    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-/**
- * Given a string format (date) return a regex to match against.
- * @param format - The format of the string
- * @returns
- * @public
- */
-function regexForFormat(format) {
-    const escaped = `^${escapeExp(format)}$`;
-    const formats = {
-        MM: '(0[1-9]|1[012])',
-        M: '([1-9]|1[012])',
-        DD: '([012][0-9]|3[01])',
-        D: '([012]?[0-9]|3[01])',
-        YYYY: '\\d{4}',
-        YY: '\\d{2}',
-    };
-    const tokens = Object.keys(formats);
-    return new RegExp(tokens.reduce((regex, format) => {
-        return regex.replace(format, formats[format]);
-    }, escaped));
-}
-/**
- * Given a FormKit input type
- * @param type - Any FormKit input type
- * @public
- */
-function nodeType(type) {
-    const t = type.toLowerCase();
-    if (t === 'list')
-        return 'list';
-    if (t === 'group')
-        return 'group';
-    return 'input';
-}
-/**
- * Determines if an object is an object or not.
- * @param o - any value
- * @returns
- * @public
- */
-// eslint-disable-next-line @typescript-eslint/ban-types
-function isRecord(o) {
-    return Object.prototype.toString.call(o) === '[object Object]';
-}
-/**
- * Checks if an object is a simple array or record.
- * @param o - A value to check
- * @returns
- * @public
- */
-function isObject(o) {
-    return isRecord(o) || Array.isArray(o);
-}
-/**
- * Attempts to determine if an object is a plain object. Mostly lifted from
- * is-plain-object: https://github.com/jonschlinkert/is-plain-object
- * Copyright (c) 2014-2017, Jon Schlinkert.
- * @param o - any value
- * @returns
- * @public
- */
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-function isPojo(o) {
-    if (isRecord(o) === false)
-        return false;
-    if (o.__FKNode__ || o.__POJO__ === false)
-        return false;
-    const ctor = o.constructor;
-    if (ctor === undefined)
-        return true;
-    const prot = ctor.prototype;
-    if (isRecord(prot) === false)
-        return false;
-    if (prot.hasOwnProperty('isPrototypeOf') === false) {
-        return false;
-    }
-    return true;
-}
-/**
- * Recursively merge data from additional into original returning a new object.
- * @param original - An object to extend
- * @param additional - An object to modify the original object with.
- * @param arrays - By default replaces arrays, but can also append to them.
- * @param ignoreUndefined - when true it treats undefined values as if they dont exist
- * @public
- */
-function extend(original, additional, extendArrays = false, ignoreUndefined = false) {
-    if (additional === null)
-        return null;
-    const merged = {};
-    if (typeof additional === 'string')
-        return additional;
-    for (const key in original) {
-        if (has(additional, key) &&
-            (additional[key] !== undefined || !ignoreUndefined)) {
-            if (extendArrays &&
-                Array.isArray(original[key]) &&
-                Array.isArray(additional[key])) {
-                merged[key] = original[key].concat(additional[key]);
-                continue;
-            }
-            if (additional[key] === undefined) {
-                continue;
-            }
-            if (isPojo(original[key]) && isPojo(additional[key])) {
-                merged[key] = extend(original[key], additional[key], extendArrays, ignoreUndefined);
-            }
-            else {
-                merged[key] = additional[key];
-            }
-        }
-        else {
-            merged[key] = original[key];
-        }
-    }
-    for (const key in additional) {
-        if (!has(merged, key) && additional[key] !== undefined) {
-            merged[key] = additional[key];
-        }
-    }
-    return merged;
-}
-/**
- * Determine if the given string is fully quoted. Examples:
- * hello - false
- * "hello" - true
- * 'world' - true
- * "hello"=="world" - false
- * "hello'this'" - false
- * "hello"'there' - false
- * "hello""there" - false
- * 'hello === world' - true
- * @param str - A string to check.
- * @public
- */
-function isQuotedString(str) {
-    // quickly return false if the value is note quoted
-    if (str[0] !== '"' && str[0] !== "'")
-        return false;
-    if (str[0] !== str[str.length - 1])
-        return false;
-    const quoteType = str[0];
-    for (let p = 1; p < str.length; p++) {
-        if (str[p] === quoteType &&
-            (p === 1 || str[p - 1] !== '\\') &&
-            p !== str.length - 1) {
-            return false;
-        }
-    }
-    return true;
-}
-/**
- * Remove extra escape characters.
- * @param str - A string to remove escape characters from.
- * @public
- */
-function rmEscapes(str) {
-    if (!str.length)
-        return '';
-    let clean = '';
-    let lastChar = '';
-    for (let p = 0; p < str.length; p++) {
-        const char = str.charAt(p);
-        if (char !== '\\' || lastChar === '\\') {
-            clean += char;
-        }
-        lastChar = char;
-    }
-    return clean;
-}
-/**
- * Performs a recursive Object.assign like operation.
- * @param a - An object to be extended by object b
- * @param b - An object to copy values from
- * @public
- */
-function assignDeep(a, b) {
-    for (const key in a) {
-        if (has(b, key) &&
-            a[key] !== b[key] &&
-            !(isPojo(a[key]) && isPojo(b[key]))) {
-            a[key] = b[key];
-        }
-        else if (isPojo(a[key]) && isPojo(b[key])) {
-            assignDeep(a[key], b[key]);
-        }
-    }
-    for (const key in b) {
-        if (!has(a, key)) {
-            a[key] = b[key];
-        }
-    }
-    return a;
-}
-/**
- * Filters out values from an object that should not be considered "props" of
- * a core node, like "value" and "name".
- * @param attrs - An object to extract core node config from.
- * @public
- */
-function nodeProps(...sets) {
-    return sets.reduce((valid, props) => {
-        const { value, name, modelValue, config, plugins, ...validProps } = props; // eslint-disable-line
-        return Object.assign(valid, validProps);
-    }, {});
-}
-/**
- * Parse a string for comma-separated arguments
- * @param str - A string to parse
- * @public
- */
-function parseArgs(str) {
-    const args = [];
-    let arg = '';
-    let depth = 0;
-    let quote = '';
-    let lastChar = '';
-    for (let p = 0; p < str.length; p++) {
-        const char = str.charAt(p);
-        if (char === quote && lastChar !== '\\') {
-            quote = '';
-        }
-        else if ((char === "'" || char === '"') && !quote && lastChar !== '\\') {
-            quote = char;
-        }
-        else if (char === '(' && !quote) {
-            depth++;
-        }
-        else if (char === ')' && !quote) {
-            depth--;
-        }
-        if (char === ',' && !quote && depth === 0) {
-            args.push(arg);
-            arg = '';
-        }
-        else if (char !== ' ' || quote) {
-            arg += char;
-        }
-        lastChar = char;
-    }
-    if (arg) {
-        args.push(arg);
-    }
-    return args;
-}
-/**
- * Return a new (shallow) object with all properties from a given object
- * that are present in the array.
- * @param obj - An object to clone
- * @param toRemove - An array of keys to remove
- * @public
- */
-function except(obj, toRemove) {
-    const clean = {};
-    const exps = toRemove.filter((n) => n instanceof RegExp);
-    const keysToRemove = new Set(toRemove);
-    for (const key in obj) {
-        if (!keysToRemove.has(key) && !exps.some((exp) => exp.test(key))) {
-            clean[key] = obj[key];
-        }
-    }
-    return clean;
-}
-/**
- * Extracts a set of keys from a given object. Importantly, this will extract
- * values even if they are not set on the original object they will just have an
- * undefined value.
- * @param obj - An object to extract values from
- * @param include - A set of keys to extract
- * @returns
- * @public
- */
-function only(obj, include) {
-    const clean = {};
-    const exps = include.filter((n) => n instanceof RegExp);
-    include.forEach((key) => {
-        if (!(key instanceof RegExp)) {
-            clean[key] = obj[key];
-        }
-    });
-    Object.keys(obj).forEach((key) => {
-        if (exps.some((exp) => exp.test(key))) {
-            clean[key] = obj[key];
-        }
-    });
-    return clean;
-}
-/**
- * This converts kebab-case to camelCase. It ONLY converts from kebab for
- * efficiency stake.
- * @param str - String to convert.
- * @public
- */
-function camel(str) {
-    return str.replace(/-([a-z0-9])/gi, (_s, g) => g.toUpperCase());
-}
-/**
- * This converts camel-case to kebab case. It ONLY converts from camel to kebab.
- * @param str - Converts camel to kebab
- * @returns
- * @public
- */
-function kebab(str) {
-    return str
-        .replace(/([a-z0-9])([A-Z])/g, (_s, trail, cap) => trail + '-' + cap.toLowerCase())
-        .replace(' ', '-')
-        .toLowerCase();
-}
-/**
- * Very shallowly clones the given object.
- * @param obj - The object to shallow clone
- * @returns
- * @public
- */
-function shallowClone(obj, explicit = ['__key', '__init']) {
-    if (obj !== null && typeof obj === 'object') {
-        let returnObject;
-        if (Array.isArray(obj))
-            returnObject = [...obj];
-        else if (isPojo(obj))
-            returnObject = { ...obj };
-        if (returnObject) {
-            applyExplicit(obj, returnObject, explicit);
-            return returnObject;
-        }
-    }
-    return obj;
-}
-/**
- * Perform a recursive clone on a given object. This only intended to be used
- * for simple objects like arrays and pojos.
- * @param obj - Object to clone
- * @public
- */
-function clone(obj, explicit = ['__key', '__init']) {
-    if (obj === null ||
-        obj instanceof RegExp ||
-        obj instanceof Date ||
-        obj instanceof Map ||
-        obj instanceof Set ||
-        (typeof File === 'function' && obj instanceof File))
-        return obj;
-    let returnObject;
-    if (Array.isArray(obj)) {
-        returnObject = obj.map((value) => {
-            if (typeof value === 'object')
-                return clone(value, explicit);
-            return value;
-        });
-    }
-    else {
-        returnObject = Object.keys(obj).reduce((newObj, key) => {
-            newObj[key] =
-                typeof obj[key] === 'object'
-                    ? clone(obj[key], explicit)
-                    : obj[key];
-            return newObj;
-        }, {});
-    }
-    for (const key of explicit) {
-        if (key in obj) {
-            Object.defineProperty(returnObject, key, {
-                enumerable: false,
-                value: obj[key],
-            });
-        }
-    }
-    return returnObject;
-}
-/**
- * Clones anything. If the item is scalar, no worries, it passes it back. if it
- * is an object, it performs a (fast/loose) clone operation.
- * @param obj - The object to clone
- * @public
- */
-function cloneAny(obj) {
-    return typeof obj === 'object'
-        ? clone(obj)
-        : obj;
-}
-/**
- * Get a specific value via dot notation.
- * @param obj - An object to fetch data from
- * @param addr - An "address" in dot notation
- * @public
- */
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-function getAt(obj, addr) {
-    if (!obj || typeof obj !== 'object')
-        return null;
-    const segments = addr.split('.');
-    let o = obj;
-    for (const i in segments) {
-        const segment = segments[i];
-        if (has(o, segment)) {
-            o = o[segment];
-        }
-        if (+i === segments.length - 1)
-            return o;
-        if (!o || typeof o !== 'object')
-            return null;
-    }
-    return null;
-}
-/**
- * Determines if the value of a prop that is either present (true) or not
- * present (false). For example the prop disabled should disable
- * by just existing, but what if it is set to the string "false" — then it
- * should not be disabled.
- * @param value - value to be checked
- * @returns
- * @public
- */
-function undefine(value) {
-    return value !== undefined && value !== 'false' && value !== false
-        ? true
-        : undefined;
-}
-/**
- * Defines an object as an initial value.
- * @param obj - Object
- * @returns
- * @public
- */
-/* eslint-disable-next-line @typescript-eslint/ban-types */
-function init(obj) {
-    return !Object.isFrozen(obj)
-        ? Object.defineProperty(obj, '__init', {
-            enumerable: false,
-            value: true,
-        })
-        : obj;
-}
-/**
- * Turn any string into a URL/DOM safe string.
- * @public
- */
-function slugify(str) {
-    return str
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .toLowerCase()
-        .replace(/[^a-z0-9]/g, ' ')
-        .trim()
-        .replace(/\s+/g, '-');
-}
-/**
- * Spreads an object or an array, otherwise returns the same value.
- * @param obj - Any value, but will spread objects and arrays
- * @public
- */
-function spread(obj, explicit = ['__key', '__init']) {
-    if (obj && typeof obj === 'object') {
-        if (obj instanceof RegExp)
-            return obj;
-        if (obj instanceof Date)
-            return obj;
-        let spread;
-        if (Array.isArray(obj)) {
-            spread = [...obj];
-        }
-        else {
-            spread = { ...obj };
-        }
-        // eslint-disable-next-line @typescript-eslint/ban-types
-        return applyExplicit(obj, spread, explicit);
-    }
-    return obj;
-}
-/**
- * Apply non enumerable properties to an object.
- * @param obj - The object to apply non-enumerable properties to
- * @param explicit - An array of non-enumerable properties to apply
- * @internal
- */
-// eslint-disable-next-line @typescript-eslint/ban-types
-function applyExplicit(original, obj, explicit) {
-    for (const key of explicit) {
-        if (key in original) {
-            Object.defineProperty(obj, key, {
-                enumerable: false,
-                value: original[key],
-            });
-        }
-    }
-    return obj;
-}
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@formkit/auto-animate/index.mjs":
-/*!******************************************************!*\
-  !*** ./node_modules/@formkit/auto-animate/index.mjs ***!
-  \******************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ autoAnimate),
-/* harmony export */   "getTransitionSizes": () => (/* binding */ getTransitionSizes),
-/* harmony export */   "vAutoAnimate": () => (/* binding */ vAutoAnimate)
-/* harmony export */ });
-/**
- * A set of all the parents currently being observe. This is the only non weak
- * registry.
- */
-const parents = new Set();
-/**
- * Element coordinates that is constantly kept up to date.
- */
-const coords = new WeakMap();
-/**
- * Siblings of elements that have been removed from the dom.
- */
-const siblings = new WeakMap();
-/**
- * Animations that are currently running.
- */
-const animations = new WeakMap();
-/**
- * A map of existing intersection observers used to track element movements.
- */
-const intersections = new WeakMap();
-/**
- * Intervals for automatically checking the position of elements occasionally.
- */
-const intervals = new WeakMap();
-/**
- * The configuration options for each group of elements.
- */
-const options = new WeakMap();
-/**
- * Debounce counters by id, used to debounce calls to update positions.
- */
-const debounces = new WeakMap();
-/**
- * The document used to calculate transitions.
- */
-let root;
-/**
- * Used to sign an element as the target.
- */
-const TGT = "__aa_tgt";
-/**
- * Used to sign an element as being part of a removal.
- */
-const DEL = "__aa_del";
-/**
- * Callback for handling all mutations.
- * @param mutations - A mutation list
- */
-const handleMutations = (mutations) => {
-    const elements = getElements(mutations);
-    // If elements is "false" that means this mutation that should be ignored.
-    if (elements) {
-        elements.forEach((el) => animate(el));
-    }
-};
-/**
- *
- * @param entries - Elements that have been resized.
- */
-const handleResizes = (entries) => {
-    entries.forEach((entry) => {
-        if (entry.target === root)
-            updateAllPos();
-        if (coords.has(entry.target))
-            updatePos(entry.target);
-    });
-};
-/**
- * Observe this elements position.
- * @param el - The element to observe the position of.
- */
-function observePosition(el) {
-    const oldObserver = intersections.get(el);
-    oldObserver === null || oldObserver === void 0 ? void 0 : oldObserver.disconnect();
-    let rect = coords.get(el);
-    let invocations = 0;
-    const buffer = 5;
-    if (!rect) {
-        rect = getCoords(el);
-        coords.set(el, rect);
-    }
-    const { offsetWidth, offsetHeight } = root;
-    const rootMargins = [
-        rect.top - buffer,
-        offsetWidth - (rect.left + buffer + rect.width),
-        offsetHeight - (rect.top + buffer + rect.height),
-        rect.left - buffer,
-    ];
-    const rootMargin = rootMargins
-        .map((px) => `${-1 * Math.floor(px)}px`)
-        .join(" ");
-    const observer = new IntersectionObserver(() => {
-        ++invocations > 1 && updatePos(el);
-    }, {
-        root,
-        threshold: 1,
-        rootMargin,
-    });
-    observer.observe(el);
-    intersections.set(el, observer);
-}
-/**
- * Update the exact position of a given element.
- * @param el - An element to update the position of.
- */
-function updatePos(el) {
-    clearTimeout(debounces.get(el));
-    const optionsOrPlugin = getOptions(el);
-    const delay = typeof optionsOrPlugin === "function" ? 500 : optionsOrPlugin.duration;
-    debounces.set(el, setTimeout(() => {
-        const currentAnimation = animations.get(el);
-        if (!currentAnimation || currentAnimation.finished) {
-            coords.set(el, getCoords(el));
-            observePosition(el);
-        }
-    }, delay));
-}
-/**
- * Updates all positions that are currently being tracked.
- */
-function updateAllPos() {
-    clearTimeout(debounces.get(root));
-    debounces.set(root, setTimeout(() => {
-        parents.forEach((parent) => forEach(parent, (el) => lowPriority(() => updatePos(el))));
-    }, 100));
-}
-/**
- * Its possible for a quick scroll or other fast events to get past the
- * intersection observer, so occasionally we need want "cold-poll" for the
- * latests and greatest position. We try to do this in the most non-disruptive
- * fashion possible. First we only do this ever couple seconds, staggard by a
- * random offset.
- * @param el - Element
- */
-function poll(el) {
-    setTimeout(() => {
-        intervals.set(el, setInterval(() => lowPriority(updatePos.bind(null, el)), 2000));
-    }, Math.round(2000 * Math.random()));
-}
-/**
- * Perform some operation that is non critical at some point.
- * @param callback
- */
-function lowPriority(callback) {
-    if (typeof requestIdleCallback === "function") {
-        requestIdleCallback(() => callback());
-    }
-    else {
-        requestAnimationFrame(() => callback());
-    }
-}
-/**
- * The mutation observer responsible for watching each root element.
- */
-let mutations;
-/**
- * A resize observer, responsible for recalculating elements on resize.
- */
-let resize;
-/**
- * If this is in a browser, initialize our Web APIs
- */
-if (typeof window !== "undefined") {
-    root = document.documentElement;
-    mutations = new MutationObserver(handleMutations);
-    resize = new ResizeObserver(handleResizes);
-    resize.observe(root);
-}
-/**
- * Retrieves all the elements that may have been affected by the last mutation
- * including ones that have been removed and are no longer in the DOM.
- * @param mutations - A mutation list.
- * @returns
- */
-function getElements(mutations) {
-    return mutations.reduce((elements, mutation) => {
-        // Short circuit if we find a purposefully deleted node.
-        if (elements === false)
-            return false;
-        if (mutation.target instanceof Element) {
-            target(mutation.target);
-            if (!elements.has(mutation.target)) {
-                elements.add(mutation.target);
-                for (let i = 0; i < mutation.target.children.length; i++) {
-                    const child = mutation.target.children.item(i);
-                    if (!child)
-                        continue;
-                    if (DEL in child)
-                        return false;
-                    target(mutation.target, child);
-                    elements.add(child);
-                }
-            }
-            if (mutation.removedNodes.length) {
-                for (let i = 0; i < mutation.removedNodes.length; i++) {
-                    const child = mutation.removedNodes[i];
-                    if (DEL in child)
-                        return false;
-                    if (child instanceof Element) {
-                        elements.add(child);
-                        target(mutation.target, child);
-                        siblings.set(child, [
-                            mutation.previousSibling,
-                            mutation.nextSibling,
-                        ]);
-                    }
-                }
-            }
-        }
-        return elements;
-    }, new Set());
-}
-/**
- *
- * @param el - The root element
- * @param child
- */
-function target(el, child) {
-    if (!child && !(TGT in el))
-        Object.defineProperty(el, TGT, { value: el });
-    else if (child && !(TGT in child))
-        Object.defineProperty(child, TGT, { value: el });
-}
-/**
- * Determines what kind of change took place on the given element and then
- * performs the proper animation based on that.
- * @param el - The specific element to animate.
- */
-function animate(el) {
-    var _a;
-    const isMounted = root.contains(el);
-    const preExisting = coords.has(el);
-    if (isMounted && siblings.has(el))
-        siblings.delete(el);
-    if (animations.has(el)) {
-        (_a = animations.get(el)) === null || _a === void 0 ? void 0 : _a.cancel();
-    }
-    if (preExisting && isMounted) {
-        remain(el);
-    }
-    else if (preExisting && !isMounted) {
-        remove(el);
-    }
-    else {
-        add(el);
-    }
-}
-/**
- * Removes all non-digits from a string and casts to a number.
- * @param str - A string containing a pixel value.
- * @returns
- */
-function raw(str) {
-    return Number(str.replace(/[^0-9.\-]/g, ""));
-}
-/**
- * Get the coordinates of elements adjusted for scroll position.
- * @param el - Element
- * @returns
- */
-function getCoords(el) {
-    const rect = el.getBoundingClientRect();
-    return {
-        top: rect.top + window.scrollY,
-        left: rect.left + window.scrollX,
-        width: rect.width,
-        height: rect.height,
-    };
-}
-/**
- * Returns the width/height that the element should be transitioned between.
- * This takes into account box-sizing.
- * @param el - Element being animated
- * @param oldCoords - Old set of Coordinates coordinates
- * @param newCoords - New set of Coordinates coordinates
- * @returns
- */
-function getTransitionSizes(el, oldCoords, newCoords) {
-    let widthFrom = oldCoords.width;
-    let heightFrom = oldCoords.height;
-    let widthTo = newCoords.width;
-    let heightTo = newCoords.height;
-    const styles = getComputedStyle(el);
-    const sizing = styles.getPropertyValue("box-sizing");
-    if (sizing === "content-box") {
-        const paddingY = raw(styles.paddingTop) +
-            raw(styles.paddingBottom) +
-            raw(styles.borderTopWidth) +
-            raw(styles.borderBottomWidth);
-        const paddingX = raw(styles.paddingLeft) +
-            raw(styles.paddingRight) +
-            raw(styles.borderRightWidth) +
-            raw(styles.borderLeftWidth);
-        widthFrom -= paddingX;
-        widthTo -= paddingX;
-        heightFrom -= paddingY;
-        heightTo -= paddingY;
-    }
-    return [widthFrom, widthTo, heightFrom, heightTo].map(Math.round);
-}
-/**
- * Retrieves animation options for the current element.
- * @param el - Element to retrieve options for.
- * @returns
- */
-function getOptions(el) {
-    return TGT in el && options.has(el[TGT])
-        ? options.get(el[TGT])
-        : { duration: 250, easing: "ease-in-out" };
-}
-/**
- * Iterate over the children of a given parent.
- * @param parent - A parent element
- * @param callback - A callback
- */
-function forEach(parent, ...callbacks) {
-    callbacks.forEach((callback) => callback(parent, options.has(parent)));
-    for (let i = 0; i < parent.children.length; i++) {
-        const child = parent.children.item(i);
-        if (child) {
-            callbacks.forEach((callback) => callback(child, options.has(child)));
-        }
-    }
-}
-/**
- * The element in question is remaining in the DOM.
- * @param el - Element to flip
- * @returns
- */
-function remain(el) {
-    const oldCoords = coords.get(el);
-    const newCoords = getCoords(el);
-    let animation;
-    if (!oldCoords)
-        return;
-    const pluginOrOptions = getOptions(el);
-    if (typeof pluginOrOptions !== "function") {
-        const deltaX = oldCoords.left - newCoords.left;
-        const deltaY = oldCoords.top - newCoords.top;
-        const [widthFrom, widthTo, heightFrom, heightTo] = getTransitionSizes(el, oldCoords, newCoords);
-        const start = {
-            transform: `translate(${deltaX}px, ${deltaY}px)`,
-        };
-        const end = {
-            transform: `translate(0, 0)`,
-        };
-        if (widthFrom !== widthTo) {
-            start.width = `${widthFrom}px`;
-            end.width = `${widthTo}px`;
-        }
-        if (heightFrom !== heightTo) {
-            start.height = `${heightFrom}px`;
-            end.height = `${heightTo}px`;
-        }
-        animation = el.animate([start, end], pluginOrOptions);
-    }
-    else {
-        animation = new Animation(pluginOrOptions(el, "remain", oldCoords, newCoords));
-        animation.play();
-    }
-    animations.set(el, animation);
-    coords.set(el, newCoords);
-    animation.addEventListener("finish", updatePos.bind(null, el));
-}
-/**
- * Adds the element with a transition.
- * @param el - Animates the element being added.
- */
-function add(el) {
-    const newCoords = getCoords(el);
-    coords.set(el, newCoords);
-    const pluginOrOptions = getOptions(el);
-    let animation;
-    if (typeof pluginOrOptions !== "function") {
-        animation = el.animate([
-            { transform: "scale(.98)", opacity: 0 },
-            { transform: "scale(0.98)", opacity: 0, offset: 0.5 },
-            { transform: "scale(1)", opacity: 1 },
-        ], {
-            duration: pluginOrOptions.duration * 1.5,
-            easing: "ease-in",
-        });
-    }
-    else {
-        animation = new Animation(pluginOrOptions(el, "add", newCoords));
-        animation.play();
-    }
-    animations.set(el, animation);
-    animation.addEventListener("finish", updatePos.bind(null, el));
-}
-/**
- * Animates the removal of an element.
- * @param el - Element to remove
- */
-function remove(el) {
-    if (!siblings.has(el) || !coords.has(el))
-        return;
-    const [prev, next] = siblings.get(el);
-    Object.defineProperty(el, DEL, { value: true });
-    if (next && next.parentNode && next.parentNode instanceof Element) {
-        next.parentNode.insertBefore(el, next);
-    }
-    else if (prev && prev.parentNode) {
-        prev.parentNode.appendChild(el);
-    }
-    const [top, left, width, height] = deletePosition(el);
-    const optionsOrPlugin = getOptions(el);
-    const oldCoords = coords.get(el);
-    let animation;
-    Object.assign(el.style, {
-        position: "absolute",
-        top: `${top}px`,
-        left: `${left}px`,
-        width: `${width}px`,
-        height: `${height}px`,
-        margin: 0,
-        pointerEvents: "none",
-        transformOrigin: "center",
-        zIndex: 100,
-    });
-    if (typeof optionsOrPlugin !== "function") {
-        animation = el.animate([
-            {
-                transform: "scale(1)",
-                opacity: 1,
-            },
-            {
-                transform: "scale(.98)",
-                opacity: 0,
-            },
-        ], { duration: optionsOrPlugin.duration, easing: "ease-out" });
-    }
-    else {
-        animation = new Animation(optionsOrPlugin(el, "remove", oldCoords));
-        animation.play();
-    }
-    animations.set(el, animation);
-    animation.addEventListener("finish", () => {
-        var _a;
-        el.remove();
-        coords.delete(el);
-        siblings.delete(el);
-        animations.delete(el);
-        (_a = intersections.get(el)) === null || _a === void 0 ? void 0 : _a.disconnect();
-    });
-}
-function deletePosition(el) {
-    const oldCoords = coords.get(el);
-    const [width, , height] = getTransitionSizes(el, oldCoords, getCoords(el));
-    let offsetParent = el.parentElement;
-    while (offsetParent &&
-        (getComputedStyle(offsetParent).position === "static" ||
-            offsetParent instanceof HTMLBodyElement)) {
-        offsetParent = offsetParent.parentElement;
-    }
-    if (!offsetParent)
-        offsetParent = document.body;
-    const parentStyles = getComputedStyle(offsetParent);
-    const parentCoords = coords.get(offsetParent) || getCoords(offsetParent);
-    const top = Math.round(oldCoords.top - parentCoords.top) -
-        raw(parentStyles.borderTopWidth);
-    const left = Math.round(oldCoords.left - parentCoords.left) -
-        raw(parentStyles.borderLeftWidth);
-    return [top, left, width, height];
-}
-/**
- * A function that automatically adds animation effects to itself and its
- * immediate children. Specifically it adds effects for adding, moving, and
- * removing DOM elements.
- * @param el - A parent element to add animations to.
- * @param options - An optional object of options.
- */
-function autoAnimate(el, config = {}) {
-    if (mutations && resize) {
-        const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-        if (mediaQuery.matches)
-            return;
-        if (getComputedStyle(el).position === "static") {
-            Object.assign(el.style, { position: "relative" });
-        }
-        forEach(el, updatePos, poll, (element) => resize === null || resize === void 0 ? void 0 : resize.observe(element));
-        if (typeof config === "function") {
-            options.set(el, config);
-        }
-        else {
-            options.set(el, { duration: 250, easing: "ease-in-out", ...config });
-        }
-        mutations.observe(el, { childList: true });
-        parents.add(el);
-    }
-}
-/**
- * The vue directive.
- */
-const vAutoAnimate = {
-    mounted: (el, binding) => {
-        autoAnimate(el, binding.value || {});
-    },
-};
-
-
-
-
-/***/ }),
-
-/***/ "./node_modules/@formkit/core/dist/index.mjs":
-/*!***************************************************!*\
-  !*** ./node_modules/@formkit/core/dist/index.mjs ***!
-  \***************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "bfs": () => (/* binding */ bfs),
-/* harmony export */   "clearErrors": () => (/* binding */ clearErrors),
-/* harmony export */   "compile": () => (/* binding */ compile),
-/* harmony export */   "createClasses": () => (/* binding */ createClasses),
-/* harmony export */   "createConfig": () => (/* binding */ createConfig$1),
-/* harmony export */   "createMessage": () => (/* binding */ createMessage),
-/* harmony export */   "createNode": () => (/* binding */ createNode),
-/* harmony export */   "createValue": () => (/* binding */ createValue),
-/* harmony export */   "deregister": () => (/* binding */ deregister),
-/* harmony export */   "error": () => (/* binding */ error),
-/* harmony export */   "errorHandler": () => (/* binding */ errorHandler),
-/* harmony export */   "generateClassList": () => (/* binding */ generateClassList),
-/* harmony export */   "getNode": () => (/* binding */ getNode$1),
-/* harmony export */   "isComponent": () => (/* binding */ isComponent),
-/* harmony export */   "isConditional": () => (/* binding */ isConditional),
-/* harmony export */   "isDOM": () => (/* binding */ isDOM),
-/* harmony export */   "isList": () => (/* binding */ isList),
-/* harmony export */   "isNode": () => (/* binding */ isNode),
-/* harmony export */   "isSugar": () => (/* binding */ isSugar),
-/* harmony export */   "names": () => (/* binding */ names),
-/* harmony export */   "register": () => (/* binding */ register),
-/* harmony export */   "reset": () => (/* binding */ reset),
-/* harmony export */   "resetCount": () => (/* binding */ resetCount),
-/* harmony export */   "resetRegistry": () => (/* binding */ resetRegistry),
-/* harmony export */   "setErrors": () => (/* binding */ setErrors),
-/* harmony export */   "submitForm": () => (/* binding */ submitForm),
-/* harmony export */   "sugar": () => (/* binding */ sugar),
-/* harmony export */   "use": () => (/* binding */ use),
-/* harmony export */   "useIndex": () => (/* binding */ useIndex),
-/* harmony export */   "valueInserted": () => (/* binding */ valueInserted),
-/* harmony export */   "valueMoved": () => (/* binding */ valueMoved),
-/* harmony export */   "valueRemoved": () => (/* binding */ valueRemoved),
-/* harmony export */   "warn": () => (/* binding */ warn),
-/* harmony export */   "warningHandler": () => (/* binding */ warningHandler),
-/* harmony export */   "watchRegistry": () => (/* binding */ watchRegistry)
-/* harmony export */ });
-/* harmony import */ var _formkit_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @formkit/utils */ "./node_modules/@formkit/utils/dist/index.mjs");
-
-
-/**
- * Creates a new dispatcher that allows the addition/removal of middleware
- * functions, and the ability to dispatch a payload to all middleware.
- * @returns FormKitDispatcher
- */
-function createDispatcher() {
-    const middleware = [];
-    let currentIndex = 0;
-    const use = (dispatchable) => middleware.push(dispatchable);
-    const dispatch = (payload) => {
-        const current = middleware[currentIndex];
-        if (typeof current === 'function') {
-            return current(payload, (explicitPayload) => {
-                currentIndex++;
-                return dispatch(explicitPayload === undefined ? payload : explicitPayload);
-            });
-        }
-        currentIndex = 0;
-        return payload;
-    };
-    use.dispatch = dispatch;
-    use.unshift = (dispatchable) => middleware.unshift(dispatchable);
-    use.remove = (dispatchable) => {
-        const index = middleware.indexOf(dispatchable);
-        if (index > -1)
-            middleware.splice(index, 1);
-    };
-    return use;
-}
-
-/**
- * Creates a new event emitter, each node uses one of these to allow it to emit
- * events to local listeners and tree listeners.
- * @returns FormKitEventEmitter
- */
-function createEmitter() {
-    const listeners = new Map();
-    const receipts = new Map();
-    let buffer = undefined;
-    const emitter = (node, event) => {
-        if (buffer) {
-            buffer.set(event.name, [node, event]);
-            return;
-        }
-        if (listeners.has(event.name)) {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            listeners.get(event.name).forEach((wrapper) => {
-                if (event.origin === node || wrapper.modifiers.includes('deep')) {
-                    wrapper.listener(event);
-                }
-            });
-        }
-        if (event.bubble) {
-            node.bubble(event);
-        }
-    };
-    /**
-     * Add an event listener
-     * @param eventName - The name of the event to listen to
-     * @param listener - The callback
-     * @returns string
-     */
-    emitter.on = (eventName, listener) => {
-        const [event, ...modifiers] = eventName.split('.');
-        const receipt = listener.receipt || (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.token)();
-        const wrapper = {
-            modifiers,
-            event,
-            listener,
-            receipt,
-        };
-        /* eslint-disable @typescript-eslint/no-non-null-assertion */
-        listeners.has(event)
-            ? listeners.get(event).push(wrapper)
-            : listeners.set(event, [wrapper]);
-        receipts.has(receipt)
-            ? receipts.get(receipt).push(event)
-            : receipts.set(receipt, [event]);
-        /* eslint-enable @typescript-eslint/no-non-null-assertion */
-        return receipt;
-    };
-    /**
-     * Remove an event listener
-     * @param listenerOrReceipt - Either a receipt or the callback function.
-     */
-    emitter.off = (receipt) => {
-        var _a;
-        if (receipts.has(receipt)) {
-            (_a = receipts.get(receipt)) === null || _a === void 0 ? void 0 : _a.forEach((event) => {
-                const eventListeners = listeners.get(event);
-                if (Array.isArray(eventListeners)) {
-                    listeners.set(event, eventListeners.filter((wrapper) => wrapper.receipt !== receipt));
-                }
-            });
-            receipts.delete(receipt);
-        }
-    };
-    /**
-     * Pause emitting values. Any events emitted while paused will not be emitted
-     * but rather "stored" — and whichever events are emitted last will be output.
-     * For example:
-     * pause()
-     * emit('foo', 1)
-     * emit('foo', 2)
-     * emit('bar', 3)
-     * emit('bar', 4)
-     * play()
-     * // would result in
-     * emit('foo', 2)
-     * emit('bar', 4)
-     * Optionally pauses all children as well.
-     * @param node - A node to pause all children on.
-     */
-    emitter.pause = (node) => {
-        if (!buffer)
-            buffer = new Map();
-        if (node) {
-            node.walk((child) => child._e.pause());
-        }
-    };
-    /**
-     * Release the current event buffer.
-     * @param node - A node to unpause all children on.
-     */
-    emitter.play = (node) => {
-        if (!buffer)
-            return;
-        const events = buffer;
-        buffer = undefined;
-        events.forEach(([node, event]) => emitter(node, event));
-        if (node) {
-            node.walk((child) => child._e.play());
-        }
-    };
-    return emitter;
-}
-/**
- * Emit an event from this node.
- * @param node - The node that is emitting
- * @param context - The context of that node
- * @param name - The name of the event
- * @param payload - The payload to emit
- * @returns FormKitNode
- */
-function emit$1(node, context, name, payload, // eslint-disable-line @typescript-eslint/explicit-module-boundary-types,
-bubble = true) {
-    context._e(node, {
-        payload,
-        name,
-        bubble,
-        origin: node,
-    });
-    return node;
-}
-/**
- * Send an event from the given node up it's ancestor tree.
- * @param node -
- * @param _context -
- * @param event -
- */
-function bubble(node, _context, event) {
-    if (isNode(node.parent)) {
-        node.parent._e(node.parent, event);
-    }
-    return node;
-}
-/**
- * Adds an event listener to the node for a specific event. The event name is a
- * simple string matching the name of the event to listen to. It can optionally
- * include modifiers like eventName.deep
- * @param node -
- * @param context -
- * @param name -
- * @param listener -
- * @returns FormKitNode
- */
-function on(_node, context, name, listener) {
-    return context._e.on(name, listener);
-}
-/**
- * Removes an event listener from a node by the returned receipt from .on().
- * @param node - The node to remote the listener from
- * @param context - The context to remove
- * @param receipt - The receipt returned by .on()
- * @returns FormKitNode
- */
-function off(node, context, receipt) {
-    context._e.off(receipt);
-    return node;
-}
-
-/**
- * FormKit's global error handler.
- * @public
- */
-const errorHandler = createDispatcher();
-/**
- * The default error handler just sets the error as the message.
- */
-errorHandler((error, next) => {
-    if (!error.message)
-        error.message = String(`E${error.code}`);
-    return next(error);
-});
-/**
- * FormKit's global warning handler.
- * @public
- */
-const warningHandler = createDispatcher();
-warningHandler((warning, next) => {
-    if (!warning.message)
-        warning.message = String(`W${warning.code}`);
-    const result = next(warning);
-    if (console && typeof console.warn === 'function')
-        console.warn(result.message);
-    return result;
-});
-/**
- * Globally emits a warning.
- * @param code - The integer error code.
- * @param data - Usually an object of information to include.
- * @public
- */
-function warn(code, data = {}) {
-    warningHandler.dispatch({ code, data });
-}
-/**
- * Emits an error, generally should result in an exception.
- * @param code - The integer error code.
- * @param data - Usually an object of information to include.
- * @public
- */
-function error(code, data = {}) {
-    throw Error(errorHandler.dispatch({ code, data }).message);
-}
-
-/**
- * Creates a new FormKitMessage object.
- * @param conf - The message configuration
- * @returns FormKitMessage
- * @public
- */
-function createMessage(conf, node) {
-    const m = {
-        blocking: false,
-        key: (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.token)(),
-        meta: {},
-        type: 'state',
-        visible: true,
-        ...conf,
-    };
-    if (node && m.value && m.meta.localize !== false) {
-        m.value = node.t(m);
-        m.meta.locale = node.config.locale;
-    }
-    return m;
-}
-/**
- * The available traps on the node's store.
- */
-const storeTraps = {
-    apply: applyMessages,
-    set: setMessage,
-    remove: removeMessage,
-    filter: filterMessages,
-    reduce: reduceMessages,
-    release: releaseBuffer,
-    touch: touchMessages,
-};
-/**
- * Creates a new FormKit message store.
- * @returns FormKitStore
- */
-function createStore(_buffer = false) {
-    const messages = {};
-    let node;
-    let buffer = _buffer;
-    let _b = [];
-    const _m = new Map();
-    let _r = undefined;
-    const store = new Proxy(messages, {
-        get(...args) {
-            const [_target, property] = args;
-            if (property === 'buffer')
-                return buffer;
-            if (property === '_b')
-                return _b;
-            if (property === '_m')
-                return _m;
-            if (property === '_r')
-                return _r;
-            if ((0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(storeTraps, property)) {
-                return storeTraps[property].bind(null, messages, store, node);
-            }
-            return Reflect.get(...args);
-        },
-        set(_t, prop, value) {
-            if (prop === '_n') {
-                node = value;
-                if (_r === '__n')
-                    releaseMissed(node, store);
-                return true;
-            }
-            else if (prop === '_b') {
-                _b = value;
-                return true;
-            }
-            else if (prop === 'buffer') {
-                buffer = value;
-                return true;
-            }
-            else if (prop === '_r') {
-                _r = value;
-                return true;
-            }
-            error(101, node);
-            return false;
-        },
-    });
-    return store;
-}
-/**
- * Adds a new value to a FormKit message bag.
- * @param store - The store itself
- * @param store - The store interface
- * @param node - The node this store belongs to
- * @param message - The message object
- * @returns FormKitStore
- */
-function setMessage(messageStore, store, node, message) {
-    if (store.buffer) {
-        store._b.push([[message]]);
-        return store;
-    }
-    if (messageStore[message.key] !== message) {
-        if (typeof message.value === 'string' && message.meta.localize !== false) {
-            // Expose the value to translation
-            const previous = message.value;
-            message.value = node.t(message);
-            if (message.value !== previous) {
-                message.meta.locale = node.props.locale;
-            }
-        }
-        const e = `message-${(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(messageStore, message.key) ? 'updated' : 'added'}`;
-        messageStore[message.key] = Object.freeze(node.hook.message.dispatch(message));
-        node.emit(e, message);
-    }
-    return store;
-}
-/**
- * Run through each message in the store, and ensure it has been translated
- * to the proper language. This most frequently happens after a locale change.
- */
-function touchMessages(messageStore, store) {
-    for (const key in messageStore) {
-        const message = { ...messageStore[key] };
-        store.set(message);
-    }
-}
-/**
- * Remove a message from the store.
- * @param store - The store itself
- * @param store - The store interface
- * @param node - The node this store belongs to
- * @param key - The message key
- * @returns FormKitStore
- */
-function removeMessage(messageStore, store, node, key) {
-    if ((0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(messageStore, key)) {
-        const message = messageStore[key];
-        delete messageStore[key];
-        node.emit('message-removed', message);
-    }
-    if (store.buffer === true) {
-        store._b = store._b.filter((buffered) => {
-            buffered[0] = buffered[0].filter((m) => m.key !== key);
-            return buffered[1] || buffered[0].length;
-        });
-    }
-    return store;
-}
-/**
- * Iterates over all messages removing those that are no longer wanted.
- * @param messageStore - The store itself
- * @param store - The store interface
- * @param node - The node to filter for
- * @param callback - A callback accepting a message and returning a boolean
- * @param type - Pre filtered by a given message type
- */
-function filterMessages(messageStore, store, node, callback, type) {
-    for (const key in messageStore) {
-        const message = messageStore[key];
-        if ((!type || message.type === type) && !callback(message)) {
-            removeMessage(messageStore, store, node, key);
-        }
-    }
-}
-/**
- * Reduce the message store to some other generic value.
- * @param messageStore - The store itself
- * @param _store - Unused but curried — the store interface itself
- * @param _node - The node owner of this store
- * @param reducer - The callback that performs the reduction
- * @param accumulator - The initial value
- * @returns
- */
-function reduceMessages(messageStore, _store, _node, reducer, accumulator) {
-    for (const key in messageStore) {
-        const message = messageStore[key];
-        accumulator = reducer(accumulator, message);
-    }
-    return accumulator;
-}
-/**
- *
- * @param messageStore - The store itself
- * @param _store - Unused but curried — the store interface itself
- * @param node - The node owner of this store
- * @param messages - An array of FormKitMessages to apply to this input, or an object of messages to apply to children.
- */
-function applyMessages(_messageStore, store, node, messages, clear) {
-    if (Array.isArray(messages)) {
-        if (store.buffer) {
-            store._b.push([messages, clear]);
-            return;
-        }
-        // In this case we are applying messages to this node’s store.
-        const applied = new Set(messages.map((message) => {
-            store.set(message);
-            return message.key;
-        }));
-        // Remove any messages that were not part of the initial apply:
-        if (typeof clear === 'string') {
-            store.filter((message) => message.type !== clear || applied.has(message.key));
-        }
-        else if (typeof clear === 'function') {
-            store.filter((message) => !clear(message) || applied.has(message.key));
-        }
-    }
-    else {
-        for (const address in messages) {
-            const child = node.at(address);
-            if (child) {
-                child.store.apply(messages[address], clear);
-            }
-            else {
-                missed(node, store, address, messages[address], clear);
-            }
-        }
-    }
-}
-/**
- * Creates an array of message arrays from strings.
- * @param errors - Arrays or objects of form errors or input errors
- * @returns
- * @internal
- */
-function createMessages(node, ...errors) {
-    const sourceKey = `${node.name}-set`;
-    const make = (error) => createMessage({
-        key: (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.slugify)(error),
-        type: 'error',
-        value: error,
-        meta: { source: sourceKey, autoClear: true },
-    });
-    return errors
-        .filter((m) => !!m)
-        .map((errorSet) => {
-        if (typeof errorSet === 'string')
-            errorSet = [errorSet];
-        if (Array.isArray(errorSet)) {
-            return errorSet.map((error) => make(error));
-        }
-        else {
-            const errors = {};
-            for (const key in errorSet) {
-                if (Array.isArray(errorSet[key])) {
-                    errors[key] = errorSet[key].map((error) => make(error));
-                }
-                else {
-                    errors[key] = [make(errorSet[key])];
-                }
-            }
-            return errors;
-        }
-    });
-}
-/**
- *
- * @param store - The store to apply this missed applications.
- * @param address - The address that was missed (a node path that didn't yet exist)
- * @param messages - The messages that should have been applied.
- * @param clear - The clearing function (if any)
- */
-function missed(node, store, address, messages, clear) {
-    var _a;
-    const misses = store._m;
-    if (!misses.has(address))
-        misses.set(address, []);
-    // The created receipt
-    if (!store._r)
-        store._r = releaseMissed(node, store);
-    (_a = misses.get(address)) === null || _a === void 0 ? void 0 : _a.push([messages, clear]);
-}
-/**
- * Releases messages that were applied to a child via parent, but the child did
- * not exist. Once the child does exist, the created event for that child will
- * bubble to this point, and any stored applications will be applied serially.
- * @param store - The store object.
- * @returns
- */
-function releaseMissed(node, store) {
-    return node.on('child.deep', ({ payload: child }) => {
-        store._m.forEach((misses, address) => {
-            if (node.at(address) === child) {
-                misses.forEach(([messages, clear]) => {
-                    child.store.apply(messages, clear);
-                });
-                store._m.delete(address);
-            }
-        });
-        // If all the stored misses were applied, remove the listener.
-        if (store._m.size === 0 && store._r) {
-            node.off(store._r);
-            store._r = undefined;
-        }
-    });
-}
-/**
- * Iterates over all buffered messages and applies them in sequence.
- * @param messageStore - The store itself
- * @param store - The store interface
- * @param node - The node to filter for
- */
-function releaseBuffer(_messageStore, store) {
-    store.buffer = false;
-    store._b.forEach(([messages, clear]) => store.apply(messages, clear));
-    store._b = [];
-}
-
-/**
- * Creates a new ledger for use on a single node's context.
- * @returns
- */
-function createLedger() {
-    const ledger = {};
-    let n;
-    return {
-        count: (...args) => createCounter(n, ledger, ...args),
-        init(node) {
-            n = node;
-            node.on('message-added.deep', add(ledger, 1));
-            node.on('message-removed.deep', add(ledger, -1));
-        },
-        merge: (child) => merge(n, ledger, child),
-        settled(counterName) {
-            return (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(ledger, counterName)
-                ? ledger[counterName].promise
-                : Promise.resolve();
-        },
-        unmerge: (child) => merge(n, ledger, child, true),
-        value(counterName) {
-            return (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(ledger, counterName) ? ledger[counterName].count : 0;
-        },
-    };
-}
-/**
- * Creates a new counter object in the counting ledger.
- * @param ledger - The actual ledger storage object
- * @param counterName - The name of the counter, can be arbitrary
- * @param condition - The condition function (or string) that filters messages
- * @param initialValue - The initial counter value
- * @returns
- */
-function createCounter(node, ledger, counterName, condition, increment = 0) {
-    condition = parseCondition(condition || counterName);
-    if (!(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(ledger, counterName)) {
-        const counter = {
-            condition,
-            count: 0,
-            name: counterName,
-            node,
-            promise: Promise.resolve(),
-            resolve: () => { }, // eslint-disable-line @typescript-eslint/no-empty-function
-        };
-        ledger[counterName] = counter;
-        increment = node.store.reduce((sum, m) => sum + counter.condition(m) * 1, increment);
-        node.each((child) => {
-            child.ledger.count(counter.name, counter.condition);
-            increment += child.ledger.value(counter.name);
-        });
-    }
-    return count(ledger[counterName], increment).promise;
-}
-/**
- * We parse the condition to allow flexibility in how counters are specified.
- * @param condition - The condition that, if true, allows a message to change a counter's value
- * @returns
- */
-function parseCondition(condition) {
-    if (typeof condition === 'function') {
-        return condition;
-    }
-    return (m) => m.type === condition;
-}
-/**
- * Perform a counting action on the a given counter object of the ledger.
- * @param counter - A counter object
- * @param increment - The amount by which we are changing the count value
- * @returns
- */
-function count(counter, increment) {
-    const initial = counter.count;
-    const post = counter.count + increment;
-    counter.count = post;
-    if (initial === 0 && post !== 0) {
-        counter.node.emit(`unsettled:${counter.name}`, counter.count, false);
-        counter.promise = new Promise((r) => (counter.resolve = r));
-    }
-    else if (initial !== 0 && post === 0) {
-        counter.node.emit(`settled:${counter.name}`, counter.count, false);
-        counter.resolve();
-    }
-    counter.node.emit(`count:${counter.name}`, counter.count, false);
-    return counter;
-}
-/**
- * Returns a function to be used as an event listener for message events.
- * @param ledger - A ledger to operate on
- * @param delta - The amount to add or subtract
- * @returns
- */
-function add(ledger, delta) {
-    return (e) => {
-        for (const name in ledger) {
-            const counter = ledger[name];
-            if (counter.condition(e.payload)) {
-                count(counter, delta);
-            }
-        }
-    };
-}
-/**
- * Given a child node, add the parent node's counters to the child and then
- * rectify the upstream ledger counts. Generally used when attaching a child
- * to an already counted tree.
- * @param parent - The parent that is "receiving" the child
- * @param ledger - The ledger object
- * @param child - The child (can be a subtree) that is being attached
- */
-function merge(parent, ledger, child, remove = false) {
-    for (const key in ledger) {
-        const condition = ledger[key].condition;
-        if (!remove)
-            child.ledger.count(key, condition);
-        const increment = child.ledger.value(key) * (remove ? -1 : 1);
-        if (!parent)
-            continue;
-        do {
-            parent.ledger.count(key, condition, increment);
-            parent = parent.parent;
-        } while (parent);
-    }
-}
-
-/**
- * A global registry of nodes by their alias or name (if root).
- */
-const registry = new Map();
-const reflected = new Map();
-/**
- * An event emitter for registered/set/unset nodes
- */
-const emit = createEmitter();
-/**
- * Receipts of listeners.
- */
-const receipts = [];
-/**
- * Registers a node to the registry _if_ the node is a root node, _or_ if the
- * node has an explicit node.props.alias. If these two things are not true
- * then no node is registered (idempotent).
- *
- * @param node - A node to register
- * @public
- */
-function register(node) {
-    if (node.props.id) {
-        registry.set(node.props.id, node);
-        reflected.set(node, node.props.id);
-        emit(node, {
-            payload: node,
-            name: node.props.id,
-            bubble: false,
-            origin: node,
-        });
-    }
-}
-/**
- * Deregister a node from the registry.
- * @param node - A node to remove
- * @public
- */
-function deregister(node) {
-    if (reflected.has(node)) {
-        const id = reflected.get(node); // eslint-disable-line @typescript-eslint/no-non-null-assertion
-        reflected.delete(node);
-        registry.delete(id);
-        emit(node, {
-            payload: null,
-            name: id,
-            bubble: false,
-            origin: node,
-        });
-    }
-}
-/**
- * Get a node by a particular id.
- * @param node - Get a node by a given id
- * @public
- */
-function getNode$1(id) {
-    return registry.get(id);
-}
-/**
- * Reset the entire registry.
- * @public
- */
-function resetRegistry() {
-    registry.forEach((node) => {
-        deregister(node);
-    });
-    receipts.forEach((receipt) => emit.off(receipt));
-}
-/**
- *
- * @param id - An id to watch
- * @param callback - A callback to notify when the node is set or removed.
- * @public
- */
-function watchRegistry(id, callback) {
-    // register a listener
-    receipts.push(emit.on(id, callback));
-}
-
-/**
- * Applies a given config change to the node.
- * @param node - The node to check for config change
- * @param prop - Checks if this property exists in the local config or props
- * @param value - The value to set
- * @internal
- */
-function configChange(node, prop, value) {
-    // When we return false, node.walk will not continue into that child.
-    let usingFallback = true;
-    !(prop in node.config._t)
-        ? node.emit(`config:${prop}`, value, false)
-        : (usingFallback = false);
-    if (!(prop in node.props)) {
-        node.emit('prop', { prop, value });
-        node.emit(`prop:${prop}`, value);
-    }
-    return usingFallback;
-}
-/**
- * Creates a new instance of a global configuration option. This object is
- * essentially just a FormKitOption object, but it can be used as the root for
- * FormKitConfig's proxy and retain event "emitting".
- *
- * @param options - FormKit node options to be used globally.
- * @public
- */
-function createConfig$1(options = {}) {
-    const nodes = new Set();
-    const target = {
-        ...options,
-        ...{
-            _add: (node) => nodes.add(node),
-            _rm: (node) => node.remove(node),
-        },
-    };
-    const rootConfig = new Proxy(target, {
-        set(t, prop, value, r) {
-            if (typeof prop === 'string') {
-                nodes.forEach((node) => configChange(node, prop, value));
-            }
-            return Reflect.set(t, prop, value, r);
-        },
-    });
-    return rootConfig;
-}
-
-/**
- * Submits a FormKit form programmatically.
- * @param id - The id of the form
- * @public
- */
-function submitForm(id) {
-    const formElement = document.getElementById(id);
-    if (formElement instanceof HTMLFormElement) {
-        const event = new Event('submit', { cancelable: true, bubbles: true });
-        formElement.dispatchEvent(event);
-        return;
-    }
-    warn(151, id);
-}
-
-/**
- * Clear all state and error messages.
- */
-function clearState(node) {
-    const clear = (n) => {
-        for (const key in n.store) {
-            const message = n.store[key];
-            if (message.type === 'error' ||
-                (message.type === 'ui' && key === 'incomplete')) {
-                n.store.remove(key);
-            }
-            else if (message.type === 'state') {
-                n.store.set({ ...message, value: false });
-            }
-        }
-    };
-    clear(node);
-    node.walk(clear);
-}
-/**
- * Resets an input to it’s "initial" value — if the input is a group or list it
- * resets all the children as well.
- * @param id - The id of an input to reset
- * @returns
- * @public
- */
-function reset(id, resetTo) {
-    const node = typeof id === 'string' ? getNode$1(id) : id;
-    if (node) {
-        const initial = (n) => (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.cloneAny)(n.props.initial) ||
-            (n.type === 'group' ? {} : n.type === 'list' ? [] : undefined);
-        // pause all events in this tree.
-        node._e.pause(node);
-        // Set it back to basics
-        node.input((0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.cloneAny)(resetTo) || initial(node), false);
-        // Set children back to basics in case they were additive (had their own value for example)
-        node.walk((child) => child.input(initial(child), false));
-        // Finally we need to lay any values back on top (if it is a group/list) since group values
-        // take precedence over child values.
-        const finalInit = initial(node);
-        node.input(typeof finalInit === 'object'
-            ? (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.cloneAny)(resetTo) || (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.init)(finalInit)
-            : finalInit, false);
-        // release the events.
-        node._e.play(node);
-        clearState(node);
-        node.emit('reset', node);
-        return node;
-    }
-    warn(152, id);
-    return;
-}
-
-/**
- * Default configuration options.
- */
-const defaultConfig = {
-    delimiter: '.',
-    delay: 0,
-    locale: 'en',
-    rootClasses: (key) => ({ [`formkit-${(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.kebab)(key)}`]: true }),
-};
-/**
- * If a node’s name is set to useIndex, it replaces the node’s name with the
- * index of the node relative to its parent’s children.
- * @public
- */
-const useIndex = Symbol('index');
-/**
- * When propagating values up a tree, this value indicates the child should be
- * removed.
- * @public
- */
-const valueRemoved = Symbol('removed');
-/**
- * When propagating values up a tree, this value indicates the child should be
- * moved.
- * @public
- */
-const valueMoved = Symbol('moved');
-/**
- * When creating a new node and having its value injected directly at a specific
- * location.
- * @public
- */
-const valueInserted = Symbol('inserted');
-/**
- * A simple type guard to determine if the context being evaluated is a list
- * type.
- * @param arg -
- * @returns arg is FormKitListContext
- * @public
- */
-function isList(arg) {
-    return arg.type === 'list' && Array.isArray(arg._value);
-}
-/**
- * Determine if a given object is a node
- * @public
- */
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-function isNode(node) {
-    return node && typeof node === 'object' && node.__FKNode__ === true;
-}
-/**
- * The setter you are trying to access is invalid.
- */
-const invalidSetter = (node, _context, property) => {
-    error(102, [node, property]);
-};
-const traps = {
-    _c: trap(getContext, invalidSetter, false),
-    add: trap(addChild),
-    addProps: trap(addProps),
-    address: trap(getAddress, invalidSetter, false),
-    at: trap(getNode),
-    bubble: trap(bubble),
-    clearErrors: trap(clearErrors$1),
-    calm: trap(calm),
-    config: trap(false),
-    define: trap(define),
-    disturb: trap(disturb),
-    destroy: trap(destroy),
-    hydrate: trap(hydrate),
-    index: trap(getIndex, setIndex, false),
-    input: trap(input),
-    each: trap(eachChild),
-    emit: trap(emit$1),
-    find: trap(find),
-    on: trap(on),
-    off: trap(off),
-    parent: trap(false, setParent),
-    plugins: trap(false),
-    remove: trap(removeChild),
-    root: trap(getRoot, invalidSetter, false),
-    reset: trap(resetValue),
-    resetConfig: trap(resetConfig),
-    setErrors: trap(setErrors$1),
-    submit: trap(submit),
-    t: trap(text),
-    use: trap(use),
-    name: trap(getName, false, false),
-    walk: trap(walkTree),
-};
-/**
- * These are all the available "traps" for a given node. You can think of these
- * a little bit like methods, but they are really Proxy interceptors.
- */
-function createTraps() {
-    return new Map(Object.entries(traps));
-}
-/**
- * Creates a getter/setter trap and curries the context/node pair
- * @param getter - The getter function
- * @param setter - The setter function
- * @param curryGetter - Indicates if the getter should be curried or not
- * @returns
- */
-function trap(getter, setter, curryGetter = true) {
-    return {
-        get: getter
-            ? (node, context) => curryGetter
-                ? (...args) => getter(node, context, ...args)
-                : getter(node, context)
-            : false,
-        set: setter !== undefined ? setter : invalidSetter.bind(null),
-    };
-}
-/**
- * Create all of the node's hook dispatchers.
- */
-function createHooks() {
-    const hooks = new Map();
-    return new Proxy(hooks, {
-        get(_, property) {
-            if (!hooks.has(property)) {
-                hooks.set(property, createDispatcher());
-            }
-            return hooks.get(property);
-        },
-    });
-}
-/**
- * This is a simple integer counter of every createName() where the name needs
- * to be generated.
- */
-let nameCount = 0;
-/**
- * This is a simple integer counter of every default id created.
- */
-let idCount = 0;
-/**
- * Reports the global number of node registrations, useful for deterministic
- * node naming.
- * @public
- */
-function resetCount() {
-    nameCount = 0;
-    idCount = 0;
-}
-/**
- * Create a name based dictionary of all children in an array.
- * @param children -
- * @public
- */
-function names(children) {
-    return children.reduce((named, child) => Object.assign(named, { [child.name]: child }), {});
-}
-/**
- * This node is responsible for deterministically generating an id for this
- * node. This cannot just be a random id, it _must_ be deterministic to ensure
- * re-hydration of the form (like post-SSR) produces the same names/ids.
- *
- * @param options -
- * @returns string
- */
-function createName(options) {
-    var _a, _b;
-    if (((_a = options.parent) === null || _a === void 0 ? void 0 : _a.type) === 'list')
-        return useIndex;
-    return options.name || `${((_b = options.props) === null || _b === void 0 ? void 0 : _b.type) || 'input'}_${++nameCount}`;
-}
-/**
- * Creates the initial value for a node based on the options passed in and the
- * type of the input.
- * @param options -
- * @param type -
- * @returns
- * @internal
- */
-function createValue(options) {
-    if (options.type === 'group') {
-        return (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.init)(options.value &&
-            typeof options.value === 'object' &&
-            !Array.isArray(options.value)
-            ? options.value
-            : {});
-    }
-    else if (options.type === 'list') {
-        return (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.init)(Array.isArray(options.value) ? options.value : []);
-    }
-    return options.value === null ? '' : options.value;
-}
-/**
- * Sets the internal value of the node.
- * @param node -
- * @param context -
- * @param value -
- * @returns T
- */
-function input(node, context, value, async = true) {
-    context._value = validateInput(node, node.hook.input.dispatch(value));
-    node.emit('input', context._value);
-    if (context.isSettled)
-        node.disturb();
-    if (async) {
-        if (context._tmo)
-            clearTimeout(context._tmo);
-        context._tmo = setTimeout(commit, node.props.delay, node, context);
-    }
-    else {
-        commit(node, context);
-    }
-    return context.settled;
-}
-/**
- * Validate that the current input is allowed.
- * @param type - The type of node (input, list, group)
- * @param value - The value that is being set
- */
-function validateInput(node, value) {
-    switch (node.type) {
-        // Inputs are allowed to have any type
-        case 'input':
-            break;
-        case 'group':
-            if (!value || typeof value !== 'object')
-                error(107, [node, value]);
-            break;
-        case 'list':
-            if (!Array.isArray(value))
-                error(108, [node, value]);
-            break;
-    }
-    return value;
-}
-/**
- * Commits the working value to the node graph as the value of this node.
- * @param node -
- * @param context -
- * @param calm -
- * @param hydrate -
- */
-function commit(node, context, calm = true, hydrate = true) {
-    context._value = context.value = node.hook.commit.dispatch(context._value);
-    if (node.type !== 'input' && hydrate)
-        node.hydrate();
-    node.emit('commit', context.value);
-    if (calm)
-        node.calm();
-}
-/**
- * Perform a modification to a single element of a parent aggregate value. This
- * is only performed on the pre-committed value (_value), although typically
- * the value and _value are both linked in memory.
- * @param context -
- * @param name -
- * @param value -
- */
-function partial(context, { name, value, from }) {
-    if (Object.isFrozen(context._value))
-        return;
-    if (isList(context)) {
-        const insert = value === valueRemoved
-            ? []
-            : value === valueMoved && typeof from === 'number'
-                ? context._value.splice(from, 1)
-                : [value];
-        context._value.splice(name, value === valueMoved || from === valueInserted ? 0 : 1, ...insert);
-        return;
-    }
-    // In this case we know for sure we're dealing with a group, TS doesn't
-    // know that however, so we use some unpleasant casting here
-    if (value !== valueRemoved) {
-        context._value[name] = value;
-    }
-    else {
-        delete context._value[name];
-    }
-}
-/**
- * Pass values down to children by calling hydrate on them.
- * @param parent -
- * @param child -
- */
-function hydrate(node, context) {
-    const _value = context._value;
-    context.children.forEach((child) => {
-        if (typeof _value !== 'object')
-            return;
-        // if (has(context._value as FormKitGroupValue, child.name)) {
-        if (child.name in _value) {
-            // In this case, the parent has a value to give to the child, so we
-            // perform a down-tree synchronous input which will cascade values down
-            // and then ultimately back up.
-            const childValue = child.type !== 'input' ||
-                (_value[child.name] && typeof _value[child.name] === 'object')
-                ? (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.init)(_value[child.name])
-                : _value[child.name];
-            child.input(childValue, false);
-        }
-        else {
-            if (node.type !== 'list' || typeof child.name === 'number') {
-                // In this case, the parent’s values have no knowledge of the child
-                // value — this typically occurs on the commit at the end of addChild()
-                // we need to create a value reservation for this node’s name. This is
-                // especially important when dealing with lists where index matters.
-                partial(context, { name: child.name, value: child.value });
-            }
-            if (!_value.__init) {
-                // In this case, someone has explicitly set the value to an empty object
-                // with node.input({}) so we do not define the __init property:
-                if (child.type === 'group')
-                    child.input({}, false);
-                else if (child.type === 'list')
-                    child.input([], false);
-                else
-                    child.input(undefined, false);
-            }
-        }
-    });
-    return node;
-}
-/**
- * Disturbs the state of a node from settled to unsettled — creating appropriate
- * promises and resolutions.
- * @param node -
- * @param context -
- */
-function disturb(node, context) {
-    var _a;
-    if (context._d <= 0) {
-        context.isSettled = false;
-        node.emit('settled', false, false);
-        context.settled = new Promise((resolve) => {
-            context._resolve = resolve;
-        });
-        if (node.parent)
-            (_a = node.parent) === null || _a === void 0 ? void 0 : _a.disturb();
-    }
-    context._d++;
-    return node;
-}
-/**
- * Calms the given node's disturbed state by one.
- * @param node -
- * @param context -
- */
-function calm(node, context, value) {
-    var _a;
-    if (value !== undefined && node.type !== 'input') {
-        partial(context, value);
-        // Commit the value up, but do not hydrate back down
-        return commit(node, context, true, false);
-    }
-    if (context._d > 0)
-        context._d--;
-    if (context._d === 0) {
-        context.isSettled = true;
-        node.emit('settled', true, false);
-        if (node.parent)
-            (_a = node.parent) === null || _a === void 0 ? void 0 : _a.calm({ name: node.name, value: context.value });
-        if (context._resolve)
-            context._resolve(context.value);
-    }
-}
-/**
- * This node is being removed and needs to be cleaned up.
- * @param node - The node to shut down
- * @param context - The context to clean up
- */
-function destroy(node, context) {
-    node.emit('destroying', node);
-    // flush all messages out
-    node.store.filter(() => false);
-    if (node.parent) {
-        node.parent.remove(node);
-    }
-    deregister(node);
-    context._value = context.value = undefined;
-    node.emit('destroyed', node);
-}
-/**
- * Defines the current input type concretely.
- * @param definition - The definition of the current input type.
- */
-function define(node, context, definition) {
-    // Assign the type
-    context.type = definition.type;
-    // Assign the definition
-    context.props.definition = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.clone)(definition);
-    // Ensure the type is seeded with the `__init` value.
-    context.value = context._value = createValue({
-        type: node.type,
-        value: context.value,
-    });
-    // Apply any input features before resetting the props.
-    if (definition.features) {
-        definition.features.forEach((feature) => feature(node));
-    }
-    // Its possible that input-defined "props" have ended up in the context attrs
-    // these should be moved back out of the attrs object.
-    if (definition.props) {
-        node.addProps(definition.props);
-    }
-    node.emit('defined', definition);
-}
-/**
- * Adds props to a given node by stripping them out of the node.props.attrs and
- * then adding them to the nodes.
- *
- * @param node - The node to add props to
- * @param context - The internal context object
- * @param props - An array of prop strings (in camelCase!)
- */
-function addProps(node, context, props) {
-    var _a;
-    if (node.props.attrs) {
-        const attrs = { ...node.props.attrs };
-        // Temporarily disable prop emits
-        node.props._emit = false;
-        for (const attr in attrs) {
-            const camelName = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.camel)(attr);
-            if (props.includes(camelName)) {
-                node.props[camelName] = attrs[attr];
-                delete attrs[attr];
-            }
-        }
-        const initial = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.cloneAny)(context._value);
-        node.props.initial =
-            node.type !== 'input' ? (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.init)(initial) : initial;
-        // Re-enable prop emits
-        node.props._emit = true;
-        node.props.attrs = attrs;
-        if (node.props.definition) {
-            node.props.definition.props = [
-                ...(((_a = node.props.definition) === null || _a === void 0 ? void 0 : _a.props) || []),
-                ...props,
-            ];
-        }
-    }
-    node.emit('added-props', props);
-    return node;
-}
-/**
- * (node.add) Adds a child to the node.
- * @param context -
- * @param node -
- * @param child -
- */
-function addChild(parent, parentContext, child, listIndex) {
-    if (parent.type === 'input')
-        error(100, parent);
-    if (child.parent && child.parent !== parent) {
-        child.parent.remove(child);
-    }
-    // Synchronously set the initial value on the parent
-    if (!parentContext.children.includes(child)) {
-        if (listIndex !== undefined && parent.type === 'list') {
-            // Inject the child:
-            parentContext.children.splice(listIndex, 0, child);
-            if (Array.isArray(parent.value) &&
-                parent.value.length < parentContext.children.length) {
-                // When adding an node or value to a list it is absolutely critical to
-                // know if, at the moment of injection, the parent’s value or the node
-                // children are the source of truth. For example, if a user pushes or
-                // splices a new value onto the lists’s array then we want to use that
-                // value as the value of the new node, but if a user adds a node to the
-                // list then we want the node’s value. In this specific case, we
-                // assume (due to length) that a new node was injected into the list, so
-                // we want that new node’s value injected into the parent list value.
-                parent.disturb().calm({
-                    name: listIndex,
-                    value: child.value,
-                    from: valueInserted,
-                });
-            }
-        }
-        else {
-            parentContext.children.push(child);
-        }
-        if (!child.isSettled)
-            parent.disturb();
-    }
-    if (child.parent !== parent) {
-        child.parent = parent;
-        // In this edge case middleware changed the parent assignment so we need to
-        // re-add the child
-        if (child.parent !== parent) {
-            parent.remove(child);
-            child.parent.add(child);
-            return parent;
-        }
-    }
-    else {
-        // When a parent is properly assigned, we inject the parent's plugins on the
-        // child.
-        child.use(parent.plugins);
-    }
-    // Finally we call commit here, which sub-calls hydrate(), hydrate() will
-    // resolve any conflict between the parent and child values, and also ensure
-    // proper "placeholders" are made on the parent.
-    commit(parent, parentContext, false);
-    parent.ledger.merge(child);
-    parent.emit('child', child);
-    return parent;
-}
-/**
- * The setter for node.parent = FormKitNode
- * @param _context -
- * @param node -
- * @param _property -
- * @param parent -
- * @returns boolean
- */
-function setParent(child, context, _property, parent) {
-    if (isNode(parent)) {
-        if (child.parent && child.parent !== parent) {
-            child.parent.remove(child);
-        }
-        context.parent = parent;
-        child.resetConfig();
-        !parent.children.includes(child)
-            ? parent.add(child)
-            : child.use(parent.plugins);
-        return true;
-    }
-    if (parent === null) {
-        context.parent = null;
-        return true;
-    }
-    return false;
-}
-/**
- * (node.remove) Removes a child from the node.
- * @param context -
- * @param node -
- * @param child -
- */
-function removeChild(node, context, child) {
-    const childIndex = context.children.indexOf(child);
-    if (childIndex !== -1) {
-        if (child.isSettled)
-            node.disturb();
-        context.children.splice(childIndex, 1);
-        // If an ancestor uses the preserve prop, then we are expected to not remove
-        // our values on this node either, see #53
-        let preserve = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.undefine)(child.props.preserve);
-        let parent = child.parent;
-        while (preserve === undefined && parent) {
-            preserve = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.undefine)(parent.props.preserve);
-            parent = parent.parent;
-        }
-        if (!preserve) {
-            node.calm({
-                name: node.type === 'list' ? childIndex : child.name,
-                value: valueRemoved,
-            });
-        }
-        else {
-            node.calm();
-        }
-        child.parent = null;
-        // Remove the child from the config. Is this weird? Yes. Is it ok? Yes.
-        child.config._rmn = child;
-    }
-    node.ledger.unmerge(child);
-    return node;
-}
-/**
- * Iterate over each immediate child and perform a callback.
- * @param context -
- * @param _node -
- * @param callback -
- */
-function eachChild(_node, context, callback) {
-    context.children.forEach((child) => callback(child));
-}
-/**
- * Walk all nodes below this one and execute a callback.
- * @param _node -
- * @param context -
- * @param callback -
- */
-function walkTree(_node, context, callback, stopIfFalse = false) {
-    context.children.forEach((child) => {
-        if (callback(child) !== false || !stopIfFalse) {
-            child.walk(callback);
-        }
-    });
-}
-/**
- * Set the configuration options of the node and it's subtree.
- * @param node -
- * @param context -
- * @param _property -
- * @param config -
- */
-function resetConfig(node, context) {
-    const parent = node.parent || undefined;
-    context.config = createConfig(node.config._t, parent);
-    node.walk((n) => n.resetConfig());
-}
-/**
- * Adds a plugin to the node, it’s children, and executes it.
- * @param context -
- * @param node -
- * @param plugin -
- * @public
- */
-function use(node, context, plugin, run = true, library = true) {
-    if (Array.isArray(plugin) || plugin instanceof Set) {
-        plugin.forEach((p) => use(node, context, p));
-        return node;
-    }
-    if (!context.plugins.has(plugin)) {
-        if (library && typeof plugin.library === 'function')
-            plugin.library(node);
-        // When plugins return false, they are never added as to the plugins Set
-        // meaning they only ever have access to the single node they were added on.
-        if (run && plugin(node) !== false) {
-            context.plugins.add(plugin);
-            node.children.forEach((child) => child.use(plugin));
-        }
-    }
-    return node;
-}
-/**
- * Moves a node in the parent’s children to the given index.
- * @param node -
- * @param _context -
- * @param _property -
- * @param setIndex -
- */
-function setIndex(node, _context, _property, setIndex) {
-    if (isNode(node.parent)) {
-        const children = node.parent.children;
-        const index = setIndex >= children.length
-            ? children.length - 1
-            : setIndex < 0
-                ? 0
-                : setIndex;
-        const oldIndex = children.indexOf(node);
-        if (oldIndex === -1)
-            return false;
-        children.splice(oldIndex, 1);
-        children.splice(index, 0, node);
-        node.parent.children = children;
-        if (node.parent.type === 'list')
-            node.parent
-                .disturb()
-                .calm({ name: index, value: valueMoved, from: oldIndex });
-        return true;
-    }
-    return false;
-}
-/**
- * Retrieves the index of a node from the parent’s children.
- * @param node -
- */
-function getIndex(node) {
-    if (node.parent) {
-        const index = [...node.parent.children].indexOf(node);
-        // If the index is currently -1 then the node isnt finished booting, so it
-        // must be the next node.
-        return index === -1 ? node.parent.children.length : index;
-    }
-    return -1;
-}
-/**
- * Retrieves the context object of a given node. This is intended to be a
- * private trap and should absolutely not be used in plugins or user-land code.
- * @param _node -
- * @param context -
- */
-function getContext(_node, context) {
-    return context;
-}
-/**
- * Get the name of the current node, allowing for slight mutations.
- * @param node -
- * @param context -
- */
-function getName(node, context) {
-    var _a;
-    if (((_a = node.parent) === null || _a === void 0 ? void 0 : _a.type) === 'list')
-        return node.index;
-    return context.name !== useIndex ? context.name : node.index;
-}
-/**
- * Returns the address of the current node.
- * @param node -
- * @param context -
- */
-function getAddress(node, context) {
-    return context.parent
-        ? context.parent.address.concat([node.name])
-        : [node.name];
-}
-/**
- * Fetches a node from the tree by its address.
- * @param context -
- * @param node -
- * @param location -
- * @returns FormKitNode
- */
-function getNode(node, _context, locator) {
-    const address = typeof locator === 'string' ? locator.split(node.config.delimiter) : locator;
-    if (!address.length)
-        return undefined;
-    const first = address[0];
-    let pointer = node.parent;
-    if (!pointer) {
-        // This address names the root node, remove it to get child name:
-        if (String(address[0]) === String(node.name))
-            address.shift();
-        // All root nodes start at themselves ultimately:
-        pointer = node;
-    }
-    // Any addresses starting with $parent should discard it
-    if (first === '$parent')
-        address.shift();
-    while (pointer && address.length) {
-        const name = address.shift();
-        switch (name) {
-            case '$root':
-                pointer = node.root;
-                break;
-            case '$parent':
-                pointer = pointer.parent;
-                break;
-            case '$self':
-                pointer = node;
-                break;
-            default:
-                pointer =
-                    pointer.children.find((c) => String(c.name) === String(name)) ||
-                        select(pointer, name);
-        }
-    }
-    return pointer || undefined;
-}
-/**
- * Perform selections on a subtree using the address "selector" methods.
- * @param node -
- * @param selector -
- * @returns FormKitNode | undefined
- */
-function select(node, selector) {
-    const matches = String(selector).match(/^(find)\((.*)\)$/);
-    if (matches) {
-        const [, action, argStr] = matches;
-        const args = argStr.split(',').map((arg) => arg.trim());
-        switch (action) {
-            case 'find':
-                return node.find(args[0], args[1]);
-            default:
-                return undefined;
-        }
-    }
-    return undefined;
-}
-/**
- * Perform a breadth first search and return the first instance of a node that
- * is found in the subtree or undefined.
- * @param node - The node to start the search on/under
- * @param _context - The context object
- * @param searchTerm - The term we are searching for
- * @param searcher - Either a key to search on, or a function
- * @returns
- */
-function find(node, _context, searchTerm, searcher) {
-    return bfs(node, searchTerm, searcher);
-}
-/**
- * Perform a breadth-first-search on a node subtree and locate the first
- * instance of a match.
- * @param node -
- * @param name -
- * @returns FormKitNode
- * @public
- */
-function bfs(tree, searchValue, searchGoal = 'name') {
-    const search = typeof searchGoal === 'string'
-        ? (n) => n[searchGoal] == searchValue // non-strict comparison is intentional
-        : searchGoal;
-    const stack = [tree];
-    while (stack.length) {
-        const node = stack.shift(); // eslint-disable-line @typescript-eslint/no-non-null-assertion
-        if (search(node, searchValue))
-            return node;
-        stack.push(...node.children);
-    }
-    return undefined;
-}
-/**
- * Get the root node of the tree.
- */
-function getRoot(n) {
-    let node = n;
-    while (node.parent) {
-        node = node.parent;
-    }
-    return node;
-}
-/**
- * Creates a new configuration option.
- * @param parent -
- * @param configOptions -
- * @returns FormKitConfig
- */
-function createConfig(target = {}, parent) {
-    let node = undefined;
-    return new Proxy(target, {
-        get(...args) {
-            const prop = args[1];
-            if (prop === '_t')
-                return target;
-            const localValue = Reflect.get(...args);
-            // Check our local values first
-            if (localValue !== undefined)
-                return localValue;
-            // Then check our parent values next
-            if (parent) {
-                const parentVal = parent.config[prop];
-                if (parentVal !== undefined)
-                    return parentVal;
-            }
-            if (target.rootConfig && typeof prop === 'string') {
-                const rootValue = target.rootConfig[prop];
-                if (rootValue !== undefined)
-                    return rootValue;
-            }
-            // The default delay value should be 20
-            if (prop === 'delay' && (node === null || node === void 0 ? void 0 : node.type) === 'input')
-                return 20;
-            // Finally check the default values
-            return defaultConfig[prop];
-        },
-        set(...args) {
-            const prop = args[1];
-            const value = args[2];
-            if (prop === '_n') {
-                node = value;
-                if (target.rootConfig)
-                    target.rootConfig._add(node);
-                return true;
-            }
-            if (prop === '_rmn') {
-                if (target.rootConfig)
-                    target.rootConfig._rm(node);
-                node = undefined;
-                return true;
-            }
-            if (!(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.eq)(target[prop], value, false)) {
-                const didSet = Reflect.set(...args);
-                if (node) {
-                    node.emit(`config:${prop}`, value, false);
-                    configChange(node, prop, value);
-                    // Walk the node tree and notify of config/prop changes where relevant
-                    node.walk((n) => configChange(n, prop, value), true);
-                }
-                return didSet;
-            }
-            return true;
-        },
-    });
-}
-/**
- * Given a string of text, expose it for modification, translation, or full
- * replacement.
- * @param key - A message key, or generic string of text
- * @returns
- */
-function text(node, _context, key, type = 'ui') {
-    const fragment = typeof key === 'string' ? { key, value: key, type } : key;
-    const value = node.hook.text.dispatch(fragment);
-    node.emit('text', value, false);
-    return value.value;
-}
-/**
- * Submits the nearest ancestor that is a FormKit "form". It determines which
- * node is a form by locating an ancestor where node.props.isForm = true.
- * @param node - The node to initiate the submit
- */
-function submit(node) {
-    const name = node.name;
-    do {
-        if (node.props.isForm === true)
-            break;
-        if (!node.parent)
-            error(106, name);
-        node = node.parent;
-    } while (node);
-    if (node.props.id) {
-        submitForm(node.props.id);
-    }
-}
-/**
- * Reset to the original value.
- * @param node - The node to reset
- * @param _context - The context
- * @param value - The value to reset to
- */
-function resetValue(node, _context, value) {
-    return reset(node, value);
-}
-/**
- * Sets errors on the node and optionally its children.
- * @param node - The node to set errors on
- * @param _context - Not used
- * @param localErrors - An array of errors to set on this node
- * @param childErrors - An object of name to errors to set on children.
- */
-function setErrors$1(node, _context, localErrors, childErrors) {
-    const sourceKey = `${node.name}-set`;
-    createMessages(node, localErrors, childErrors).forEach((errors) => {
-        node.store.apply(errors, (message) => message.meta.source === sourceKey);
-    });
-    return node;
-}
-/**
- * Clears errors on the node and optionally its children.
- * @param node - The node to set errors on
- * @param _context - Not used
- * @param localErrors - An array of errors to set on this node
- * @param childErrors - An object of name to errors to set on children.
- */
-function clearErrors$1(node, context, clearChildErrors = true) {
-    setErrors$1(node, context, []);
-    if (clearChildErrors) {
-        const sourceKey = `${node.name}-set`;
-        node.walk((child) => {
-            child.store.filter((message) => {
-                return !(message.type === 'error' &&
-                    message.meta &&
-                    message.meta.source === sourceKey);
-            });
-        });
-    }
-    return node;
-}
-/**
- * Middleware to assign default prop values as issued by core.
- * @param node - The node being registered
- * @param next - Calls the next middleware.
- * @returns
- */
-function defaultProps(node) {
-    if (!(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(node.props, 'id'))
-        node.props.id = `input_${idCount++}`;
-    return node;
-}
-/**
- * @param options -
- * @param config -
- */
-function createProps(initial) {
-    const props = {
-        initial: typeof initial === 'object' ? (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.cloneAny)(initial) : initial,
-    };
-    let node;
-    let isEmitting = true;
-    return new Proxy(props, {
-        get(...args) {
-            const [_t, prop] = args;
-            if ((0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(props, prop))
-                return Reflect.get(...args);
-            if (node && typeof prop === 'string' && node.config[prop] !== undefined)
-                return node.config[prop];
-            return undefined;
-        },
-        set(target, property, originalValue, receiver) {
-            if (property === '_n') {
-                node = originalValue;
-                return true;
-            }
-            if (property === '_emit') {
-                isEmitting = originalValue;
-                return true;
-            }
-            const { prop, value } = node.hook.prop.dispatch({
-                prop: property,
-                value: originalValue,
-            });
-            // Typescript compiler cannot handle a symbol index, even though js can:
-            if (!(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.eq)(props[prop], value, false) ||
-                typeof value === 'object') {
-                const didSet = Reflect.set(target, prop, value, receiver);
-                if (isEmitting) {
-                    node.emit('prop', { prop, value });
-                    if (typeof prop === 'string')
-                        node.emit(`prop:${prop}`, value);
-                }
-                return didSet;
-            }
-            return true;
-        },
-    });
-}
-/**
- * A cheap function that iterates over all plugins and stops once node.define
- * is called.
- * @param node - A formkit node
- * @param plugins - An array of plugins
- * @returns
- */
-function findDefinition(node, plugins) {
-    // If the definition is already there, force call to define.
-    if (node.props.definition)
-        return node.define(node.props.definition);
-    for (const plugin of plugins) {
-        if (node.props.definition)
-            return;
-        if (typeof plugin.library === 'function') {
-            plugin.library(node);
-        }
-    }
-}
-/**
- * Create a new context object for our a FormKit node, given default information
- * @param options - An options object to override the defaults.
- * @returns FormKitContext
- */
-function createContext(options) {
-    const value = createValue(options);
-    const config = createConfig(options.config || {}, options.parent);
-    return {
-        _d: 0,
-        _e: createEmitter(),
-        _resolve: false,
-        _tmo: false,
-        _value: value,
-        children: (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.dedupe)(options.children || []),
-        config,
-        hook: createHooks(),
-        isCreated: false,
-        isSettled: true,
-        ledger: createLedger(),
-        name: createName(options),
-        parent: options.parent || null,
-        plugins: new Set(),
-        props: createProps(value),
-        settled: Promise.resolve(value),
-        store: createStore(true),
-        traps: createTraps(),
-        type: options.type || 'input',
-        value,
-    };
-}
-/**
- * Initialize a node object's internal properties.
- * @param node - The node to initialize
- * @returns FormKitNode
- */
-function nodeInit(node, options) {
-    var _a;
-    // Set the internal node on the props, config, ledger and store
-    node.ledger.init((node.store._n = node.props._n = node.config._n = node));
-    // Apply given in options to the node.
-    node.props._emit = false;
-    if (options.props)
-        Object.assign(node.props, options.props);
-    node.props._emit = true;
-    // Attempt to find a definition from the pre-existing plugins.
-    findDefinition(node, new Set([
-        ...(options.plugins || []),
-        ...(node.parent ? node.parent.plugins : []),
-    ]));
-    // Then we apply each plugin's root code, we do this with an explicit loop
-    // for that ity-bitty performance bump.
-    if (options.plugins) {
-        for (const plugin of options.plugins) {
-            use(node, node._c, plugin, true, false);
-        }
-    }
-    // Initialize the default props
-    defaultProps(node);
-    // Apply the parent to each child.
-    node.each((child) => node.add(child));
-    // If the node has a parent, ensure it's properly nested bi-directionally.
-    if (node.parent)
-        node.parent.add(node, options.index);
-    // Inputs are leafs, and cannot have children
-    if (node.type === 'input' && node.children.length)
-        error(100, node);
-    // Apply the input hook to the initial value.
-    input(node, node._c, node._value, false);
-    // Release the store buffer
-    node.store.release();
-    // Register the node globally if someone explicitly gave it an id
-    if ((_a = options.props) === null || _a === void 0 ? void 0 : _a.id)
-        register(node);
-    // Our node is finally ready, emit it to the world
-    node.emit('created', node);
-    node.isCreated = true;
-    return node;
-}
-/**
- * Creates a new instance of a FormKit Node. Nodes are the atomic unit of
- * a FormKit graph.
- *
- * @param options - An object of options to define the node.
- * @returns FormKitNode
- * @public
- */
-function createNode(options) {
-    const ops = options || {};
-    const context = createContext(ops);
-    // Note: The typing for the proxy object cannot be fully modeled, thus we are
-    // force-typing to a FormKitNode. See:
-    // https://github.com/microsoft/TypeScript/issues/28067
-    const node = new Proxy(context, {
-        get(...args) {
-            const [, property] = args;
-            if (property === '__FKNode__')
-                return true;
-            const trap = context.traps.get(property);
-            if (trap && trap.get)
-                return trap.get(node, context);
-            return Reflect.get(...args);
-        },
-        set(...args) {
-            const [, property, value] = args;
-            const trap = context.traps.get(property);
-            if (trap && trap.set)
-                return trap.set(node, context, property, value);
-            return Reflect.set(...args);
-        },
-    });
-    return nodeInit(node, ops);
-}
-
-/**
- * Type narrow that a node is a DOM node.
- * @param node - A schema node to check
- * @returns
- * @public
- */
-function isDOM(node) {
-    return typeof node !== 'string' && (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(node, '$el');
-}
-/**
- * Type narrow that a node is a DOM node.
- * @param node - A schema node to check
- * @returns
- * @public
- */
-function isComponent(node) {
-    return typeof node !== 'string' && (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(node, '$cmp');
-}
-/**
- * Root declaration.
- * @param node - An object to check
- * @returns
- * @public
- */
-function isConditional(node) {
-    if (!node || typeof node === 'string')
-        return false;
-    return (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(node, 'if') && (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(node, 'then');
-}
-/**
- * Determines if the node is syntactic sugar or not.
- * @param node - Node
- * @returns
- * @public
- */
-function isSugar(node) {
-    return typeof node !== 'string' && '$formkit' in node;
-}
-/**
- * Converts syntactic sugar nodes to standard nodes.
- * @param node - A node to covert
- * @returns
- * @public
- */
-function sugar(node) {
-    if (typeof node === 'string') {
-        return {
-            $el: 'text',
-            children: node,
-        };
-    }
-    if (isSugar(node)) {
-        const { $formkit: type, for: iterator, if: condition, children, key, bind, ...props } = node;
-        return Object.assign({
-            $cmp: 'FormKit',
-            props: { ...props, type },
-        }, condition ? { if: condition } : {}, iterator ? { for: iterator } : {}, children ? { children } : {}, key ? { key } : {}, bind ? { bind } : {});
-    }
-    return node;
-}
-
-/**
- * Compiles a logical string like "a != z || b == c" into a single function.
- * The return value is an object with a "provide" method that iterates over all
- * requirement tokens to use as replacements.
- * ```typescript
- * let name = {
- *   value: 'jon'
- * }
- * const condition = compile("$name == 'bob'").provide((token) => {
- *  return () => name.value // must return a function!
- * })
- *
- * condition() // false
- * ```
- * @param expr - A string to compile
- * @returns
- * @public
- */
-function compile(expr) {
-    /**
-     * These tokens are replacements used in evaluating a given condition.
-     */
-    // const tokens: FormKitTokens = {}
-    /**
-     * The value of the provide() callback. Used for late binding.
-     */
-    let provideTokens;
-    /**
-     * These are token requirements like "$name.value" that are need to fulfill
-     * a given condition call.
-     */
-    const requirements = new Set();
-    /**
-     * Expands the current value if it is a function.
-     * @param operand - A left or right hand operand
-     * @returns
-     */
-    const x = function expand(operand, tokens) {
-        return typeof operand === 'function' ? operand(tokens) : operand;
-    };
-    /**
-     * Comprehensive list of operators. This list MUST be
-     * ordered by the length of the operator characters in descending order.
-     */
-    const operatorRegistry = [
-        {
-            '&&': (l, r, t) => x(l, t) && x(r, t),
-            '||': (l, r, t) => x(l, t) || x(r, t),
-        },
-        {
-            '===': (l, r, t) => !!(x(l, t) === x(r, t)),
-            '!==': (l, r, t) => !!(x(l, t) !== x(r, t)),
-            '==': (l, r, t) => !!(x(l, t) == x(r, t)),
-            '!=': (l, r, t) => !!(x(l, t) != x(r, t)),
-            '>=': (l, r, t) => !!(x(l, t) >= x(r, t)),
-            '<=': (l, r, t) => !!(x(l, t) <= x(r, t)),
-            '>': (l, r, t) => !!(x(l, t) > x(r, t)),
-            '<': (l, r, t) => !!(x(l, t) < x(r, t)),
-        },
-        {
-            '+': (l, r, t) => x(l, t) + x(r, t),
-            '-': (l, r, t) => x(l, t) - x(r, t),
-        },
-        {
-            '*': (l, r, t) => x(l, t) * x(r, t),
-            '/': (l, r, t) => x(l, t) / x(r, t),
-            '%': (l, r, t) => x(l, t) % x(r, t),
-        },
-    ];
-    /**
-     * A full list of all operator symbols.
-     */
-    const operatorSymbols = operatorRegistry.reduce((s, g) => {
-        return s.concat(Object.keys(g));
-    }, []);
-    /**
-     * An array of the first character of each operator.
-     */
-    const operatorChars = new Set(operatorSymbols.map((key) => key.charAt(0)));
-    /**
-     * Determines if the current character is the start of an operator symbol, if it
-     * is, it returns that symbol.
-     * @param symbols - An array of symbols that are considered operators
-     * @param char - The current character being operated on
-     * @param p - The position of the pointer
-     * @param expression - The full string expression
-     * @returns
-     */
-    function getOp(symbols, char, p, expression) {
-        const candidates = symbols.filter((s) => s.startsWith(char));
-        if (!candidates.length)
-            return false;
-        return candidates.find((symbol) => {
-            if (expression.length >= p + symbol.length) {
-                const nextChars = expression.substring(p, p + symbol.length);
-                if (nextChars === symbol)
-                    return symbol;
-            }
-            return false;
-        });
-    }
-    /**
-     * Determines the step number of the right or left hand operator.
-     * @param p - The position of the pointer
-     * @param expression - The full string expression
-     * @param direction - 1 = right, 0 = left
-     */
-    function getStep(p, expression, direction = 1) {
-        let next = direction
-            ? expression.substring(p + 1).trim()
-            : expression.substring(0, p).trim();
-        if (!next.length)
-            return -1;
-        if (!direction) {
-            // left hand direction could include a function name we need to remove
-            const reversed = next.split('').reverse();
-            const start = reversed.findIndex((char) => operatorChars.has(char));
-            next = reversed.slice(start).join('');
-        }
-        const char = next[0];
-        return operatorRegistry.findIndex((operators) => {
-            const symbols = Object.keys(operators);
-            return !!getOp(symbols, char, 0, next);
-        });
-    }
-    /**
-     * Extracts a tail call. For example:
-     * ```
-     * $foo().bar(baz) + 7
-     * ```
-     * Would extract "bar(baz)" and return p of 15 (after the (baz)).
-     *
-     * @param p - The position of a closing parenthetical.
-     * @param expression - The full expression being parsed.
-     */
-    function getTail(pos, expression) {
-        let tail = '';
-        const length = expression.length;
-        let depth = 0;
-        for (let p = pos; p < length; p++) {
-            const char = expression.charAt(p);
-            if (char === '(') {
-                depth++;
-            }
-            else if (char === ')') {
-                depth--;
-            }
-            else if (depth === 0 && char === ' ') {
-                continue;
-            }
-            if (depth === 0 && getOp(operatorSymbols, char, p, expression)) {
-                return [tail, p - 1];
-            }
-            else {
-                tail += char;
-            }
-        }
-        return [tail, expression.length - 1];
-    }
-    /**
-     * Parse a string expression into a function that returns a boolean. This is
-     * the magic behind schema logic like $if.
-     * @param expression - A string expression to parse
-     * @returns
-     */
-    function parseLogicals(expression, step = 0) {
-        const operators = operatorRegistry[step];
-        const length = expression.length;
-        const symbols = Object.keys(operators);
-        let depth = 0;
-        let quote = false;
-        let op = null;
-        let operand = '';
-        let left = null;
-        let operation;
-        let lastChar = '';
-        let char = '';
-        let parenthetical = '';
-        let parenQuote = '';
-        let startP = 0;
-        const addTo = (depth, char) => {
-            depth ? (parenthetical += char) : (operand += char);
-        };
-        for (let p = 0; p < length; p++) {
-            lastChar = char;
-            char = expression.charAt(p);
-            if ((char === "'" || char === '"') &&
-                lastChar !== '\\' &&
-                ((depth === 0 && !quote) || (depth && !parenQuote))) {
-                if (depth) {
-                    parenQuote = char;
-                }
-                else {
-                    quote = char;
-                }
-                addTo(depth, char);
-                continue;
-            }
-            else if ((quote && (char !== quote || lastChar === '\\')) ||
-                (parenQuote && (char !== parenQuote || lastChar === '\\'))) {
-                addTo(depth, char);
-                continue;
-            }
-            else if (quote === char) {
-                quote = false;
-                addTo(depth, char);
-                continue;
-            }
-            else if (parenQuote === char) {
-                parenQuote = false;
-                addTo(depth, char);
-                continue;
-            }
-            else if (char === ' ') {
-                continue;
-            }
-            else if (char === '(') {
-                if (depth === 0) {
-                    startP = p;
-                }
-                else {
-                    parenthetical += char;
-                }
-                depth++;
-            }
-            else if (char === ')') {
-                depth--;
-                if (depth === 0) {
-                    // Parenthetical statements cannot be grouped up in the implicit order
-                    // of left/right statements based on which step they are on because
-                    // they are parsed on every step and then must be applied to the
-                    // operator. Example:
-                    //
-                    // 5 + (3) * 2
-                    //
-                    // This should yield 11 not 16. This order is normally implicit in the
-                    // sequence of operators being parsed, but with parenthesis the parse
-                    // happens each time. Instead we need to know if the resulting value
-                    // should be applied to the left or the right hand operator. The
-                    // general algorithm is:
-                    //
-                    // 1. Does this paren have an operator on the left or right side
-                    // 2. If not, it's unnecessarily wrapped (3 + 2)
-                    // 3. If it does, then which order of operation is highest?
-                    // 4. Wait for the highest order of operation to bind to an operator.
-                    // If the parenthetical has a preceding token like $fn(1 + 2) then we
-                    // need to subtract the existing operand length from the start
-                    // to determine if this is a left or right operation
-                    const fn = typeof operand === 'string' && operand.startsWith('$')
-                        ? operand
-                        : undefined;
-                    const hasTail = fn && expression.charAt(p + 1) === '.';
-                    // It's possible the function has a chained tail call:
-                    let tail = '';
-                    if (hasTail) {
-                        [tail, p] = getTail(p + 2, expression);
-                    }
-                    const lStep = op ? step : getStep(startP, expression, 0);
-                    const rStep = getStep(p, expression);
-                    if (lStep === -1 && rStep === -1) {
-                        // This parenthetical was unnecessarily wrapped at the root, or
-                        // these are args of a function call.
-                        operand = evaluate(parenthetical, -1, fn, tail);
-                    }
-                    else if (op && (lStep >= rStep || rStep === -1) && step === lStep) {
-                        // has a left hand operator with a higher order of operation
-                        left = op.bind(null, evaluate(parenthetical, -1, fn, tail));
-                        op = null;
-                        operand = '';
-                    }
-                    else if (rStep > lStep && step === rStep) {
-                        // should be applied to the right hand operator when it gets one
-                        operand = evaluate(parenthetical, -1, fn, tail);
-                    }
-                    else {
-                        operand += `(${parenthetical})${hasTail ? `.${tail}` : ''}`;
-                    }
-                    parenthetical = '';
-                }
-                else {
-                    parenthetical += char;
-                }
-            }
-            else if (depth === 0 &&
-                (operation = getOp(symbols, char, p, expression))) {
-                if (p === 0) {
-                    error(103, [operation, expression]);
-                }
-                // We identified the operator by looking ahead in the string, so we need
-                // our position to move past the operator
-                p += operation.length - 1;
-                if (p === expression.length - 1) {
-                    error(104, [operation, expression]);
-                }
-                if (!op) {
-                    // Bind the left hand operand
-                    if (left) {
-                        // In this case we've already parsed the left hand operator
-                        op = operators[operation].bind(null, evaluate(left, step));
-                        left = null;
-                    }
-                    else {
-                        op = operators[operation].bind(null, evaluate(operand, step));
-                        operand = '';
-                    }
-                }
-                else if (operand) {
-                    // Bind the right hand operand, and return the resulting expression as a new left hand operator
-                    left = op.bind(null, evaluate(operand, step));
-                    op = operators[operation].bind(null, left);
-                    operand = '';
-                }
-                continue;
-            }
-            else {
-                addTo(depth, char);
-            }
-        }
-        if (operand && op) {
-            // If we were left with an operand after the loop, and an op, it should
-            // be the right hand assignment.
-            op = op.bind(null, evaluate(operand, step));
-        }
-        // If we don't have an op, but we do have a left hand assignment, then that
-        // is actually our operator, so just re-assign it to op
-        op = !op && left ? left : op;
-        if (!op && operand) {
-            // If we don't have any op but we do have an operand so there is no boolean
-            // logic to perform, but that operand still means something so we need to
-            // evaluate it and return it as a function
-            op = (v, t) => {
-                return typeof v === 'function' ? v(t) : v;
-            };
-            op = op.bind(null, evaluate(operand, step));
-        }
-        if (!op && !operand) {
-            error(105, expression);
-        }
-        return op;
-    }
-    /**
-     * Given a string like '$name==bobby' evaluate it to true or false
-     * @param operand - A left or right boolean operand — usually conditions
-     * @param step - The current order of operation
-     * @param fnToken - The token (string) representation of a function being called
-     * @returns
-     */
-    function evaluate(operand, step, fnToken, tail //eslint-disable-line
-    ) {
-        if (fnToken) {
-            const fn = evaluate(fnToken, operatorRegistry.length);
-            let userFuncReturn;
-            // "Tail calls" are dot accessors after a function $foo().value. We need
-            // to compile tail calls, and then provide the function result to the
-            // exposed tokens.
-            let tailCall = tail
-                ? compile(`$${tail}`)
-                : false;
-            if (typeof fn === 'function') {
-                const args = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.parseArgs)(String(operand)).map((arg) => evaluate(arg, -1));
-                return (tokens) => {
-                    const userFunc = fn(tokens);
-                    if (typeof userFunc !== 'function') {
-                        warn(150, fnToken);
-                        return userFunc;
-                    }
-                    userFuncReturn = userFunc(...args.map((arg) => typeof arg === 'function' ? arg(tokens) : arg));
-                    if (tailCall) {
-                        tailCall = tailCall.provide((subTokens) => {
-                            const rootTokens = provideTokens(subTokens);
-                            const t = subTokens.reduce((tokenSet, token) => {
-                                const isTail = token === tail || (tail === null || tail === void 0 ? void 0 : tail.startsWith(`${token}(`));
-                                if (isTail) {
-                                    const value = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.getAt)(userFuncReturn, token);
-                                    tokenSet[token] = () => value;
-                                }
-                                else {
-                                    tokenSet[token] = rootTokens[token];
-                                }
-                                return tokenSet;
-                            }, {});
-                            return t;
-                        });
-                    }
-                    return tailCall ? tailCall() : userFuncReturn;
-                };
-            }
-        }
-        else if (typeof operand === 'string') {
-            // the word true or false will never contain further operations
-            if (operand === 'true')
-                return true;
-            if (operand === 'false')
-                return false;
-            if (operand === 'undefined')
-                return undefined;
-            // Truly quotes strings cannot contain an operation, return the string
-            if ((0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.isQuotedString)(operand))
-                return (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.rmEscapes)(operand.substring(1, operand.length - 1));
-            // Actual numbers cannot be contain an operation
-            if (!isNaN(+operand))
-                return Number(operand);
-            if (step < operatorRegistry.length - 1) {
-                return parseLogicals(operand, step + 1);
-            }
-            else {
-                if (operand.startsWith('$')) {
-                    const cleaned = operand.substring(1);
-                    requirements.add(cleaned);
-                    return function getToken(tokens) {
-                        return cleaned in tokens ? tokens[cleaned]() : undefined;
-                    };
-                }
-                // In this case we are dealing with an unquoted string, just treat it
-                // as a plain string.
-                return operand;
-            }
-        }
-        return operand;
-    }
-    /**
-     * Compile the string.
-     */
-    const compiled = parseLogicals(expr.startsWith('$:') ? expr.substring(2) : expr);
-    /**
-     * Convert compiled requirements to an array.
-     */
-    const reqs = Array.from(requirements);
-    /**
-     * Provides token values via callback to compiled output.
-     * @param callback - A callback that needs to provide all token requirements
-     * @returns
-     */
-    function provide(callback) {
-        provideTokens = callback;
-        return Object.assign(compiled.bind(null, callback(reqs)), {
-            provide,
-        });
-    }
-    return Object.assign(compiled, {
-        provide,
-    });
-}
-
-/**
- * Function that produces a standardized object representation of CSS classes
- * @param propertyKey - section key
- * @param node - FormKit node
- * @param sectionClassList - Things to turn into classes
- * @returns
- * @public
- */
-function createClasses(propertyKey, node, sectionClassList) {
-    if (!sectionClassList)
-        return {};
-    if (typeof sectionClassList === 'string') {
-        const classKeys = sectionClassList.split(' ');
-        return classKeys.reduce((obj, key) => Object.assign(obj, { [key]: true }), {});
-    }
-    else if (typeof sectionClassList === 'function') {
-        return createClasses(propertyKey, node, sectionClassList(node, propertyKey));
-    }
-    return sectionClassList;
-}
-/**
- * Combines multiple class lists into a single list
- * @param node - the FormKit node being operated on
- * @param property - The property key to which the class list will be applied
- * @param args - CSS class list(s)
- * @returns
- * @public
- */
-function generateClassList(node, property, ...args) {
-    const combinedClassList = args.reduce((finalClassList, currentClassList) => {
-        if (!currentClassList)
-            return finalClassList;
-        const { $reset, ...classList } = currentClassList;
-        if ($reset) {
-            return classList;
-        }
-        return Object.assign(finalClassList, classList);
-    }, {});
-    return (Object.keys(node.hook.classes.dispatch({ property, classes: combinedClassList })
-        .classes)
-        .filter((key) => combinedClassList[key])
-        .join(' ') || null);
-}
-
-/**
- * Sets errors on a form, group, or input.
- * @param formId - The id of a form
- * @param localErrors - The errors to set on the form or the form’s inputs
- * @param childErrors - (optional) The errors to set on the form or the form’s inputs
- * @public
- */
-function setErrors(id, localErrors, childErrors) {
-    const node = getNode$1(id);
-    if (node) {
-        node.setErrors(localErrors, childErrors);
-    }
-    else {
-        warn(651, id);
-    }
-}
-/**
- * Clears child errors.
- * @param id - The id of the node you want to clear errors for
- * @param clearChildren - Determines if the the children of this node should have their errors cleared.
- * @public
- */
-function clearErrors(id, clearChildren = true) {
-    const node = getNode$1(id);
-    if (node) {
-        node.clearErrors(clearChildren);
-    }
-    else {
-        warn(652, id);
-    }
-}
-
-
-
-
-/***/ }),
-
 /***/ "./node_modules/@formkit/dev/dist/index.mjs":
 /*!**************************************************!*\
   !*** ./node_modules/@formkit/dev/dist/index.mjs ***!
@@ -58619,6 +55339,7 @@ const warnings = {
     /**
      * Deprecation warnings:
      */
+    800: ({ data: name }) => `${name} is deprecated.`,
 };
 /**
  * Decodes an error that is being emitted and console logs it.
@@ -58667,6 +55388,7 @@ registered = true;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ar": () => (/* binding */ ar),
+/* harmony export */   "bg": () => (/* binding */ bg),
 /* harmony export */   "createI18nPlugin": () => (/* binding */ createI18nPlugin),
 /* harmony export */   "cs": () => (/* binding */ cs),
 /* harmony export */   "da": () => (/* binding */ da),
@@ -58680,9 +55402,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fy": () => (/* binding */ fy),
 /* harmony export */   "he": () => (/* binding */ he),
 /* harmony export */   "hr": () => (/* binding */ hr),
+/* harmony export */   "hu": () => (/* binding */ hu),
 /* harmony export */   "id": () => (/* binding */ id),
 /* harmony export */   "it": () => (/* binding */ it),
 /* harmony export */   "ja": () => (/* binding */ ja),
+/* harmony export */   "kk": () => (/* binding */ kk),
 /* harmony export */   "ko": () => (/* binding */ ko),
 /* harmony export */   "list": () => (/* binding */ list),
 /* harmony export */   "locales": () => (/* binding */ locales),
@@ -58694,7 +55418,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ru": () => (/* binding */ ru),
 /* harmony export */   "sentence": () => (/* binding */ sentence),
 /* harmony export */   "sl": () => (/* binding */ sl),
+/* harmony export */   "sr": () => (/* binding */ sr),
 /* harmony export */   "sv": () => (/* binding */ sv),
+/* harmony export */   "tg": () => (/* binding */ tg),
 /* harmony export */   "th": () => (/* binding */ th),
 /* harmony export */   "tr": () => (/* binding */ tr),
 /* harmony export */   "vi": () => (/* binding */ vi),
@@ -58765,7 +55491,7 @@ function order(first, second) {
  * Standard language for interface features.
  * @public
  */
-const ui$q = {
+const ui$v = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -58795,7 +55521,7 @@ const ui$q = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$q = {
+const validation$v = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -59056,8 +55782,8 @@ const validation$q = {
 
 var ar = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$q,
-    validation: validation$q
+    ui: ui$v,
+    validation: validation$v
 });
 
 /**
@@ -59069,7 +55795,311 @@ var ar = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$p = {
+const ui$u = {
+    /**
+     * Shown on a button for adding additional items.
+     */
+    add: 'Добави',
+    /**
+     * Shown when a button to remove items is visible.
+     */
+    remove: 'Премахни',
+    /**
+     * Shown when there are multiple items to remove at the same time.
+     */
+    removeAll: 'Премахни всички',
+    /**
+     * Shown when all fields are not filled out correctly.
+     */
+    incomplete: 'Извинете, не всички полета са попълнени правилно.',
+    /**
+     * Shown in a button inside a form to submit the form.
+     */
+    submit: 'Изпрати',
+    /**
+     * Shown when no files are selected.
+     */
+    noFiles: 'Няма избран файл',
+};
+/**
+ * These are all the possible strings that pertain to validation messages.
+ * @public
+ */
+const validation$u = {
+    /**
+     * The value is not an accepted value.
+     * @see {@link https://docs.formkit.com/essentials/validation#accepted}
+     */
+    accepted({ name }) {
+        /* <i18n case="Shown when the user-provided value is not a valid 'accepted' value."> */
+        return `Моля приемете ${name}.`;
+        /* </i18n> */
+    },
+    /**
+     * The date is not after
+     * @see {@link https://docs.formkit.com/essentials/validation#date-after}
+     */
+    date_after({ name, args }) {
+        if (Array.isArray(args) && args.length) {
+            /* <i18n case="Shown when the user-provided date is not after the date supplied to the rule."> */
+            return `${sentence(name)} трябва да е след ${date(args[0])}.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided date is not after today's date, since no date was supplied to the rule."> */
+        return `${sentence(name)} трябва да бъде в бъдещето.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not a letter.
+     * @see {@link https://docs.formkit.com/essentials/validation#alpha}
+     */
+    alpha({ name }) {
+        /* <i18n case="Shown when the user-provided value contains non-alphabetical characters."> */
+        return `${sentence(name)} може да съдържа само букви.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not alphanumeric
+     * @see {@link https://docs.formkit.com/essentials/validation#alphanumeric}
+     */
+    alphanumeric({ name }) {
+        /* <i18n case="Shown when the user-provided value contains non-alphanumeric characters."> */
+        return `${sentence(name)} може да съдържа само букви и цифри.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not letter and/or spaces
+     * @see {@link https://docs.formkit.com/essentials/validation#alpha-spaces}
+     */
+    alpha_spaces({ name }) {
+        /* <i18n case="Shown when the user-provided value contains non-alphabetical and non-space characters."> */
+        return `${sentence(name)} може да съдържа само букви и интервали.`;
+        /* </i18n> */
+    },
+    /**
+     * The date is not before
+     * @see {@link https://docs.formkit.com/essentials/validation#date-before}
+     */
+    date_before({ name, args }) {
+        if (Array.isArray(args) && args.length) {
+            /* <i18n case="Shown when the user-provided date is not before the date supplied to the rule."> */
+            return `${sentence(name)} трябва да е преди ${date(args[0])}.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided date is not before today's date, since no date was supplied to the rule."> */
+        return `${sentence(name)} трябва да бъде в миналото.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not between two numbers
+     * @see {@link https://docs.formkit.com/essentials/validation#between}
+     */
+    between({ name, args }) {
+        if (isNaN(args[0]) || isNaN(args[1])) {
+            /* <i18n case="Shown when any of the arguments supplied to the rule were not a number."> */
+            return `Това поле е конфигурирано неправилно и не може да бъде изпратено`;
+            /* </i18n> */
+        }
+        const [a, b] = order(args[0], args[1]);
+        /* <i18n case="Shown when the user-provided value is not between two numbers."> */
+        return `${sentence(name)} трябва да бъде между ${a} и ${b}.`;
+        /* </i18n> */
+    },
+    /**
+     * The confirmation field does not match
+     * @see {@link https://docs.formkit.com/essentials/validation#confirm}
+     */
+    confirm({ name }) {
+        /* <i18n case="Shown when the user-provided value does not equal the value of the matched input."> */
+        return `${sentence(name)} не съвпада.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not a valid date
+     * @see {@link https://docs.formkit.com/essentials/validation#date-format}
+     */
+    date_format({ name, args }) {
+        if (Array.isArray(args) && args.length) {
+            /* <i18n case="Shown when the user-provided date does not satisfy the date format supplied to the rule."> */
+            return `${sentence(name)} е невалидна дата. Моля, използвайте формата ${args[0]}`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when no date argument was supplied to the rule."> */
+        return 'Това поле е конфигурирано неправилно и не може да бъде изпратено';
+        /* </i18n> */
+    },
+    /**
+     * Is not within expected date range
+     * @see {@link https://docs.formkit.com/essentials/validation#date-between}
+     */
+    date_between({ name, args }) {
+        /* <i18n case="Shown when the user-provided date is not between the start and end dates supplied to the rule. "> */
+        return `${sentence(name)} трябва да бъде между ${date(args[0])} и ${date(args[1])}.`;
+        /* </i18n> */
+    },
+    /**
+     * Shown when the user-provided value is not a valid email address.
+     * @see {@link https://docs.formkit.com/essentials/validation#email}
+     */
+    email: 'Моля, въведете валиден имейл адрес.',
+    /**
+     * Does not end with the specified value
+     * @see {@link https://docs.formkit.com/essentials/validation#ends-with}
+     */
+    ends_with({ name, args }) {
+        /* <i18n case="Shown when the user-provided value does not end with the substring supplied to the rule."> */
+        return `${sentence(name)} не завършва на ${list(args)}.`;
+        /* </i18n> */
+    },
+    /**
+     * Is not an allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#is}
+     */
+    is({ name }) {
+        /* <i18n case="Shown when the user-provided value is not one of the values supplied to the rule."> */
+        return `${sentence(name)} е неразрешена стойност.`;
+        /* </i18n> */
+    },
+    /**
+     * Does not match specified length
+     * @see {@link https://docs.formkit.com/essentials/validation#length}
+     */
+    length({ name, args: [first = 0, second = Infinity] }) {
+        const min = Number(first) <= Number(second) ? first : second;
+        const max = Number(second) >= Number(first) ? second : first;
+        if (min == 1 && max === Infinity) {
+            /* <i18n case="Shown when the length of the user-provided value is not at least one character."> */
+            return `${sentence(name)} трябва да има поне един символ.`;
+            /* </i18n> */
+        }
+        if (min == 0 && max) {
+            /* <i18n case="Shown when first argument supplied to the rule is 0, and the user-provided value is longer than the max (the 2nd argument) supplied to the rule."> */
+            return `${sentence(name)} трябва да бъде по-малко или равно на ${max} символа.`;
+            /* </i18n> */
+        }
+        if (min && max === Infinity) {
+            /* <i18n case="Shown when the length of the user-provided value is less than the minimum supplied to the rule and there is no maximum supplied to the rule."> */
+            return `${sentence(name)} трябва да бъде по-голямо или равно на ${min} символа.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the length of the user-provided value is between the two lengths supplied to the rule."> */
+        return `${sentence(name)} трябва да бъде между ${min} и ${max} символа.`;
+        /* </i18n> */
+    },
+    /**
+     * Value is not a match
+     * @see {@link https://docs.formkit.com/essentials/validation#matches}
+     */
+    matches({ name }) {
+        /* <i18n case="Shown when the user-provided value does not match any of the values or RegExp patterns supplied to the rule. "> */
+        return `${sentence(name)} е неразрешена стойност.`;
+        /* </i18n> */
+    },
+    /**
+     * Exceeds maximum allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#max}
+     */
+    max({ name, node: { value }, args }) {
+        if (Array.isArray(value)) {
+            /* <i18n case="Shown when the length of the array of user-provided values is longer than the max supplied to the rule."> */
+            return `Не може да има повече от ${args[0]} ${name}.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided value is greater than the maximum number supplied to the rule."> */
+        return `${sentence(name)} трябва да бъде по-малко или равно на ${args[0]}.`;
+        /* </i18n> */
+    },
+    /**
+     * The (field-level) value does not match specified mime type
+     * @see {@link https://docs.formkit.com/essentials/validation#mime}
+     */
+    mime({ name, args }) {
+        if (!args[0]) {
+            /* <i18n case="Shown when no file formats were supplied to the rule."> */
+            return 'Не са разрешени никакви файлови формати.';
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the mime type of user-provided file does not match any mime types supplied to the rule."> */
+        return `${sentence(name)} трябва да бъде от тип: ${args[0]}`;
+        /* </i18n> */
+    },
+    /**
+     * Does not fulfill minimum allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#min}
+     */
+    min({ name, node: { value }, args }) {
+        if (Array.isArray(value)) {
+            /* <i18n case="Shown when the length of the array of user-provided values is shorter than the min supplied to the rule."> */
+            return `Не може да има по-малко от ${args[0]} ${name}.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided value is less than the minimum number supplied to the rule."> */
+        return `${sentence(name)} трябва да бъде поне ${args[0]}.`;
+        /* </i18n> */
+    },
+    /**
+     * Is not an allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#not}
+     */
+    not({ name, node: { value } }) {
+        /* <i18n case="Shown when the user-provided value matches one of the values supplied to (and thus disallowed by) the rule."> */
+        return `“${value}” е неразрешен ${name}.`;
+        /* </i18n> */
+    },
+    /**
+     *  Is not a number
+     * @see {@link https://docs.formkit.com/essentials/validation#number}
+     */
+    number({ name }) {
+        /* <i18n case="Shown when the user-provided value is not a number."> */
+        return `${sentence(name)} трябва да бъде число.`;
+        /* </i18n> */
+    },
+    /**
+     * Required field.
+     * @see {@link https://docs.formkit.com/essentials/validation#required}
+     */
+    required({ name }) {
+        /* <i18n case="Shown when a user does not provide a value to a required input."> */
+        return `${sentence(name)} е задължително.`;
+        /* </i18n> */
+    },
+    /**
+     * Does not start with specified value
+     * @see {@link https://docs.formkit.com/essentials/validation#starts-with}
+     */
+    starts_with({ name, args }) {
+        /* <i18n case="Shown when the user-provided value does not start with the substring supplied to the rule."> */
+        return `${sentence(name)} не започва с ${list(args)}.`;
+        /* </i18n> */
+    },
+    /**
+     * Is not a url
+     * @see {@link https://docs.formkit.com/essentials/validation#url}
+     */
+    url() {
+        /* <i18n case="Shown when the user-provided value is not a valid url."> */
+        return `Моля, въведете валиден URL адрес.`;
+        /* </i18n> */
+    },
+};
+
+var bg = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    ui: ui$u,
+    validation: validation$u
+});
+
+/**
+ * Here we can import additional helper functions to assist in formatting our
+ * language. Feel free to add additional helper methods to libs/formats if it
+ * assists in creating good validation messages for your locale.
+ */
+/**
+ * Standard language for interface features.
+ * @public
+ */
+const ui$t = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -59099,7 +56129,7 @@ const ui$p = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$p = {
+const validation$t = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -59351,8 +56381,8 @@ const validation$p = {
 
 var cs = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$p,
-    validation: validation$p
+    ui: ui$t,
+    validation: validation$t
 });
 
 /**
@@ -59364,7 +56394,7 @@ var cs = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$o = {
+const ui$s = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -59394,7 +56424,7 @@ const ui$o = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$o = {
+const validation$s = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -59655,8 +56685,8 @@ const validation$o = {
 
 var da = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$o,
-    validation: validation$o
+    ui: ui$s,
+    validation: validation$s
 });
 
 /**
@@ -59668,7 +56698,7 @@ var da = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$n = {
+const ui$r = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -59698,7 +56728,7 @@ const ui$n = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$n = {
+const validation$r = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -59958,8 +56988,8 @@ const validation$n = {
 
 var de = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$n,
-    validation: validation$n
+    ui: ui$r,
+    validation: validation$r
 });
 
 /**
@@ -59971,7 +57001,7 @@ var de = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$m = {
+const ui$q = {
     /**
      * Shown on a button for adding additional items.
      */
@@ -60001,7 +57031,7 @@ const ui$m = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$m = {
+const validation$q = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -60262,8 +57292,8 @@ const validation$m = {
 
 var en = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$m,
-    validation: validation$m
+    ui: ui$q,
+    validation: validation$q
 });
 
 /**
@@ -60275,7 +57305,7 @@ var en = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$l = {
+const ui$p = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -60305,7 +57335,7 @@ const ui$l = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$l = {
+const validation$p = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -60566,8 +57596,8 @@ const validation$l = {
 
 var es = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$l,
-    validation: validation$l
+    ui: ui$p,
+    validation: validation$p
 });
 
 /**
@@ -60579,7 +57609,7 @@ var es = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$k = {
+const ui$o = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -60609,7 +57639,7 @@ const ui$k = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$k = {
+const validation$o = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -60871,8 +57901,8 @@ const validation$k = {
 
 var fa = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$k,
-    validation: validation$k
+    ui: ui$o,
+    validation: validation$o
 });
 
 /**
@@ -60884,7 +57914,7 @@ var fa = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$j = {
+const ui$n = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -60914,7 +57944,7 @@ const ui$j = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$j = {
+const validation$n = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -61175,8 +58205,8 @@ const validation$j = {
 
 var fi = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$j,
-    validation: validation$j
+    ui: ui$n,
+    validation: validation$n
 });
 
 /**
@@ -61188,7 +58218,7 @@ var fi = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$i = {
+const ui$m = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -61218,7 +58248,7 @@ const ui$i = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$i = {
+const validation$m = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -61479,8 +58509,8 @@ const validation$i = {
 
 var fr = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$i,
-    validation: validation$i
+    ui: ui$m,
+    validation: validation$m
 });
 
 /**
@@ -61492,7 +58522,11 @@ var fr = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$h = {
+const ui$l = {
+    /**
+     * Shown on a button for adding additional items.
+     */
+    add: 'Foeg ta',
     /**
      * Shown when a button to remove items is visible.
      */
@@ -61518,7 +58552,7 @@ const ui$h = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$h = {
+const validation$l = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -61558,6 +58592,15 @@ const validation$h = {
     alphanumeric({ name }) {
         /* <i18n case="Shown when the user-provided value contains non-alphanumeric characters."> */
         return `${sentence(name)} mei allinne letters en sifers befetsje.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not letter and/or spaces
+     * @see {@link https://docs.formkit.com/essentials/validation#alpha-spaces}
+     */
+    alpha_spaces({ name }) {
+        /* <i18n case="Shown when the user-provided value contains non-alphabetical and non-space characters."> */
+        return `${sentence(name)} mei allinne letters en spaasjes befetsje.`;
         /* </i18n> */
     },
     /**
@@ -61770,8 +58813,8 @@ const validation$h = {
 
 var fy = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$h,
-    validation: validation$h
+    ui: ui$l,
+    validation: validation$l
 });
 
 /**
@@ -61783,7 +58826,7 @@ var fy = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$g = {
+const ui$k = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -61805,7 +58848,7 @@ const ui$g = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$g = {
+const validation$k = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -62065,8 +59108,8 @@ const validation$g = {
 
 var he = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$g,
-    validation: validation$g
+    ui: ui$k,
+    validation: validation$k
 });
 
 /**
@@ -62078,7 +59121,7 @@ var he = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$f = {
+const ui$j = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -62100,7 +59143,7 @@ const ui$f = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$f = {
+const validation$j = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -62360,8 +59403,8 @@ const validation$f = {
 
 var hr = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$f,
-    validation: validation$f
+    ui: ui$j,
+    validation: validation$j
 });
 
 /**
@@ -62373,7 +59416,311 @@ var hr = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$e = {
+const ui$i = {
+    /**
+     * Shown on a button for adding additional items.
+     */
+    add: 'Hozzáadás',
+    /**
+     * Shown when a button to remove items is visible.
+     */
+    remove: 'Eltávolítás',
+    /**
+     * Shown when there are multiple items to remove at the same time.
+     */
+    removeAll: 'Összes eltávolítása',
+    /**
+     * Shown when all fields are not filled out correctly.
+     */
+    incomplete: 'Sajnáljuk, nem minden mező lett helyesen kitöltve.',
+    /**
+     * Shown in a button inside a form to submit the form.
+     */
+    submit: 'Beküldés',
+    /**
+     * Shown when no files are selected.
+     */
+    noFiles: 'Nincs fájl kiválasztva',
+};
+/**
+ * These are all the possible strings that pertain to validation messages.
+ * @public
+ */
+const validation$i = {
+    /**
+     * The value is not an accepted value.
+     * @see {@link https://docs.formkit.com/essentials/validation#accepted}
+     */
+    accepted({ name }) {
+        /* <i18n case="Shown when the user-provided value is not a valid 'accepted' value."> */
+        return `Fogadja el a ${name} mezőt.`;
+        /* </i18n> */
+    },
+    /**
+     * The date is not after
+     * @see {@link https://docs.formkit.com/essentials/validation#date-after}
+     */
+    date_after({ name, args }) {
+        if (Array.isArray(args) && args.length) {
+            /* <i18n case="Shown when the user-provided date is not after the date supplied to the rule."> */
+            return `${sentence(name)} mezőnek ${date(args[0])} után kell lennie.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided date is not after today's date, since no date was supplied to the rule."> */
+        return `${sentence(name)} mezőnek a jövőben kell lennie.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not a letter.
+     * @see {@link https://docs.formkit.com/essentials/validation#alpha}
+     */
+    alpha({ name }) {
+        /* <i18n case="Shown when the user-provided value contains non-alphabetical characters."> */
+        return `${sentence(name)} csak alfanumerikus karaktereket tartalmazhat.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not alphanumeric
+     * @see {@link https://docs.formkit.com/essentials/validation#alphanumeric}
+     */
+    alphanumeric({ name }) {
+        /* <i18n case="Shown when the user-provided value contains non-alphanumeric characters."> */
+        return `${sentence(name)} csak betűket és számokat tartalmazhat.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not letter and/or spaces
+     * @see {@link https://docs.formkit.com/essentials/validation#alpha-spaces}
+     */
+    alpha_spaces({ name }) {
+        /* <i18n case="Shown when the user-provided value contains non-alphabetical and non-space characters."> */
+        return `${sentence(name)} csak betűket és szóközöket tartalmazhat.`;
+        /* </i18n> */
+    },
+    /**
+     * The date is not before
+     * @see {@link https://docs.formkit.com/essentials/validation#date-before}
+     */
+    date_before({ name, args }) {
+        if (Array.isArray(args) && args.length) {
+            /* <i18n case="Shown when the user-provided date is not before the date supplied to the rule."> */
+            return `${sentence(name)} mezőnek ${date(args[0])} előtt kell lennie.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided date is not before today's date, since no date was supplied to the rule."> */
+        return `${sentence(name)} mezőnek a múltban kell lennie.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not between two numbers
+     * @see {@link https://docs.formkit.com/essentials/validation#between}
+     */
+    between({ name, args }) {
+        if (isNaN(args[0]) || isNaN(args[1])) {
+            /* <i18n case="Shown when any of the arguments supplied to the rule were not a number."> */
+            return `Ez a mező hibásan lett konfigurálva, így nem lehet beküldeni.`;
+            /* </i18n> */
+        }
+        const [a, b] = order(args[0], args[1]);
+        /* <i18n case="Shown when the user-provided value is not between two numbers."> */
+        return `A ${sentence(name)} mezőnek ${a} és ${b} között kell lennie.`;
+        /* </i18n> */
+    },
+    /**
+     * The confirmation field does not match
+     * @see {@link https://docs.formkit.com/essentials/validation#confirm}
+     */
+    confirm({ name }) {
+        /* <i18n case="Shown when the user-provided value does not equal the value of the matched input."> */
+        return `${sentence(name)} nem egyezik.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not a valid date
+     * @see {@link https://docs.formkit.com/essentials/validation#date-format}
+     */
+    date_format({ name, args }) {
+        if (Array.isArray(args) && args.length) {
+            /* <i18n case="Shown when the user-provided date does not satisfy the date format supplied to the rule."> */
+            return `${sentence(name)} nem érvényes dátum, ${args[0]} formátumot használj`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when no date argument was supplied to the rule."> */
+        return 'Ez a mező hibásan lett konfigurálva, így nem lehet beküldeni.';
+        /* </i18n> */
+    },
+    /**
+     * Is not within expected date range
+     * @see {@link https://docs.formkit.com/essentials/validation#date-between}
+     */
+    date_between({ name, args }) {
+        /* <i18n case="Shown when the user-provided date is not between the start and end dates supplied to the rule. "> */
+        return `${sentence(name)} mezőnek ${date(args[0])} és ${args[1]} között kell lennie`;
+        /* </i18n> */
+    },
+    /**
+     * Shown when the user-provided value is not a valid email address.
+     * @see {@link https://docs.formkit.com/essentials/validation#email}
+     */
+    email: 'Kérjük, érvények email címet adjon meg.',
+    /**
+     * Does not end with the specified value
+     * @see {@link https://docs.formkit.com/essentials/validation#ends-with}
+     */
+    ends_with({ name, args }) {
+        /* <i18n case="Shown when the user-provided value does not end with the substring supplied to the rule."> */
+        return `${sentence(name)} mező nem a kijelölt (${list(args)}) módon ér véget.`;
+        /* </i18n> */
+    },
+    /**
+     * Is not an allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#is}
+     */
+    is({ name }) {
+        /* <i18n case="Shown when the user-provided value is not one of the values supplied to the rule."> */
+        return `${sentence(name)} nem engedélyezett érték.`;
+        /* </i18n> */
+    },
+    /**
+     * Does not match specified length
+     * @see {@link https://docs.formkit.com/essentials/validation#length}
+     */
+    length({ name, args: [first = 0, second = Infinity] }) {
+        const min = Number(first) <= Number(second) ? first : second;
+        const max = Number(second) >= Number(first) ? second : first;
+        if (min == 1 && max === Infinity) {
+            /* <i18n case="Shown when the length of the user-provided value is not at least one character."> */
+            return `${sentence(name)} mezőnek legalább egy karakteresnek kell lennie.`;
+            /* </i18n> */
+        }
+        if (min == 0 && max) {
+            /* <i18n case="Shown when first argument supplied to the rule is 0, and the user-provided value is longer than the max (the 2nd argument) supplied to the rule."> */
+            return `${sentence(name)} mezőnek maximum ${max} karakteresnek kell lennie.`;
+            /* </i18n> */
+        }
+        if (min && max === Infinity) {
+            /* <i18n case="Shown when the length of the user-provided value is less than the minimum supplied to the rule and there is no maximum supplied to the rule."> */
+            return `${sentence(name)} mezőnek minimum ${min} karakteresnek kell lennie.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the length of the user-provided value is between the two lengths supplied to the rule."> */
+        return `${sentence(name)} mezőnek ${min} és ${max} karakter között kell lennie.`;
+        /* </i18n> */
+    },
+    /**
+     * Value is not a match
+     * @see {@link https://docs.formkit.com/essentials/validation#matches}
+     */
+    matches({ name }) {
+        /* <i18n case="Shown when the user-provided value does not match any of the values or RegExp patterns supplied to the rule. "> */
+        return `${sentence(name)} nem engedélyezett érték.`;
+        /* </i18n> */
+    },
+    /**
+     * Exceeds maximum allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#max}
+     */
+    max({ name, node: { value }, args }) {
+        if (Array.isArray(value)) {
+            /* <i18n case="Shown when the length of the array of user-provided values is longer than the max supplied to the rule."> */
+            return `Nem lehet több mint ${args[0]} ${name}.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided value is greater than the maximum number supplied to the rule."> */
+        return `${sentence(name)} nem lehet nagyobb, mint ${args[0]}.`;
+        /* </i18n> */
+    },
+    /**
+     * The (field-level) value does not match specified mime type
+     * @see {@link https://docs.formkit.com/essentials/validation#mime}
+     */
+    mime({ name, args }) {
+        if (!args[0]) {
+            /* <i18n case="Shown when no file formats were supplied to the rule."> */
+            return 'Nincsenek támogatott fájlformátumok.';
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the mime type of user-provided file does not match any mime types supplied to the rule."> */
+        return `${sentence(name)}-nak/nek a következőnek kell lennie: ${args[0]}`;
+        /* </i18n> */
+    },
+    /**
+     * Does not fulfill minimum allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#min}
+     */
+    min({ name, node: { value }, args }) {
+        if (Array.isArray(value)) {
+            /* <i18n case="Shown when the length of the array of user-provided values is shorter than the min supplied to the rule."> */
+            return `Nem lehet kevesebb, mint ${args[0]} ${name}.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided value is less than the minimum number supplied to the rule."> */
+        return `${sentence(name)}-nak/nek minimum ${args[0]}-nak/nek kell lennie.`;
+        /* </i18n> */
+    },
+    /**
+     * Is not an allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#not}
+     */
+    not({ name, node: { value } }) {
+        /* <i18n case="Shown when the user-provided value matches one of the values supplied to (and thus disallowed by) the rule."> */
+        return `"${value}" nem engedélyezett ${name}.`;
+        /* </i18n> */
+    },
+    /**
+     *  Is not a number
+     * @see {@link https://docs.formkit.com/essentials/validation#number}
+     */
+    number({ name }) {
+        /* <i18n case="Shown when the user-provided value is not a number."> */
+        return `${sentence(name)} mezőnek számnak kell lennie.`;
+        /* </i18n> */
+    },
+    /**
+     * Required field.
+     * @see {@link https://docs.formkit.com/essentials/validation#required}
+     */
+    required({ name }) {
+        /* <i18n case="Shown when a user does not provide a value to a required input."> */
+        return `${sentence(name)} mező kötelező.`;
+        /* </i18n> */
+    },
+    /**
+     * Does not start with specified value
+     * @see {@link https://docs.formkit.com/essentials/validation#starts-with}
+     */
+    starts_with({ name, args }) {
+        /* <i18n case="Shown when the user-provided value does not start with the substring supplied to the rule."> */
+        return `${sentence(name)} nem a következővel kezdődik: ${list(args)}.`;
+        /* </i18n> */
+    },
+    /**
+     * Is not a url
+     * @see {@link https://docs.formkit.com/essentials/validation#url}
+     */
+    url() {
+        /* <i18n case="Shown when the user-provided value is not a valid url."> */
+        return `Kérjük, érvényes URL-t adjon meg.`;
+        /* </i18n> */
+    },
+};
+
+var hu = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    ui: ui$i,
+    validation: validation$i
+});
+
+/**
+ * Here we can import additional helper functions to assist in formatting our
+ * language. Feel free to add additional helper methods to libs/formats if it
+ * assists in creating good validation messages for your locale.
+ */
+/**
+ * Standard language for interface features.
+ * @public
+ */
+const ui$h = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -62403,7 +59750,7 @@ const ui$e = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$e = {
+const validation$h = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -62664,8 +60011,8 @@ const validation$e = {
 
 var id = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$e,
-    validation: validation$e
+    ui: ui$h,
+    validation: validation$h
 });
 
 /**
@@ -62677,7 +60024,7 @@ var id = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$d = {
+const ui$g = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -62707,7 +60054,7 @@ const ui$d = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$d = {
+const validation$g = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -62968,8 +60315,8 @@ const validation$d = {
 
 var it = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$d,
-    validation: validation$d
+    ui: ui$g,
+    validation: validation$g
 });
 
 /**
@@ -62981,7 +60328,7 @@ var it = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$c = {
+const ui$f = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -63011,7 +60358,7 @@ const ui$c = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$c = {
+const validation$f = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -63272,8 +60619,8 @@ const validation$c = {
 
 var ja = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$c,
-    validation: validation$c
+    ui: ui$f,
+    validation: validation$f
 });
 
 /**
@@ -63285,7 +60632,311 @@ var ja = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$b = {
+const ui$e = {
+    /**
+     * Shown on a button for adding additional items.
+     */
+    add: 'қосу',
+    /**
+     * Shown when a button to remove items is visible.
+     */
+    remove: 'Жою',
+    /**
+     * Shown when there are multiple items to remove at the same time.
+     */
+    removeAll: 'Барлығын жою',
+    /**
+     * Shown when all fields are not filled out correctly.
+     */
+    incomplete: 'Кешіріңіз, барлық өрістер дұрыс толтырылмаған.',
+    /**
+     * Shown in a button inside a form to submit the form.
+     */
+    submit: 'Жіберу',
+    /**
+     * Shown when no files are selected.
+     */
+    noFiles: 'Ешбір файл таңдалмады',
+};
+/**
+ * These are all the possible strings that pertain to validation messages.
+ * @public
+ */
+const validation$e = {
+    /**
+     * The value is not an accepted value.
+     * @see {@link https://docs.formkit.com/essentials/validation#accepted}
+     */
+    accepted({ name }) {
+        /* <i18n case="Shown when the user-provided value is not a valid 'accepted' value."> */
+        return `қабылдаңыз ${name}.`;
+        /* </i18n> */
+    },
+    /**
+     * The date is not after
+     * @see {@link https://docs.formkit.com/essentials/validation#date-after}
+     */
+    date_after({ name, args }) {
+        if (Array.isArray(args) && args.length) {
+            /* <i18n case="Shown when the user-provided date is not after the date supplied to the rule."> */
+            return `${sentence(name)} кейін болуы керек ${date(args[0])}.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided date is not after today's date, since no date was supplied to the rule."> */
+        return `${sentence(name)} болашақта болуы керек.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not a letter.
+     * @see {@link https://docs.formkit.com/essentials/validation#alpha}
+     */
+    alpha({ name }) {
+        /* <i18n case="Shown when the user-provided value contains non-alphabetical characters."> */
+        return `${sentence(name)} тек алфавиттік таңбаларды қамтуы мүмкін.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not alphanumeric
+     * @see {@link https://docs.formkit.com/essentials/validation#alphanumeric}
+     */
+    alphanumeric({ name }) {
+        /* <i18n case="Shown when the user-provided value contains non-alphanumeric characters."> */
+        return `${sentence(name)} тек әріптер мен сандардан тұруы мүмкін.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not letter and/or spaces
+     * @see {@link https://docs.formkit.com/essentials/validation#alpha-spaces}
+     */
+    alpha_spaces({ name }) {
+        /* <i18n case="Shown when the user-provided value contains non-alphabetical and non-space characters."> */
+        return `${sentence(name)} тек әріптер мен бос орындар болуы мүмкін.`;
+        /* </i18n> */
+    },
+    /**
+     * The date is not before
+     * @see {@link https://docs.formkit.com/essentials/validation#date-before}
+     */
+    date_before({ name, args }) {
+        if (Array.isArray(args) && args.length) {
+            /* <i18n case="Shown when the user-provided date is not before the date supplied to the rule."> */
+            return `${sentence(name)} бұрын болуы керек ${date(args[0])}.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided date is not before today's date, since no date was supplied to the rule."> */
+        return `${sentence(name)} өткенде болуы керек.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not between two numbers
+     * @see {@link https://docs.formkit.com/essentials/validation#between}
+     */
+    between({ name, args }) {
+        if (isNaN(args[0]) || isNaN(args[1])) {
+            /* <i18n case="Shown when any of the arguments supplied to the rule were not a number."> */
+            return `Бұл өріс қате конфигурацияланған және оны жіберу мүмкін емес.`;
+            /* </i18n> */
+        }
+        const [a, b] = order(args[0], args[1]);
+        /* <i18n case="Shown when the user-provided value is not between two numbers."> */
+        return `${sentence(name)} арасында болуы керек ${a} және ${b}.`;
+        /* </i18n> */
+    },
+    /**
+     * The confirmation field does not match
+     * @see {@link https://docs.formkit.com/essentials/validation#confirm}
+     */
+    confirm({ name }) {
+        /* <i18n case="Shown when the user-provided value does not equal the value of the matched input."> */
+        return `${sentence(name)} сәйкес келмейді.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not a valid date
+     * @see {@link https://docs.formkit.com/essentials/validation#date-format}
+     */
+    date_format({ name, args }) {
+        if (Array.isArray(args) && args.length) {
+            /* <i18n case="Shown when the user-provided date does not satisfy the date format supplied to the rule."> */
+            return `${sentence(name)} жарамды күн емес, пішімді пайдаланыңыз ${args[0]}`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when no date argument was supplied to the rule."> */
+        return 'Бұл өріс қате конфигурацияланған және оны жіберу мүмкін емес';
+        /* </i18n> */
+    },
+    /**
+     * Is not within expected date range
+     * @see {@link https://docs.formkit.com/essentials/validation#date-between}
+     */
+    date_between({ name, args }) {
+        /* <i18n case="Shown when the user-provided date is not between the start and end dates supplied to the rule. "> */
+        return `${sentence(name)} арасында болуы керек ${date(args[0])} және ${date(args[1])}`;
+        /* </i18n> */
+    },
+    /**
+     * Shown when the user-provided value is not a valid email address.
+     * @see {@link https://docs.formkit.com/essentials/validation#email}
+     */
+    email: 'Өтінеміз қолданыстағы электронды пошта адресін енгізіңіз.',
+    /**
+     * Does not end with the specified value
+     * @see {@link https://docs.formkit.com/essentials/validation#ends-with}
+     */
+    ends_with({ name, args }) {
+        /* <i18n case="Shown when the user-provided value does not end with the substring supplied to the rule."> */
+        return `${sentence(name)} -мен бітпейді ${list(args)}.`;
+        /* </i18n> */
+    },
+    /**
+     * Is not an allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#is}
+     */
+    is({ name }) {
+        /* <i18n case="Shown when the user-provided value is not one of the values supplied to the rule."> */
+        return `${sentence(name)} рұқсат етілген мән емес.`;
+        /* </i18n> */
+    },
+    /**
+     * Does not match specified length
+     * @see {@link https://docs.formkit.com/essentials/validation#length}
+     */
+    length({ name, args: [first = 0, second = Infinity] }) {
+        const min = Number(first) <= Number(second) ? first : second;
+        const max = Number(second) >= Number(first) ? second : first;
+        if (min == 1 && max === Infinity) {
+            /* <i18n case="Shown when the length of the user-provided value is not at least one character."> */
+            return `${sentence(name)} кем дегенде бір таңба болуы керек.`;
+            /* </i18n> */
+        }
+        if (min == 0 && max) {
+            /* <i18n case="Shown when first argument supplied to the rule is 0, and the user-provided value is longer than the max (the 2nd argument) supplied to the rule."> */
+            return `${sentence(name)} кем немесе тең болуы керек ${max} кейіпкерлер.`;
+            /* </i18n> */
+        }
+        if (min && max === Infinity) {
+            /* <i18n case="Shown when the length of the user-provided value is less than the minimum supplied to the rule and there is no maximum supplied to the rule."> */
+            return `${sentence(name)} артық немесе тең болуы керек ${min} кейіпкерлер.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the length of the user-provided value is between the two lengths supplied to the rule."> */
+        return `${sentence(name)} арасында болуы керек ${min} және ${max} кейіпкерлер.`;
+        /* </i18n> */
+    },
+    /**
+     * Value is not a match
+     * @see {@link https://docs.formkit.com/essentials/validation#matches}
+     */
+    matches({ name }) {
+        /* <i18n case="Shown when the user-provided value does not match any of the values or RegExp patterns supplied to the rule. "> */
+        return `${sentence(name)} рұқсат етілген мән емес.`;
+        /* </i18n> */
+    },
+    /**
+     * Exceeds maximum allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#max}
+     */
+    max({ name, node: { value }, args }) {
+        if (Array.isArray(value)) {
+            /* <i18n case="Shown when the length of the array of user-provided values is longer than the max supplied to the rule."> */
+            return `артық болуы мүмкін емес ${args[0]} ${name}.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided value is greater than the maximum number supplied to the rule."> */
+        return `${sentence(name)} кем немесе тең болуы керек ${args[0]}.`;
+        /* </i18n> */
+    },
+    /**
+     * The (field-level) value does not match specified mime type
+     * @see {@link https://docs.formkit.com/essentials/validation#mime}
+     */
+    mime({ name, args }) {
+        if (!args[0]) {
+            /* <i18n case="Shown when no file formats were supplied to the rule."> */
+            return 'Файл пішімдері рұқсат етілмейді.';
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the mime type of user-provided file does not match any mime types supplied to the rule."> */
+        return `${sentence(name)} типте болуы керек: ${args[0]}`;
+        /* </i18n> */
+    },
+    /**
+     * Does not fulfill minimum allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#min}
+     */
+    min({ name, node: { value }, args }) {
+        if (Array.isArray(value)) {
+            /* <i18n case="Shown when the length of the array of user-provided values is shorter than the min supplied to the rule."> */
+            return `кем болуы мүмкін емес ${args[0]} ${name}.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided value is less than the minimum number supplied to the rule."> */
+        return `${sentence(name)} кем дегенде болуы керек ${args[0]}.`;
+        /* </i18n> */
+    },
+    /**
+     * Is not an allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#not}
+     */
+    not({ name, node: { value } }) {
+        /* <i18n case="Shown when the user-provided value matches one of the values supplied to (and thus disallowed by) the rule."> */
+        return `“${value}” рұқсат етілмейді ${name}.`;
+        /* </i18n> */
+    },
+    /**
+     *  Is not a number
+     * @see {@link https://docs.formkit.com/essentials/validation#number}
+     */
+    number({ name }) {
+        /* <i18n case="Shown when the user-provided value is not a number."> */
+        return `${sentence(name)} сан болуы керек.`;
+        /* </i18n> */
+    },
+    /**
+     * Required field.
+     * @see {@link https://docs.formkit.com/essentials/validation#required}
+     */
+    required({ name }) {
+        /* <i18n case="Shown when a user does not provide a value to a required input."> */
+        return `${sentence(name)} талап етіледі.`;
+        /* </i18n> */
+    },
+    /**
+     * Does not start with specified value
+     * @see {@link https://docs.formkit.com/essentials/validation#starts-with}
+     */
+    starts_with({ name, args }) {
+        /* <i18n case="Shown when the user-provided value does not start with the substring supplied to the rule."> */
+        return `${sentence(name)} -ден басталмайды ${list(args)}.`;
+        /* </i18n> */
+    },
+    /**
+     * Is not a url
+     * @see {@link https://docs.formkit.com/essentials/validation#url}
+     */
+    url() {
+        /* <i18n case="Shown when the user-provided value is not a valid url."> */
+        return `Жарамды URL мекенжайын қосыңыз.`;
+        /* </i18n> */
+    },
+};
+
+var kk = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    ui: ui$e,
+    validation: validation$e
+});
+
+/**
+ * Here we can import additional helper functions to assist in formatting our
+ * language. Feel free to add additional helper methods to libs/formats if it
+ * assists in creating good validation messages for your locale.
+ */
+/**
+ * Standard language for interface features.
+ * @public
+ */
+const ui$d = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -63315,7 +60966,7 @@ const ui$b = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$b = {
+const validation$d = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -63576,8 +61227,8 @@ const validation$b = {
 
 var ko = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$b,
-    validation: validation$b
+    ui: ui$d,
+    validation: validation$d
 });
 
 /**
@@ -63589,7 +61240,7 @@ var ko = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$a = {
+const ui$c = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -63619,7 +61270,7 @@ const ui$a = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$a = {
+const validation$c = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -63880,8 +61531,8 @@ const validation$a = {
 
 var nl = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$a,
-    validation: validation$a
+    ui: ui$c,
+    validation: validation$c
 });
 
 /**
@@ -63893,7 +61544,7 @@ var nl = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$9 = {
+const ui$b = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -63923,7 +61574,7 @@ const ui$9 = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$9 = {
+const validation$b = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -64184,8 +61835,8 @@ const validation$9 = {
 
 var pl = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$9,
-    validation: validation$9
+    ui: ui$b,
+    validation: validation$b
 });
 
 /**
@@ -64197,7 +61848,7 @@ var pl = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$8 = {
+const ui$a = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -64227,7 +61878,7 @@ const ui$8 = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$8 = {
+const validation$a = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -64487,8 +62138,8 @@ const validation$8 = {
 
 var pt = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$8,
-    validation: validation$8
+    ui: ui$a,
+    validation: validation$a
 });
 
 /**
@@ -64500,7 +62151,7 @@ var pt = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$7 = {
+const ui$9 = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -64530,7 +62181,7 @@ const ui$7 = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$7 = {
+const validation$9 = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -64791,8 +62442,8 @@ const validation$7 = {
 
 var ro = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$7,
-    validation: validation$7
+    ui: ui$9,
+    validation: validation$9
 });
 
 /**
@@ -64804,7 +62455,7 @@ var ro = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$6 = {
+const ui$8 = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -64834,7 +62485,7 @@ const ui$6 = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$6 = {
+const validation$8 = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -65095,8 +62746,8 @@ const validation$6 = {
 
 var ru = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$6,
-    validation: validation$6
+    ui: ui$8,
+    validation: validation$8
 });
 
 /**
@@ -65108,7 +62759,7 @@ var ru = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$5 = {
+const ui$7 = {
     /**
      * Shown on buttons for adding new items.
      */
@@ -65138,7 +62789,7 @@ const ui$5 = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$5 = {
+const validation$7 = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -65399,8 +63050,8 @@ const validation$5 = {
 
 var sl = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    ui: ui$5,
-    validation: validation$5
+    ui: ui$7,
+    validation: validation$7
 });
 
 /**
@@ -65412,7 +63063,311 @@ var sl = /*#__PURE__*/Object.freeze({
  * Standard language for interface features.
  * @public
  */
-const ui$4 = {
+const ui$6 = {
+    /**
+     * Shown on a button for adding additional items.
+     */
+    add: 'Dodaj',
+    /**
+     * Shown when a button to remove items is visible.
+     */
+    remove: 'Ukloni',
+    /**
+     * Shown when there are multiple items to remove at the same time.
+     */
+    removeAll: 'Ukloni sve',
+    /**
+     * Shown when all fields are not filled out correctly.
+     */
+    incomplete: 'Pojedina polja nisu ispravno ispunjena.',
+    /**
+     * Shown in a button inside a form to submit the form.
+     */
+    submit: 'Pošalji',
+    /**
+     * Shown when no files are selected.
+     */
+    noFiles: 'Fajl nije odabran',
+};
+/**
+ * These are all the possible strings that pertain to validation messages.
+ * @public
+ */
+const validation$6 = {
+    /**
+     * The value is not an accepted value.
+     * @see {@link https://docs.formkit.com/essentials/validation#accepted}
+     */
+    accepted({ name }) {
+        /* <i18n case="Shown when the user-provided value is not a valid 'accepted' value."> */
+        return `Molimo prihvatite ${name}`;
+        /* </i18n> */
+    },
+    /**
+     * The date is not after
+     * @see {@link https://docs.formkit.com/essentials/validation#date-after}
+     */
+    date_after({ name, args }) {
+        if (Array.isArray(args) && args.length) {
+            /* <i18n case="Shown when the user-provided date is not after the date supplied to the rule."> */
+            return `${sentence(name)} mora biti posle ${date(args[0])}.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided date is not after today's date, since no date was supplied to the rule."> */
+        return `${sentence(name)} mora biti u budućnosti.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not a letter.
+     * @see {@link https://docs.formkit.com/essentials/validation#alpha}
+     */
+    alpha({ name }) {
+        /* <i18n case="Shown when the user-provided value contains non-alphabetical characters."> */
+        return `${sentence(name)} može da sadrži samo abecedne znakove.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not alphanumeric
+     * @see {@link https://docs.formkit.com/essentials/validation#alphanumeric}
+     */
+    alphanumeric({ name }) {
+        /* <i18n case="Shown when the user-provided value contains non-alphanumeric characters."> */
+        return `${sentence(name)} može da sadrži samo slova i brojeve.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not letter and/or spaces
+     * @see {@link https://docs.formkit.com/essentials/validation#alpha-spaces}
+     */
+    alpha_spaces({ name }) {
+        /* <i18n case="Shown when the user-provided value contains non-alphabetical and non-space characters."> */
+        return `${sentence(name)} može da sadrži samo slova i razmake.`;
+        /* </i18n> */
+    },
+    /**
+     * The date is not before
+     * @see {@link https://docs.formkit.com/essentials/validation#date-before}
+     */
+    date_before({ name, args }) {
+        if (Array.isArray(args) && args.length) {
+            /* <i18n case="Shown when the user-provided date is not before the date supplied to the rule."> */
+            return `${sentence(name)} mora biti pre ${date(args[0])}.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided date is not before today's date, since no date was supplied to the rule."> */
+        return `${sentence(name)} mora biti u prošlosti.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not between two numbers
+     * @see {@link https://docs.formkit.com/essentials/validation#between}
+     */
+    between({ name, args }) {
+        if (isNaN(args[0]) || isNaN(args[1])) {
+            /* <i18n case="Shown when any of the arguments supplied to the rule were not a number."> */
+            return `Ovo polje je pogrešno konfigurisano i ne može se poslati.`;
+            /* </i18n> */
+        }
+        const [a, b] = order(args[0], args[1]);
+        /* <i18n case="Shown when the user-provided value is not between two numbers."> */
+        return `${sentence(name)} mora biti između ${a} i ${b}.`;
+        /* </i18n> */
+    },
+    /**
+     * The confirmation field does not match
+     * @see {@link https://docs.formkit.com/essentials/validation#confirm}
+     */
+    confirm({ name }) {
+        /* <i18n case="Shown when the user-provided value does not equal the value of the matched input."> */
+        return `${sentence(name)} se ne podudara.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not a valid date
+     * @see {@link https://docs.formkit.com/essentials/validation#date-format}
+     */
+    date_format({ name, args }) {
+        if (Array.isArray(args) && args.length) {
+            /* <i18n case="Shown when the user-provided date does not satisfy the date format supplied to the rule."> */
+            return `${sentence(name)} nije važeći datum, molimo Vas koristite format ${args[0]}`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when no date argument was supplied to the rule."> */
+        return 'Ovo polje je pogrešno konfigurisano i ne može se poslati';
+        /* </i18n> */
+    },
+    /**
+     * Is not within expected date range
+     * @see {@link https://docs.formkit.com/essentials/validation#date-between}
+     */
+    date_between({ name, args }) {
+        /* <i18n case="Shown when the user-provided date is not between the start and end dates supplied to the rule. "> */
+        return `${sentence(name)} mora biti između ${date(args[0])} i ${date(args[1])}`;
+        /* </i18n> */
+    },
+    /**
+     * Shown when the user-provided value is not a valid email address.
+     * @see {@link https://docs.formkit.com/essentials/validation#email}
+     */
+    email: 'Unesite ispravnu e-mail adresu.',
+    /**
+     * Does not end with the specified value
+     * @see {@link https://docs.formkit.com/essentials/validation#ends-with}
+     */
+    ends_with({ name, args }) {
+        /* <i18n case="Shown when the user-provided value does not end with the substring supplied to the rule."> */
+        return `${sentence(name)} se ne završava sa ${list(args)}.`;
+        /* </i18n> */
+    },
+    /**
+     * Is not an allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#is}
+     */
+    is({ name }) {
+        /* <i18n case="Shown when the user-provided value is not one of the values supplied to the rule."> */
+        return `${sentence(name)} nije dozvoljena vrednost`;
+        /* </i18n> */
+    },
+    /**
+     * Does not match specified length
+     * @see {@link https://docs.formkit.com/essentials/validation#length}
+     */
+    length({ name, args: [first = 0, second = Infinity] }) {
+        const min = Number(first) <= Number(second) ? first : second;
+        const max = Number(second) >= Number(first) ? second : first;
+        if (min == 1 && max === Infinity) {
+            /* <i18n case="Shown when the length of the user-provided value is not at least one character."> */
+            return `${sentence(name)} mora biti najmanje jedan karakter.`;
+            /* </i18n> */
+        }
+        if (min == 0 && max) {
+            /* <i18n case="Shown when first argument supplied to the rule is 0, and the user-provided value is longer than the max (the 2nd argument) supplied to the rule."> */
+            return `${sentence(name)} mora biti manji ili jednaki od ${max} karaktera.`;
+            /* </i18n> */
+        }
+        if (min && max === Infinity) {
+            /* <i18n case="Shown when the length of the user-provided value is less than the minimum supplied to the rule and there is no maximum supplied to the rule."> */
+            return `${sentence(name)} mora biti veći ili jednaki od ${min} karaktera.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the length of the user-provided value is between the two lengths supplied to the rule."> */
+        return `${sentence(name)} mora biti između ${min} i ${max} karaktera.`;
+        /* </i18n> */
+    },
+    /**
+     * Value is not a match
+     * @see {@link https://docs.formkit.com/essentials/validation#matches}
+     */
+    matches({ name }) {
+        /* <i18n case="Shown when the user-provided value does not match any of the values or RegExp patterns supplied to the rule. "> */
+        return `${sentence(name)} nije dozvoljena vrednost.`;
+        /* </i18n> */
+    },
+    /**
+     * Exceeds maximum allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#max}
+     */
+    max({ name, node: { value }, args }) {
+        if (Array.isArray(value)) {
+            /* <i18n case="Shown when the length of the array of user-provided values is longer than the max supplied to the rule."> */
+            return `Ne može imati više od ${args[0]} ${name}.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided value is greater than the maximum number supplied to the rule."> */
+        return `${sentence(name)} mora biti manji ili jednaki od ${args[0]}.`;
+        /* </i18n> */
+    },
+    /**
+     * The (field-level) value does not match specified mime type
+     * @see {@link https://docs.formkit.com/essentials/validation#mime}
+     */
+    mime({ name, args }) {
+        if (!args[0]) {
+            /* <i18n case="Shown when no file formats were supplied to the rule."> */
+            return 'Nisu dozvoljeni formati datoteka.';
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the mime type of user-provided file does not match any mime types supplied to the rule."> */
+        return `${sentence(name)} mora biti tipa: ${args[0]}`;
+        /* </i18n> */
+    },
+    /**
+     * Does not fulfill minimum allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#min}
+     */
+    min({ name, node: { value }, args }) {
+        if (Array.isArray(value)) {
+            /* <i18n case="Shown when the length of the array of user-provided values is shorter than the min supplied to the rule."> */
+            return `Ne može imati manje od ${args[0]} ${name}.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided value is less than the minimum number supplied to the rule."> */
+        return `${sentence(name)} mora da ima najmanje ${args[0]}.`;
+        /* </i18n> */
+    },
+    /**
+     * Is not an allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#not}
+     */
+    not({ name, node: { value } }) {
+        /* <i18n case="Shown when the user-provided value matches one of the values supplied to (and thus disallowed by) the rule."> */
+        return `“${value}” nije dozvoljeno ${name}.`;
+        /* </i18n> */
+    },
+    /**
+     *  Is not a number
+     * @see {@link https://docs.formkit.com/essentials/validation#number}
+     */
+    number({ name }) {
+        /* <i18n case="Shown when the user-provided value is not a number."> */
+        return `${sentence(name)} mora biti broj.`;
+        /* </i18n> */
+    },
+    /**
+     * Required field.
+     * @see {@link https://docs.formkit.com/essentials/validation#required}
+     */
+    required({ name }) {
+        /* <i18n case="Shown when a user does not provide a value to a required input."> */
+        return `${sentence(name)} je obavezno polje.`;
+        /* </i18n> */
+    },
+    /**
+     * Does not start with specified value
+     * @see {@link https://docs.formkit.com/essentials/validation#starts-with}
+     */
+    starts_with({ name, args }) {
+        /* <i18n case="Shown when the user-provided value does not start with the substring supplied to the rule."> */
+        return `${sentence(name)} ne počinje sa ${list(args)}.`;
+        /* </i18n> */
+    },
+    /**
+     * Is not a url
+     * @see {@link https://docs.formkit.com/essentials/validation#url}
+     */
+    url() {
+        /* <i18n case="Shown when the user-provided value is not a valid url."> */
+        return `Molimo unesite važeći URL.`;
+        /* </i18n> */
+    },
+};
+
+var sr = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    ui: ui$6,
+    validation: validation$6
+});
+
+/**
+ * Here we can import additional helper functions to assist in formatting our
+ * language. Feel free to add additional helper methods to libs/formats if it
+ * assists in creating good validation messages for your locale.
+ */
+/**
+ * Standard language for interface features.
+ * @public
+ */
+const ui$5 = {
     /**
      * Shown when a button to remove items is visible.
      */
@@ -65438,7 +63393,7 @@ const ui$4 = {
  * These are all the possible strings that pertain to validation messages.
  * @public
  */
-const validation$4 = {
+const validation$5 = {
     /**
      * The value is not an accepted value.
      * @see {@link https://docs.formkit.com/essentials/validation#accepted}
@@ -65698,6 +63653,310 @@ const validation$4 = {
 };
 
 var sv = /*#__PURE__*/Object.freeze({
+    __proto__: null,
+    ui: ui$5,
+    validation: validation$5
+});
+
+/**
+ * Here we can import additional helper functions to assist in formatting our
+ * language. Feel free to add additional helper methods to libs/formats if it
+ * assists in creating good validation messages for your locale.
+ */
+/**
+ * Standard language for interface features.
+ * @public
+ */
+const ui$4 = {
+    /**
+     * Shown on a button for adding additional items.
+     */
+    add: 'Илова кардан',
+    /**
+     * Shown when a button to remove items is visible.
+     */
+    remove: 'Хориҷ кардан',
+    /**
+     * Shown when there are multiple items to remove at the same time.
+     */
+    removeAll: 'Ҳамаро хориҷ кунед',
+    /**
+     * Shown when all fields are not filled out correctly.
+     */
+    incomplete: 'Бубахшед, на ҳама майдонҳо дуруст пур карда шудаанд.',
+    /**
+     * Shown in a button inside a form to submit the form.
+     */
+    submit: 'Пешниҳод кунед',
+    /**
+     * Shown when no files are selected.
+     */
+    noFiles: 'Ягон файл интихоб нашудааст',
+};
+/**
+ * These are all the possible strings that pertain to validation messages.
+ * @public
+ */
+const validation$4 = {
+    /**
+     * The value is not an accepted value.
+     * @see {@link https://docs.formkit.com/essentials/validation#accepted}
+     */
+    accepted({ name }) {
+        /* <i18n case="Shown when the user-provided value is not a valid 'accepted' value."> */
+        return `Лутфан ${name}-ро қабул кунед`;
+        /* </i18n> */
+    },
+    /**
+     * The date is not after
+     * @see {@link https://docs.formkit.com/essentials/validation#date-after}
+     */
+    date_after({ name, args }) {
+        if (Array.isArray(args) && args.length) {
+            /* <i18n case="Shown when the user-provided date is not after the date supplied to the rule."> */
+            return `${sentence(name)} бояд пас аз ${date(args[0])} бошад.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided date is not after today's date, since no date was supplied to the rule."> */
+        return `${sentence(name)} бояд дар оянда бошад.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not a letter.
+     * @see {@link https://docs.formkit.com/essentials/validation#alpha}
+     */
+    alpha({ name }) {
+        /* <i18n case="Shown when the user-provided value contains non-alphabetical characters."> */
+        return `${sentence(name)} метавонад танҳо аломатҳои алифборо дар бар гирад.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not alphanumeric
+     * @see {@link https://docs.formkit.com/essentials/validation#alphanumeric}
+     */
+    alphanumeric({ name }) {
+        /* <i18n case="Shown when the user-provided value contains non-alphanumeric characters."> */
+        return `${sentence(name)} метавонад танҳо ҳарфҳо ва рақамҳоро дар бар гирад.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not letter and/or spaces
+     * @see {@link https://docs.formkit.com/essentials/validation#alpha-spaces}
+     */
+    alpha_spaces({ name }) {
+        /* <i18n case="Shown when the user-provided value contains non-alphabetical and non-space characters."> */
+        return `${sentence(name)} метавонад танҳо ҳарфҳо ва фосилаҳоро дар бар гирад.`;
+        /* </i18n> */
+    },
+    /**
+     * The date is not before
+     * @see {@link https://docs.formkit.com/essentials/validation#date-before}
+     */
+    date_before({ name, args }) {
+        if (Array.isArray(args) && args.length) {
+            /* <i18n case="Shown when the user-provided date is not before the date supplied to the rule."> */
+            return `${sentence(name)} бояд пеш аз ${date(args[0])} бошад.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided date is not before today's date, since no date was supplied to the rule."> */
+        return `${sentence(name)} бояд дар гузашта бошад.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not between two numbers
+     * @see {@link https://docs.formkit.com/essentials/validation#between}
+     */
+    between({ name, args }) {
+        if (isNaN(args[0]) || isNaN(args[1])) {
+            /* <i18n case="Shown when any of the arguments supplied to the rule were not a number."> */
+            return `Ин майдон нодуруст танзим шудааст ва онро пешниҳод кардан ғайриимкон аст.`;
+            /* </i18n> */
+        }
+        const [a, b] = order(args[0], args[1]);
+        /* <i18n case="Shown when the user-provided value is not between two numbers."> */
+        return `${sentence(name)} бояд дар байни ${a} ва ${b} бошад.`;
+        /* </i18n> */
+    },
+    /**
+     * The confirmation field does not match
+     * @see {@link https://docs.formkit.com/essentials/validation#confirm}
+     */
+    confirm({ name }) {
+        /* <i18n case="Shown when the user-provided value does not equal the value of the matched input."> */
+        return `${sentence(name)} мувофиқат намекунад.`;
+        /* </i18n> */
+    },
+    /**
+     * The value is not a valid date
+     * @see {@link https://docs.formkit.com/essentials/validation#date-format}
+     */
+    date_format({ name, args }) {
+        if (Array.isArray(args) && args.length) {
+            /* <i18n case="Shown when the user-provided date does not satisfy the date format supplied to the rule."> */
+            return `${sentence(name)} санаи дуруст нест, лутфан формати ${args[0]}-ро истифода баред`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when no date argument was supplied to the rule."> */
+        return 'Ин майдон нодуруст танзим шудааст ва онро пешниҳод кардан ғайриимкон аст';
+        /* </i18n> */
+    },
+    /**
+     * Is not within expected date range
+     * @see {@link https://docs.formkit.com/essentials/validation#date-between}
+     */
+    date_between({ name, args }) {
+        /* <i18n case="Shown when the user-provided date is not between the start and end dates supplied to the rule. "> */
+        return `${sentence(name)} бояд дар байни ${date(args[0])} ва ${date(args[1])} бошад`;
+        /* </i18n> */
+    },
+    /**
+     * Shown when the user-provided value is not a valid email address.
+     * @see {@link https://docs.formkit.com/essentials/validation#email}
+     */
+    email: 'Лутфан нишонаи имейли амалкунандаро ворид намоед.',
+    /**
+     * Does not end with the specified value
+     * @see {@link https://docs.formkit.com/essentials/validation#ends-with}
+     */
+    ends_with({ name, args }) {
+        /* <i18n case="Shown when the user-provided value does not end with the substring supplied to the rule."> */
+        return `${sentence(name)} бо ${list(args)} ба охир намерасад.`;
+        /* </i18n> */
+    },
+    /**
+     * Is not an allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#is}
+     */
+    is({ name }) {
+        /* <i18n case="Shown when the user-provided value is not one of the values supplied to the rule."> */
+        return `${sentence(name)} арзиши иҷозатдодашуда нест.`;
+        /* </i18n> */
+    },
+    /**
+     * Does not match specified length
+     * @see {@link https://docs.formkit.com/essentials/validation#length}
+     */
+    length({ name, args: [first = 0, second = Infinity] }) {
+        const min = Number(first) <= Number(second) ? first : second;
+        const max = Number(second) >= Number(first) ? second : first;
+        if (min == 1 && max === Infinity) {
+            /* <i18n case="Shown when the length of the user-provided value is not at least one character."> */
+            return `${sentence(name)} бояд ҳадди аққал як аломат бошад.`;
+            /* </i18n> */
+        }
+        if (min == 0 && max) {
+            /* <i18n case="Shown when first argument supplied to the rule is 0, and the user-provided value is longer than the max (the 2nd argument) supplied to the rule."> */
+            return `${sentence(name)} бояд аз ${max} аломат камтар ё баробар бошад.`;
+            /* </i18n> */
+        }
+        if (min && max === Infinity) {
+            /* <i18n case="Shown when the length of the user-provided value is less than the minimum supplied to the rule and there is no maximum supplied to the rule."> */
+            return `${sentence(name)} бояд аз ${min} аломат зиёд ё баробар бошад.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the length of the user-provided value is between the two lengths supplied to the rule."> */
+        return `${sentence(name)} бояд дар байни ${min} ва ${max} аломат бошад.`;
+        /* </i18n> */
+    },
+    /**
+     * Value is not a match
+     * @see {@link https://docs.formkit.com/essentials/validation#matches}
+     */
+    matches({ name }) {
+        /* <i18n case="Shown when the user-provided value does not match any of the values or RegExp patterns supplied to the rule. "> */
+        return `${sentence(name)} арзиши иҷозатдодашуда нест.`;
+        /* </i18n> */
+    },
+    /**
+     * Exceeds maximum allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#max}
+     */
+    max({ name, node: { value }, args }) {
+        if (Array.isArray(value)) {
+            /* <i18n case="Shown when the length of the array of user-provided values is longer than the max supplied to the rule."> */
+            return `Зиёда аз ${args[0]} ${name} дошта наметавонад.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided value is greater than the maximum number supplied to the rule."> */
+        return `${sentence(name)} бояд аз ${args[0]} камтар ё баробар бошад.`;
+        /* </i18n> */
+    },
+    /**
+     * The (field-level) value does not match specified mime type
+     * @see {@link https://docs.formkit.com/essentials/validation#mime}
+     */
+    mime({ name, args }) {
+        if (!args[0]) {
+            /* <i18n case="Shown when no file formats were supplied to the rule."> */
+            return 'Ягон формати файл иҷозат дода намешавад.';
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the mime type of user-provided file does not match any mime types supplied to the rule."> */
+        return `${sentence(name)} бояд чунин намуд бошад: ${args[0]}`;
+        /* </i18n> */
+    },
+    /**
+     * Does not fulfill minimum allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#min}
+     */
+    min({ name, node: { value }, args }) {
+        if (Array.isArray(value)) {
+            /* <i18n case="Shown when the length of the array of user-provided values is shorter than the min supplied to the rule."> */
+            return `Камтар аз ${args[0]} ${name} дошта наметавонад.`;
+            /* </i18n> */
+        }
+        /* <i18n case="Shown when the user-provided value is less than the minimum number supplied to the rule."> */
+        return `${sentence(name)} бояд ҳадди аққал ${args[0]} бошад.`;
+        /* </i18n> */
+    },
+    /**
+     * Is not an allowed value
+     * @see {@link https://docs.formkit.com/essentials/validation#not}
+     */
+    not({ name, node: { value } }) {
+        /* <i18n case="Shown when the user-provided value matches one of the values supplied to (and thus disallowed by) the rule."> */
+        return `"${value}" ${name} иҷозат дода намешавад.`;
+        /* </i18n> */
+    },
+    /**
+     *  Is not a number
+     * @see {@link https://docs.formkit.com/essentials/validation#number}
+     */
+    number({ name }) {
+        /* <i18n case="Shown when the user-provided value is not a number."> */
+        return `${sentence(name)} бояд рақам бошад.`;
+        /* </i18n> */
+    },
+    /**
+     * Required field.
+     * @see {@link https://docs.formkit.com/essentials/validation#required}
+     */
+    required({ name }) {
+        /* <i18n case="Shown when a user does not provide a value to a required input."> */
+        return `${sentence(name)} лозим аст.`;
+        /* </i18n> */
+    },
+    /**
+     * Does not start with specified value
+     * @see {@link https://docs.formkit.com/essentials/validation#starts-with}
+     */
+    starts_with({ name, args }) {
+        /* <i18n case="Shown when the user-provided value does not start with the substring supplied to the rule."> */
+        return `${sentence(name)} бо ${list(args)} оғоз намешавад.`;
+        /* </i18n> */
+    },
+    /**
+     * Is not a url
+     * @see {@link https://docs.formkit.com/essentials/validation#url}
+     */
+    url() {
+        /* <i18n case="Shown when the user-provided value is not a valid url."> */
+        return `Лутфан URL-и дурустро дохил кунед.`;
+        /* </i18n> */
+    },
+};
+
+var tg = /*#__PURE__*/Object.freeze({
     __proto__: null,
     ui: ui$4,
     validation: validation$4
@@ -66979,6 +65238,7 @@ function parseLocale(locale, availableLocales) {
  */
 const locales = {
     ar,
+    bg,
     cs,
     da,
     de,
@@ -66990,9 +65250,11 @@ const locales = {
     fy,
     he,
     hr,
+    hu,
     id,
     it,
     ja,
+    kk,
     ko,
     nl,
     pl,
@@ -67000,7 +65262,9 @@ const locales = {
     ro,
     ru,
     sl,
+    sr,
     sv,
+    tg,
     th,
     tr,
     vi,
@@ -67021,48 +65285,129 @@ const locales = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "$attrs": () => (/* binding */ $attrs),
+/* harmony export */   "$extend": () => (/* binding */ $extend),
+/* harmony export */   "$for": () => (/* binding */ $for),
+/* harmony export */   "$if": () => (/* binding */ $if),
+/* harmony export */   "$root": () => (/* binding */ $root),
+/* harmony export */   "actions": () => (/* binding */ actions),
+/* harmony export */   "box": () => (/* binding */ box),
+/* harmony export */   "boxHelp": () => (/* binding */ boxHelp),
+/* harmony export */   "boxLabel": () => (/* binding */ boxLabel),
+/* harmony export */   "boxOption": () => (/* binding */ boxOption),
+/* harmony export */   "boxOptions": () => (/* binding */ boxOptions),
+/* harmony export */   "boxWrapper": () => (/* binding */ boxWrapper),
 /* harmony export */   "button": () => (/* binding */ button),
+/* harmony export */   "buttonInput": () => (/* binding */ buttonInput),
+/* harmony export */   "buttonLabel": () => (/* binding */ buttonLabel),
 /* harmony export */   "checkbox": () => (/* binding */ checkbox),
-/* harmony export */   "color": () => (/* binding */ color),
+/* harmony export */   "checkboxes": () => (/* binding */ checkboxes),
+/* harmony export */   "color": () => (/* binding */ text),
 /* harmony export */   "composable": () => (/* binding */ composable),
 /* harmony export */   "createLibraryPlugin": () => (/* binding */ createLibraryPlugin),
-/* harmony export */   "date": () => (/* binding */ date),
-/* harmony export */   "datetimeLocal": () => (/* binding */ datetimeLocal),
-/* harmony export */   "email": () => (/* binding */ email),
+/* harmony export */   "createSection": () => (/* binding */ createSection),
+/* harmony export */   "date": () => (/* binding */ text),
+/* harmony export */   "datetimeLocal": () => (/* binding */ text),
+/* harmony export */   "decorator": () => (/* binding */ decorator),
+/* harmony export */   "defaultIcon": () => (/* binding */ defaultIcon),
+/* harmony export */   "disablesChildren": () => (/* binding */ disables),
+/* harmony export */   "email": () => (/* binding */ text),
 /* harmony export */   "extendSchema": () => (/* binding */ extendSchema),
-/* harmony export */   "features": () => (/* binding */ index),
+/* harmony export */   "fieldset": () => (/* binding */ fieldset),
 /* harmony export */   "file": () => (/* binding */ file),
+/* harmony export */   "fileInput": () => (/* binding */ fileInput),
+/* harmony export */   "fileItem": () => (/* binding */ fileItem),
+/* harmony export */   "fileList": () => (/* binding */ fileList),
+/* harmony export */   "fileName": () => (/* binding */ fileName),
+/* harmony export */   "fileRemove": () => (/* binding */ fileRemove),
+/* harmony export */   "files": () => (/* binding */ files),
 /* harmony export */   "form": () => (/* binding */ form),
+/* harmony export */   "formInput": () => (/* binding */ formInput),
+/* harmony export */   "forms": () => (/* binding */ form$1),
+/* harmony export */   "fragment": () => (/* binding */ fragment),
 /* harmony export */   "group": () => (/* binding */ group),
+/* harmony export */   "help": () => (/* binding */ help),
 /* harmony export */   "hidden": () => (/* binding */ hidden),
-/* harmony export */   "inputs": () => (/* binding */ inputs),
+/* harmony export */   "icon": () => (/* binding */ icon),
+/* harmony export */   "ignores": () => (/* binding */ ignore),
+/* harmony export */   "initialValue": () => (/* binding */ initialValue),
+/* harmony export */   "inner": () => (/* binding */ inner),
+/* harmony export */   "inputs": () => (/* binding */ index),
+/* harmony export */   "label": () => (/* binding */ label),
+/* harmony export */   "legend": () => (/* binding */ legend),
 /* harmony export */   "list": () => (/* binding */ list),
 /* harmony export */   "localize": () => (/* binding */ localize),
-/* harmony export */   "month": () => (/* binding */ month),
-/* harmony export */   "number": () => (/* binding */ number),
-/* harmony export */   "password": () => (/* binding */ password),
+/* harmony export */   "message": () => (/* binding */ message),
+/* harmony export */   "messages": () => (/* binding */ messages),
+/* harmony export */   "month": () => (/* binding */ text),
+/* harmony export */   "noFiles": () => (/* binding */ noFiles),
+/* harmony export */   "normalizeBoxes": () => (/* binding */ normalizeBoxes),
+/* harmony export */   "number": () => (/* binding */ text),
+/* harmony export */   "option": () => (/* binding */ option),
+/* harmony export */   "optionSlot": () => (/* binding */ optionSlot),
+/* harmony export */   "options": () => (/* binding */ options),
+/* harmony export */   "outer": () => (/* binding */ outer),
+/* harmony export */   "password": () => (/* binding */ text),
+/* harmony export */   "prefix": () => (/* binding */ prefix),
 /* harmony export */   "radio": () => (/* binding */ radio),
-/* harmony export */   "range": () => (/* binding */ range),
-/* harmony export */   "search": () => (/* binding */ search),
+/* harmony export */   "radios": () => (/* binding */ radios),
+/* harmony export */   "range": () => (/* binding */ text),
+/* harmony export */   "search": () => (/* binding */ text),
 /* harmony export */   "select": () => (/* binding */ select),
-/* harmony export */   "submit": () => (/* binding */ submit),
-/* harmony export */   "tel": () => (/* binding */ tel),
+/* harmony export */   "selectInput": () => (/* binding */ selectInput$1),
+/* harmony export */   "selects": () => (/* binding */ select$1),
+/* harmony export */   "submit": () => (/* binding */ button),
+/* harmony export */   "submitInput": () => (/* binding */ submitInput),
+/* harmony export */   "suffix": () => (/* binding */ suffix),
+/* harmony export */   "tel": () => (/* binding */ text),
 /* harmony export */   "text": () => (/* binding */ text),
+/* harmony export */   "textInput": () => (/* binding */ textInput),
 /* harmony export */   "textarea": () => (/* binding */ textarea),
-/* harmony export */   "time": () => (/* binding */ time),
-/* harmony export */   "url": () => (/* binding */ url),
+/* harmony export */   "textareaInput": () => (/* binding */ textareaInput),
+/* harmony export */   "time": () => (/* binding */ text),
+/* harmony export */   "url": () => (/* binding */ text),
 /* harmony export */   "useSchema": () => (/* binding */ useSchema),
-/* harmony export */   "week": () => (/* binding */ week)
+/* harmony export */   "week": () => (/* binding */ text),
+/* harmony export */   "wrapper": () => (/* binding */ wrapper)
 /* harmony export */ });
 /* harmony import */ var _formkit_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @formkit/utils */ "./node_modules/@formkit/utils/dist/index.mjs");
 /* harmony import */ var _formkit_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @formkit/core */ "./node_modules/@formkit/core/dist/index.mjs");
 
 
 
-const outer = composable('outer', () => ({
+/**
+ *
+ * @param libraries - One or many formkit urls.
+ * @returns
+ * @public
+ */
+function createLibraryPlugin(...libraries) {
+    /**
+     * Merge all provided library items.
+     */
+    const library = libraries.reduce((merged, lib) => (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.extend)(merged, lib), {});
+    /* eslint-disable-next-line @typescript-eslint/no-empty-function */
+    const plugin = () => { };
+    /**
+     * Enables the hook that exposes all library inputs.
+     * @param node - The primary plugin
+     */
+    plugin.library = function (node) {
+        const type = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.camel)(node.props.type);
+        if ((0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(library, type)) {
+            node.define(library[type]);
+        }
+    };
+    return plugin;
+}
+
+/**
+ * @public
+ */
+const outer = createSection('outer', () => ({
     $el: 'div',
     attrs: {
-        class: '$classes.outer',
+        key: '$id',
         'data-type': '$type',
         'data-multiple': '$attrs.multiple',
         'data-disabled': '$disabled || undefined',
@@ -67070,444 +65415,109 @@ const outer = composable('outer', () => ({
         'data-invalid': '$state.valid === false && $state.validationVisible || undefined',
         'data-errors': '$state.errors || undefined',
         'data-submitted': '$state.submitted || undefined',
+        'data-prefix-icon': '$_rawPrefixIcon !== undefined || undefined',
+        'data-suffix-icon': '$_rawSuffixIcon !== undefined || undefined',
+        'data-prefix-icon-click': '$onPrefixIconClick !== undefined || undefined',
+        'data-suffix-icon-click': '$onSuffixIconClick !== undefined || undefined',
     },
-}));
+}), true);
 
-const wrapper$2 = composable('wrapper', () => ({
-    $el: 'div',
+/**
+ * @public
+ */
+const inner = createSection('inner', 'div');
+
+/**
+ * @public
+ */
+const wrapper = createSection('wrapper', 'div');
+
+/**
+ * @public
+ */
+const label = createSection('label', () => ({
+    $el: 'label',
+    if: '$label',
     attrs: {
-        class: '$classes.wrapper',
+        for: '$id',
     },
 }));
 
-const inner = composable('inner', () => ({
-    $el: 'div',
-    attrs: {
-        class: '$classes.inner',
-    },
-}));
-
-const help = (schema = {}, children = [], target = 'help', cond = '$help') => ({
-    if: `$slots.${target}`,
-    then: `$slots.${target}`,
-    else: (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.extend)({
-        $el: 'div',
-        attrs: {
-            id: `$: "help-" + ${target == 'optionHelp' ? '$option.attrs.id' : '$id'}`,
-            class: `$classes.${target}`,
-        },
-        if: cond,
-        children,
-    }, schema),
-});
-
-const messages = composable('messages', () => ({
+/**
+ * @public
+ */
+const messages = createSection('messages', () => ({
     $el: 'ul',
     if: '$fns.length($messages)',
-    attrs: {
-        class: '$classes.messages',
-        'aria-live': '$type === "form" && "assertive" || "polite"',
-    },
 }));
 
-const message = composable('message', () => ({
+/**
+ * @public
+ */
+const message = createSection('message', () => ({
     $el: 'li',
     for: ['message', '$messages'],
     attrs: {
         key: '$message.key',
-        class: '$classes.message',
         id: `$id + '-' + $message.key`,
         'data-message-type': '$message.type',
     },
 }));
 
-const prefix = composable('prefix', () => ({ $el: null }));
-
-const suffix = composable('suffix', () => ({ $el: null }));
-
 /**
- * Type guard for schema objects.
- * @param schema - returns true if the node is a schema node but not a string or conditional.
- */
-function isSchemaObject(schema) {
-    return (typeof schema === 'object' &&
-        ('$el' in schema || '$cmp' in schema || '$formkit' in schema));
-}
-/**
- * Extends a single schema node with an extension. The extension can be any partial node including strings.
- * @param schema - Extend a base schema node.
- * @param extension - The values to extend on the base schema node.
- * @returns
  * @public
  */
-function extendSchema(schema, extension = {}) {
-    if (typeof schema === 'string') {
-        return isSchemaObject(extension) || typeof extension === 'string'
-            ? extension
-            : schema;
-    }
-    else if (Array.isArray(schema)) {
-        return isSchemaObject(extension) ? extension : schema;
-    }
-    return (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.extend)(schema, extension);
-}
-/**
- * Creates a new section key.
- *
- * @param key - A new section key name.
- * @param schema - The default schema in this composable slot.
- * @returns
- * @public
- */
-function composable(key, schema) {
-    return (extendWith = {}, children = undefined) => {
-        const root = typeof schema === 'function'
-            ? schema(children)
-            : typeof schema === 'object'
-                ? (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.clone)(schema)
-                : schema;
-        const isObj = isSchemaObject(root);
-        if (isObj && !('children' in root) && children) {
-            if (Array.isArray(children)) {
-                if (children.length) {
-                    root.children = children;
-                }
-            }
-            else {
-                root.children = [children];
-            }
-        }
-        const extended = extendSchema(root, extendWith);
-        return {
-            if: `$slots.${key}`,
-            then: `$slots.${key}`,
-            else: Array.isArray(extended) ? extended : [extended],
-        };
-    };
-}
-/**
- * Creates an input schema with all of the wrapping base schema.
- * @param inputSchema - Content to store in the input section key location.
- * @public
- */
-function useSchema(inputSchema) {
-    return (extensions = {}) => {
-        const input = composable('input', inputSchema)(extensions.input);
-        return [
-            outer(extensions.outer, [
-                wrapper$2(extensions.wrapper, [
-                    label(extensions.label, '$label'),
-                    inner(extensions.inner, [
-                        prefix(extensions.prefix),
-                        ...(Array.isArray(input) ? input : [input]),
-                        suffix(extensions.suffix),
-                    ]),
-                ]),
-                help(extensions.help, '$help'),
-                messages(extensions.messages, [
-                    message(extensions.message, '$message.value'),
-                ]),
-            ]),
-        ];
-    };
-}
+const prefix = createSection('prefix', null);
 
-const label = composable('label', () => ({
-    $el: 'label',
-    if: '$label',
+/**
+ * @public
+ */
+const suffix = createSection('suffix', null);
+
+/**
+ * @public
+ */
+const help = createSection('help', () => ({
+    $el: 'div',
+    if: '$help',
     attrs: {
-        for: '$id',
-        class: '$classes.label',
+        id: '$: "help-" + $id',
     },
 }));
 
-const text$1 = composable('input', () => ({
+/**
+ * @public
+ */
+const fieldset = createSection('fieldset', () => ({
+    $el: 'fieldset',
+    attrs: {
+        id: '$id',
+        'aria-describedby': {
+            if: '$help',
+            then: '$: "help-" + $id',
+            else: undefined,
+        },
+    },
+}));
+
+/**
+ * @public
+ */
+const decorator = createSection('decorator', () => ({
+    $el: 'span',
+    attrs: {
+        'aria-hidden': 'true',
+    },
+}));
+
+/**
+ * @public
+ */
+const box = createSection('input', () => ({
     $el: 'input',
     bind: '$attrs',
     attrs: {
         type: '$type',
-        disabled: '$disabled',
-        class: '$classes.input',
-        name: '$node.name',
-        onInput: '$handlers.DOMInput',
-        onBlur: '$handlers.blur',
-        value: '$_value',
-        id: '$id',
-        'aria-describedby': '$describedBy',
-    },
-}));
-
-/**
- * The schema for text classifications.
- * @public
- */
-const textSchema$1 = (extensions = {}) => [
-    outer(extensions.outer, [
-        wrapper$2(extensions.wrapper, [
-            label(extensions.label, '$label'),
-            inner(extensions.inner, [
-                prefix(extensions.prefix),
-                text$1(extensions.input),
-                suffix(extensions.suffix),
-            ]),
-        ]),
-        help(extensions.help, '$help'),
-        messages(extensions.messages, [
-            message(extensions.message, '$message.value'),
-        ]),
-    ]),
-];
-
-const file$1 = composable('input', () => ({
-    $el: 'input',
-    bind: '$attrs',
-    attrs: {
-        type: 'file',
-        foo: 'bar',
-        disabled: '$disabled',
-        class: '$classes.input',
-        name: '$node.name',
-        onChange: '$handlers.files',
-        onBlur: '$handlers.blur',
-        id: '$id',
-        'aria-describedby': '$describedBy',
-    },
-}));
-
-const fileList = composable('fileList', () => ({
-    $el: 'ul',
-    if: '$value.length',
-    attrs: {
-        class: '$classes.fileList',
-        'data-has-multiple': {
-            if: '$value.length > 1',
-            then: 'true',
-        },
-    },
-}));
-
-const fileItem = composable('fileItem', () => ({
-    $el: 'li',
-    for: ['file', '$value'],
-    attrs: {
-        class: '$classes.fileItem',
-    },
-}));
-
-const fileName = composable('fileName', () => ({
-    $el: 'span',
-    attrs: {
-        class: '$classes.fileName',
-    },
-}));
-
-const noFiles = composable('noFiles', () => ({
-    $el: 'span',
-    if: '$value.length == 0',
-    attrs: {
-        class: '$classes.noFiles',
-    },
-}));
-
-const removeFiles = composable('removeFiles', () => ({
-    $el: 'a',
-    attrs: {
-        href: '#',
-        class: '$classes.removeFiles',
-        onClick: '$handlers.resetFiles',
-    },
-}));
-
-/**
- * The schema for text classifications.
- * @public
- */
-const fileSchema = (extensions = {}) => [
-    outer(extensions.outer, [
-        wrapper$2(extensions.wrapper, [
-            label(extensions.label, '$label'),
-            inner(extensions.inner, [
-                prefix(extensions.prefix),
-                file$1(extensions.input),
-                fileList(extensions.fileList, [
-                    fileItem(extensions.file, [
-                        fileName(extensions.fileName, '$file.name'),
-                        {
-                            if: '$value.length == 1',
-                            then: removeFiles(extensions.removeFiles, '$ui.remove.value'),
-                        },
-                    ]),
-                ]),
-                {
-                    if: '$value.length > 1',
-                    then: removeFiles(extensions.removeFiles, '$ui.removeAll.value'),
-                },
-                noFiles(extensions.noFiles, '$ui.noFiles.value'),
-                suffix(extensions.suffix),
-            ]),
-        ]),
-        help(extensions.help, '$help'),
-        messages(extensions.messages, [
-            message(extensions.message, '$message.value'),
-        ]),
-    ]),
-];
-
-const textarea$1 = composable('input', () => ({
-    $el: 'textarea',
-    bind: '$attrs',
-    attrs: {
-        class: '$classes.input',
-        disabled: '$disabled',
-        name: '$node.name',
-        onInput: '$handlers.DOMInput',
-        onBlur: '$handlers.blur',
-        value: '$_value',
-        id: '$id',
-        'aria-describedby': '$describedBy',
-    },
-    children: '$initialValue',
-}));
-
-/**
- * The schema for textarea classifications.
- * @public
- */
-const textareaSchema = (extensions = {}) => [
-    outer(extensions.outer, [
-        wrapper$2(extensions.wrapper, [
-            label(extensions.label, '$label'),
-            inner(extensions.inner, [
-                prefix(extensions.prefix),
-                textarea$1(extensions.input),
-                suffix(extensions.suffix),
-            ]),
-        ]),
-        help(extensions.help, '$help'),
-        messages(extensions.messages, [
-            message(extensions.message, '$message.value'),
-        ]),
-    ]),
-];
-
-/**
- * The schema for text classifications.
- * @public
- */
-const hiddenSchema = (extensions = {}) => [
-    text$1(extensions.input),
-];
-
-const fragment = (schema = {}, children = []) => (Object.keys(schema).length || typeof children !== 'string'
-    ? (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.extend)({ $el: 'div', children }, schema)
-    : children);
-
-const groupSchema = (extensions = {}) => {
-    return [fragment(extensions.wrapper, '$slots.default')];
-};
-
-const listSchema = (extensions = {}) => {
-    return [fragment(extensions.wrapper, '$slots.default')];
-};
-
-const select$2 = composable('input', (children) => ({
-    $el: 'select',
-    bind: '$attrs',
-    attrs: {
-        id: '$id',
-        'data-placeholder': {
-            if: '$placeholder',
-            then: {
-                if: '$value',
-                then: undefined,
-                else: 'true',
-            },
-        },
-        disabled: '$disabled',
-        class: '$classes.input',
-        name: '$node.name',
-        onInput: '$handlers.selectInput',
-        onBlur: '$handlers.blur',
-        'aria-describedby': '$describedBy',
-    },
-    children: {
-        if: '$slots.default',
-        then: '$slots.default',
-        else: children,
-    },
-}));
-
-const option = (schema = {}, children = []) => ({
-    if: '$slots.option',
-    then: [
-        {
-            $el: 'text',
-            if: '$options.length',
-            for: ['option', '$options'],
-            children: '$slots.option',
-        },
-    ],
-    else: (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.extend)({
-        $el: 'option',
-        if: '$options.length',
-        for: ['option', '$options'],
-        bind: '$option.attrs',
-        attrs: {
-            class: '$classes.option',
-            value: '$option.value',
-            selected: '$fns.isSelected($option.value)',
-        },
-        children,
-    }, schema),
-});
-
-/**
- * The schema for text classifications.
- * @public
- */
-const textSchema = (extensions = {}) => [
-    outer(extensions.outer, [
-        wrapper$2(extensions.wrapper, [
-            label(extensions.label, '$label'),
-            inner(extensions.inner, [
-                prefix(extensions.prefix),
-                select$2(extensions.input, [option(extensions.option, '$option.label')]),
-                suffix(extensions.suffix),
-            ]),
-        ]),
-        help(extensions.help, '$help'),
-        messages(extensions.messages, [
-            message(extensions.message, '$message.value'),
-        ]),
-    ]),
-];
-
-const boxLabel = composable('label', (children) => ({
-    $el: 'span',
-    if: typeof children === 'string' ? children : '$: true',
-    attrs: {
-        class: '$classes.label',
-    },
-}));
-
-const wrapper$1 = composable('wrapper', () => ({
-    $el: 'label',
-    attrs: {
-        class: '$classes.wrapper',
-        'data-disabled': {
-            if: '$options.length',
-            then: undefined,
-            else: '$disabled',
-        },
-    },
-}));
-
-const box = composable('input', () => ({
-    $el: 'input',
-    bind: '$attrs',
-    attrs: {
-        type: '$type',
-        class: '$classes.input',
         name: '$node.props.altName || $node.name',
         disabled: '$option.attrs.disabled || $disabled',
         onInput: '$handlers.toggleChecked',
@@ -67531,128 +65541,172 @@ const box = composable('input', () => ({
     },
 }));
 
-const fieldset = composable('fieldset', () => ({
-    $el: 'fieldset',
-    attrs: {
-        id: '$id',
-        class: '$classes.fieldset',
-        'aria-describedby': {
-            if: '$help',
-            then: '$: "help-" + $id',
-            else: undefined,
-        },
-    },
-}));
-
-const legend = composable('legend', () => ({
+/**
+ * @public
+ */
+const legend = createSection('legend', () => ({
     $el: 'legend',
     if: '$label',
-    attrs: {
-        class: '$classes.legend',
-    },
 }));
 
-const boxes = composable('option', () => ({
+/**
+ * @public
+ */
+const boxOption = createSection('option', () => ({
     $el: 'li',
     for: ['option', '$options'],
     attrs: {
-        class: '$classes.option',
         'data-disabled': '$option.attrs.disabled || $disabled',
     },
 }));
 
-const wrapper = composable('options', () => ({
-    $el: 'ul',
-    attrs: {
-        class: '$classes.options',
-    },
-}));
+/**
+ * @public
+ */
+const boxOptions = createSection('options', 'ul');
 
-const decorator = composable('decorator', () => ({
-    $el: 'span',
+/**
+ * @public
+ */
+const boxWrapper = createSection('wrapper', () => ({
+    $el: 'label',
     attrs: {
-        class: '$classes.decorator',
-        'aria-hidden': 'true',
+        'data-disabled': {
+            if: '$options.length',
+            then: undefined,
+            else: '$disabled',
+        },
     },
 }));
 
 /**
- * The schema for text classifications.
  * @public
  */
-const boxSchema = (extensions = {}) => {
-    const singleCheckbox = [
-        wrapper$1(extensions.wrapper, [
-            inner(extensions.inner, [
-                prefix(extensions.prefix),
-                box(extensions.input),
-                decorator(extensions.decorator),
-                suffix(extensions.suffix),
-            ]),
-            boxLabel(extensions.label, '$label'),
-        ]),
-        help(extensions.help, '$help'),
-    ];
-    const multiCheckbox = fieldset(extensions.fieldset, [
-        legend(extensions.legend, '$label'),
-        help(extensions.help, '$help'),
-        wrapper(extensions.options, [
-            boxes(extensions.option, [
-                wrapper$1(extensions.wrapper, [
-                    inner(extensions.inner, [
-                        prefix(extensions.prefix),
-                        box((0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.extend)({
-                            bind: '$option.attrs',
-                            attrs: {
-                                id: '$option.attrs.id',
-                                value: '$option.value',
-                                checked: '$fns.isChecked($option.value)',
-                            },
-                        }, extensions.input || {})),
-                        decorator(extensions.decorator),
-                        suffix(extensions.suffix),
-                    ]),
-                    boxLabel(extensions.label, '$option.label'),
-                ]),
-                help(extensions.optionHelp, '$option.help', 'optionHelp', '$option.help'),
-            ]),
-        ]),
-    ]);
-    return [
-        outer(extensions.outer, [
-            {
-                if: '$options.length',
-                then: multiCheckbox,
-                else: singleCheckbox,
-            },
-            messages(extensions.messages, [
-                message(extensions.message, '$message.value'),
-            ]),
-        ]),
-    ];
-};
-
-const actions = composable('actions', () => ({
+const boxHelp = createSection('optionHelp', () => ({
     $el: 'div',
-    if: '$actions',
+    if: '$option.help',
     attrs: {
-        class: '$classes.actions',
+        id: '$: "help-" + $option.attrs.id',
     },
 }));
 
-const form$2 = composable('form', () => ({
+/**
+ * @public
+ */
+const boxLabel = createSection('label', 'span');
+
+/**
+ * @public
+ */
+const buttonInput = createSection('input', () => ({
+    $el: 'button',
+    bind: '$attrs',
+    attrs: {
+        type: '$type',
+        disabled: '$disabled',
+        name: '$node.name',
+        id: '$id',
+    },
+}));
+
+/**
+ * @public
+ */
+const buttonLabel = createSection('default', null);
+
+/**
+ * @public
+ */
+const fileInput = createSection('input', () => ({
+    $el: 'input',
+    bind: '$attrs',
+    attrs: {
+        type: 'file',
+        disabled: '$disabled',
+        name: '$node.name',
+        onChange: '$handlers.files',
+        onBlur: '$handlers.blur',
+        id: '$id',
+        'aria-describedby': '$describedBy',
+    },
+}));
+
+/**
+ * @public
+ */
+const fileItem = createSection('fileItem', () => ({
+    $el: 'li',
+    for: ['file', '$value'],
+}));
+
+/**
+ * @public
+ */
+const fileList = createSection('fileList', () => ({
+    $el: 'ul',
+    if: '$value.length',
+    attrs: {
+        'data-has-multiple': {
+            if: '$value.length > 1',
+            then: 'true',
+        },
+    },
+}));
+
+/**
+ * @public
+ */
+const fileName = createSection('fileName', () => ({
+    $el: 'span',
+    attrs: {
+        class: '$classes.fileName',
+    },
+}));
+
+/**
+ * @public
+ */
+const fileRemove = createSection('fileRemove', () => ({
+    $el: 'button',
+    attrs: {
+        onClick: '$handlers.resetFiles',
+    },
+}));
+
+/**
+ * @public
+ */
+const noFiles = createSection('noFiles', () => ({
+    $el: 'span',
+    if: '$value.length == 0',
+}));
+
+/**
+ * @public
+ */
+const formInput = createSection('form', () => ({
     $el: 'form',
     bind: '$attrs',
     attrs: {
         id: '$id',
-        class: '$classes.form',
         name: '$node.name',
         onSubmit: '$handlers.submit',
         'data-loading': '$state.loading || undefined',
     },
+}), true);
+
+/**
+ * @public
+ */
+const actions = createSection('actions', () => ({
+    $el: 'div',
+    if: '$actions',
 }));
 
-const submit$1 = composable('submit', () => ({
+/**
+ * @public
+ */
+const submitInput = createSection('submit', () => ({
     $cmp: 'FormKit',
     bind: '$submitAttrs',
     props: {
@@ -67663,57 +65717,152 @@ const submit$1 = composable('submit', () => ({
     },
 }));
 
-const formSchema = (extensions = {}) => {
-    return [
-        form$2(extensions.form, [
-            '$slots.default',
-            messages(extensions.messages, [
-                message(extensions.message, '$message.value'),
-            ]),
-            actions(extensions.actions, [submit$1(extensions.submit)]),
-        ]),
-    ];
-};
-
-const button$1 = composable('input', () => ({
-    $el: 'button',
+/**
+ * @public
+ */
+const textInput = createSection('input', () => ({
+    $el: 'input',
     bind: '$attrs',
     attrs: {
         type: '$type',
         disabled: '$disabled',
-        class: '$classes.input',
         name: '$node.name',
+        onInput: '$handlers.DOMInput',
+        onBlur: '$handlers.blur',
+        value: '$_value',
         id: '$id',
+        'aria-describedby': '$describedBy',
     },
 }));
 
 /**
- * The schema for text classifications.
  * @public
  */
-const buttonSchema = (extensions = {}) => [
-    outer(extensions.outer, [
-        messages(extensions.messages, [
-            message(extensions.message, '$message.value'),
-        ]),
-        wrapper$2(extensions.wrapper, [
-            button$1(extensions.input, [
-                prefix(extensions.prefix),
-                {
-                    if: '$slots.default',
-                    then: '$slots.default',
-                    else: {
-                        if: '$label',
-                        then: '$label',
-                        else: '$ui.submit.value',
-                    },
-                },
-                suffix(extensions.suffix),
-            ]),
-        ]),
-        help(extensions.help, '$help'),
-    ]),
-];
+const fragment = createSection('wrapper', null, true);
+
+/**
+ * @public
+ */
+const selectInput$1 = createSection('input', () => ({
+    $el: 'select',
+    bind: '$attrs',
+    attrs: {
+        id: '$id',
+        'data-placeholder': {
+            if: '$placeholder',
+            then: {
+                if: '$value',
+                then: undefined,
+                else: 'true',
+            },
+        },
+        disabled: '$disabled',
+        class: '$classes.input',
+        name: '$node.name',
+        onInput: '$handlers.selectInput',
+        onBlur: '$handlers.blur',
+        'aria-describedby': '$describedBy',
+    },
+}));
+
+/**
+ * @public
+ */
+const option = createSection('option', () => ({
+    $el: 'option',
+    for: ['option', '$options'],
+    bind: '$option.attrs',
+    attrs: {
+        class: '$classes.option',
+        value: '$option.value',
+        selected: '$fns.isSelected($option.value)',
+    },
+}));
+
+/**
+ * @public
+ */
+const optionSlot = () => ({
+    $el: null,
+    if: '$options.length',
+    for: ['option', '$options'],
+    children: '$slots.option',
+});
+
+/**
+ * @public
+ */
+const textareaInput = createSection('input', () => ({
+    $el: 'textarea',
+    bind: '$attrs',
+    attrs: {
+        disabled: '$disabled',
+        name: '$node.name',
+        onInput: '$handlers.DOMInput',
+        onBlur: '$handlers.blur',
+        value: '$_value',
+        id: '$id',
+        'aria-describedby': '$describedBy',
+    },
+    children: '$initialValue',
+}));
+
+/**
+ * @public
+ */
+const icon = (sectionKey, el) => {
+    return createSection(`${sectionKey}Icon`, () => {
+        const rawIconProp = `_raw${sectionKey.charAt(0).toUpperCase()}${sectionKey.slice(1)}Icon`;
+        return {
+            if: `$${sectionKey}Icon && $${rawIconProp}`,
+            $el: `${el ? el : 'span'}`,
+            attrs: {
+                class: `$classes.${sectionKey}Icon + " formkit-icon"`,
+                innerHTML: `$${rawIconProp}`,
+                onClick: `$handlers.iconClick(${sectionKey})`,
+                for: {
+                    if: `${el === 'label'}`,
+                    then: '$id'
+                }
+            }
+        };
+    })();
+};
+
+/**
+ * Normalize the boxes.
+ * @param node - The node
+ * @returns
+ * @public
+ */
+function normalizeBoxes(node) {
+    return function (prop, next) {
+        if (prop.prop === 'options' && Array.isArray(prop.value)) {
+            prop.value = prop.value.map((option) => {
+                var _a;
+                if (!((_a = option.attrs) === null || _a === void 0 ? void 0 : _a.id)) {
+                    return (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.extend)(option, {
+                        attrs: { id: `${node.name}-option-${(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.kebab)(String(option.value))}` },
+                    });
+                }
+                return option;
+            });
+            if (node.props.type === 'checkbox' && !Array.isArray(node.value)) {
+                if (node.isCreated) {
+                    node.input([], false);
+                }
+                else {
+                    node.on('created', () => {
+                        if (!Array.isArray(node.value)) {
+                            node.input([], false);
+                        }
+                    });
+                }
+            }
+        }
+        return next(prop);
+    };
+}
 
 /**
  * Accepts an array of objects, array of strings, or object of key-value pairs.
@@ -67792,10 +65941,364 @@ function options(node) {
 }
 
 /**
+ * Event handler when an input is toggled.
+ * @param node - The node being toggled
+ * @param e - The input even related to the toggling
+ * @public
+ */
+function toggleChecked$1(node, e) {
+    const el = e.target;
+    if (el instanceof HTMLInputElement) {
+        const value = Array.isArray(node.props.options)
+            ? optionValue(node.props.options, el.value)
+            : el.value;
+        if (Array.isArray(node.props.options) && node.props.options.length) {
+            if (!Array.isArray(node._value)) {
+                // There is no array value set
+                node.input([value]);
+            }
+            else if (!node._value.some((existingValue) => shouldSelect(value, existingValue))) {
+                // The value is not in the current set
+                node.input([...node._value, value]);
+            }
+            else {
+                // Filter out equivalent values
+                node.input(node._value.filter((existingValue) => !shouldSelect(value, existingValue)));
+            }
+        }
+        else {
+            if (el.checked) {
+                node.input(node.props.onValue);
+            }
+            else {
+                node.input(node.props.offValue);
+            }
+        }
+    }
+}
+/**
+ * Checks if a given option is present in the node value.
+ * @param node - The node being checked
+ * @param value - The value of any option
+ * @returns
+ */
+function isChecked$1(node, value) {
+    var _a, _b;
+    // We need to force vue’s reactivity to respond when the value is run:
+    (_a = node.context) === null || _a === void 0 ? void 0 : _a.value;
+    (_b = node.context) === null || _b === void 0 ? void 0 : _b._value;
+    if (Array.isArray(node._value)) {
+        return node._value.some((existingValue) => shouldSelect(optionValue(node.props.options, value), existingValue));
+    }
+    return false;
+}
+/**
+ * Adds checkbox selection support
+ * @param node - Node the feature is added to
+ * @public
+ */
+function checkboxes(node) {
+    node.on('created', () => {
+        var _a, _b;
+        if ((_a = node.context) === null || _a === void 0 ? void 0 : _a.handlers) {
+            node.context.handlers.toggleChecked = toggleChecked$1.bind(null, node);
+        }
+        if ((_b = node.context) === null || _b === void 0 ? void 0 : _b.fns) {
+            node.context.fns.isChecked = isChecked$1.bind(null, node);
+        }
+        // Configure our default onValue and offValue
+        if (!(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(node.props, 'onValue'))
+            node.props.onValue = true;
+        if (!(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(node.props, 'offValue'))
+            node.props.offValue = false;
+    });
+    node.hook.prop(normalizeBoxes(node));
+}
+
+/**
+ * Allows disabling children of this.
+ * @param node - The FormKitNode of the form/group/list
+ * @public
+ */
+function disables(node) {
+    node.on('created', () => {
+        node.props.disabled = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.undefine)(node.props.disabled);
+    });
+    node.hook.prop(({ prop, value }, next) => {
+        value = prop === 'disabled' ? (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.undefine)(value) : value;
+        return next({ prop, value });
+    });
+    node.on('prop:disabled', ({ payload: value }) => {
+        node.config.disabled = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.undefine)(value);
+    });
+    node.on('created', () => {
+        node.config.disabled = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.undefine)(node.props.disabled);
+    });
+}
+
+/**
+ * Creates a new feature that generates a localization message of type ui
+ * for use on a given component.
+ *
+ * @param key - The key of the message
+ * @param value - The value of the message
+ * @returns
+ * @public
+ */
+function localize(key, value) {
+    return (node) => {
+        node.store.set((0,_formkit_core__WEBPACK_IMPORTED_MODULE_1__.createMessage)({
+            key,
+            type: 'ui',
+            value: value || key,
+            meta: {
+                localize: true,
+                i18nArgs: [node],
+            },
+        }));
+    };
+}
+
+const isBrowser = typeof window !== 'undefined';
+/**
+ * Remove the data-file-hover attribute from the target.
+ * @param e - Event
+ */
+function removeHover(e) {
+    if (e.target instanceof HTMLElement &&
+        e.target.hasAttribute('data-file-hover')) {
+        e.target.removeAttribute('data-file-hover');
+    }
+}
+/**
+ * Prevent stray drag/drop events from navigating the window.
+ * @param e - Event
+ * @public
+ */
+function preventStrayDrop(type, e) {
+    if (!(e.target instanceof HTMLInputElement)) {
+        e.preventDefault();
+    }
+    else if (type === 'dragover') {
+        e.target.setAttribute('data-file-hover', 'true');
+    }
+    if (type === 'drop') {
+        removeHover(e);
+    }
+}
+/**
+ * Feature to add file handling support to an input.
+ * @param node - The node being checked
+ * @public
+ */
+function files(node) {
+    // Localize our content:
+    localize('noFiles', 'Select file')(node);
+    localize('removeAll', 'Remove all')(node);
+    localize('remove')(node);
+    if (isBrowser) {
+        if (!window._FormKit_File_Drop) {
+            window.addEventListener('dragover', preventStrayDrop.bind(null, 'dragover'));
+            window.addEventListener('drop', preventStrayDrop.bind(null, 'drop'));
+            window.addEventListener('dragleave', removeHover);
+            window._FormKit_File_Drop = true;
+        }
+    }
+    node.on('created', () => {
+        if (!Array.isArray(node.value)) {
+            node.input([], false);
+        }
+        if (!node.context)
+            return;
+        node.context.handlers.resetFiles = (e) => {
+            e.preventDefault();
+            node.input([]);
+            if (node.props.id && isBrowser) {
+                const el = document.getElementById(node.props.id);
+                if (el)
+                    el.value = '';
+            }
+        };
+        node.context.handlers.files = (e) => {
+            var _a, _b;
+            const files = [];
+            if (e.target instanceof HTMLInputElement && e.target.files) {
+                for (let i = 0; i < e.target.files.length; i++) {
+                    let file;
+                    if ((file = e.target.files.item(i))) {
+                        files.push({ name: file.name, file });
+                    }
+                }
+                node.input(files);
+            }
+            if (node.context)
+                node.context.files = files;
+            // Call the original listener if there is one.
+            if (typeof ((_a = node.props.attrs) === null || _a === void 0 ? void 0 : _a.onChange) === 'function') {
+                (_b = node.props.attrs) === null || _b === void 0 ? void 0 : _b.onChange(e);
+            }
+        };
+    });
+}
+
+/**
+ * Handle the submit event.
+ * @param e - The event
+ * @public
+ */
+async function handleSubmit(node, submitEvent) {
+    submitEvent.preventDefault();
+    await node.settled;
+    // Set the submitted state on all children
+    node.walk((n) => {
+        n.store.set((0,_formkit_core__WEBPACK_IMPORTED_MODULE_1__.createMessage)({
+            key: 'submitted',
+            value: true,
+            visible: false,
+        }));
+    });
+    if (typeof node.props.onSubmitRaw === 'function') {
+        node.props.onSubmitRaw(submitEvent, node);
+    }
+    if (node.ledger.value('blocking')) {
+        // There is still a blocking message in the store.
+        if (node.props.incompleteMessage !== false) {
+            node.store.set((0,_formkit_core__WEBPACK_IMPORTED_MODULE_1__.createMessage)({
+                blocking: false,
+                key: `incomplete`,
+                meta: {
+                    localize: node.props.incompleteMessage === undefined,
+                    i18nArgs: [{ node }],
+                    showAsMessage: true,
+                },
+                type: 'ui',
+                value: node.props.incompleteMessage || 'Form incomplete.',
+            }));
+        }
+    }
+    else {
+        // No blocking messages
+        if (typeof node.props.onSubmit === 'function') {
+            // call onSubmit
+            const retVal = node.props.onSubmit(node.hook.submit.dispatch((0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.clone)(node.value)), node);
+            if (retVal instanceof Promise) {
+                const autoDisable = node.props.disabled === undefined &&
+                    node.props.submitBehavior !== 'live';
+                if (autoDisable)
+                    node.props.disabled = true;
+                node.store.set((0,_formkit_core__WEBPACK_IMPORTED_MODULE_1__.createMessage)({
+                    key: 'loading',
+                    value: true,
+                    visible: false,
+                }));
+                await retVal;
+                if (autoDisable)
+                    node.props.disabled = false;
+                node.store.remove('loading');
+            }
+        }
+        else {
+            if (submitEvent.target instanceof HTMLFormElement) {
+                submitEvent.target.submit();
+            }
+        }
+    }
+}
+/**
+ * Converts the options prop to usable values.
+ * @param node - A formkit node.
+ * @public
+ */
+function form$1(node) {
+    node.props.isForm = true;
+    node.on('created', () => {
+        var _a;
+        if ((_a = node.context) === null || _a === void 0 ? void 0 : _a.handlers) {
+            node.context.handlers.submit = handleSubmit.bind(null, node);
+        }
+        if (!(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(node.props, 'actions')) {
+            node.props.actions = true;
+        }
+    });
+    node.on('settled:blocking', () => node.store.remove('incomplete'));
+}
+
+/**
+ * Applies ignore="true" by default.
+ * @param node - The node
+ * @public
+ */
+function ignore(node) {
+    if (node.props.ignore === undefined) {
+        node.props.ignore = true;
+        node.parent = null;
+    }
+}
+
+/**
+ * Ensures the input has an `initialValue` prop.
+ * @param node - The node being given an initial value
+ * @public
+ */
+function initialValue(node) {
+    node.on('created', () => {
+        if (node.context) {
+            node.context.initialValue = node.value || '';
+        }
+    });
+}
+
+/**
+ * Sets the value of a radio button when checked.
+ * @param node - FormKitNode
+ * @param value - Value
+ * @public
+ */
+function toggleChecked(node, event) {
+    if (event.target instanceof HTMLInputElement) {
+        node.input(optionValue(node.props.options, event.target.value));
+    }
+}
+/**
+ * Checks if the value being checked is the current value.
+ * @param node - The node to check against.
+ * @param value - The value to check
+ * @returns
+ */
+function isChecked(node, value) {
+    var _a, _b;
+    // We need to force vue’s reactivity to respond when the value is run:
+    (_a = node.context) === null || _a === void 0 ? void 0 : _a.value;
+    (_b = node.context) === null || _b === void 0 ? void 0 : _b._value;
+    return shouldSelect(optionValue(node.props.options, value), node._value);
+}
+/**
+ * Determines if a given radio input is being evaluated.
+ * @param node - The radio input group.
+ * @public
+ */
+function radios(node) {
+    node.on('created', () => {
+        var _a, _b;
+        if (!Array.isArray(node.props.options)) {
+            (0,_formkit_core__WEBPACK_IMPORTED_MODULE_1__.warn)(350, node);
+        }
+        if ((_a = node.context) === null || _a === void 0 ? void 0 : _a.handlers) {
+            node.context.handlers.toggleChecked = toggleChecked.bind(null, node);
+        }
+        if ((_b = node.context) === null || _b === void 0 ? void 0 : _b.fns) {
+            node.context.fns.isChecked = isChecked.bind(null, node);
+        }
+    });
+    node.hook.prop(normalizeBoxes(node));
+}
+
+/**
  * Checks if a the given option should have the selected attribute.
  * @param node - The node being evaluated.
  * @param option - The option value to check
  * @returns
+ * @public
  */
 function isSelected(node, option) {
     // Here we trick reactivity (if at play) to watch this function.
@@ -67901,538 +66404,366 @@ function select$1(node) {
 }
 
 /**
- * Normalize the boxes.
- * @param node - The node
- * @returns
+ * @param sectionKey - the location the icon should be loaded
+ * @param defaultIcon - the icon that should be loaded if a match is found in the user's CSS
  * @public
  */
-function normalizeBoxes(node) {
-    return function (prop, next) {
-        if (prop.prop === 'options' && Array.isArray(prop.value)) {
-            prop.value = prop.value.map((option) => {
-                var _a;
-                if (!((_a = option.attrs) === null || _a === void 0 ? void 0 : _a.id)) {
-                    return (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.extend)(option, {
-                        attrs: { id: `${node.name}-option-${(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.kebab)(String(option.value))}` },
-                    });
-                }
-                return option;
-            });
-            if (node.props.type === 'checkbox' && !Array.isArray(node.value)) {
-                if (node.isCreated) {
-                    node.input([], false);
-                }
-                else {
-                    node.on('created', () => {
-                        if (!Array.isArray(node.value)) {
-                            node.input([], false);
-                        }
-                    });
-                }
-            }
+function defaultIcon(sectionKey, defaultIcon) {
+    return (node) => {
+        if (node.props[`${sectionKey}Icon`] === undefined) {
+            node.props[`${sectionKey}Icon`] = `default:${defaultIcon}`;
         }
-        return next(prop);
     };
 }
 
 /**
- * Event handler when an input is toggled.
- * @param node - The node being toggled
- * @param e - The input even related to the toggling
+ * Type guard for schema objects.
+ * @param schema - returns true if the node is a schema node but not a string or conditional.
  */
-function toggleChecked$1(node, e) {
-    const el = e.target;
-    if (el instanceof HTMLInputElement) {
-        const value = Array.isArray(node.props.options)
-            ? optionValue(node.props.options, el.value)
-            : el.value;
-        if (Array.isArray(node.props.options) && node.props.options.length) {
-            if (!Array.isArray(node._value)) {
-                // There is no array value set
-                node.input([value]);
-            }
-            else if (!node._value.some((existingValue) => shouldSelect(value, existingValue))) {
-                // The value is not in the current set
-                node.input([...node._value, value]);
-            }
-            else {
-                // Filter out equivalent values
-                node.input(node._value.filter((existingValue) => !shouldSelect(value, existingValue)));
-            }
-        }
-        else {
-            if (el.checked) {
-                node.input(node.props.onValue);
-            }
-            else {
-                node.input(node.props.offValue);
-            }
-        }
-    }
+function isSchemaObject(schema) {
+    return (typeof schema === 'object' &&
+        ('$el' in schema || '$cmp' in schema || '$formkit' in schema));
 }
 /**
- * Checks if a given option is present in the node value.
- * @param node - The node being checked
- * @param value - The value of any option
+ * Checks if the current schema node is a slot condition like:
+ * ```js
+ * {
+ *  if: '$slot.name',
+ *  then: '$slot.name',
+ *  else: []
+ * }
+ * ```
+ * @param node - a schema node
  * @returns
  */
-function isChecked$1(node, value) {
-    var _a, _b;
-    // We need to force vue’s reactivity to respond when the value is run:
-    (_a = node.context) === null || _a === void 0 ? void 0 : _a.value;
-    (_b = node.context) === null || _b === void 0 ? void 0 : _b._value;
-    if (Array.isArray(node._value)) {
-        return node._value.some((existingValue) => shouldSelect(optionValue(node.props.options, value), existingValue));
+function isSlotCondition(node) {
+    if ((0,_formkit_core__WEBPACK_IMPORTED_MODULE_1__.isConditional)(node) &&
+        node.if &&
+        node.if.startsWith('$slots.') &&
+        typeof node.then === 'string' &&
+        node.then.startsWith('$slots.') &&
+        'else' in node) {
+        return true;
     }
     return false;
 }
 /**
- * Adds checkbox selection support
- * @param node - Node the feature is added to
- * @public
- */
-function checkboxes(node) {
-    node.on('created', () => {
-        var _a, _b;
-        if ((_a = node.context) === null || _a === void 0 ? void 0 : _a.handlers) {
-            node.context.handlers.toggleChecked = toggleChecked$1.bind(null, node);
-        }
-        if ((_b = node.context) === null || _b === void 0 ? void 0 : _b.fns) {
-            node.context.fns.isChecked = isChecked$1.bind(null, node);
-        }
-        // Configure our default onValue and offValue
-        if (!(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(node.props, 'onValue'))
-            node.props.onValue = true;
-        if (!(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(node.props, 'offValue'))
-            node.props.offValue = false;
-    });
-    node.hook.prop(normalizeBoxes(node));
-}
-
-/**
- * Sets the value of a radio button when checked.
- * @param node - FormKitNode
- * @param value - Value
- */
-function toggleChecked(node, event) {
-    if (event.target instanceof HTMLInputElement) {
-        node.input(optionValue(node.props.options, event.target.value));
-    }
-}
-/**
- * Checks if the value being checked is the current value.
- * @param node - The node to check against.
- * @param value - The value to check
+ * Extends a single schema node with an extension. The extension can be any partial node including strings.
+ * @param schema - Extend a base schema node.
+ * @param extension - The values to extend on the base schema node.
  * @returns
- */
-function isChecked(node, value) {
-    var _a, _b;
-    // We need to force vue’s reactivity to respond when the value is run:
-    (_a = node.context) === null || _a === void 0 ? void 0 : _a.value;
-    (_b = node.context) === null || _b === void 0 ? void 0 : _b._value;
-    return shouldSelect(optionValue(node.props.options, value), node._value);
-}
-/**
- * Determines if a given radio input is being evaluated.
- * @param node - The radio input group.
  * @public
  */
-function radios(node) {
-    node.on('created', () => {
-        var _a, _b;
-        if (!Array.isArray(node.props.options)) {
-            (0,_formkit_core__WEBPACK_IMPORTED_MODULE_1__.warn)(350, node);
-        }
-        if ((_a = node.context) === null || _a === void 0 ? void 0 : _a.handlers) {
-            node.context.handlers.toggleChecked = toggleChecked.bind(null, node);
-        }
-        if ((_b = node.context) === null || _b === void 0 ? void 0 : _b.fns) {
-            node.context.fns.isChecked = isChecked.bind(null, node);
-        }
-    });
-    node.hook.prop(normalizeBoxes(node));
-}
-
-/**
- * Allows disabling children of this.
- * @param node - The FormKitNode of the form/group/list
- * @public
- */
-function disables(node) {
-    node.on('created', () => {
-        node.props.disabled = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.undefine)(node.props.disabled);
-    });
-    node.hook.prop(({ prop, value }, next) => {
-        value = prop === 'disabled' ? (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.undefine)(value) : value;
-        return next({ prop, value });
-    });
-    node.on('prop:disabled', ({ payload: value }) => {
-        node.config.disabled = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.undefine)(value);
-    });
-    node.on('created', () => {
-        node.config.disabled = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.undefine)(node.props.disabled);
-    });
-}
-
-/**
- * Handle the submit event.
- * @param e - The event
- */
-async function handleSubmit(node, submitEvent) {
-    submitEvent.preventDefault();
-    await node.settled;
-    // Set the submitted state on all children
-    node.walk((n) => {
-        n.store.set((0,_formkit_core__WEBPACK_IMPORTED_MODULE_1__.createMessage)({
-            key: 'submitted',
-            value: true,
-            visible: false,
-        }));
-    });
-    if (typeof node.props.onSubmitRaw === 'function') {
-        node.props.onSubmitRaw(submitEvent, node);
+function extendSchema(schema, extension = {}) {
+    if (typeof schema === 'string') {
+        return isSchemaObject(extension) || typeof extension === 'string'
+            ? extension
+            : schema;
     }
-    if (node.ledger.value('blocking')) {
-        // There is still a blocking message in the store.
-        if (node.props.incompleteMessage !== false) {
-            node.store.set((0,_formkit_core__WEBPACK_IMPORTED_MODULE_1__.createMessage)({
-                blocking: false,
-                key: `incomplete`,
-                meta: {
-                    localize: node.props.incompleteMessage === undefined,
-                    i18nArgs: [{ node }],
-                    showAsMessage: true,
-                },
-                type: 'ui',
-                value: node.props.incompleteMessage || 'Form incomplete.',
-            }));
-        }
+    else if (Array.isArray(schema)) {
+        return isSchemaObject(extension) ? extension : schema;
     }
-    else {
-        // No blocking messages
-        if (typeof node.props.onSubmit === 'function') {
-            // call onSubmit
-            const retVal = node.props.onSubmit((0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.clone)(node.value), node);
-            if (retVal instanceof Promise) {
-                const autoDisable = node.props.disabled === undefined &&
-                    node.props.submitBehavior !== 'live';
-                if (autoDisable)
-                    node.props.disabled = true;
-                node.store.set((0,_formkit_core__WEBPACK_IMPORTED_MODULE_1__.createMessage)({
-                    key: 'loading',
-                    value: true,
-                    visible: false,
-                }));
-                await retVal;
-                if (autoDisable)
-                    node.props.disabled = false;
-                node.store.remove('loading');
-            }
-        }
-        else {
-            if (submitEvent.target instanceof HTMLFormElement) {
-                submitEvent.target.submit();
-            }
-        }
-    }
+    return (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.extend)(schema, extension);
 }
 /**
- * Converts the options prop to usable values.
- * @param node - A formkit node.
- * @public
- */
-function form$1(node) {
-    node.props.isForm = true;
-    node.on('created', () => {
-        var _a;
-        if ((_a = node.context) === null || _a === void 0 ? void 0 : _a.handlers) {
-            node.context.handlers.submit = handleSubmit.bind(null, node);
-        }
-        if (!(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(node.props, 'actions')) {
-            node.props.actions = true;
-        }
-    });
-    node.on('settled:blocking', () => node.store.remove('incomplete'));
-}
-
-/**
- * Creates a new feature that generates a localization message of type ui
- * for use on a given component.
+ * ================================================================
+ * NOTE: This function is deprecated. Use `createSection` instead!
+ * ================================================================
  *
- * @param key - The key of the message
- * @param value - The value of the message
+ * @param key - A new section key name.
+ * @param schema - The default schema in this composable slot.
  * @returns
  * @public
  */
-function localize(key, value) {
-    return (node) => {
-        node.store.set((0,_formkit_core__WEBPACK_IMPORTED_MODULE_1__.createMessage)({
-            key,
-            type: 'ui',
-            value: value || key,
-            meta: {
-                localize: true,
-                i18nArgs: [node],
-            },
-        }));
+function composable(key, schema) {
+    (0,_formkit_core__WEBPACK_IMPORTED_MODULE_1__.warn)(800, 'composable function');
+    return (extendWith = {}, children = undefined) => {
+        const root = typeof schema === 'function'
+            ? schema(children)
+            : typeof schema === 'object'
+                ? (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.clone)(schema)
+                : schema;
+        const isObj = isSchemaObject(root);
+        if (isObj && !('children' in root) && children) {
+            if (Array.isArray(children)) {
+                if (children.length) {
+                    root.children = children;
+                }
+            }
+            else {
+                root.children = [children];
+            }
+        }
+        const extended = extendSchema(root, extendWith);
+        return {
+            if: `$slots.${key}`,
+            then: `$slots.${key}`,
+            else: Array.isArray(extended) ? extended : [extended],
+        };
     };
 }
-
-const isBrowser = typeof window !== 'undefined';
 /**
- * Remove the data-file-hover attribute from the target.
- * @param e - Event
- */
-function removeHover(e) {
-    if (e.target instanceof HTMLElement &&
-        e.target.hasAttribute('data-file-hover')) {
-        e.target.removeAttribute('data-file-hover');
-    }
-}
-/**
- * Prevent stray drag/drop events from navigating the window.
- * @param e - Event
+ * Creates an input schema with all of the wrapping base schema.
+ * @param inputSchema - Content to store in the input section key location.
  * @public
  */
-function preventStrayDrop(type, e) {
-    if (!(e.target instanceof HTMLInputElement)) {
-        e.preventDefault();
-    }
-    else if (type === 'dragover') {
-        e.target.setAttribute('data-file-hover', 'true');
-    }
-    if (type === 'drop') {
-        removeHover(e);
-    }
+function useSchema(inputSection) {
+    return outer(wrapper(label('$label'), inner(prefix(), inputSection(), suffix())), help('$help'), messages(message('$message.value')));
 }
-function files(node) {
-    // Localize our content:
-    localize('noFiles', 'Select file')(node);
-    localize('removeAll', 'Remove all')(node);
-    localize('remove')(node);
-    if (isBrowser) {
-        if (!window._FormKit_File_Drop) {
-            window.addEventListener('dragover', preventStrayDrop.bind(null, 'dragover'));
-            window.addEventListener('drop', preventStrayDrop.bind(null, 'drop'));
-            window.addEventListener('dragleave', removeHover);
-            window._FormKit_File_Drop = true;
-        }
-    }
-    node.on('created', () => {
-        if (!Array.isArray(node.value)) {
-            node.input([], false);
-        }
-        if (!node.context)
-            return;
-        node.context.handlers.resetFiles = (e) => {
-            e.preventDefault();
-            node.input([]);
-            if (node.props.id && isBrowser) {
-                const el = document.getElementById(node.props.id);
-                if (el)
-                    el.value = '';
-            }
-        };
-        node.context.handlers.files = (e) => {
-            var _a, _b;
-            const files = [];
-            if (e.target instanceof HTMLInputElement && e.target.files) {
-                for (let i = 0; i < e.target.files.length; i++) {
-                    let file;
-                    if ((file = e.target.files.item(i))) {
-                        files.push({ name: file.name, file });
-                    }
+/**
+ * Creates a new reusable section.
+ * @param section - A single section of schema
+ * @param el - The element or a function that returns a schema node.
+ * @param root - When true returns an extendable root schema node.
+ * @returns
+ * @public
+ */
+function createSection(section, el, root = false) {
+    return (...children) => {
+        const extendable = (extensions) => {
+            const node = !el || typeof el === 'string' ? { $el: el } : el();
+            if ((0,_formkit_core__WEBPACK_IMPORTED_MODULE_1__.isDOM)(node) || (0,_formkit_core__WEBPACK_IMPORTED_MODULE_1__.isComponent)(node)) {
+                if (!node.meta) {
+                    node.meta = { section };
                 }
-                node.input(files);
+                if (children.length && !node.children) {
+                    node.children = [
+                        ...children.map((child) => typeof child === 'string' ? child : child(extensions)),
+                    ];
+                }
+                if ((0,_formkit_core__WEBPACK_IMPORTED_MODULE_1__.isDOM)(node)) {
+                    node.attrs = {
+                        class: `$classes.${section}`,
+                        ...(node.attrs || {}),
+                    };
+                }
             }
-            if (node.context)
-                node.context.files = files;
-            // Call the original listener if there is one.
-            if (typeof ((_a = node.props.attrs) === null || _a === void 0 ? void 0 : _a.onChange) === 'function') {
-                (_b = node.props.attrs) === null || _b === void 0 ? void 0 : _b.onChange(e);
-            }
+            return {
+                if: `$slots.${section}`,
+                then: `$slots.${section}`,
+                else: section in extensions
+                    ? extendSchema(node, extensions[section])
+                    : node,
+            };
         };
-    });
+        return root ? createRoot(extendable) : extendable;
+    };
 }
-
 /**
- * Applies ignore="true" by default.
- * @param node - The node
+ * Returns an extendable schema root node.
+ * @param rootSection - Creates the root node.
+ * @returns
+ */
+function createRoot(rootSection) {
+    return (extensions) => {
+        return [rootSection(extensions)];
+    };
+}
+/**
+ * Applies attributes to a given schema section by applying a higher order
+ * function that merges a given set of attributes into the node.
+ * @param attrs - Apply attributes to a FormKitSchemaExtendableSection
+ * @param section - A section to apply attributes to
+ * @returns
  * @public
  */
-function ignore(node) {
-    if (node.props.ignore === undefined) {
-        node.props.ignore = true;
-        node.parent = null;
-    }
-}
-
-function initialValue(node) {
-    node.on('created', () => {
-        if (node.context) {
-            node.context.initialValue = node.value || '';
+function $attrs(attrs, section) {
+    return (extensions) => {
+        const node = section(extensions);
+        const attributes = typeof attrs === 'function' ? attrs() : attrs;
+        if (!(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.isObject)(attributes))
+            return node;
+        if (isSlotCondition(node) && (0,_formkit_core__WEBPACK_IMPORTED_MODULE_1__.isDOM)(node.else)) {
+            node.else.attrs = { ...node.else.attrs, ...attributes };
         }
-    });
+        else if ((0,_formkit_core__WEBPACK_IMPORTED_MODULE_1__.isDOM)(node)) {
+            node.attrs = { ...node.attrs, ...attributes };
+        }
+        return node;
+    };
+}
+/**
+ *
+ * @param condition - A schema condition to apply to a section.
+ * @param then - The section that applies if the condition is true.
+ * @param otherwise - (else) The section that applies if the condition is false.
+ * @returns
+ * @public
+ */
+function $if(condition, then, otherwise) {
+    return (extensions) => {
+        const node = then(extensions);
+        if (otherwise) {
+            return {
+                if: condition,
+                then: node,
+                else: otherwise(extensions),
+            };
+        }
+        else if (isSlotCondition(node)) {
+            Object.assign(node.else, { if: condition });
+        }
+        else if (isSchemaObject(node)) {
+            Object.assign(node, { if: condition });
+        }
+        return node;
+    };
+}
+/**
+ * Applies a condition to a given schema section.
+ * @param varName - The name of the variable that holds the current instance.
+ * @param inName - The variable we are iterating over.
+ * @param section - A section to repeat
+ * @returns
+ * @public
+ */
+function $for(varName, inName, section) {
+    return (extensions) => {
+        const node = section(extensions);
+        if (isSlotCondition(node)) {
+            Object.assign(node.else, { for: `${varName} in ${inName}` });
+        }
+        else if (isSchemaObject(node)) {
+            Object.assign(node, { for: `${varName} in ${inName}` });
+        }
+        return node;
+    };
+}
+/**
+ * Extends a schema node with a given set of extensions.
+ * @param section - A section to apply an extension to.
+ * @param extendWith - A partial schema snippet to apply to the section.
+ * @returns
+ * @public
+ */
+function $extend(section, extendWith) {
+    return (extensions) => {
+        const node = section({});
+        if (isSlotCondition(node)) {
+            if (Array.isArray(node.else))
+                return node;
+            node.else = extendSchema(extendSchema(node.else, extendWith), extensions);
+            return node;
+        }
+        return extendSchema(extendSchema(node, extendWith), extensions);
+    };
+}
+/**
+ * Creates a root schema section.
+ * @param section - A section to make a root from.
+ * @returns
+ * @public
+ */
+function $root(section) {
+    return createRoot(section);
 }
 
 /**
- * Default classifications that are available.
+ * Input definition for a button.
+ * @public
  */
-const textClassification = {
+const button = {
+    /**
+     * The actual schema of the input, or a function that returns the schema.
+     */
+    schema: outer(messages(message('$message.value')), wrapper(buttonInput(icon('prefix'), prefix(), buttonLabel('$label || $ui.submit.value'), suffix(), icon('suffix'))), help('$help')),
+    /**
+     * The type of node, can be a list, group, or input.
+     */
     type: 'input',
-    schema: textSchema$1,
-};
-/**
- * The color input.
- * @public
- */
-const color = textClassification;
-/**
- * The date input.
- * @public
- */
-const date = textClassification;
-/**
- * The datetime-local input.
- * @public
- */
-const datetimeLocal = textClassification;
-/**
- * The email input.
- * @public
- */
-const email = textClassification;
-/**
- * The month input.
- * @public
- */
-const month = textClassification;
-/**
- * The number input.
- * @public
- */
-const number = textClassification;
-/**
- * The password input.
- * @public
- */
-const password = textClassification;
-/**
- * The search input.
- * @public
- */
-const search = textClassification;
-/**
- * The tel input.
- * @public
- */
-const tel = textClassification;
-/**
- * The time input.
- * @public
- */
-const time = textClassification;
-/**
- * The text input.
- * @public
- */
-const text = textClassification;
-/**
- * The url input.
- * @public
- */
-const url = textClassification;
-/**
- * The week input.
- * @public
- */
-const week = textClassification;
-/**
- * The range input.
- * @public
- */
-const range = textClassification;
-/**
- * The textarea input.
- * @public
- */
-const textarea = {
-    type: 'input',
-    schema: textareaSchema,
-    features: [initialValue],
-};
-/**
- * Buttons are all this classification:
- */
-const buttonClassification = {
-    type: 'input',
-    schema: buttonSchema,
+    /**
+     * An array of extra props to accept for this input.
+     */
+    props: [],
+    /**
+     * Additional features that should be added to your input
+     */
     features: [localize('submit'), ignore],
 };
+
 /**
- * The submit input.
- * @public
- */
-const submit = buttonClassification;
-/**
- * The button classification.
- * @public
- */
-const button = buttonClassification;
-/**
- * The hidden input.
- * @public
- */
-const hidden = {
-    type: 'input',
-    schema: hiddenSchema,
-};
-/**
- * The select input type.
- * @public
- */
-const select = {
-    type: 'input',
-    schema: textSchema,
-    props: ['options', 'placeholder'],
-    features: [options, select$1],
-};
-/**
- * The checkbox input type.
+ * Input definition for a checkbox(ess).
  * @public
  */
 const checkbox = {
+    /**
+     * The actual schema of the input, or a function that returns the schema.
+     */
+    schema: outer($if('$options == undefined', 
+    /**
+     * Single checkbox structure.
+     */
+    boxWrapper(inner(prefix(), box(), decorator(), suffix()), $if('$label', boxLabel('$label'))), 
+    /**
+     * Multi checkbox structure.
+     */
+    fieldset(legend('$label'), help('$help'), boxOptions(boxOption(boxWrapper(inner(prefix(), $extend(box(), {
+        bind: '$option.attrs',
+        attrs: {
+            id: '$option.attrs.id',
+            value: '$option.value',
+            checked: '$fns.isChecked($option.value)',
+        },
+    }), decorator(), suffix()), $if('$option.label', boxLabel('$option.label'))), boxHelp('$option.help'))))), 
+    // Help text only goes under the input when it is a single.
+    $if('$options.length === 0 && $help', help('$help')), messages(message('$message.value'))),
+    /**
+     * The type of node, can be a list, group, or input.
+     */
     type: 'input',
-    schema: boxSchema,
+    /**
+     * An array of extra props to accept for this input.
+     */
     props: ['options', 'onValue', 'offValue'],
+    /**
+     * Additional features that should be added to your input
+     */
     features: [options, checkboxes],
 };
+
 /**
- * The radio input type.
+ * Input definition for a file input.
  * @public
  */
-const radio = {
+const file = {
+    /**
+     * The actual schema of the input, or a function that returns the schema.
+     */
+    schema: outer(wrapper(label('$label'), inner(icon('prefix', 'label'), prefix(), fileInput(), fileList(fileItem(icon('fileItem'), fileName('$file.name'), $if('$value.length === 1', fileRemove(icon('fileRemove'), '$ui.remove.value')))), $if('$value.length > 1', fileRemove('$ui.removeAll.value')), noFiles(icon('fileItem'), '$ui.noFiles.value'), suffix(), icon('suffix'))), help('$help'), messages(message('$message.value'))),
+    /**
+     * The type of node, can be a list, group, or input.
+     */
     type: 'input',
-    schema: boxSchema,
-    props: ['options'],
-    features: [options, radios],
+    /**
+     * An array of extra props to accept for this input.
+     */
+    props: [],
+    /**
+     * Additional features that should be added to your input
+     */
+    features: [
+        files,
+        defaultIcon('fileItem', 'fileDoc'),
+        defaultIcon('fileRemove', 'close'),
+    ],
 };
+
 /**
- * The group input type.
- * @public
- */
-const group = {
-    type: 'group',
-    schema: groupSchema,
-    features: [disables],
-};
-/**
- * The form input type.
+ * Input definition for a form.
  * @public
  */
 const form = {
+    /**
+     * The actual schema of the input, or a function that returns the schema.
+     */
+    schema: formInput('$slots.default', messages(message('$message.value')), actions(submitInput())),
+    /**
+     * The type of node, can be a list, group, or input.
+     */
     type: 'group',
-    schema: formSchema,
+    /**
+     * An array of extra props to accept for this input.
+     */
     props: [
         'actions',
         'submit',
@@ -68441,100 +66772,218 @@ const form = {
         'submitBehavior',
         'incompleteMessage',
     ],
+    /**
+     * Additional features that should be added to your input
+     */
     features: [form$1, disables],
 };
+
 /**
- * The list input type.
+ * Input definition for a group.
+ * @public
+ */
+const group = {
+    /**
+     * The actual schema of the input, or a function that returns the schema.
+     */
+    schema: fragment('$slots.default'),
+    /**
+     * The type of node, can be a list, group, or input.
+     */
+    type: 'group',
+    /**
+     * An array of extra props to accept for this input.
+     */
+    props: [],
+    /**
+     * Additional features that should be added to your input
+     */
+    features: [disables],
+};
+
+/**
+ * Input definition for a hidden input.
+ * @public
+ */
+const hidden = {
+    /**
+     * The actual schema of the input, or a function that returns the schema.
+     */
+    schema: $root(textInput()),
+    /**
+     * The type of node, can be a list, group, or input.
+     */
+    type: 'input',
+    /**
+     * An array of extra props to accept for this input.
+     */
+    props: [],
+    /**
+     * Additional features that should be added to your input
+     */
+    features: [],
+};
+
+/**
+ * Input definition for a list.
  * @public
  */
 const list = {
+    /**
+     * The actual schema of the input, or a function that returns the schema.
+     */
+    schema: fragment('$slots.default'),
+    /**
+     * The type of node, can be a list, group, or input.
+     */
     type: 'list',
-    schema: listSchema,
+    /**
+     * An array of extra props to accept for this input.
+     */
+    props: [],
+    /**
+     * Additional features that should be added to your input
+     */
     features: [disables],
 };
+
 /**
- * The file input.
+ * Input definition for a radio.
  * @public
  */
-const file = {
+const radio = {
+    /**
+     * The actual schema of the input, or a function that returns the schema.
+     */
+    schema: outer($if('$options == undefined', 
+    /**
+     * Single radio structure.
+     */
+    boxWrapper(inner(prefix(), box(), decorator(), suffix()), $if('$label', boxLabel('$label'))), 
+    /**
+     * Multi radio structure.
+     */
+    fieldset(legend('$label'), help('$help'), boxOptions(boxOption(boxWrapper(inner(prefix(), $extend(box(), {
+        bind: '$option.attrs',
+        attrs: {
+            id: '$option.attrs.id',
+            value: '$option.value',
+            checked: '$fns.isChecked($option.value)',
+        },
+    }), decorator(), suffix()), $if('$option.label', boxLabel('$option.label'))), boxHelp('$option.help'))))), 
+    // Help text only goes under the input when it is a single.
+    $if('$options.length === 0 && $help', help('$help')), messages(message('$message.value'))),
+    /**
+     * The type of node, can be a list, group, or input.
+     */
     type: 'input',
-    schema: fileSchema,
-    features: [files],
-    props: ['files'],
+    /**
+     * An array of extra props to accept for this input.
+     */
+    props: ['options', 'onValue', 'offValue'],
+    /**
+     * Additional features that should be added to your input
+     */
+    features: [options, radios],
 };
 
-var inputs = /*#__PURE__*/Object.freeze({
+/**
+ * Input definition for a select.
+ * @public
+ */
+const select = {
+    /**
+     * The actual schema of the input, or a function that returns the schema.
+     */
+    schema: outer(wrapper(label('$label'), inner(icon('prefix'), prefix(), selectInput$1($if('$slots.default', () => '$slots.default', $if('$slots.option', optionSlot, option('$option.label')))), icon('select'), suffix(), icon('suffix'))), help('$help'), messages(message('$message.value'))),
+    /**
+     * The type of node, can be a list, group, or input.
+     */
+    type: 'input',
+    /**
+     * An array of extra props to accept for this input.
+     */
+    props: ['options', 'placeholder'],
+    /**
+     * Additional features that should be added to your input
+     */
+    features: [options, select$1, defaultIcon('select', 'down')],
+};
+
+/**
+ * Input definition for a textarea.
+ * @public
+ */
+const textarea = {
+    /**
+     * The actual schema of the input, or a function that returns the schema.
+     */
+    schema: outer(wrapper(label('$label'), inner(icon('prefix', 'label'), prefix(), textareaInput(), suffix(), icon('suffix'))), help('$help'), messages(message('$message.value'))),
+    /**
+     * The type of node, can be a list, group, or input.
+     */
+    type: 'input',
+    /**
+     * An array of extra props to accept for this input.
+     */
+    props: [],
+    /**
+     * Additional features that should be added to your input
+     */
+    features: [initialValue],
+};
+
+/**
+ * Input definition for a text.
+ * @public
+ */
+const text = {
+    /**
+     * The actual schema of the input, or a function that returns the schema.
+     */
+    schema: outer(wrapper(label('$label'), inner(icon('prefix', 'label'), prefix(), textInput(), suffix(), icon('suffix'))), help('$help'), messages(message('$message.value'))),
+    /**
+     * The type of node, can be a list, group, or input.
+     */
+    type: 'input',
+    /**
+     * An array of extra props to accept for this input.
+     */
+    props: [],
+    /**
+     * Additional features that should be added to your input
+     */
+    features: [],
+};
+
+var index = /*#__PURE__*/Object.freeze({
     __proto__: null,
-    color: color,
-    date: date,
-    datetimeLocal: datetimeLocal,
-    email: email,
-    month: month,
-    number: number,
-    password: password,
-    search: search,
-    tel: tel,
-    time: time,
-    text: text,
-    url: url,
-    week: week,
-    range: range,
-    textarea: textarea,
-    submit: submit,
     button: button,
-    hidden: hidden,
-    select: select,
+    submit: button,
     checkbox: checkbox,
-    radio: radio,
-    group: group,
+    file: file,
     form: form,
+    group: group,
+    hidden: hidden,
     list: list,
-    file: file
+    radio: radio,
+    select: select,
+    textarea: textarea,
+    text: text,
+    color: text,
+    date: text,
+    datetimeLocal: text,
+    email: text,
+    month: text,
+    number: text,
+    password: text,
+    search: text,
+    tel: text,
+    time: text,
+    url: text,
+    week: text,
+    range: text
 });
-
-/**
- *
- * @param libraries - One or many formkit urls.
- * @returns
- * @public
- */
-function createLibraryPlugin(...libraries) {
-    /**
-     * Merge all provided library items.
-     */
-    const library = libraries.reduce((merged, lib) => (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.extend)(merged, lib), {});
-    /* eslint-disable-next-line @typescript-eslint/no-empty-function */
-    const plugin = () => { };
-    /**
-     * Enables the hook that exposes all library inputs.
-     * @param node - The primary plugin
-     */
-    plugin.library = function (node) {
-        const type = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.camel)(node.props.type);
-        if ((0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(library, type)) {
-            node.define(library[type]);
-        }
-    };
-    return plugin;
-}
-
-/**
- * Export all features (#188):
- * @public
- */
-var index = {
-    checkbox: checkboxes,
-    disables,
-    files,
-    form: form$1,
-    ignore,
-    initialValue,
-    localize,
-    normalizeBoxes,
-    options,
-    radios,
-    select: select$1,
-};
 
 
 
@@ -68852,7 +67301,7 @@ const date_after = function ({ value }, compare = false) {
  */
 const alpha = function ({ value }, set = 'default') {
     const sets = {
-        default: /^[a-zA-ZÀ-ÖØ-öø-ÿĄąĆćĘęŁłŃńŚśŹźŻż]+$/,
+        default: /^[a-zA-ZÀ-ÖØ-öø-ÿĄąĆćČčĎďĘęĚěŁłŃńŇňŘřŚśŠšŤťŮůŹźŻŽžż]+$/,
         latin: /^[a-zA-Z]+$/,
     };
     const selectedSet = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(sets, set) ? set : 'default';
@@ -68866,7 +67315,7 @@ const alpha = function ({ value }, set = 'default') {
  */
 const alpha_spaces = function ({ value }, set = 'default') {
     const sets = {
-        default: /^[a-zA-ZÀ-ÖØ-öø-ÿĄąĆćĘęŁłŃńŚśŹźŻż ]+$/,
+        default: /^[a-zA-ZÀ-ÖØ-öø-ÿĄąĆćČčĎďĘęĚěŁłŃńŇňŘřŚśŠšŤťŮůŹźŻŽžż ]+$/,
         latin: /^[a-zA-Z ]+$/,
     };
     const selectedSet = (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_0__.has)(sets, set) ? set : 'default';
@@ -69138,6 +67587,361 @@ const url = function url({ value }, ...stack) {
         return false;
     }
 };
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@formkit/themes/dist/index.mjs":
+/*!*****************************************************!*\
+  !*** ./node_modules/@formkit/themes/dist/index.mjs ***!
+  \*****************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createIconHandler": () => (/* binding */ createIconHandler),
+/* harmony export */   "createThemePlugin": () => (/* binding */ createThemePlugin),
+/* harmony export */   "generateClasses": () => (/* binding */ generateClasses),
+/* harmony export */   "iconRegistry": () => (/* binding */ iconRegistry)
+/* harmony export */ });
+/* harmony import */ var _formkit_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @formkit/core */ "./node_modules/@formkit/core/dist/index.mjs");
+
+
+/**
+ * A function to generate FormKit class functions from a javascript object
+ * @param classes - An object of input types with nested objects of sectionKeys and class lists
+ * @returns FormKitClassFunctions
+ * @public
+ */
+function generateClasses(classes) {
+    const classesBySectionKey = {};
+    Object.keys(classes).forEach((type) => {
+        Object.keys(classes[type]).forEach((sectionKey) => {
+            if (!classesBySectionKey[sectionKey]) {
+                classesBySectionKey[sectionKey] = {
+                    [type]: classes[type][sectionKey],
+                };
+            }
+            else {
+                classesBySectionKey[sectionKey][type] = classes[type][sectionKey];
+            }
+        });
+    });
+    Object.keys(classesBySectionKey).forEach((sectionKey) => {
+        const classesObject = classesBySectionKey[sectionKey];
+        classesBySectionKey[sectionKey] = function (node, sectionKey) {
+            return addClassesBySection(node, sectionKey, classesObject);
+        };
+    });
+    return classesBySectionKey;
+}
+/**
+ * Updates a class list for a given sectionKey
+ * @param node - the FormKit node being operated on
+ * @param sectionKey - The section key to which the class list will be applied
+ * @param classByType - Object containing mappings of class lists to section keys
+ * @returns
+ * @public
+ */
+function addClassesBySection(node, _sectionKey, classesByType) {
+    const type = node.props.type;
+    let classList = '';
+    if (classesByType.global) {
+        classList += classesByType.global + ' ';
+    }
+    if (classesByType[type]) {
+        classList += classesByType[type];
+    }
+    const listParts = classList.split('$reset');
+    if (listParts.length > 1) {
+        return `$reset ${listParts[listParts.length - 1].trim()}`;
+    }
+    return listParts[0].trim();
+}
+/**
+ * The document's computed CSS styles
+ */
+let documentStyles = undefined;
+let documentThemeLinkTag = null;
+/**
+ * Stores the state of theme loading
+ */
+let themeDidLoad;
+let themeHasLoaded = false;
+let themeWasRequested = false;
+const themeLoaded = new Promise((res) => {
+    themeDidLoad = () => {
+        themeHasLoaded = true;
+        res();
+    };
+});
+/**
+ * Check if we are client-side
+ */
+const isClient = typeof window !== 'undefined' && typeof fetch !== 'undefined';
+documentStyles = isClient ? getComputedStyle(document.documentElement) : undefined;
+/**
+ * The FormKit icon Registry - a global record of loaded icons.
+ * @public
+ */
+const iconRegistry = {};
+/**
+ * A collection of existing icon requests to avoid duplicate fetching
+ */
+const iconRequests = {};
+/**
+ * Creates the theme plugin based on a given theme name
+ * @param theme - The name or id of the theme to apply
+ * @param icons - Icons you want to add to the global icon registry
+ * @param iconLoader - A function that handles loading an icon when it is not found in the registry
+ * @public
+ */
+function createThemePlugin(theme, icons, iconLoaderUrl, iconLoader) {
+    if (icons) {
+        // add any user-provided icons to the registry
+        Object.assign(iconRegistry, icons);
+    }
+    // if we have a theme declared, request it
+    if (isClient &&
+        !themeWasRequested &&
+        (documentStyles === null || documentStyles === void 0 ? void 0 : documentStyles.getPropertyValue('--formkit-theme'))) {
+        // we have the theme loaded locally
+        themeDidLoad();
+        themeWasRequested = true;
+    }
+    else if (theme &&
+        !themeWasRequested &&
+        isClient) {
+        // we have the theme name but need to request it remotely
+        loadTheme(theme);
+    }
+    else if (!themeWasRequested &&
+        isClient) {
+        // we don't have a discoverable theme, so don't wait for it
+        themeDidLoad();
+    }
+    const themePlugin = function themePlugin(node) {
+        var _a, _b;
+        // register the icon handler, and override with local prop value if it exists
+        node.addProps(['iconLoader', 'iconLoaderUrl']);
+        node.props.iconHandler = createIconHandler(((_a = node.props) === null || _a === void 0 ? void 0 : _a.iconLoader) ? node.props.iconLoader : iconLoader, ((_b = node.props) === null || _b === void 0 ? void 0 : _b.iconLoaderUrl) ? node.props.iconLoaderUrl : iconLoaderUrl);
+        loadIconPropIcons(node, node.props.iconHandler);
+        node.on('created', () => {
+            var _a;
+            // set up the `-icon` click handlers
+            if ((_a = node === null || node === void 0 ? void 0 : node.context) === null || _a === void 0 ? void 0 : _a.handlers) {
+                node.context.handlers.iconClick = (sectionKey) => {
+                    const clickHandlerProp = `on${sectionKey.charAt(0).toUpperCase()}${sectionKey.slice(1)}IconClick`;
+                    const handlerFunction = node.props[clickHandlerProp];
+                    if (handlerFunction && typeof handlerFunction === 'function') {
+                        return (e) => {
+                            return handlerFunction(node, e);
+                        };
+                    }
+                    return undefined;
+                };
+            }
+        });
+    };
+    themePlugin.iconHandler = createIconHandler(iconLoader, iconLoaderUrl);
+    return themePlugin;
+}
+/**
+ * Loads a FormKit theme
+ */
+function loadTheme(theme) {
+    if (!theme ||
+        !isClient ||
+        typeof getComputedStyle !== 'function') {
+        // if we're not client-side then bail
+        return;
+    }
+    // since we're client-side, flag that we've requested the theme
+    themeWasRequested = true;
+    documentThemeLinkTag = document.getElementById('formkit-theme');
+    // retrieve document styles on plugin creation when the window object exists
+    if (theme &&
+        // if we have a window object
+        isClient &&
+        // we don't have an existing theme OR the theme being set up is different
+        ((!(documentStyles === null || documentStyles === void 0 ? void 0 : documentStyles.getPropertyValue('--formkit-theme')) &&
+            !documentThemeLinkTag) || ((documentThemeLinkTag === null || documentThemeLinkTag === void 0 ? void 0 : documentThemeLinkTag.getAttribute('data-theme')) &&
+            (documentThemeLinkTag === null || documentThemeLinkTag === void 0 ? void 0 : documentThemeLinkTag.getAttribute('data-theme')) !== theme))) {
+        // if for some reason we didn't overwrite the __FKV__ token during publish
+        // then use the `latest` tag for CDN fetching. (this applies to local dev as well)
+        const formkitVersion = _formkit_core__WEBPACK_IMPORTED_MODULE_0__.FORMKIT_VERSION.startsWith('__') ? 'latest' : _formkit_core__WEBPACK_IMPORTED_MODULE_0__.FORMKIT_VERSION;
+        const themeUrl = `https://cdn.jsdelivr.net/npm/@formkit/themes@${formkitVersion}/dist/${theme}/theme.css`;
+        const link = document.createElement('link');
+        link.type = 'text/css';
+        link.rel = 'stylesheet';
+        link.id = 'formkit-theme';
+        link.setAttribute('data-theme', theme);
+        link.onload = () => {
+            documentStyles = getComputedStyle(document.documentElement); // grab new variables from theme
+            themeDidLoad();
+        };
+        document.head.appendChild(link);
+        link.href = themeUrl;
+        // if we had an existing theme being loaded, remove it.
+        if (documentThemeLinkTag) {
+            documentThemeLinkTag.remove();
+        }
+    }
+}
+/**
+ * Returns a function responsible for loading an icon by name
+ * @param iconLoader - a function for loading an icon when it's not found in the iconRegistry
+ * @public
+ */
+function createIconHandler(iconLoader, iconLoaderUrl) {
+    return (iconName) => {
+        if (typeof iconName === 'boolean') {
+            return; // do nothing if we're dealing with a boolean
+        }
+        // if we're dealing with an inline SVG, just use it as-is
+        if (iconName.startsWith('<svg')) {
+            return iconName;
+        }
+        if (typeof iconName !== 'string')
+            return; // bail if we got something that wasn't a boolean or string
+        // check if we've already loaded the icon before
+        const icon = iconRegistry[iconName];
+        // is this a default icon that should only load from a stylesheet?
+        const isDefault = iconName.startsWith('default:');
+        iconName = isDefault ? iconName.split(':')[1] : iconName;
+        let loadedIcon = undefined;
+        if (icon || iconName in iconRegistry) {
+            return icon;
+        }
+        else if (!iconRequests[iconName]) {
+            loadedIcon = getIconFromStylesheet(iconName);
+            loadedIcon = isClient && typeof loadedIcon === 'undefined' ? Promise.resolve(loadedIcon) : loadedIcon;
+            if (loadedIcon instanceof Promise) {
+                iconRequests[iconName] = loadedIcon.then((iconValue) => {
+                    if (!iconValue && typeof iconName === 'string' && !isDefault) {
+                        return loadedIcon = typeof iconLoader === 'function' ? iconLoader(iconName) : getRemoteIcon(iconName, iconLoaderUrl);
+                    }
+                    return iconValue;
+                }).then((finalIcon) => {
+                    if (typeof iconName === 'string') {
+                        iconRegistry[isDefault ? `default:${iconName}` : iconName] = finalIcon;
+                    }
+                    return finalIcon;
+                });
+            }
+            else if (typeof loadedIcon === 'string') {
+                iconRegistry[isDefault ? `default:${iconName}` : iconName] = loadedIcon;
+                return loadedIcon;
+            }
+        }
+        return iconRequests[iconName];
+    };
+}
+function getIconFromStylesheet(iconName) {
+    if (!isClient)
+        return;
+    if (themeHasLoaded) {
+        return loadStylesheetIcon(iconName);
+    }
+    else {
+        return themeLoaded.then(() => {
+            return loadStylesheetIcon(iconName);
+        });
+    }
+}
+function loadStylesheetIcon(iconName) {
+    const cssVarIcon = documentStyles === null || documentStyles === void 0 ? void 0 : documentStyles.getPropertyValue(`--fk-icon-${iconName}`);
+    if (cssVarIcon) {
+        // if we have a matching icon in the CSS properties, then decode it
+        const icon = atob(cssVarIcon);
+        if (icon.startsWith('<svg')) {
+            iconRegistry[iconName] = icon;
+            return icon;
+        }
+    }
+    return undefined;
+}
+/**
+ * Attempts to fetch a remote icon from the FormKit CDN
+ * @param iconName - The string name of the icon
+ * @public
+ */
+function getRemoteIcon(iconName, iconLoaderUrl) {
+    const formkitVersion = _formkit_core__WEBPACK_IMPORTED_MODULE_0__.FORMKIT_VERSION.startsWith('__') ? 'latest' : _formkit_core__WEBPACK_IMPORTED_MODULE_0__.FORMKIT_VERSION;
+    const fetchUrl = typeof iconLoaderUrl === 'function' ? iconLoaderUrl(iconName) : `https://cdn.jsdelivr.net/npm/@formkit/icons@${formkitVersion}/dist/icons/${iconName}.svg`;
+    if (!isClient)
+        return undefined;
+    return fetch(`${fetchUrl}`)
+        .then(async (r) => {
+        const icon = await r.text();
+        if (icon.startsWith('<svg')) {
+            return icon;
+        }
+        return undefined;
+    })
+        .catch(e => {
+        console.error(e);
+        return undefined;
+    });
+}
+/**
+ * Loads icons for the matching `-icon` props on a given node
+ */
+function loadIconPropIcons(node, iconHandler) {
+    const iconRegex = /^[a-zA-Z-]+(?:-icon|Icon)$/;
+    const iconProps = Object.keys(node.props).filter((prop) => {
+        return iconRegex.test(prop);
+    });
+    iconProps.forEach((sectionKey) => {
+        return loadPropIcon(node, iconHandler, sectionKey);
+    });
+}
+/**
+ * Loads an icon from an icon-prop declaration eg. suffix-icon="settings"
+ */
+function loadPropIcon(node, iconHandler, sectionKey) {
+    const iconName = node.props[sectionKey];
+    const loadedIcon = iconHandler(iconName);
+    const rawIconProp = `_raw${sectionKey.charAt(0).toUpperCase()}${sectionKey.slice(1)}`;
+    const clickHandlerProp = `on${sectionKey.charAt(0).toUpperCase()}${sectionKey.slice(1)}Click`;
+    node.addProps([rawIconProp, clickHandlerProp]);
+    // listen for changes to the icon prop
+    node.on(`prop:${sectionKey}`, reloadIcon);
+    if (loadedIcon instanceof Promise) {
+        return loadedIcon.then((svg) => {
+            node.props[rawIconProp] = svg;
+        });
+    }
+    else {
+        node.props[rawIconProp] = loadedIcon;
+    }
+    return;
+}
+/**
+ * reloads an icon when the prop value changes
+ */
+function reloadIcon(event) {
+    var _a;
+    const node = event.origin;
+    const iconName = event.payload;
+    const iconHandler = (_a = node === null || node === void 0 ? void 0 : node.props) === null || _a === void 0 ? void 0 : _a.iconHandler;
+    const sectionKey = event.name.split(':')[1];
+    const rawIconProp = `_raw${sectionKey.charAt(0).toUpperCase()}${sectionKey.slice(1)}`;
+    if (iconHandler && typeof iconHandler === 'function') {
+        const loadedIcon = iconHandler(iconName);
+        if (loadedIcon instanceof Promise) {
+            return loadedIcon.then((svg) => {
+                node.props[rawIconProp] = svg;
+            });
+        }
+        else {
+            node.props[rawIconProp] = loadedIcon;
+        }
+    }
+}
 
 
 
@@ -70242,6 +69046,7 @@ function fnHints(existingHints, rule) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FormKit": () => (/* binding */ FormKit),
+/* harmony export */   "FormKitIcon": () => (/* binding */ FormKitIcon),
 /* harmony export */   "FormKitSchema": () => (/* binding */ FormKitSchema),
 /* harmony export */   "bindings": () => (/* binding */ vueBindings),
 /* harmony export */   "clearErrors": () => (/* reexport safe */ _formkit_core__WEBPACK_IMPORTED_MODULE_0__.clearErrors),
@@ -70266,8 +69071,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _formkit_rules__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @formkit/rules */ "./node_modules/@formkit/rules/dist/index.mjs");
 /* harmony import */ var _formkit_validation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @formkit/validation */ "./node_modules/@formkit/validation/dist/index.mjs");
 /* harmony import */ var _formkit_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @formkit/i18n */ "./node_modules/@formkit/i18n/dist/index.mjs");
-/* harmony import */ var _formkit_observer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @formkit/observer */ "./node_modules/@formkit/observer/dist/index.mjs");
-/* harmony import */ var _formkit_dev__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @formkit/dev */ "./node_modules/@formkit/dev/dist/index.mjs");
+/* harmony import */ var _formkit_themes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @formkit/themes */ "./node_modules/@formkit/themes/dist/index.mjs");
+/* harmony import */ var _formkit_observer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @formkit/observer */ "./node_modules/@formkit/observer/dist/index.mjs");
+/* harmony import */ var _formkit_dev__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @formkit/dev */ "./node_modules/@formkit/dev/dist/index.mjs");
+
 
 
 
@@ -70695,6 +69502,8 @@ function parseSchema(library, schema) {
                     return null;
                 const instanceScope = instanceScopes.get(instanceKey) || [];
                 for (const key in values) {
+                    if (Array.isArray(values) && key === 'length')
+                        continue; // Fix #299
                     const iterationData = Object.defineProperty({
                         ...instanceScope.reduce((previousIterationData, scopedData) => {
                             if (previousIterationData.__idata) {
@@ -71264,6 +70073,9 @@ const pseudoProps = [
     /^preserve(-e|E)rrors/,
     /^[a-z]+(?:-visibility|Visibility)$/,
     /^[a-zA-Z-]+(?:-class|Class)$/,
+    'prefixIcon',
+    'suffixIcon',
+    /^[a-zA-Z-]+(?:-icon|Icon)$/,
 ];
 /**
  * Given some props, map those props to individualized props internally.
@@ -71477,6 +70289,8 @@ function useInput(props, context, options = {}) {
         const sourceKey = `${node.name}-prop`;
         (0,vue__WEBPACK_IMPORTED_MODULE_1__.watchEffect)(() => {
             const keys = Object.keys(props.inputErrors);
+            if (!keys.length)
+                node.clearErrors(true, sourceKey);
             const messages = keys.reduce((messages, key) => {
                 let value = props.inputErrors[key];
                 if (typeof value === 'string')
@@ -71579,19 +70393,22 @@ function createInput(schemaOrComponent, definitionOptions = {}) {
         type: 'input',
         ...definitionOptions,
     };
-    let schema = undefined;
+    let schema;
     if (isComponent(schemaOrComponent)) {
         const cmpName = `SchemaComponent${totalCreated++}`;
-        schema = () => ({
+        schema = (0,_formkit_inputs__WEBPACK_IMPORTED_MODULE_3__.createSection)('input', () => ({
             $cmp: cmpName,
             props: {
                 context: '$node.context',
             },
-        });
+        }));
         definition.library = { [cmpName]: (0,vue__WEBPACK_IMPORTED_MODULE_1__.markRaw)(schemaOrComponent) };
     }
-    else {
+    else if (typeof schemaOrComponent === 'function') {
         schema = schemaOrComponent;
+    }
+    else {
+        schema = (0,_formkit_inputs__WEBPACK_IMPORTED_MODULE_3__.createSection)('input', () => (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_2__.cloneAny)(schemaOrComponent));
     }
     // Use the default wrapping schema
     definition.schema = (0,_formkit_inputs__WEBPACK_IMPORTED_MODULE_3__.useSchema)(schema || 'Schema undefined');
@@ -71709,7 +70526,7 @@ const vueBindings = function vueBindings(node) {
             let className = Reflect.get(...args);
             if (!className && typeof property === 'string') {
                 if (!(0,_formkit_utils__WEBPACK_IMPORTED_MODULE_2__.has)(target, property) && !property.startsWith('__v')) {
-                    const observedNode = (0,_formkit_observer__WEBPACK_IMPORTED_MODULE_7__.createObserver)(node);
+                    const observedNode = (0,_formkit_observer__WEBPACK_IMPORTED_MODULE_8__.createObserver)(node);
                     observedNode.watch((node) => {
                         const rootClasses = typeof node.config.rootClasses === 'function'
                             ? node.config.rootClasses(property, node)
@@ -71752,7 +70569,12 @@ const vueBindings = function vueBindings(node) {
             eq: _formkit_utils__WEBPACK_IMPORTED_MODULE_2__.eq,
         },
         handlers: {
-            blur: () => node.store.set((0,_formkit_core__WEBPACK_IMPORTED_MODULE_0__.createMessage)({ key: 'blurred', visible: false, value: true })),
+            blur: (e) => {
+                node.store.set((0,_formkit_core__WEBPACK_IMPORTED_MODULE_0__.createMessage)({ key: 'blurred', visible: false, value: true }));
+                if (typeof node.props.attrs.onBlur === 'function') {
+                    node.props.attrs.onBlur(e);
+                }
+            },
             touch: () => {
                 node.store.set((0,_formkit_core__WEBPACK_IMPORTED_MODULE_0__.createMessage)({ key: 'dirty', visible: false, value: true }));
             },
@@ -71819,18 +70641,25 @@ const vueBindings = function vueBindings(node) {
     /**
      * We use a node observer to individually observe node props.
      */
-    const rootProps = [
-        'help',
-        'label',
-        'disabled',
-        'options',
-        'type',
-        'attrs',
-        'preserve',
-        'preserveErrors',
-        'id',
-    ];
-    observeProps(rootProps);
+    const rootProps = () => {
+        const props = [
+            'help',
+            'label',
+            'disabled',
+            'options',
+            'type',
+            'attrs',
+            'preserve',
+            'preserveErrors',
+            'id',
+        ];
+        const iconPattern = /^[a-zA-Z-]+(?:-icon|Icon)$/;
+        const matchingProps = Object.keys(node.props).filter((prop) => {
+            return iconPattern.test(prop);
+        });
+        return props.concat(matchingProps);
+    };
+    observeProps(rootProps());
     /**
      * Once the input is defined, deal with it.
      * @param definition - Type definition.
@@ -71928,7 +70757,7 @@ const vueBindings = function vueBindings(node) {
  * @public
  */
 const defaultConfig = (options = {}) => {
-    const { rules = {}, locales = {}, inputs: inputs$1 = {}, messages = {}, locale = undefined, ...nodeOptions } = options;
+    const { rules = {}, locales = {}, inputs: inputs$1 = {}, messages = {}, locale = undefined, theme = undefined, iconLoaderUrl = undefined, iconLoader = undefined, icons = {}, ...nodeOptions } = options;
     /**
      * The default configuration includes the validation plugin,
      * with all core-available validation rules.
@@ -71947,11 +70776,83 @@ const defaultConfig = (options = {}) => {
      * config imports all "native" inputs by default, but
      */
     const library = (0,_formkit_inputs__WEBPACK_IMPORTED_MODULE_3__.createLibraryPlugin)(_formkit_inputs__WEBPACK_IMPORTED_MODULE_3__.inputs, inputs$1);
+    /**
+     * Create the theme plugin for the user provided theme
+     */
+    const themePlugin = (0,_formkit_themes__WEBPACK_IMPORTED_MODULE_7__.createThemePlugin)(theme, icons, iconLoaderUrl, iconLoader);
     return (0,_formkit_utils__WEBPACK_IMPORTED_MODULE_2__.extend)({
-        plugins: [library, vueBindings, i18n, validation],
+        plugins: [library, themePlugin, vueBindings, i18n, validation],
         ...(!locale ? {} : { config: { locale } }),
     }, nodeOptions || {}, true);
 };
+
+/**
+ * Renders an icon using the current IconLoader set at the root FormKit config
+ * @public
+ */
+const FormKitIcon = (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
+    props: {
+        icon: {
+            type: String,
+            default: ''
+        },
+        iconLoader: {
+            type: Function,
+            default: null
+        },
+        iconLoaderUrl: {
+            type: Function,
+            default: null
+        }
+    },
+    setup(props) {
+        var _a, _b;
+        const icon = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(undefined);
+        const config = (0,vue__WEBPACK_IMPORTED_MODULE_1__.inject)(optionsSymbol, {});
+        const parent = (0,vue__WEBPACK_IMPORTED_MODULE_1__.inject)(parentSymbol, null);
+        let iconHandler = undefined;
+        if (props.iconLoader && typeof props.iconLoader === 'function') {
+            // if we have a locally supplied loader, then use it
+            iconHandler = (0,_formkit_themes__WEBPACK_IMPORTED_MODULE_7__.createIconHandler)(props.iconLoader);
+        }
+        else if (parent && ((_a = parent.props) === null || _a === void 0 ? void 0 : _a.iconLoader)) {
+            // otherwise try to inherit from a parent
+            iconHandler = (0,_formkit_themes__WEBPACK_IMPORTED_MODULE_7__.createIconHandler)(parent.props.iconLoader);
+        }
+        else if (props.iconLoaderUrl && typeof props.iconLoaderUrl === 'function') {
+            iconHandler = (0,_formkit_themes__WEBPACK_IMPORTED_MODULE_7__.createIconHandler)(iconHandler, props.iconLoaderUrl);
+        }
+        else {
+            // grab our iconHandler from the global config
+            const iconPlugin = (_b = config === null || config === void 0 ? void 0 : config.plugins) === null || _b === void 0 ? void 0 : _b.find(plugin => {
+                return typeof plugin.iconHandler === 'function';
+            });
+            if (iconPlugin) {
+                iconHandler = iconPlugin.iconHandler;
+            }
+        }
+        if (iconHandler && typeof iconHandler === 'function') {
+            const iconOrPromise = iconHandler(props.icon);
+            if (iconOrPromise instanceof Promise) {
+                iconOrPromise.then((iconValue) => {
+                    icon.value = iconValue;
+                });
+            }
+            else {
+                icon.value = iconOrPromise;
+            }
+        }
+        return () => {
+            if (icon.value) {
+                return (0,vue__WEBPACK_IMPORTED_MODULE_1__.h)('span', {
+                    class: 'formkit-icon',
+                    innerHTML: icon.value
+                });
+            }
+            return null;
+        };
+    }
+});
 
 
 

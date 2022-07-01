@@ -68,11 +68,10 @@ export const useCart = defineStore("shopState", {
             return this.customer;
         },
         getCartTotal() {
-            const cartTotalAmount = this.cart.reduce(
+            return this.cart.reduce(
                 (total, product) => total + product.price * product.quantity,
                 0
             );
-            return cartTotalAmount;
         },
     },
     persist: {
