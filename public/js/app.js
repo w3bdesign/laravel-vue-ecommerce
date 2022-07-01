@@ -20373,6 +20373,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }, _callee);
     })));
+
+    var checkout = /*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      return function checkout() {
+        return _ref3.apply(this, arguments);
+      };
+    }();
+
     var __returned__ = {
       localState: localState,
       store: store,
@@ -20381,6 +20400,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       getCartTotal: getCartTotal,
       getCustomerDetails: getCustomerDetails,
       removeProductFromCart: removeProductFromCart,
+      checkout: checkout,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       storeToRefs: pinia__WEBPACK_IMPORTED_MODULE_4__.storeToRefs,
@@ -20856,9 +20876,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }]),
         disabled: $setup.localState.paymentIsProcessing,
         onClick: _cache[0] || (_cache[0] = function ($event) {
-          return _ctx.checkout(_ctx.product);
+          return $setup.checkout(_ctx.product);
         })
-      }, " Checkout ", 10
+      }, " Place order ", 10
       /* CLASS, PROPS */
       , _hoisted_29)])], 512
       /* NEED_PATCH */

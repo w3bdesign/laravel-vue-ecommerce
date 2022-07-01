@@ -112,7 +112,7 @@
                             :disabled="localState.paymentIsProcessing"
                             @click="checkout(product)"
                         >
-                            Checkout
+                            Place order
                         </button>
                     </div>
                 </div>
@@ -172,6 +172,29 @@ onMounted(async () => {
     */
     // localState.cardElement.mount("#card-element");
 });
+
+const checkout = async () => {
+    /* const { customer } = store.state;
+      const {
+        paymentMethod,
+        error,
+      } = await localState.stripe.createPaymentMethod(
+        'card',
+        localState.cardElement,
+        {
+          billing_details: {
+            name: `${customer.firstName} ${customer.lastName}`,
+            email: customer.email,
+            address: {
+              line1: customer.address,
+              city: customer.city,
+              state: customer.state,
+              postal_code: customer.zipcode,
+            },
+          },
+        },
+      );*/
+};
 </script>
 
 <style>
