@@ -20220,6 +20220,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
+/* harmony import */ var _store_useCart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../store/useCart */ "./resources/js/store/useCart.js");
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'OrderForm',
@@ -20227,6 +20231,8 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose();
     var formSubmitted = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+    var store = (0,_store_useCart__WEBPACK_IMPORTED_MODULE_1__.useCart)(); //const { saveCustomerDetails } = storeToRefs(useCart());
+
     var formData = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       firstName: "",
       lastName: "",
@@ -20239,16 +20245,18 @@ __webpack_require__.r(__webpack_exports__);
 
     var submitHandler = function submitHandler() {
       formSubmitted.value = true;
-      alert("Submitted!");
-      console.log("Form data: ", formData);
+      store.saveCustomerDetails(formData);
     };
 
     var __returned__ = {
       formSubmitted: formSubmitted,
+      store: store,
       formData: formData,
       submitHandler: submitHandler,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
-      reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive
+      reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
+      storeToRefs: pinia__WEBPACK_IMPORTED_MODULE_2__.storeToRefs,
+      useCart: _store_useCart__WEBPACK_IMPORTED_MODULE_1__.useCart
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -20655,7 +20663,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   )), $setup.getCartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_20, "Total: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formatPrice($setup.getCartTotal)), 1
   /* TEXT */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), !$setup.getCartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h2", _hoisted_21, " Cart is currently empty ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.getCartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_order_form)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), !$setup.getCartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h2", _hoisted_21, " Cart is currently empty ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), $setup.getCartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_order_form)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Stripe: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.getCustomerDetails) + " - " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.getCustomerDetails.firstName) + " ", 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, {
     name: "fade",
     persisted: ""
   }, {
@@ -20672,7 +20682,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* CLASS, PROPS */
       , _hoisted_29)])], 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $setup.getCustomerDetails.firstName && $setup.localState.checkoutFormIsValid]])];
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $setup.getCustomerDetails.firstName]])];
     }),
     _: 1
     /* STABLE */
@@ -21726,6 +21736,10 @@ var useCart = (0,pinia__WEBPACK_IMPORTED_MODULE_1__.defineStore)("shopState", {
       return this.products.find(function (product) {
         return product.slug === slug;
       });
+    },
+    saveCustomerDetails: function saveCustomerDetails(customer) {
+      console.log("Customer: ", customer);
+      this.customer = customer;
     }
   },
   getters: {

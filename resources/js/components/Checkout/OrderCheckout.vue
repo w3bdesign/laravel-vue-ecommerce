@@ -81,13 +81,15 @@
             <div class="flex justify-center w-full align-center">
                 <order-form></order-form>
             </div>
+
+
+            Stripe:
+             {{ getCustomerDetails }} - {{ getCustomerDetails.firstName }}
+
+
+
             <transition name="fade">
-                <div
-                    v-show="
-                        getCustomerDetails.firstName &&
-                        localState.checkoutFormIsValid
-                    "
-                >
+                <div v-show="getCustomerDetails.firstName">
                     <div class="flex justify-center w-full align-center">
                         <span
                             class="h-10 p-4 text-lg font-bold text-center text-red-500"

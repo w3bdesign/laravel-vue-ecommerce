@@ -146,8 +146,15 @@
 
 <script setup>
 import { ref, reactive } from "vue";
+import { storeToRefs } from "pinia";
+
+import { useCart } from "../../store/useCart";
 
 const formSubmitted = ref(false);
+
+const store = useCart();
+
+//const { saveCustomerDetails } = storeToRefs(useCart());
 
 const formData = reactive({
     firstName: "",
@@ -161,7 +168,6 @@ const formData = reactive({
 
 const submitHandler = () => {
     formSubmitted.value = true;
-    alert("Submitted!");
-    console.log("Form data: ", formData);
+    store.saveCustomerDetails(formData);
 };
 </script>
