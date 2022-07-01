@@ -20753,7 +20753,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $setup.formData.firstName = $event;
         }),
-        validation: "required|alpha",
+        validation: "required|alpha|length:2,30",
         "validation-visibility": "live",
         placeholder: "First name",
         "outer-class": "mb-5",
@@ -20771,7 +20771,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
           return $setup.formData.lastName = $event;
         }),
-        validation: "required|alpha",
+        validation: "required|alpha|length:2,30",
         "validation-visibility": "live",
         placeholder: "Last name",
         "outer-class": "mb-5",
@@ -20789,7 +20789,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $setup.formData.address = $event;
         }),
-        validation: "required|alpha",
+        validation: "required|alpha|length:5,30",
         "validation-visibility": "live",
         placeholder: "Address",
         "outer-class": "mb-5",
@@ -20807,7 +20807,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
           return $setup.formData.zipcode = $event;
         }),
-        validation: "required|alpha",
+        validation: "required|number|length:4,8",
         "validation-visibility": "live",
         placeholder: "Zip code",
         "outer-class": "mb-5",
@@ -20825,7 +20825,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
           return $setup.formData.city = $event;
         }),
-        validation: "required|alpha",
+        validation: "required|alpha|length:3,10",
         "validation-visibility": "live",
         placeholder: "City",
         "outer-class": "mb-5",
@@ -20843,7 +20843,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
           return $setup.formData.state = $event;
         }),
-        validation: "required|alpha",
+        validation: "required|alpha|length:2,10",
         "validation-visibility": "live",
         placeholder: "State",
         "outer-class": "mb-5",
@@ -20861,7 +20861,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
           return $setup.formData.email = $event;
         }),
-        validation: "required|alpha",
+        validation: "required|email|length:5,30",
         "validation-visibility": "live",
         placeholder: "Email",
         "outer-class": "mb-5",
