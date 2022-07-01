@@ -21801,15 +21801,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_Index_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../pages/Index.vue */ "./resources/js/pages/Index.vue");
 /* harmony import */ var _pages_Products_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../pages/Products.vue */ "./resources/js/pages/Products.vue");
 /* harmony import */ var _pages_Checkout_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/Checkout.vue */ "./resources/js/pages/Checkout.vue");
-/* harmony import */ var _components_Products_SingleProduct_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Products/SingleProduct.vue */ "./resources/js/components/Products/SingleProduct.vue");
+/* harmony import */ var _pages_Categories_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/Categories.vue */ "./resources/js/pages/Categories.vue");
+/* harmony import */ var _components_Products_SingleProduct_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Products/SingleProduct.vue */ "./resources/js/components/Products/SingleProduct.vue");
 // Pages
 
 
 
-/*
-import Categories from '../pages/Categories.vue';
 
-import Success from '../pages/Success.vue';*/
+/*import Success from '../pages/Success.vue';*/
 // Components
 
 
@@ -21822,13 +21821,15 @@ var routes = [{
 }, {
   name: "single.product",
   path: "/product/:slug",
-  component: _components_Products_SingleProduct_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  component: _components_Products_SingleProduct_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
 }, {
   path: "/checkout",
   component: _pages_Checkout_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+}, {
+  path: "/categories",
+  component: _pages_Categories_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
 }
 /*
-{ path: '/categories', component: Categories },
 { path: '/success', component: Success },*/
 ];
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (routes);
@@ -47804,6 +47805,27 @@ const __exports__ = /*#__PURE__*/(0,C_GitHub_laravel_vue_node_modules_vue_loader
 /* hot reload */
 if (false) {}
 
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
+/***/ "./resources/js/pages/Categories.vue":
+/*!*******************************************!*\
+  !*** ./resources/js/pages/Categories.vue ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var C_GitHub_laravel_vue_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+const script = {}
+
+;
+const __exports__ = /*#__PURE__*/(0,C_GitHub_laravel_vue_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_0__["default"])(script, [['__file',"resources/js/pages/Categories.vue"]])
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
 
