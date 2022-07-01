@@ -46,7 +46,7 @@
 </template>
 
 <script setup>
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 
 import { useCart } from "../../store/useCart";
 import { formatPrice } from "../../utils/functions";
