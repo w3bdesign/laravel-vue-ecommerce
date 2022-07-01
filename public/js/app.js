@@ -20753,7 +20753,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $setup.formData.firstName = $event;
         }),
-        validation: "required|alpha|length:2,30",
+        validation: "required|alpha|length:3,30",
         "validation-visibility": "live",
         placeholder: "First name",
         "outer-class": "mb-5",
@@ -20789,7 +20789,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $setup.formData.address = $event;
         }),
-        validation: "required|alpha|length:5,30",
+        validation: "required|alphanumerical|length:5,30",
         "validation-visibility": "live",
         placeholder: "Address",
         "outer-class": "mb-5",
