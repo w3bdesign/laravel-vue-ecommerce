@@ -11,7 +11,7 @@
                                     name="firstName"
                                     label="First name"
                                     v-model="formData.firstName"
-                                    validation="required|alpha|length:3,30"
+                                    validation="required|alpha|length:3"
                                     validation-visibility="live"
                                     placeholder="First name"
                                     outer-class="mb-5"
@@ -27,7 +27,7 @@
                                     name="lastName"
                                     label="Last name"
                                     v-model="formData.lastName"
-                                    validation="required|alpha|length:2,30"
+                                    validation="required|alpha|length:2"
                                     validation-visibility="live"
                                     placeholder="Last name"
                                     outer-class="mb-5"
@@ -43,7 +43,7 @@
                                     name="address"
                                     label="Address"
                                     v-model="formData.address"
-                                    validation="required|alphanumerical|length:5,30"
+                                    validation="required|alphanumerical|length:5"
                                     validation-visibility="live"
                                     placeholder="Address"
                                     outer-class="mb-5"
@@ -60,7 +60,7 @@
                                     name="zipcode"
                                     label="Zip code"
                                     v-model="formData.zipcode"
-                                    validation="required|number|length:4,8"
+                                    validation="required|number|length:4"
                                     validation-visibility="live"
                                     placeholder="Zip code"
                                     outer-class="mb-5"
@@ -77,7 +77,7 @@
                                     name="city"
                                     label="City"
                                     v-model="formData.city"
-                                    validation="required|alpha|length:3,10"
+                                    validation="required|alpha|length:3"
                                     validation-visibility="live"
                                     placeholder="City"
                                     outer-class="mb-5"
@@ -94,7 +94,7 @@
                                     name="state"
                                     label="State"
                                     v-model="formData.state"
-                                    validation="required|alpha|length:2,10"
+                                    validation="required|alpha|length:2"
                                     validation-visibility="live"
                                     placeholder="State"
                                     outer-class="mb-5"
@@ -110,7 +110,7 @@
                                     name="email"
                                     label="Email"
                                     v-model="formData.email"
-                                    validation="required|email|length:5,30"
+                                    validation="required|email|length:5"
                                     validation-visibility="live"
                                     placeholder="Email"
                                     outer-class="mb-5"
@@ -125,8 +125,7 @@
                             <form-kit
                                 type="submit"
                                 label="Checkout"
-                                input-class="px-6 py-2 font-semibold text-white rounded-md
-      hover:opacity-90      
+                                input-class="px-6 py-2 font-semibold text-white rounded-md hover:opacity-90  
       transition-all
       duration-500
       ease-in-out      

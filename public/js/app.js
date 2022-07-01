@@ -20756,7 +20756,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return $setup.formData.firstName = $event;
         }),
-        validation: "required|alpha|length:3,30",
+        validation: "required|alpha|length:3",
         "validation-visibility": "live",
         placeholder: "First name",
         "outer-class": "mb-5",
@@ -20774,7 +20774,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
           return $setup.formData.lastName = $event;
         }),
-        validation: "required|alpha|length:2,30",
+        validation: "required|alpha|length:2",
         "validation-visibility": "live",
         placeholder: "Last name",
         "outer-class": "mb-5",
@@ -20792,7 +20792,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $setup.formData.address = $event;
         }),
-        validation: "required|alphanumerical|length:5,30",
+        validation: "required|alphanumerical|length:5",
         "validation-visibility": "live",
         placeholder: "Address",
         "outer-class": "mb-5",
@@ -20810,7 +20810,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
           return $setup.formData.zipcode = $event;
         }),
-        validation: "required|number|length:4,8",
+        validation: "required|number|length:4",
         "validation-visibility": "live",
         placeholder: "Zip code",
         "outer-class": "mb-5",
@@ -20828,7 +20828,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
           return $setup.formData.city = $event;
         }),
-        validation: "required|alpha|length:3,10",
+        validation: "required|alpha|length:3",
         "validation-visibility": "live",
         placeholder: "City",
         "outer-class": "mb-5",
@@ -20846,7 +20846,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
           return $setup.formData.state = $event;
         }),
-        validation: "required|alpha|length:2,10",
+        validation: "required|alpha|length:2",
         "validation-visibility": "live",
         placeholder: "State",
         "outer-class": "mb-5",
@@ -20864,7 +20864,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
           return $setup.formData.email = $event;
         }),
-        validation: "required|email|length:5,30",
+        validation: "required|email|length:5",
         "validation-visibility": "live",
         placeholder: "Email",
         "outer-class": "mb-5",
@@ -20877,7 +20877,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["modelValue"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
         type: "submit",
         label: "Checkout",
-        "input-class": "px-6 py-2 font-semibold text-white rounded-md\r\n      hover:opacity-90      \r\n      transition-all\r\n      duration-500\r\n      ease-in-out      \r\n      focus:outline-none \r\n      bg-blue-600"
+        "input-class": "px-6 py-2 font-semibold text-white rounded-md hover:opacity-90  \r\n      transition-all\r\n      duration-500\r\n      ease-in-out      \r\n      focus:outline-none \r\n      bg-blue-600"
       })])])])];
     }),
     _: 1
