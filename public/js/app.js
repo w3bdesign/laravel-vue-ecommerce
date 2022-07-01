@@ -20340,16 +20340,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
 
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var stripe, elements, cardElement;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              // localState.stripe =
-              console.log("Stripe key: ", "pk_test_nF5FAPJedaaoeeaHLxZ0R0X900AqFQTTLF");
-              _context.next = 3;
+              _context.next = 2;
               return (0,_stripe_stripe_js__WEBPACK_IMPORTED_MODULE_1__.loadStripe)("pk_test_nF5FAPJedaaoeeaHLxZ0R0X900AqFQTTLF");
 
-            case 3:
+            case 2:
+              stripe = _context.sent;
+              elements = stripe.elements();
+              cardElement = elements.create("card", {
+                classes: {
+                  base: "bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 p-3 leading-8 transition-colors duration-200 ease-in-out"
+                }
+              });
+              cardElement.mount("#card-element");
+              /* 
+              localState.cardElement = elements.create("card", {
+                  classes: {
+                      base: "bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 p-3 leading-8 transition-colors duration-200 ease-in-out",
+                  },
+              });
+              */
+              // localState.cardElement.mount("#card-element");
+
+            case 6:
             case "end":
               return _context.stop();
           }

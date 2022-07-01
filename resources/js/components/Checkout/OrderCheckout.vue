@@ -152,9 +152,17 @@ const removeProductFromCart = (product) => {
 onMounted(async () => {
     // localState.stripe =
 
-    console.log("Stripe key: ", process.env.MIX_STRIPE_KEY);
-    await loadStripe(process.env.MIX_STRIPE_KEY);
-    // const elements = localState.stripe.elements();
+    let stripe = await loadStripe(process.env.MIX_STRIPE_KEY);
+    const elements = stripe.elements();
+
+    const cardElement = elements.create("card", {
+        classes: {
+            base: "bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 p-3 leading-8 transition-colors duration-200 ease-in-out",
+        },
+    });
+
+    cardElement.mount("#card-element");
+
     /* 
    localState.cardElement = elements.create("card", {
         classes: {
