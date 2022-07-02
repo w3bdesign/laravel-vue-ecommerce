@@ -20324,7 +20324,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       cardElement: {},
       customer: {},
       orderError: false
-    });
+    }); // https://formkit.com/guides/build-a-multi-step-form
+
     var store = (0,_store_useCart__WEBPACK_IMPORTED_MODULE_3__.useCart)();
 
     var _storeToRefs = (0,pinia__WEBPACK_IMPORTED_MODULE_4__.storeToRefs)((0,_store_useCart__WEBPACK_IMPORTED_MODULE_3__.useCart)()),
@@ -20430,7 +20431,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
 /* harmony import */ var _store_useCart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../store/useCart */ "./resources/js/store/useCart.js");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -20438,7 +20441,10 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var store = (0,_store_useCart__WEBPACK_IMPORTED_MODULE_1__.useCart)();
+
+    var _storeToRefs = (0,pinia__WEBPACK_IMPORTED_MODULE_2__.storeToRefs)((0,_store_useCart__WEBPACK_IMPORTED_MODULE_1__.useCart)()),
+        saveCustomerDetails = _storeToRefs.saveCustomerDetails;
+
     var formData = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       firstName: "",
       lastName: "",
@@ -20450,14 +20456,15 @@ __webpack_require__.r(__webpack_exports__);
     });
 
     var submitHandler = function submitHandler() {
-      store.saveCustomerDetails(formData);
+      saveCustomerDetails(formData);
     };
 
     var __returned__ = {
-      store: store,
+      saveCustomerDetails: saveCustomerDetails,
       formData: formData,
       submitHandler: submitHandler,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
+      storeToRefs: pinia__WEBPACK_IMPORTED_MODULE_2__.storeToRefs,
       useCart: _store_useCart__WEBPACK_IMPORTED_MODULE_1__.useCart
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
@@ -20872,7 +20879,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_25, _hoisted_26, _hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700;", {
+        "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["px-6 py-2 font-semibold text-white rounded-md hover:opacity-90 transition-all duration-500 ease-in-out focus:outline-none bg-blue-600", {
           disabledButton: $setup.localState.paymentIsProcessing
         }]),
         disabled: $setup.localState.paymentIsProcessing,
@@ -21077,7 +21084,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["modelValue"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
         type: "submit",
         label: "Checkout",
-        "input-class": "px-6 py-2 font-semibold text-white rounded-md hover:opacity-90  \r\n      transition-all\r\n      duration-500\r\n      ease-in-out      \r\n      focus:outline-none \r\n      bg-blue-600"
+        "input-class": "px-6\r\n      py-2\r\n      font-semibold\r\n      text-white      \r\n      rounded-md\r\n      hover:opacity-90      \r\n      transition-all\r\n      duration-500\r\n      ease-in-out      \r\n      focus:outline-none \r\n      bg-blue-600"
       })])])])];
     }),
     _: 1
@@ -21989,11 +21996,6 @@ var useCart = (0,pinia__WEBPACK_IMPORTED_MODULE_1__.defineStore)("shopState", {
     clearCart: function clearCart() {
       this.cart.length = 0;
     },
-    getSingleProduct: function getSingleProduct(slug) {
-      return this.products.find(function (product) {
-        return product.slug === slug;
-      });
-    },
     saveCustomerDetails: function saveCustomerDetails(customer) {
       console.log("Customer: ", customer);
       this.customer = customer;
@@ -22004,6 +22006,11 @@ var useCart = (0,pinia__WEBPACK_IMPORTED_MODULE_1__.defineStore)("shopState", {
       return this.cart.reduce(function (total, product) {
         return total + product.quantity;
       }, 0);
+    },
+    getSingleProduct: function getSingleProduct(slug) {
+      return this.products.find(function (product) {
+        return product.slug === slug;
+      });
     },
     getCartContent: function getCartContent() {
       return this.cart;

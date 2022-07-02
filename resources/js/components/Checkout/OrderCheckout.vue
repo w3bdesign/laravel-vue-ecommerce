@@ -105,7 +105,7 @@
                     </div>
                     <div class="flex justify-center w-full align-center">
                         <button
-                            class="p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-500 rounded hover:bg-blue-700;"
+                            class="px-6 py-2 font-semibold text-white rounded-md hover:opacity-90 transition-all duration-500 ease-in-out focus:outline-none bg-blue-600"
                             :class="{
                                 disabledButton: localState.paymentIsProcessing,
                             }"
