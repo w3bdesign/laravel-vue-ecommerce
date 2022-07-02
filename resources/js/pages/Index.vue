@@ -1,4 +1,4 @@
 <template>
-    <hero-component />
+    <carousel-component />
     <showall-products />
 </template>
