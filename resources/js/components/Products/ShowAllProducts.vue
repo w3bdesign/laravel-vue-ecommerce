@@ -1,14 +1,23 @@
 <template>
-    <div v-if="store.products">
+    <div v-if="products">
         <div id="product-container" class="flex flex-wrap items-center">
-            <div v-for="product in store.products" :key="product.id"
-                class="flex flex-col mt-6 md:pr-6 xl:pr-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4">
-                <router-link :to="{
-                    name: 'single.product',
-                    params: { slug: product.slug },
-                }">
-                    <img v-if="product.imageUrl !== undefined" class="productImage" :alt="product.name"
-                        :src="product.imageUrl" />
+            <div
+                v-for="product in products"
+                :key="product.id"
+                class="flex flex-col mt-6 md:pr-6 xl:pr-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4"
+            >
+                <router-link
+                    :to="{
+                        name: 'single.product',
+                        params: { slug: product.slug },
+                    }"
+                >
+                    <img
+                        v-if="product.imageUrl !== undefined"
+                        class="productImage"
+                        :alt="product.name"
+                        :src="product.imageUrl"
+                    />
                     <div class="flex justify-center pt-3">
                         <p class="text-xl font-bold text-center cursor-pointer">
                             {{ product.name }}
@@ -20,7 +29,9 @@
                         </div>
                     </div>
                     <div class="flex justify-center pt-3">
-                        <base-button backgroundColor="bg-blue-600">View Product</base-button>
+                        <base-button backgroundColor="bg-blue-600"
+                            >View Product</base-button
+                        >
                     </div>
                 </router-link>
             </div>
@@ -31,5 +42,6 @@
 <script setup>
 import { useCart } from "../../store/useCart";
 
-const store = useCart();
+//const store = useCart();
+const { products } = useCart();
 </script>
