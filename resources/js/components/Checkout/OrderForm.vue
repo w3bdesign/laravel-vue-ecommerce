@@ -147,11 +147,10 @@
 
 <script setup>
 import { reactive } from "vue";
-import { storeToRefs } from "pinia";
 
 import { useCart } from "../../store/useCart";
 
-const { saveCustomerDetails } = storeToRefs(useCart());
+const store = useCart();
 
 const formData = reactive({
     firstName: "",
@@ -164,6 +163,6 @@ const formData = reactive({
 });
 
 const submitHandler = () => {
-    saveCustomerDetails(formData);
+    store.saveCustomerDetails(formData);
 };
 </script>

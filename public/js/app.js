@@ -20468,9 +20468,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
 /* harmony import */ var _store_useCart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../store/useCart */ "./resources/js/store/useCart.js");
-
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -20478,10 +20476,7 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-
-    var _storeToRefs = (0,pinia__WEBPACK_IMPORTED_MODULE_2__.storeToRefs)((0,_store_useCart__WEBPACK_IMPORTED_MODULE_1__.useCart)()),
-        saveCustomerDetails = _storeToRefs.saveCustomerDetails;
-
+    var store = (0,_store_useCart__WEBPACK_IMPORTED_MODULE_1__.useCart)();
     var formData = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
       firstName: "",
       lastName: "",
@@ -20493,15 +20488,14 @@ __webpack_require__.r(__webpack_exports__);
     });
 
     var submitHandler = function submitHandler() {
-      saveCustomerDetails(formData);
+      store.saveCustomerDetails(formData);
     };
 
     var __returned__ = {
-      saveCustomerDetails: saveCustomerDetails,
+      store: store,
       formData: formData,
       submitHandler: submitHandler,
       reactive: vue__WEBPACK_IMPORTED_MODULE_0__.reactive,
-      storeToRefs: pinia__WEBPACK_IMPORTED_MODULE_2__.storeToRefs,
       useCart: _store_useCart__WEBPACK_IMPORTED_MODULE_1__.useCart
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
