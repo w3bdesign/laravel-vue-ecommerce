@@ -201,7 +201,7 @@ const checkout = async () => {
             localState.cardElement,
             {
                 billing_details: {
-                    name: `Test test`,
+                    name: "Test test",
                     email: "test@test.no",
                     address: {
                         line1: "Test",
@@ -222,11 +222,20 @@ const checkout = async () => {
 
     console.log("Creating order ....");
 
-    axios.post("/api/purchase", store.getCustomerDetails).then((response) => {
+    console.log(store.getCustomerDetails);
+
+    const kunde = {
+        ...store.getCustomerDetails,
+        cart: JSON.stringify(store.getCartContent),
+        amount: 5000,
+        payment_method_id: "pm_1LHFzAA9Txo2gk0Jnb10TeU8",
+    };
+
+    console.log(kunde);
+
+    axios.post("/api/purchase", kunde).then((response) => {
         console.log(response);
     });
-
-    
 };
 </script>
 
