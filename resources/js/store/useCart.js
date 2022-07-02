@@ -45,10 +45,6 @@ export const useCart = defineStore("shopState", {
             this.cart.length = 0;
         },
 
-        getSingleProduct(slug) {
-            return this.products.find((product) => product.slug === slug);
-        },
-
         saveCustomerDetails(customer) {
             console.log("Customer: ", customer);
             this.customer = customer;
@@ -60,6 +56,9 @@ export const useCart = defineStore("shopState", {
                 (total, product) => total + product.quantity,
                 0
             );
+        },
+        getSingleProduct(slug) {
+            return this.products.find((product) => product.slug === slug);
         },
         getCartContent() {
             return this.cart;

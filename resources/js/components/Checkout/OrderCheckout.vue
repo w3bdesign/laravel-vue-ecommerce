@@ -138,6 +138,8 @@ const localState = reactive({
     orderError: false,
 });
 
+// https://formkit.com/guides/build-a-multi-step-form
+
 const store = useCart();
 
 const { getCartQuantity, getCartContent, getCartTotal, getCustomerDetails } =
