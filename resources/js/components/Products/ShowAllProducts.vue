@@ -42,6 +42,5 @@
 <script setup>
 import { useCart } from "../../store/useCart";
 
-//const store = useCart();
 const { products } = useCart();
 </script>
