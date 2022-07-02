@@ -152,18 +152,16 @@ const removeProductFromCart = (product) => {
 };
 
 onMounted(async () => {
-    // localState.stripe =
+    localState.stripe = await loadStripe(process.env.MIX_STRIPE_KEY);
+    const stripeElements = localState.stripe.elements();
 
-    let stripe = await loadStripe(process.env.MIX_STRIPE_KEY);
-    const elements = stripe.elements();
-
-    const cardElement = elements.create("card", {
+    localState.cardElement = stripeElements.create("card", {
         classes: {
             base: "bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 p-3 leading-8 transition-colors duration-200 ease-in-out",
         },
     });
 
-    cardElement.mount("#card-element");
+    localState.cardElement.mount("#card-element");
 
     /* 
    localState.cardElement = elements.create("card", {
@@ -196,6 +194,39 @@ const checkout = async () => {
           },
         },
       );*/
+
+    const { paymentMethod, error } =
+        await localState.stripe.createPaymentMethod(
+            "card",
+            localState.cardElement,
+            {
+                billing_details: {
+                    name: `Test test`,
+                    email: "test@test.no",
+                    address: {
+                        line1: "Test",
+                        city: "City",
+                        state: "State",
+                        postal_code: "1234",
+                    },
+                },
+            }
+        );
+
+    if (error) {
+        console.log("Stripe error!");
+        return;
+    }
+
+    console.log("paymentMethod: ", paymentMethod);
+
+    console.log("Creating order ....");
+
+    axios.post("/api/purchase", store.getCustomerDetails).then((response) => {
+        console.log(response);
+    });
+
+    
 };
 </script>
 

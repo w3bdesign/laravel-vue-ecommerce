@@ -20341,7 +20341,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
 
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var stripe, elements, cardElement;
+      var stripeElements;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -20350,14 +20350,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return (0,_stripe_stripe_js__WEBPACK_IMPORTED_MODULE_1__.loadStripe)("pk_test_nF5FAPJedaaoeeaHLxZ0R0X900AqFQTTLF");
 
             case 2:
-              stripe = _context.sent;
-              elements = stripe.elements();
-              cardElement = elements.create("card", {
+              localState.stripe = _context.sent;
+              stripeElements = localState.stripe.elements();
+              localState.cardElement = stripeElements.create("card", {
                 classes: {
                   base: "bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 p-3 leading-8 transition-colors duration-200 ease-in-out"
                 }
               });
-              cardElement.mount("#card-element");
+              localState.cardElement.mount("#card-element");
               /* 
               localState.cardElement = elements.create("card", {
                   classes: {
@@ -20377,10 +20377,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var checkout = /*#__PURE__*/function () {
       var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var _yield$localState$str, paymentMethod, error;
+
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                _context2.next = 2;
+                return localState.stripe.createPaymentMethod("card", localState.cardElement, {
+                  billing_details: {
+                    name: "Test test",
+                    email: "test@test.no",
+                    address: {
+                      line1: "Test",
+                      city: "City",
+                      state: "State",
+                      postal_code: "1234"
+                    }
+                  }
+                });
+
+              case 2:
+                _yield$localState$str = _context2.sent;
+                paymentMethod = _yield$localState$str.paymentMethod;
+                error = _yield$localState$str.error;
+
+                if (!error) {
+                  _context2.next = 8;
+                  break;
+                }
+
+                console.log("Stripe error!");
+                return _context2.abrupt("return");
+
+              case 8:
+                console.log("paymentMethod: ", paymentMethod);
+                console.log("Creating order ....");
+                axios.post("/api/purchase", store.getCustomerDetails).then(function (response) {
+                  console.log(response);
+                });
+
+              case 11:
               case "end":
                 return _context2.stop();
             }
