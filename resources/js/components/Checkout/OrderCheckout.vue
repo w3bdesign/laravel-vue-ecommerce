@@ -83,71 +83,13 @@
                     <order-form></order-form>
                 </div>
                 <div v-show="getCustomerDetails.firstName">
-                    <div
-                        class="relative mt-8 overflow-x-auto shadow-md sm:rounded-lg"
-                    >
-                        <table
-                            class="w-full text-lg text-left text-gray-500 dark:text-gray-400"
-                        >
-                            <thead
-                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-                            >
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">Name</th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Address
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Zipcode
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">City</th>
-                                    <th scope="col" class="px-6 py-3">State</th>
-                                    <th scope="col" class="px-6 py-3">Email</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-                                >
-                                    <th
-                                        scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap"
-                                    >
-                                        {{ getCustomerDetails.firstName }}
-                                        {{ getCustomerDetails.lastName }}
-                                    </th>
-                                    <td class="px-6 py-4">
-                                        {{ getCustomerDetails.address }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ getCustomerDetails.zipcode }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ getCustomerDetails.city }}
-                                    </td>
-                                    <td class="px-6 py-4 text-right">
-                                        {{ getCustomerDetails.state }}
-                                    </td>
-                                    <td class="px-6 py-4 text-right">
-                                        {{ getCustomerDetails.email }}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <customer-details></customer-details>
                 </div>
             </div>
             <transition name="fade">
                 <div v-show="getCustomerDetails.firstName">
-                    <div class="flex justify-center w-full align-center">
-                        <span
-                            class="h-10 p-6 text-xl font-bold text-center text-red-500"
-                            >Use the following card details for testing:
-                            <br />4242424242424242 <br />CVC any 3 digits
-                            <br />Any future date <br />Any zip code
-                        </span>
-                    </div>
-                    <h2 class="h-10 p-4 mt-32 text-2xl font-bold text-center">
+                    <fakevisa-details></fakevisa-details>
+                    <h2 class="h-10 p-4 mt-6 text-2xl font-bold text-center">
                         Stripe payment
                     </h2>
                     <div class="flex justify-center w-full p-4 align-center">
