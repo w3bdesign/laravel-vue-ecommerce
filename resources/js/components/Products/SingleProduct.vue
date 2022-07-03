@@ -54,5 +54,7 @@ import { formatPrice } from "../../utils/functions";
 const store = useCart();
 const route = useRoute();
 
-const product = store.getSingleProduct(route.params.slug);
+const { getSingleProduct } = store;
+
+const product = getSingleProduct(route.params.slug);
 </script>

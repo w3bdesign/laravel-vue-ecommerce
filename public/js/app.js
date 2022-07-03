@@ -20651,10 +20651,12 @@ __webpack_require__.r(__webpack_exports__);
     expose();
     var store = (0,_store_useCart__WEBPACK_IMPORTED_MODULE_0__.useCart)();
     var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.useRoute)();
-    var product = store.getSingleProduct(route.params.slug);
+    var getSingleProduct = store.getSingleProduct;
+    var product = getSingleProduct(route.params.slug);
     var __returned__ = {
       store: store,
       route: route,
+      getSingleProduct: getSingleProduct,
       product: product,
       useRoute: vue_router__WEBPACK_IMPORTED_MODULE_2__.useRoute,
       useCart: _store_useCart__WEBPACK_IMPORTED_MODULE_0__.useCart,
@@ -22042,8 +22044,12 @@ var useCart = (0,pinia__WEBPACK_IMPORTED_MODULE_1__.defineStore)("shopState", {
       this.cart.length = 0;
     },
     saveCustomerDetails: function saveCustomerDetails(customer) {
-      console.log("Customer: ", customer);
       this.customer = customer;
+    },
+    getSingleProduct: function getSingleProduct(slug) {
+      return this.products.find(function (product) {
+        return product.slug === slug;
+      });
     }
   },
   getters: {
@@ -22051,11 +22057,6 @@ var useCart = (0,pinia__WEBPACK_IMPORTED_MODULE_1__.defineStore)("shopState", {
       return this.cart.reduce(function (total, product) {
         return total + product.quantity;
       }, 0);
-    },
-    getSingleProduct: function getSingleProduct(slug) {
-      return this.products.find(function (product) {
-        return product.slug === slug;
-      });
     },
     getCartContent: function getCartContent() {
       return this.cart;
