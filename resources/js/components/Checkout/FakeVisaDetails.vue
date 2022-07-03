@@ -1,14 +1,14 @@
 <template>
     <div class="w-full">
-        <h2 class="h-10 py-6 mt-6 text-2xl font-bold text-center">
+        <h3 class="h-12 py-6 mt-6 text-2xl font-bold text-center">
             Use the following card details for testing:
-        </h2>
+        </h3>
     </div>
     <div class="relative mt-8 overflow-x-auto shadow-md sm:rounded-lg">
         <table
             class="w-full text-lg text-left text-gray-500 dark:text-gray-400"
         >
-            <caption>
+            <caption class="sr-only">
                 Fake visa card details
             </caption>
             <thead

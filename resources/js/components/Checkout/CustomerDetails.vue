@@ -1,7 +1,7 @@
 <template>
     <div class="relative mt-8 overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-lg text-left text-gray-500 dark:text-gray-400">
-             <caption>
+             <caption class="sr-only">
                 Customer details
             </caption>
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

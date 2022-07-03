@@ -20833,7 +20833,9 @@ var _hoisted_2 = {
   "class": "w-full text-lg text-left text-gray-500 dark:text-gray-400"
 };
 
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("caption", null, " Customer details ", -1
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("caption", {
+  "class": "sr-only"
+}, " Customer details ", -1
 /* HOISTED */
 );
 
@@ -20915,7 +20917,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"w-full\"><h2 class=\"h-10 py-6 mt-6 text-2xl font-bold text-center\"> Use the following card details for testing: </h2></div><div class=\"relative mt-8 overflow-x-auto shadow-md sm:rounded-lg\"><table class=\"w-full text-lg text-left text-gray-500 dark:text-gray-400\"><caption> Fake visa card details </caption><thead class=\"text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400\"><tr><th scope=\"col\" class=\"px-6 py-3\">Number</th><th scope=\"col\" class=\"px-6 py-3\">CVC</th><th scope=\"col\" class=\"px-6 py-3\">Date</th><th scope=\"col\" class=\"px-6 py-3\">Zipcode</th></tr></thead><tbody><tr class=\"bg-white border-b dark:bg-gray-800 dark:border-gray-700\"><th scope=\"row\" class=\"px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap\"> 4242424242424242 </th><td class=\"px-6 py-4\">Any 3 digits</td><td class=\"px-6 py-4\">Any future date</td><td class=\"px-6 py-4\">Any zip code</td></tr></tbody></table></div>", 2);
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"w-full\"><h3 class=\"h-12 py-6 mt-6 text-2xl font-bold text-center\"> Use the following card details for testing: </h3></div><div class=\"relative mt-8 overflow-x-auto shadow-md sm:rounded-lg\"><table class=\"w-full text-lg text-left text-gray-500 dark:text-gray-400\"><caption class=\"sr-only\"> Fake visa card details </caption><thead class=\"text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400\"><tr><th scope=\"col\" class=\"px-6 py-3\">Number</th><th scope=\"col\" class=\"px-6 py-3\">CVC</th><th scope=\"col\" class=\"px-6 py-3\">Date</th><th scope=\"col\" class=\"px-6 py-3\">Zipcode</th></tr></thead><tbody><tr class=\"bg-white border-b dark:bg-gray-800 dark:border-gray-700\"><th scope=\"row\" class=\"px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap\"> 4242424242424242 </th><td class=\"px-6 py-4\">Any 3 digits</td><td class=\"px-6 py-4\">Any future date</td><td class=\"px-6 py-4\">Any zip code</td></tr></tbody></table></div>", 2);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return _hoisted_1;
