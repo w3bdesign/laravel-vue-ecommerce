@@ -20413,24 +20413,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   break;
                 }
 
-                console.log("Stripe error!");
+                localState.orderError = "Error";
                 return _context2.abrupt("return");
 
               case 8:
-                console.log("paymentMethod: ", paymentMethod);
-                console.log("Creating order ....");
-                console.log(store.getCustomerDetails);
                 kunde = _objectSpread(_objectSpread({}, store.getCustomerDetails), {}, {
                   cart: JSON.stringify(store.getCartContent),
                   amount: 5000,
-                  payment_method_id: "pm_1LHFzAA9Txo2gk0Jnb10TeU8"
+                  payment_method_id: paymentMethod.id
                 });
-                console.log(kunde);
                 axios.post("/api/purchase", kunde).then(function (response) {
+                  localState.paymentIsProcessing = true;
                   console.log(response);
+                  console.log(response.statusText);
+                })["catch"](function () {
+                  localState.paymentIsProcessing = false;
+                  localState.orderError = true;
                 });
 
-              case 14:
+              case 10:
               case "end":
                 return _context2.stop();
             }

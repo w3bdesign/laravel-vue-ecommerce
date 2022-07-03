@@ -174,27 +174,6 @@ onMounted(async () => {
 });
 
 const checkout = async () => {
-    /* const { customer } = store.state;
-      const {
-        paymentMethod,
-        error,
-      } = await localState.stripe.createPaymentMethod(
-        'card',
-        localState.cardElement,
-        {
-          billing_details: {
-            name: `${customer.firstName} ${customer.lastName}`,
-            email: customer.email,
-            address: {
-              line1: customer.address,
-              city: customer.city,
-              state: customer.state,
-              postal_code: customer.zipcode,
-            },
-          },
-        },
-      );*/
-
     const { paymentMethod, error } =
         await localState.stripe.createPaymentMethod(
             "card",
@@ -214,28 +193,28 @@ const checkout = async () => {
         );
 
     if (error) {
-        console.log("Stripe error!");
+        localState.orderError = "Error";
         return;
     }
-
-    console.log("paymentMethod: ", paymentMethod);
-
-    console.log("Creating order ....");
-
-    console.log(store.getCustomerDetails);
 
     const kunde = {
         ...store.getCustomerDetails,
         cart: JSON.stringify(store.getCartContent),
         amount: 5000,
-        payment_method_id: "pm_1LHFzAA9Txo2gk0Jnb10TeU8",
+        payment_method_id: paymentMethod.id,
     };
 
-    console.log(kunde);
-
-    axios.post("/api/purchase", kunde).then((response) => {
-        console.log(response);
-    });
+    axios
+        .post("/api/purchase", kunde)
+        .then((response) => {
+            localState.paymentIsProcessing = true;
+            console.log(response);
+            console.log(response.statusText);
+        })
+        .catch(() => {
+            localState.paymentIsProcessing = false;
+            localState.orderError = true;
+        });
 };
 </script>
 
