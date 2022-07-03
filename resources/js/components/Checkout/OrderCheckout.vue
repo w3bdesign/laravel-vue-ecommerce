@@ -157,15 +157,6 @@ onMounted(async () => {
     });
 
     localState.cardElement.mount("#card-element");
-
-    /* 
-   localState.cardElement = elements.create("card", {
-        classes: {
-            base: "bg-gray-100 rounded border border-gray-300 focus:border-indigo-500 text-base outline-none text-gray-700 p-3 leading-8 transition-colors duration-200 ease-in-out",
-        },
-    });
-    */
-    // localState.cardElement.mount("#card-element");
 });
 
 const checkout = async () => {
