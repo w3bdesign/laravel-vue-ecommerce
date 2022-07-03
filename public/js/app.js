@@ -21131,7 +21131,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["modelValue"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_form_kit, {
         type: "submit",
         label: "Checkout",
-        "input-class": "px-6\r\n      py-2\r\n      font-semibold\r\n      text-white      \r\n      rounded-md\r\n      hover:opacity-90      \r\n      transition-all\r\n      duration-500\r\n      ease-in-out      \r\n      focus:outline-none \r\n      bg-blue-600"
+        "input-class": "px-6  py-2 font-semibold text-white rounded-md  hover:opacity-90 transition-all duration-500 ease-in-out focus:outline-none  bg-blue-600"
       })])])])];
     }),
     _: 1

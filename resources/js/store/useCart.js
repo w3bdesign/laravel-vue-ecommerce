@@ -24,7 +24,6 @@ export const useCart = defineStore("shopState", {
                 })
                 .catch((error) => (this.error = error));
         },
-
         addToCart({ item }) {
             const foundProductInCartIndex = this.cart.findIndex(
                 (cartItem) => item.slug === cartItem.slug
@@ -44,11 +43,9 @@ export const useCart = defineStore("shopState", {
         clearCart() {
             this.cart.length = 0;
         },
-
         saveCustomerDetails(customer) {
             this.customer = customer;
         },
-
         getSingleProduct(slug) {
             return this.products.find((product) => product.slug === slug);
         },
@@ -60,6 +57,7 @@ export const useCart = defineStore("shopState", {
                 0
             );
         },
+      
 
         getCartContent() {
             return this.cart;
