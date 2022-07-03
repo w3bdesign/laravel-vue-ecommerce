@@ -74,11 +74,11 @@
         <h2 v-if="!getCartQuantity" class="m-4 text-3xl text-center">
             Cart is currently empty
         </h2>
-        <div v-if="getCartQuantity">
+        <div v-else>
             <h2 class="h-10 m-2 py-4 text-3xl font-bold text-center">
                 Customer Details
             </h2>
-            <div class="flex justify-center w-full align-center">
+            <div class="">
                 <div v-show="!getCustomerDetails.firstName">
                     <order-form></order-form>
                 </div>
@@ -92,7 +92,7 @@
                     <h2 class="h-10 p-4 mt-6 text-2xl font-bold text-center">
                         Stripe payment
                     </h2>
-                    <div class="flex justify-center w-full p-4 align-center">
+                    <div class="flex justify-center w-full align-center">
                         <div
                             id="card-element"
                             class="w-full h-16 mt-6 lg:w-5/12 xl:w-5/12"
@@ -102,7 +102,7 @@
                     </div>
                     <div class="flex justify-center w-full align-center">
                         <button
-                            class="px-6 py-2 font-semibold text-white rounded-md hover:opacity-90 transition-all duration-500 ease-in-out focus:outline-none bg-blue-600"
+                            class="mt-6 px-6 py-2 font-semibold text-white rounded-md hover:opacity-90 transition-all duration-500 ease-in-out focus:outline-none bg-blue-600"
                             :class="{
                                 disabledButton: localState.paymentIsProcessing,
                             }"
@@ -138,7 +138,7 @@ const localState = reactive({
 const store = useCart();
 
 const { getCartQuantity, getCartContent, getCartTotal, getCustomerDetails } =
-    storeToRefs(useCart());
+    storeToRefs(store);
 
 const removeProductFromCart = (product) => {
     localState.removingCartItem = true;
@@ -194,8 +194,10 @@ const checkout = async () => {
         .post("/api/purchase", kunde)
         .then((response) => {
             localState.paymentIsProcessing = true;
-            console.log(response);
-            console.log(response.statusText);
+            if (response.statusText === "Created") 
+            {
+                
+            }
         })
         .catch(() => {
             localState.paymentIsProcessing = false;
