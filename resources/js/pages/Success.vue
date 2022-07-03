@@ -1,0 +1,3 @@
+<template>
+Great success
+</template>

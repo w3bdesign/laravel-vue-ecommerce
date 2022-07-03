@@ -3,8 +3,7 @@ import Index from "../pages/Index.vue";
 import Products from "../pages/Products.vue";
 import Checkout from "../pages/Checkout.vue";
 import Categories from "../pages/Categories.vue";
-
-/*import Success from '../pages/Success.vue';*/
+import Success from "../pages/Success.vue";
 
 // Components
 import SingleProduct from "../components/Products/SingleProduct.vue";
@@ -19,9 +18,7 @@ const routes = [
     },
     { path: "/checkout", component: Checkout },
     { path: "/categories", component: Categories },
-    /*
-
-{ path: '/success', component: Success },*/
+    { path: "/success", component: Success },
 ];
 
 export default routes;
