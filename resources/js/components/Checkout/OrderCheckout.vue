@@ -194,7 +194,9 @@ const checkout = async () => {
         .post("/api/purchase", kunde)
         .then((response) => {
             localState.paymentIsProcessing = true;
-            if (response.statusText === "Created") {
+            if (response.statusText === "Created") 
+            {
+                
             }
         })
         .catch(() => {
@@ -204,7 +206,7 @@ const checkout = async () => {
 };
 </script>
 
-<style scoped>
+<style>
 .disabledButton {
     @apply cursor-not-allowed opacity-50;
 }
@@ -233,23 +235,5 @@ const checkout = async () => {
 .fade-enter-from,
 .fade-leave-to {
     opacity: 0;
-}
-
-@media (min-width: 640px) {
-    table {
-        display: inline-table !important;
-    }
-
-    thead tr:not(:first-child) {
-        display: none;
-    }
-}
-
-td:not(:last-child) {
-    border-bottom: 0;
-}
-
-th:not(:last-child) {
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 }
 </style>
