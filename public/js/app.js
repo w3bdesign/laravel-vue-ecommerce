@@ -20917,7 +20917,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"w-full\"><h3 class=\"h-12 py-6 mt-6 text-2xl font-bold text-center\"> Use the following card details for testing: </h3></div><div class=\"relative mt-8 overflow-x-auto shadow-md sm:rounded-lg\"><table class=\"w-full text-lg text-left text-gray-500 dark:text-gray-400\"><caption class=\"sr-only\"> Fake visa card details </caption><thead class=\"text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400\"><tr><th scope=\"col\" class=\"px-6 py-3\">Number</th><th scope=\"col\" class=\"px-6 py-3\">CVC</th><th scope=\"col\" class=\"px-6 py-3\">Date</th><th scope=\"col\" class=\"px-6 py-3\">Zipcode</th></tr></thead><tbody><tr class=\"bg-white border-b dark:bg-gray-800 dark:border-gray-700\"><th scope=\"row\" class=\"px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap\"> 4242424242424242 </th><td class=\"px-6 py-4\">Any 3 digits</td><td class=\"px-6 py-4\">Any future date</td><td class=\"px-6 py-4\">Any zip code</td></tr></tbody></table><table class=\"w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5\"><thead class=\"text-white\"><tr class=\"bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0\"><th class=\"p-3 text-left\">Name</th><th class=\"p-3 text-left\">Email</th><th class=\"p-3 text-left\" width=\"110px\">Actions</th></tr><tr class=\"bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0\"><th class=\"p-3 text-left\">Name</th><th class=\"p-3 text-left\">Email</th><th class=\"p-3 text-left\" width=\"110px\">Actions</th></tr><tr class=\"bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0\"><th class=\"p-3 text-left\">Name</th><th class=\"p-3 text-left\">Email</th><th class=\"p-3 text-left\" width=\"110px\">Actions</th></tr><tr class=\"bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0\"><th class=\"p-3 text-left\">Name</th><th class=\"p-3 text-left\">Email</th><th class=\"p-3 text-left\" width=\"110px\">Actions</th></tr></thead><tbody class=\"flex-1 sm:flex-none\"><tr class=\"flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0\"><td class=\"border-grey-light border hover:bg-gray-100 p-3\">John Covv</td><td class=\"border-grey-light border hover:bg-gray-100 p-3 truncate\">contato@johncovv.com</td><td class=\"border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer\">Delete</td></tr><tr class=\"flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0\"><td class=\"border-grey-light border hover:bg-gray-100 p-3\">Michael Jackson</td><td class=\"border-grey-light border hover:bg-gray-100 p-3 truncate\">m_jackson@mail.com</td><td class=\"border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer\">Delete</td></tr><tr class=\"flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0\"><td class=\"border-grey-light border hover:bg-gray-100 p-3\">Julia</td><td class=\"border-grey-light border hover:bg-gray-100 p-3 truncate\">julia@mail.com</td><td class=\"border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer\">Delete</td></tr><tr class=\"flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0\"><td class=\"border-grey-light border hover:bg-gray-100 p-3\">Martin Madrazo</td><td class=\"border-grey-light border hover:bg-gray-100 p-3 truncate\">martin.madrazo@mail.com</td><td class=\"border-grey-light border hover:bg-gray-100 p-3 text-red-400 hover:text-red-600 hover:font-medium cursor-pointer\">Delete</td></tr></tbody></table></div>", 2);
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"w-full\"><h3 class=\"h-12 py-6 mt-6 text-2xl font-bold text-center\"> Use the following card details for testing: </h3></div><div class=\"relative mt-8 overflow-x-auto\"><table class=\"w-full text-lg text-left text-gray-500 dark:text-gray-400\"><caption class=\"sr-only\"> Fake visa card details </caption><thead class=\"text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400\"><tr><th scope=\"col\" class=\"px-6 py-3\">Number</th><th scope=\"col\" class=\"px-6 py-3\">CVC</th><th scope=\"col\" class=\"px-6 py-3\">Date</th><th scope=\"col\" class=\"px-6 py-3\">Zipcode</th></tr></thead><tbody><tr class=\"bg-white border-b dark:bg-gray-800 dark:border-gray-700\"><th scope=\"row\" class=\"px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap\"> 4242424242424242 </th><td class=\"px-6 py-4\">Any 3 digits</td><td class=\"px-6 py-4\">Any future date</td><td class=\"px-6 py-4\">Any zip code</td></tr></tbody></table><table class=\"w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5\"><caption class=\"sr-only\"> Fake visa card details </caption><thead class=\"text-white\"><tr class=\"bg-gray-600 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0\"><th scope=\"col\" class=\"p-3 text-left\">Number</th><th scope=\"col\" class=\"p-3 text-left\">CVC</th><th scope=\"col\" class=\"p-3 text-left\">Date</th><th scope=\"col\" class=\"p-3 text-left\">Zipcode</th></tr></thead><tbody class=\"flex-1 sm:flex-none\"><tr class=\"flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0\"><td class=\"border-grey-light border hover:bg-gray-100 p-3\"> 4242424242424242 </td><td class=\"border-grey-light border hover:bg-gray-100 p-3\"> Any 3 digits </td><td class=\"border-grey-light border hover:bg-gray-100 p-3\"> Any future date </td><td class=\"border-grey-light border hover:bg-gray-100 p-3\"> Any zip code </td></tr></tbody></table></div>", 2);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return _hoisted_1;
@@ -21803,6 +21803,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 10
   /* CLASS, PROPS */
   , _hoisted_1);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/base/BaseTable.vue?vue&type=template&id=759b012a":
+/*!************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/base/BaseTable.vue?vue&type=template&id=759b012a ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+function render(_ctx, _cache) {
+  return " Table ";
 }
 
 /***/ }),
@@ -24247,7 +24264,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n@media (min-width: 640px) {\ntable {\r\n      display: inline-table !important;\n}\nthead tr:not(:first-child) {\r\n      display: none;\n}\n}\ntd:not(:last-child) {\r\n    border-bottom: 0;\n}\nth:not(:last-child) {\r\n    border-bottom: 2px solid rgba(0, 0, 0, .1);\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n@media (min-width: 640px) {\ntable {\r\n        display: inline-table !important;\n}\nthead tr:not(:first-child) {\r\n        display: none;\n}\n}\ntd:not(:last-child) {\r\n    border-bottom: 0;\n}\nth:not(:last-child) {\r\n    border-bottom: 2px solid rgba(0, 0, 0, 0.1);\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48178,6 +48195,32 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/components/base/BaseTable.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/base/BaseTable.vue ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _BaseTable_vue_vue_type_template_id_759b012a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaseTable.vue?vue&type=template&id=759b012a */ "./resources/js/components/base/BaseTable.vue?vue&type=template&id=759b012a");
+/* harmony import */ var C_GitHub_laravel_vue_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+const script = {}
+
+;
+const __exports__ = /*#__PURE__*/(0,C_GitHub_laravel_vue_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_1__["default"])(script, [['render',_BaseTable_vue_vue_type_template_id_759b012a__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/components/base/BaseTable.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/layout/Layout.vue":
 /*!****************************************!*\
   !*** ./resources/js/layout/Layout.vue ***!
@@ -48663,6 +48706,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BaseButton_vue_vue_type_template_id_a11f00f4__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BaseButton_vue_vue_type_template_id_a11f00f4__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./BaseButton.vue?vue&type=template&id=a11f00f4 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/base/BaseButton.vue?vue&type=template&id=a11f00f4");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/base/BaseTable.vue?vue&type=template&id=759b012a":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/base/BaseTable.vue?vue&type=template&id=759b012a ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BaseTable_vue_vue_type_template_id_759b012a__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BaseTable_vue_vue_type_template_id_759b012a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./BaseTable.vue?vue&type=template&id=759b012a */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/components/base/BaseTable.vue?vue&type=template&id=759b012a");
 
 
 /***/ }),
@@ -52561,7 +52620,8 @@ function compileToFunction(template, options) {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var map = {
-	"./BaseButton.vue": "./resources/js/components/base/BaseButton.vue"
+	"./BaseButton.vue": "./resources/js/components/base/BaseButton.vue",
+	"./BaseTable.vue": "./resources/js/components/base/BaseTable.vue"
 };
 
 
