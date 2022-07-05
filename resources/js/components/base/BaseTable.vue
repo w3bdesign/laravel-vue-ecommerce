@@ -31,17 +31,12 @@
                 <tr
                     class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0"
                 >
-                    <td class="border-grey-light border hover:bg-gray-100 p-3">
-                        4242424242424242
-                    </td>
-                    <td class="border-grey-light border hover:bg-gray-100 p-3">
-                        Any 3 digits
-                    </td>
-                    <td class="border-grey-light border hover:bg-gray-100 p-3">
-                        Any future date
-                    </td>
-                    <td class="border-grey-light border hover:bg-gray-100 p-3">
-                        Any zip code
+                    <td
+                        v-for="data in tableData"
+                        :key="data"
+                        class="border-grey-light border hover:bg-gray-100 p-3"
+                    >
+                        {{ data }}
                     </td>
                 </tr>
             </tbody>
