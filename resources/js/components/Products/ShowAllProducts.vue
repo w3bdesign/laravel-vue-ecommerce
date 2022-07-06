@@ -9,11 +9,11 @@
         <router-link
           :to="{
             name: 'single.product',
-            params: { slug: product.slug },
+            params: { slug: product.slug, product: JSON.stringify(product) },
           }"
         >
           <img
-            v-if="product.imageUrl !== undefined"
+            v-if="product.imageUrl"
             class="productImage"
             :alt="product.name"
             :src="product.imageUrl"
