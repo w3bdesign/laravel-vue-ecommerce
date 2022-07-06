@@ -22241,25 +22241,34 @@ var useCart = (0,pinia__WEBPACK_IMPORTED_MODULE_1__.defineStore)("shopState", {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/products").then(function (response) {
-                  if (response.data) {
-                    _this.products = response.data;
-                    _this.loading = false;
-                  }
-                })["catch"](function (error) {
-                  return _this.error = error;
-                });
+                _context.prev = 0;
+                _this.loading = true;
+                _context.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/products");
 
-              case 1:
+              case 4:
+                response = _context.sent;
+                _this.products = response.data;
+                _this.loading = false;
+                _context.next = 12;
+                break;
+
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](0);
+                _this.error = _context.t0;
+
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[0, 9]]);
       }))();
     },
     addToCart: function addToCart(_ref) {

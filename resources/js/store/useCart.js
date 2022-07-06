@@ -15,15 +15,24 @@ export const useCart = defineStore("shopState", {
     state: () => state,
     actions: {
         async getProductsFromApi() {
-            axios
+            try {
+                this.loading = true;
+                const response = await axios.get("/api/products");
+                this.products = response.data;
+                this.loading = false;
+            } catch (error) {
+                this.error = error;
+            }
+
+            /*  await axios
                 .get("/api/products")
                 .then((response) => {
                     if (response.data) {
                         this.products = response.data;
-                        this.loading = false
+                        this.loading = false;
                     }
                 })
-                .catch((error) => (this.error = error));
+                .catch((error) => (this.error = error));*/
         },
         addToCart({ item }) {
             const foundProductInCartIndex = this.cart.findIndex(
@@ -58,7 +67,6 @@ export const useCart = defineStore("shopState", {
                 0
             );
         },
-      
 
         getCartContent() {
             return this.cart;
