@@ -20992,21 +20992,17 @@ var _hoisted_22 = {
 
 var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
   "class": "h-10 m-2 py-4 text-3xl font-bold text-center"
-}, " Customer Details ", -1
+}, "Customer Details", -1
 /* HOISTED */
 );
 
-var _hoisted_24 = {
-  "class": ""
-};
-
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
   "class": "h-10 p-4 mt-6 text-2xl font-bold text-center"
-}, " Stripe payment ", -1
+}, "Stripe payment", -1
 /* HOISTED */
 );
 
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "flex justify-center w-full align-center"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   id: "card-element",
@@ -21015,10 +21011,10 @@ var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_27 = {
+var _hoisted_26 = {
   "class": "flex justify-center w-full align-center"
 };
-var _hoisted_28 = ["disabled"];
+var _hoisted_27 = ["disabled"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_order_form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("order-form");
 
@@ -21057,7 +21053,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   )), $setup.getCartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_20, "Total: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formatPrice($setup.getCartTotal)), 1
   /* TEXT */
-  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), !$setup.getCartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h2", _hoisted_21, " Cart is currently empty ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_order_form)], 512
+  )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), !$setup.getCartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("h2", _hoisted_21, " Cart is currently empty ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, [_hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_order_form)], 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$setup.getCustomerDetails.firstName]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_customer_details)], 512
   /* NEED_PATCH */
@@ -21066,7 +21062,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     persisted: ""
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_fakevisa_details), _hoisted_25, _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_fakevisa_details), _hoisted_24, _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["mt-6 px-6 py-2 font-semibold text-white rounded-md hover:opacity-90 transition-all duration-500 ease-in-out focus:outline-none bg-blue-600", {
           disabledButton: $setup.localState.paymentIsProcessing
         }]),
@@ -21076,7 +21072,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         })
       }, " Place order ", 10
       /* CLASS, PROPS */
-      , _hoisted_28)])], 512
+      , _hoisted_27)])], 512
       /* NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $setup.getCustomerDetails.firstName]])];
     }),
@@ -21276,7 +21272,7 @@ var _hoisted_3 = {
   "class": "p-6"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("footer", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, " Copyright © " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.todayDate) + " Daniel / w3bdesign ", 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("footer", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, "Copyright © " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.todayDate) + " Daniel / w3bdesign", 1
   /* TEXT */
   )])]);
 }
@@ -21335,7 +21331,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         to: "/checkout"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, " Quantity: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.getCartQuantity), 1
+          return [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, "Quantity: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.getCartQuantity), 1
           /* TEXT */
           )];
         }),
@@ -21495,7 +21491,7 @@ var _hoisted_1 = {
   "data-carousel": "static"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"overflow-hidden relative h-56 rounded-lg sm:h-64 xl:h-80 2xl:h-96\"><!-- Item 1 --><div class=\"hidden duration-700 ease-in-out\" data-carousel-item><div class=\"flex items-start justify-center w-full px-6 tracking-wide\"><span class=\"z-40 absolute top-1/2 p-4 my-4 text-2xl text-black bg-white rounded-lg mt-4\">MacBook Air 14 In Store now!</span><img src=\"/images/Hero.jpg\" class=\"block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2\" alt=\"...\"></div></div><!-- Item 2 --><div class=\"hidden duration-700 ease-in-out\" data-carousel-item><img src=\"/images/Hero.jpg\" class=\"block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2\" alt=\"...\"></div><!-- Item 3 --><div class=\"hidden duration-700 ease-in-out\" data-carousel-item><img src=\"/images/Hero.jpg\" class=\"block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2\" alt=\"...\"></div></div>", 1);
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"overflow-hidden relative h-56 rounded-lg sm:h-64 xl:h-80 2xl:h-96\"><!-- Item 1 --><div class=\"hidden duration-700 ease-in-out\" data-carousel-item><div class=\"flex items-start justify-center w-full px-6 tracking-wide\"><span class=\"z-40 absolute top-1/2 p-4 my-4 text-2xl text-black bg-white rounded-lg mt-4\">MacBook Air 14 In Store now!!!</span><img src=\"/images/Hero.jpg\" class=\"block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2\" alt=\"...\"></div></div><!-- Item 2 --><div class=\"hidden duration-700 ease-in-out\" data-carousel-item><img src=\"/images/Hero.jpg\" class=\"block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2\" alt=\"...\"></div><!-- Item 3 --><div class=\"hidden duration-700 ease-in-out\" data-carousel-item><img src=\"/images/Hero.jpg\" class=\"block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2\" alt=\"...\"></div></div>", 1);
 
 var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "flex absolute bottom-5 left-1/2 z-30 space-x-3 -translate-x-1/2"
@@ -24294,7 +24290,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.disabledButton {\n@apply cursor-not-allowed opacity-50;\n}\n.flex-container {\n@apply container mx-auto mt-4 flex border border-gray-300 rounded-lg shadow flex-wrap flex-row justify-around items-center content-center;\n}\n.item {\n@apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;\n}\n.inline-block {\n@apply inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;\n}\n.removing {\n@apply animate-spin cursor-not-allowed;\n}\n.fade-enter-active,\r\n.fade-leave-active {\r\n    transition: all 0.5s ease;\n}\n.fade-enter-from,\r\n.fade-leave-to {\r\n    opacity: 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.disabledButton {\n@apply cursor-not-allowed opacity-50;\n}\n.flex-container {\n@apply container mx-auto mt-4 flex border border-gray-300 rounded-lg shadow flex-wrap flex-row justify-around items-center content-center;\n}\n.item {\n@apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;\n}\n.inline-block {\n@apply inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;\n}\n.removing {\n@apply animate-spin cursor-not-allowed;\n}\n.fade-enter-active,\r\n.fade-leave-active {\r\n  transition: all 0.5s ease;\n}\n.fade-enter-from,\r\n.fade-leave-to {\r\n  opacity: 0;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24318,7 +24314,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.formkit-messages[data-v-7ee4fe98] {\r\n    color: red !important;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.formkit-messages[data-v-7ee4fe98] {\r\n  color: red !important;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24342,7 +24338,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.cartQuantity[data-v-a5f35132] {\n@apply absolute w-6 h-6 pb-2 ml-16 -mt-12 text-center text-white bg-black rounded-full lg:ml-14;\n}\n.fade-enter-active[data-v-a5f35132],\r\n.fade-leave-active[data-v-a5f35132] {\r\n    transition: all 1.5s ease;\n}\n.fade-enter-from[data-v-a5f35132],\r\n.fade-leave-to[data-v-a5f35132] {\r\n    opacity: 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.cartQuantity[data-v-a5f35132] {\n@apply absolute w-6 h-6 pb-2 ml-16 -mt-12 text-center text-white bg-black rounded-full lg:ml-14;\n}\n.fade-enter-active[data-v-a5f35132],\r\n.fade-leave-active[data-v-a5f35132] {\r\n  transition: all 1.5s ease;\n}\n.fade-enter-from[data-v-a5f35132],\r\n.fade-leave-to[data-v-a5f35132] {\r\n  opacity: 0;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -24366,7 +24362,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.link-underline[data-v-41f95097] {\r\n    border-bottom-width: 0;\r\n    background-image: linear-gradient(transparent, transparent),\r\n        linear-gradient(#fff, #fff);\r\n    background-size: 0 3px;\r\n    background-position: 0 100%;\r\n    background-repeat: no-repeat;\r\n    transition: background-size 0.3s ease-in-out;\n}\n.link-underline-blue[data-v-41f95097] {\r\n    background-image: linear-gradient(transparent, transparent),\r\n        linear-gradient(rgb(42, 53, 217), rgb(42, 53, 217));\n}\n.link-underline[data-v-41f95097]:hover {\r\n    background-size: 100% 3px;\r\n    background-position: 0 100%;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.link-underline[data-v-41f95097] {\r\n  border-bottom-width: 0;\r\n  background-image: linear-gradient(transparent, transparent), linear-gradient(#fff, #fff);\r\n  background-size: 0 3px;\r\n  background-position: 0 100%;\r\n  background-repeat: no-repeat;\r\n  transition: background-size 0.3s ease-in-out;\n}\n.link-underline-blue[data-v-41f95097] {\r\n  background-image: linear-gradient(transparent, transparent),\r\n    linear-gradient(rgb(42, 53, 217), rgb(42, 53, 217));\n}\n.link-underline[data-v-41f95097]:hover {\r\n  background-size: 100% 3px;\r\n  background-position: 0 100%;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
