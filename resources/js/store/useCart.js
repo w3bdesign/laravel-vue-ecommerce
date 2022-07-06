@@ -3,7 +3,6 @@ import { defineStore } from "pinia";
 import axios from "axios";
 
 const state = {
-    products: [],
     cart: [],
     order: {},
     customer: {},

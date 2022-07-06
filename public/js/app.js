@@ -20792,9 +20792,39 @@ __webpack_require__.r(__webpack_exports__);
     var store = (0,_store_useCart__WEBPACK_IMPORTED_MODULE_1__.useCart)();
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeMount)(function () {
       store.getProductsFromApi();
-    });
+    }); // https://pinia.vuejs.org/core-concepts/actions.html#subscribing-to-actions
+
+    var callback = function callback(test) {
+      console.log("Callback!", test);
+    };
+
+    store.$onAction(callback, true);
+    var unsubscribe = store.$onAction(function (_ref2) {
+      var name = _ref2.name,
+          store = _ref2.store,
+          args = _ref2.args,
+          after = _ref2.after,
+          onError = _ref2.onError;
+      // a shared variable for this specific action call
+      var startTime = Date.now(); // this will trigger before an action on `store` is executed
+
+      console.log("Start \"".concat(name, "\" with params [").concat(args.join(", "), "].")); // this will trigger if the action succeeds and after it has fully run.
+      // it waits for any returned promised
+
+      after(function (result) {
+        console.log("Finished \"".concat(name, "\" after ").concat(Date.now() - startTime, "ms.\nResult: ").concat(result, "."));
+      }); // this will trigger if the action throws or returns a promise that rejects
+
+      onError(function (error) {
+        console.warn("Failed \"".concat(name, "\" after ").concat(Date.now() - startTime, "ms.\nError: ").concat(error, "."));
+      });
+    }); // manually remove the listener
+
+    unsubscribe();
     var __returned__ = {
       store: store,
+      callback: callback,
+      unsubscribe: unsubscribe,
       onBeforeMount: vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeMount,
       useCart: _store_useCart__WEBPACK_IMPORTED_MODULE_1__.useCart
     };
