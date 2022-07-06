@@ -36,7 +36,7 @@
         "tailwindcss": "2.2.19",
         "vee-validate": "4.5.11",
         "vue": "3.2.37",
-        "vue-router": "4.1.0",
+        "vue-router": "4.1.1",
         "vuex": "4.0.2",
         "vuex-composition-helpers": "2.0.3",
         "vuex-persist": "3.1.3",
