@@ -14,11 +14,6 @@
                                     validation="required|alpha|length:3"
                                     validation-visibility="live"
                                     placeholder="First name"
-                                    outer-class="mb-5"
-                                    label-class="block mb-1 font-bold text-sm"
-                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500"
-                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                    help-class="text-xs text-gray-500"
                                 />
                             </div>
                             <div class="p-2 lg:w-1/2">
@@ -30,11 +25,6 @@
                                     validation="required|alpha|length:2"
                                     validation-visibility="live"
                                     placeholder="Last name"
-                                    outer-class="mb-5"
-                                    label-class="block mb-1 font-bold text-sm"
-                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500"
-                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                    help-class="text-xs text-gray-500"
                                 />
                             </div>
                             <div class="p-2 lg:w-1/2">
@@ -46,11 +36,6 @@
                                     validation="required|alphanumerical|length:5"
                                     validation-visibility="live"
                                     placeholder="Address"
-                                    outer-class="mb-5"
-                                    label-class="block mb-1 font-bold text-sm"
-                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500"
-                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                    help-class="text-xs text-gray-500"
                                 />
                             </div>
 
@@ -63,11 +48,6 @@
                                     validation="required|number|length:4"
                                     validation-visibility="live"
                                     placeholder="Zip code"
-                                    outer-class="mb-5"
-                                    label-class="block mb-1 font-bold text-sm"
-                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500"
-                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                    help-class="text-xs text-gray-500"
                                 />
                             </div>
 
@@ -80,11 +60,6 @@
                                     validation="required|alpha|length:3"
                                     validation-visibility="live"
                                     placeholder="City"
-                                    outer-class="mb-5"
-                                    label-class="block mb-1 font-bold text-sm"
-                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500"
-                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                    help-class="text-xs text-gray-500"
                                 />
                             </div>
 
@@ -97,11 +72,6 @@
                                     validation="required|alpha|length:2"
                                     validation-visibility="live"
                                     placeholder="State"
-                                    outer-class="mb-5"
-                                    label-class="block mb-1 font-bold text-sm"
-                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500"
-                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                    help-class="text-xs text-gray-500"
                                 />
                             </div>
                             <div class="p-2 lg:w-1/2">
@@ -113,11 +83,6 @@
                                     validation="required|email|length:5"
                                     validation-visibility="live"
                                     placeholder="Email"
-                                    outer-class="mb-5"
-                                    label-class="block mb-1 font-bold text-sm"
-                                    inner-class="max-w-md border border-gray-400 rounded-lg mb-1 overflow-hidden focus-within:border-blue-500"
-                                    input-class="w-full h-10 px-3 border-none text-base text-gray-700 placeholder-gray-400"
-                                    help-class="text-xs text-gray-500"
                                 />
                             </div>
                         </div>
@@ -125,7 +90,7 @@
                             <form-kit
                                 type="submit"
                                 label="Save details"
-                                input-class="px-6  py-2 font-semibold text-white rounded-md  hover:opacity-90 transition-all duration-500 ease-in-out focus:outline-none  bg-blue-600"
+                                input-class="px-6 py-2 font-semibold text-white rounded-md  hover:opacity-90 transition-all duration-500 ease-in-out focus:outline-none  bg-blue-600"
                             />
                         </div>
                     </div>

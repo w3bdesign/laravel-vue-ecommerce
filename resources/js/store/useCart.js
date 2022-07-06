@@ -7,7 +7,7 @@ const state = {
     cart: [],
     order: {},
     customer: {},
-    checkoutFormIsValid: false,
+    loading: true,
     error: null,
 };
 
@@ -20,6 +20,7 @@ export const useCart = defineStore("shopState", {
                 .then((response) => {
                     if (response.data) {
                         this.products = response.data;
+                        this.loading = false
                     }
                 })
                 .catch((error) => (this.error = error));

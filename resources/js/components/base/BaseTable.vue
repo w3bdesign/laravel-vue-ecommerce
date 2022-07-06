@@ -4,7 +4,7 @@
             {{ tableTitle }}
         </h3>
     </div>
-    <div class="relative mt-8 overflow-x-auto">
+    <div class="relative mt-4 overflow-x-auto">
         <table
             class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5"
         >

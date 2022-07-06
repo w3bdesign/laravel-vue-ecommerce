@@ -50,6 +50,7 @@ app.use(
     plugin,
     defaultConfig({
         plugins: [createAutoAnimatePlugin()],
+        theme: "genesis",
     })
 );
 

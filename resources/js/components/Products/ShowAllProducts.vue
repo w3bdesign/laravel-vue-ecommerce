@@ -1,5 +1,5 @@
 <template>
-    <div v-if="products">
+    <div v-if="products.length">
         <div id="product-container" class="flex flex-wrap items-center">
             <div
                 v-for="product in products"
@@ -37,10 +37,13 @@
             </div>
         </div>
     </div>
+    <div v-if="loading"><base-loading-spinner></base-loading-spinner></div>
 </template>
 
 <script setup>
 import { useCart } from "../../store/useCart";
 
-const { products } = useCart();
+const store = useCart();
+
+const { products, loading } = store;
 </script>
