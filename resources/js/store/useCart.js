@@ -20,16 +20,6 @@ export const useCart = defineStore("shopState", {
             } catch (error) {
                 this.error = error;
             }
-
-            /*  await axios
-                .get("/api/products")
-                .then((response) => {
-                    if (response.data) {
-                        this.products = response.data;
-                        this.loading = false;
-                    }
-                })
-                .catch((error) => (this.error = error));*/
         },
         addToCart({ item }) {
             const foundProductInCartIndex = this.cart.findIndex(
