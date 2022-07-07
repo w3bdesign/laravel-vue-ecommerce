@@ -11,8 +11,6 @@
       getCustomerDetails.email,
     ]"
   />
-
-  </div>
 </template>
 
 <script setup>
@@ -23,7 +21,4 @@ import { useCart } from "../../store/useCart";
 const store = useCart();
 
 const { getCustomerDetails } = storeToRefs(store);
-
-
-
 </script>

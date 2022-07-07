@@ -50,7 +50,6 @@
                   placeholder="Zip code"
                 />
               </div>
-
               <div class="p-2 lg:w-1/2">
                 <form-kit
                   type="text"
@@ -62,7 +61,6 @@
                   placeholder="City"
                 />
               </div>
-
               <div class="p-2 lg:w-1/2">
                 <form-kit
                   type="text"

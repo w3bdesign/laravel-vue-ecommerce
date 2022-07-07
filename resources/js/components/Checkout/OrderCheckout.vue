@@ -65,14 +65,11 @@
       Cart is currently empty
     </h2>
     <div v-else>
-      <h2 class="h-10 m-2 py-4 text-3xl font-bold text-center">Customer Details</h2>
-      <div>
-        <div v-show="!getCustomerDetails.firstName">
-          <order-form></order-form>
-        </div>
-        <div v-show="getCustomerDetails.firstName">
-          <customer-details></customer-details>
-        </div>
+      <div v-show="!getCustomerDetails.firstName">
+        <order-form></order-form>
+      </div>
+      <div v-show="getCustomerDetails.firstName">
+        <customer-details></customer-details>
       </div>
       <transition name="fade">
         <div v-show="getCustomerDetails.firstName">
