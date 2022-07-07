@@ -20413,13 +20413,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var checkout = /*#__PURE__*/function () {
       var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var _yield$localState$str, paymentMethod, error, kunde;
+        var store, _yield$localState$str, paymentMethod, error, kunde;
 
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
+                store = (0,_store_useCart__WEBPACK_IMPORTED_MODULE_3__.useCart)();
+                _context2.next = 3;
                 return localState.stripe.createPaymentMethod("card", localState.cardElement, {
                   billing_details: {
                     name: "Test test",
@@ -20433,20 +20434,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 });
 
-              case 2:
+              case 3:
                 _yield$localState$str = _context2.sent;
                 paymentMethod = _yield$localState$str.paymentMethod;
                 error = _yield$localState$str.error;
 
-                if (!error) {
-                  _context2.next = 8;
+                if (!(error || !paymentMethod.id)) {
+                  _context2.next = 9;
                   break;
                 }
 
                 localState.orderError = "Error";
                 return _context2.abrupt("return");
 
-              case 8:
+              case 9:
                 kunde = _objectSpread(_objectSpread({}, store.getCustomerDetails), {}, {
                   cart: JSON.stringify(store.getCartContent),
                   amount: 5000,
@@ -20454,14 +20455,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 });
                 axios.post("/api/purchase", kunde).then(function (response) {
                   localState.paymentIsProcessing = true;
+                  console.log(response);
 
-                  if (response.statusText === "Created") {}
+                  if (response.statusText === "Created") {
+                    localState.paymentIsProcessing = false;
+                    store.clearCart();
+                    store.clearCustomer();
+                  }
                 })["catch"](function () {
                   localState.paymentIsProcessing = false;
                   localState.orderError = true;
                 });
 
-              case 10:
+              case 11:
               case "end":
                 return _context2.stop();
             }
@@ -20992,13 +20998,13 @@ var _hoisted_22 = {
 
 var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
   "class": "h-10 m-2 py-4 text-3xl font-bold text-center"
-}, "Customer Details", -1
+}, " Customer Details ", -1
 /* HOISTED */
 );
 
 var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
   "class": "h-10 p-4 mt-6 text-2xl font-bold text-center"
-}, "Stripe payment", -1
+}, " Stripe payment ", -1
 /* HOISTED */
 );
 
@@ -21070,7 +21076,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: _cache[0] || (_cache[0] = function ($event) {
           return $setup.checkout(_ctx.product);
         })
-      }, " Place order ", 10
+      }, " Submit order ", 10
       /* CLASS, PROPS */
       , _hoisted_27)])], 512
       /* NEED_PATCH */
@@ -21980,7 +21986,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _router_index__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./router/index */ "./resources/js/router/index.js");
 /* harmony import */ var flowbite__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! flowbite */ "./node_modules/flowbite/dist/flowbite.js");
 /* harmony import */ var flowbite__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(flowbite__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var pinia_plugin_persist__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! pinia-plugin-persist */ "./node_modules/pinia-plugin-persist/dist/pinia-persist.es.js");
+/* harmony import */ var pinia_plugin_persistedstate__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! pinia-plugin-persistedstate */ "./node_modules/pinia-plugin-persistedstate/dist/index.mjs");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
@@ -22020,7 +22026,7 @@ app.use(_formkit_vue__WEBPACK_IMPORTED_MODULE_1__.plugin, (0,_formkit_vue__WEBPA
   plugins: [(0,_formkit_addons__WEBPACK_IMPORTED_MODULE_2__.createAutoAnimatePlugin)()],
   theme: "genesis"
 }));
-pinia.use(pinia_plugin_persist__WEBPACK_IMPORTED_MODULE_16__["default"]);
+pinia.use(pinia_plugin_persistedstate__WEBPACK_IMPORTED_MODULE_16__["default"]);
 app.mount("#app");
 
 /***/ }),
@@ -22252,6 +22258,9 @@ var useCart = (0,pinia__WEBPACK_IMPORTED_MODULE_0__.defineStore)("shopState", {
     clearCart: function clearCart() {
       this.cart.length = 0;
     },
+    clearCustomer: function clearCustomer() {
+      this.customer = {};
+    },
     saveCustomerDetails: function saveCustomerDetails(customer) {
       this.customer = customer;
     },
@@ -22279,9 +22288,7 @@ var useCart = (0,pinia__WEBPACK_IMPORTED_MODULE_0__.defineStore)("shopState", {
       }, 0);
     }
   },
-  persist: {
-    enabled: true
-  }
+  persist: true
 });
 
 /***/ }),
@@ -24290,7 +24297,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.disabledButton {\n@apply cursor-not-allowed opacity-50;\n}\n.flex-container {\n@apply container mx-auto mt-4 flex border border-gray-300 rounded-lg shadow flex-wrap flex-row justify-around items-center content-center;\n}\n.item {\n@apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;\n}\n.inline-block {\n@apply inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;\n}\n.removing {\n@apply animate-spin cursor-not-allowed;\n}\n.fade-enter-active,\r\n.fade-leave-active {\r\n  transition: all 0.5s ease;\n}\n.fade-enter-from,\r\n.fade-leave-to {\r\n  opacity: 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.disabledButton {\n@apply cursor-not-allowed opacity-50;\n}\n.flex-container {\n@apply container mx-auto mt-4 flex border border-gray-300 rounded-lg shadow flex-wrap flex-row justify-around items-center content-center;\n}\n.item {\n@apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;\n}\n.inline-block {\n@apply inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;\n}\n.removing {\n@apply animate-spin cursor-not-allowed;\n}\n.fade-enter-active,\r\n.fade-leave-active {\r\n    transition: all 0.5s ease;\n}\n.fade-enter-from,\r\n.fade-leave-to {\r\n    opacity: 0;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -45234,60 +45241,6 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./node_modules/pinia-plugin-persist/dist/pinia-persist.es.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/pinia-plugin-persist/dist/pinia-persist.es.js ***!
-  \********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ index),
-/* harmony export */   "updateStorage": () => (/* binding */ updateStorage)
-/* harmony export */ });
-const updateStorage = (strategy, store) => {
-  const storage = strategy.storage || sessionStorage;
-  const storeKey = strategy.key || store.$id;
-  if (strategy.paths) {
-    const partialState = strategy.paths.reduce((finalObj, key) => {
-      finalObj[key] = store.$state[key];
-      return finalObj;
-    }, {});
-    storage.setItem(storeKey, JSON.stringify(partialState));
-  } else {
-    storage.setItem(storeKey, JSON.stringify(store.$state));
-  }
-};
-var index = ({ options, store }) => {
-  var _a, _b, _c, _d;
-  if ((_a = options.persist) == null ? void 0 : _a.enabled) {
-    const defaultStrat = [{
-      key: store.$id,
-      storage: sessionStorage
-    }];
-    const strategies = ((_c = (_b = options.persist) == null ? void 0 : _b.strategies) == null ? void 0 : _c.length) ? (_d = options.persist) == null ? void 0 : _d.strategies : defaultStrat;
-    strategies.forEach((strategy) => {
-      const storage = strategy.storage || sessionStorage;
-      const storeKey = strategy.key || store.$id;
-      const storageResult = storage.getItem(storeKey);
-      if (storageResult) {
-        store.$patch(JSON.parse(storageResult));
-        updateStorage(strategy, store);
-      }
-    });
-    store.$subscribe(() => {
-      strategies.forEach((strategy) => {
-        updateStorage(strategy, store);
-      });
-    });
-  }
-};
-
 
 
 /***/ }),
@@ -68676,6 +68629,131 @@ const FormKitIcon = (0,vue__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
     }
 });
 
+
+
+
+/***/ }),
+
+/***/ "./node_modules/pinia-plugin-persistedstate/dist/index.mjs":
+/*!*****************************************************************!*\
+  !*** ./node_modules/pinia-plugin-persistedstate/dist/index.mjs ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createNuxtPersistedState": () => (/* binding */ createNuxtPersistedState),
+/* harmony export */   "createPersistedState": () => (/* binding */ createPersistedState),
+/* harmony export */   "default": () => (/* binding */ persistedState)
+/* harmony export */ });
+var __defProp = Object.defineProperty;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+
+// src/normalize.ts
+function isObject(v) {
+  return typeof v === "object" && v !== null;
+}
+function normalizeOptions(options, globalOptions) {
+  options = isObject(options) ? options : /* @__PURE__ */ Object.create(null);
+  return new Proxy(options, {
+    get(target, key, receiver) {
+      return Reflect.get(target, key, receiver) || Reflect.get(globalOptions, key, receiver);
+    }
+  });
+}
+
+// src/pick.ts
+function get(state, path) {
+  return path.reduce((obj, p) => {
+    return obj == null ? void 0 : obj[p];
+  }, state);
+}
+function set(state, path, val) {
+  return path.slice(0, -1).reduce((obj, p) => {
+    if (!/^(__proto__)$/.test(p))
+      return obj[p] = obj[p] || {};
+    else
+      return {};
+  }, state)[path[path.length - 1]] = val, state;
+}
+function pick(baseState, paths) {
+  return paths.reduce((substate, path) => {
+    const pathArray = path.split(".");
+    return set(substate, pathArray, get(baseState, pathArray));
+  }, {});
+}
+
+// src/plugin.ts
+function createPersistedState(factoryOptions = {}) {
+  return function(context) {
+    const {
+      options: { persist },
+      store
+    } = context;
+    if (!persist)
+      return;
+    const {
+      storage = localStorage,
+      beforeRestore = null,
+      afterRestore = null,
+      serializer = {
+        serialize: JSON.stringify,
+        deserialize: JSON.parse
+      },
+      key = store.$id,
+      paths = null
+    } = normalizeOptions(persist, factoryOptions);
+    beforeRestore == null ? void 0 : beforeRestore(context);
+    try {
+      const fromStorage = storage.getItem(key);
+      if (fromStorage)
+        store.$patch(serializer.deserialize(fromStorage));
+    } catch (_error) {
+    }
+    afterRestore == null ? void 0 : afterRestore(context);
+    store.$subscribe((_mutation, state) => {
+      try {
+        const toStore = Array.isArray(paths) ? pick(state, paths) : state;
+        storage.setItem(key, serializer.serialize(toStore));
+      } catch (_error) {
+      }
+    }, { detached: true });
+  };
+}
+function createNuxtPersistedState(useCookie, factoryOptions) {
+  return createPersistedState(__spreadValues({
+    storage: {
+      getItem: (key) => {
+        return useCookie(key, __spreadValues({
+          encode: encodeURIComponent,
+          decode: decodeURIComponent
+        }, factoryOptions == null ? void 0 : factoryOptions.cookieOptions)).value;
+      },
+      setItem: (key, value) => {
+        useCookie(key, __spreadValues({
+          encode: encodeURIComponent,
+          decode: decodeURIComponent
+        }, factoryOptions == null ? void 0 : factoryOptions.cookieOptions)).value = value;
+      }
+    }
+  }, factoryOptions));
+}
+var persistedState = createPersistedState();
 
 
 

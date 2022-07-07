@@ -1,7 +1,5 @@
 import { defineStore } from "pinia";
 
-
-
 const state = {
     cart: [],
     order: {},
@@ -52,6 +50,10 @@ export const useCart = defineStore("shopState", {
         clearCart() {
             this.cart.length = 0;
         },
+
+        clearCustomer() {
+            this.customer = {};
+        },
         saveCustomerDetails(customer) {
             this.customer = customer;
         },
@@ -80,7 +82,5 @@ export const useCart = defineStore("shopState", {
             );
         },
     },
-    persist: {
-        enabled: true,
-    },
+    persist: true,
 });

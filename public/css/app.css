@@ -760,10 +760,6 @@ video {
   margin-right: -1rem;
 }
 
-.mt-16 {
-  margin-top: 4rem;
-}
-
 .ml-8 {
   margin-left: 2rem;
 }
@@ -1226,14 +1222,6 @@ video {
 
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
-}
-
-.bg-cover {
-  background-size: cover;
-}
-
-.bg-right {
-  background-position: right;
 }
 
 .p-4 {
@@ -1874,16 +1862,8 @@ video {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .md\:items-center {
-    align-items: center;
-  }
-
   .md\:p-2 {
     padding: 0.5rem;
-  }
-
-  .md\:pt-0 {
-    padding-top: 0px;
   }
 
   .md\:pr-6 {

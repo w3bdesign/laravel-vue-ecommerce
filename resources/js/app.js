@@ -24,7 +24,7 @@ import { registerBaseComponents } from "./helpers/registerBaseComponents";
 import router from "./router/index";
 
 import "flowbite";
-import piniaPersist from "pinia-plugin-persist";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 
 const app = createApp({});
 const pinia = createPinia();
@@ -54,6 +54,6 @@ app.use(
     })
 );
 
-pinia.use(piniaPersist);
+pinia.use(piniaPluginPersistedstate);
 
 app.mount("#app");

@@ -1,6 +1,6 @@
 {
     "private": true,
-    "version": "0.0.9",
+    "version": "0.1.0",
     "scripts": {
         "dev": "npm run development",
         "development": "mix",
@@ -26,7 +26,7 @@
         "flowbite": "^1.4.7",
         "lodash": "^4.17.21",
         "pinia": "^2.0.14",
-        "pinia-plugin-persist": "^1.0.0",
+        "pinia-plugin-persistedstate": "^1.6.1",
         "swrv": "1.0.0-beta.8",
         "vue": "^3.2.37",
         "vue-router": "^4.1.1"
