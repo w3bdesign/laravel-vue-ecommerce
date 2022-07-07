@@ -160,8 +160,6 @@ onMounted(async () => {
 });
 
 const checkout = async () => {
-    const store = useCart();
-
     const { paymentMethod, error } =
         await localState.stripe.createPaymentMethod(
             "card",

@@ -20413,14 +20413,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var checkout = /*#__PURE__*/function () {
       var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var store, _yield$localState$str, paymentMethod, error, kunde;
+        var _yield$localState$str, paymentMethod, error, kunde;
 
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                store = (0,_store_useCart__WEBPACK_IMPORTED_MODULE_3__.useCart)();
-                _context2.next = 3;
+                _context2.next = 2;
                 return localState.stripe.createPaymentMethod("card", localState.cardElement, {
                   billing_details: {
                     name: "Test test",
@@ -20434,20 +20433,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 });
 
-              case 3:
+              case 2:
                 _yield$localState$str = _context2.sent;
                 paymentMethod = _yield$localState$str.paymentMethod;
                 error = _yield$localState$str.error;
 
                 if (!(error || !paymentMethod.id)) {
-                  _context2.next = 9;
+                  _context2.next = 8;
                   break;
                 }
 
                 localState.orderError = "Error";
                 return _context2.abrupt("return");
 
-              case 9:
+              case 8:
                 kunde = _objectSpread(_objectSpread({}, store.getCustomerDetails), {}, {
                   cart: JSON.stringify(store.getCartContent),
                   amount: 5000,
@@ -20467,7 +20466,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   localState.orderError = true;
                 });
 
-              case 11:
+              case 10:
               case "end":
                 return _context2.stop();
             }
