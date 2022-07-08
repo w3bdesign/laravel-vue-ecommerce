@@ -29,21 +29,13 @@
       </thead>
       <tbody class="flex-1 sm:flex-none">
         <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
-
-
-
-      
-          
-
-          <template
-            v-for="(data, index) in tableData"
+          <td
             :key="data"
+            v-for="data in tableData"
             class="border-grey-light border hover:bg-gray-100 p-3 text-center"
           >
-          <td v-if="$slots.remove && index === 0" class="inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full"><slot name="remove"></slot></td>
-         
-           <td class="border-grey-light border hover:bg-gray-100 p-3 text-center">{{ data }}</td> 
-          </template>
+            {{ data }}
+          </td>
         </tr>
       </tbody>
     </table>
@@ -51,14 +43,7 @@
 </template>
 
 <script setup>
-import { useSlots } from "vue";
-
-
 defineProps(["tableTitle", "tableHeaders", "tableData"]);
-
-const slotDefault = useSlots();
-console.log('slotDefault', slotDefault["remove"]);
-
 </script>
 
 <style>

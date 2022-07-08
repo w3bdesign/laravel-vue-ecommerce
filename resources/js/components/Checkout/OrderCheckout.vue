@@ -9,61 +9,9 @@
 
       <cart-summary />
 
-      
 
-      <div
-        v-for="{ id, name, quantity, price } in getCartContent"
-        :key="id"
-        class="container mx-auto mt-4 flex border border-gray-300 rounded-lg shadow flex-wrap flex-row justify-around items-center content-center"
-      >
-        <div class="lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto">
-          <span class="block mt-2 text-xl font-bold">Remove: <br /></span>
-          <span class="inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full">
-            <a tabindex="0" @click="removeProductFromCart(product)">
-              <img
-                class="mt-2 ml-4 cursor-pointer"
-                :class="{
-                  removing: localState.removingCartItem,
-                }"
-                alt="Remove icon"
-                aria-label="Remove"
-                src="../../../img/svg/Remove.svg"
-              />
-            </a>
-          </span>
-        </div>
-        <div class="lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto">
-          <span class="block mt-2 text-xl font-bold">Name: <br /></span>
-          <span
-            class="text-lg inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full"
-            >{{ name }}</span
-          >
-        </div>
-        <div class="lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto">
-          <span class="block mt-2 text-xl font-bold">Quantity: <br /> </span>
-          <span
-            class="text-lg inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full"
-          >
-            {{ quantity }}
-          </span>
-        </div>
-        <div class="item">
-          <span class="block mt-2 text-xl font-bold">Price: <br /></span>
-          <span
-            class="text-lg inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full"
-          >
-            {{ formatPrice(price) }}
-          </span>
-        </div>
-      </div>
-      <div
-        v-if="getCartQuantity"
-        class="container mx-auto mt-2 flex flex-wrap flex-row justify-end items-end content-center"
-      >
-        <span class="p-4 text-2xl font-extrabold text-right"
-          >Total: {{ formatPrice(getCartTotal) }}</span
-        >
-      </div>
+
+
     </section>
     <h2 v-if="!getCartQuantity" class="m-4 text-3xl text-center">
       Cart is currently empty
