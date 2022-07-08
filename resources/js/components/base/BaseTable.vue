@@ -4,7 +4,7 @@
       {{ tableTitle }}
     </h3>
   </div>
-  <div class="relative mt-4 overflow-x-auto">
+  <div class="relative mt-2 overflow-x-auto">
     <table
       class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5"
     >
@@ -29,6 +29,12 @@
       </thead>
       <tbody class="flex-1 sm:flex-none">
         <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+
+
+
+      
+          <td v-if="$slots.remove"><slot name="remove"></slot></td>
+
           <td
             v-for="data in tableData"
             :key="data"
@@ -43,7 +49,14 @@
 </template>
 
 <script setup>
+import { useSlots } from "vue";
+
+
 defineProps(["tableTitle", "tableHeaders", "tableData"]);
+
+const slotDefault = useSlots();
+console.log('slotDefault', slotDefault["remove"]);
+
 </script>
 
 <style>

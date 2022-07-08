@@ -6,6 +6,13 @@
           >Error during order. Please retry</span
         >
       </div>
+
+      
+
+      <cart-summary />
+
+
+
       <div
         v-for="product in getCartContent"
         :key="product.id"
@@ -70,8 +77,8 @@
       <transition name="fade">
         <div v-show="getCustomerDetails.firstName">
           <customer-details />
-
-          <fakevisa-details></fakevisa-details>
+          <fakevisa-details />
+          <!-- TODO: Refactor Stripe into separate component -->
           <h2 class="h-10 p-4 mt-6 text-2xl font-bold text-center">Stripe payment</h2>
           <div class="flex justify-center w-full align-center">
             <div id="card-element" class="w-full h-16 mt-6 lg:w-5/12 xl:w-5/12">

@@ -9,8 +9,10 @@ import Layout from "./layout/Layout.vue";
 
 import Cart from "./components/Header/Cart.vue";
 import ShowAllProducts from "./components/Products/ShowAllProducts.vue";
+
 import CustomerDetails from "./components/Checkout/CustomerDetails.vue";
 import FakeVisaDetails from "./components/Checkout/FakeVisaDetails.vue";
+import CartSummary from "./components/Checkout/CartSummary.vue";
 
 import Carousel from "./components/Index/Carousel.vue";
 
@@ -33,6 +35,7 @@ registerBaseComponents(app);
 
 app.component("customer-details", CustomerDetails);
 app.component("fakevisa-details", FakeVisaDetails);
+app.component("cart-summary", CartSummary);
 
 app.component("carousel-component", Carousel);
 
