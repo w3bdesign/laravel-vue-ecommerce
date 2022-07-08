@@ -9,7 +9,10 @@
             aria-label="Cart"
             src="../../../img/svg/Cart.svg"
           />
-          <div class="cartQuantity">Quantity: {{ getCartQuantity }}</div>
+          <span class="absolute w-6 h-6 pb-2 ml-16 -mt-12 text-center text-white bg-black rounded-full lg:ml-14">
+            {{ getCartQuantity }}
+          </span>
+          <span>Total: {{ formatPrice(getCartTotal) }}</span>
         </router-link>
       </div>
     </transition>
@@ -20,8 +23,11 @@
 import { storeToRefs } from "pinia";
 
 import { useCart } from "../../store/useCart";
+import { formatPrice } from "../../utils/functions";
 
-const { getCartQuantity } = storeToRefs(useCart());
+const store = useCart();
+
+const { getCartQuantity, getCartTotal } = storeToRefs(store);
 </script>
 
 <style scoped>

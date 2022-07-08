@@ -1849,6 +1849,10 @@ video {
     margin-top: 0px;
   }
 
+  .lg\:ml-14 {
+    margin-left: 3.5rem;
+  }
+
   .lg\:block {
     display: block;
   }

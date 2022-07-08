@@ -20635,8 +20635,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
+/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
 /* harmony import */ var _store_useCart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../store/useCart */ "./resources/js/store/useCart.js");
+/* harmony import */ var _utils_functions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../utils/functions */ "./resources/js/utils/functions.js");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -20644,14 +20646,19 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
+    var store = (0,_store_useCart__WEBPACK_IMPORTED_MODULE_0__.useCart)();
 
-    var _storeToRefs = (0,pinia__WEBPACK_IMPORTED_MODULE_1__.storeToRefs)((0,_store_useCart__WEBPACK_IMPORTED_MODULE_0__.useCart)()),
-        getCartQuantity = _storeToRefs.getCartQuantity;
+    var _storeToRefs = (0,pinia__WEBPACK_IMPORTED_MODULE_2__.storeToRefs)(store),
+        getCartQuantity = _storeToRefs.getCartQuantity,
+        getCartTotal = _storeToRefs.getCartTotal;
 
     var __returned__ = {
+      store: store,
       getCartQuantity: getCartQuantity,
-      storeToRefs: pinia__WEBPACK_IMPORTED_MODULE_1__.storeToRefs,
-      useCart: _store_useCart__WEBPACK_IMPORTED_MODULE_0__.useCart
+      getCartTotal: getCartTotal,
+      storeToRefs: pinia__WEBPACK_IMPORTED_MODULE_2__.storeToRefs,
+      useCart: _store_useCart__WEBPACK_IMPORTED_MODULE_0__.useCart,
+      formatPrice: _utils_functions__WEBPACK_IMPORTED_MODULE_1__.formatPrice
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -21311,7 +21318,7 @@ var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
 });
 
 var _hoisted_4 = {
-  "class": "cartQuantity"
+  "class": "absolute w-6 h-6 pb-2 ml-16 -mt-12 text-center text-white bg-black rounded-full lg:ml-14"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
@@ -21324,7 +21331,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         to: "/checkout"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, "Quantity: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.getCartQuantity), 1
+          return [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.getCartQuantity), 1
+          /* TEXT */
+          ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Total: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formatPrice($setup.getCartTotal)), 1
           /* TEXT */
           )];
         }),
