@@ -24,16 +24,13 @@
         </tr>
       </thead>
       <tbody class="flex-1 sm:flex-none">
-        <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
-          <template
-            v-for="({ name, quantity, price }, index) in getCartContent"
-            :key="id"
-            class="border-grey-light border hover:bg-gray-100 p-3 text-center"
-          >
-            <td
-              v-if="index === 0"
-              class="inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full"
-            >
+        <template
+          v-for="({ name, quantity, price }, index) in getCartContent"
+          :key="id"
+          class="border-grey-light border hover:bg-gray-100 p-3 text-center"
+        >
+          <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
+            <td class="border-grey-light border hover:bg-gray-100">
               <a tabindex="0" @click="removeProductFromCart(product)">
                 <img
                   class="mt-2 mx-auto cursor-pointer"
@@ -52,8 +49,8 @@
             <td class="border-grey-light border hover:bg-gray-100 p-3 text-center">
               {{ formatPrice(price) }}
             </td>
-          </template>
-        </tr>
+          </tr>
+        </template>
       </tbody>
     </table>
 
