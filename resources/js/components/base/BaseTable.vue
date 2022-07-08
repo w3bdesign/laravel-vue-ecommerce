@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <h3 class="h-12 py-6 mt-6 text-2xl font-bold text-center">
+    <h3 class="h-12 py-4 mt-2 text-2xl font-bold text-center">
       {{ tableTitle }}
     </h3>
   </div>

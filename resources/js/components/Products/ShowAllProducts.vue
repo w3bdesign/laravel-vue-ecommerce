@@ -33,7 +33,7 @@
       </div>
     </div>
   </div>
-   <div v-if="error">
+  <div v-if="error">
     <h1 class="text-center text-3xl text-red-500 m-4 p-4 mt-8">Error loading products</h1>
   </div>
 </template>

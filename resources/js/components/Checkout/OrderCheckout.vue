@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1 class="h-10 p-6 text-4xl font-bold text-center">Checkout</h1>
     <section class="mt-10">
       <div v-if="localState.orderError" class="h-10 p-4">
         <span class="text-lg text-center text-red-500"
@@ -66,13 +65,12 @@
     </h2>
     <div v-else>
       <div v-show="!getCustomerDetails.firstName">
-        <order-form></order-form>
-      </div>
-      <div v-show="getCustomerDetails.firstName">
-        <customer-details></customer-details>
+        <order-form />
       </div>
       <transition name="fade">
         <div v-show="getCustomerDetails.firstName">
+          <customer-details />
+
           <fakevisa-details></fakevisa-details>
           <h2 class="h-10 p-4 mt-6 text-2xl font-bold text-center">Stripe payment</h2>
           <div class="flex justify-center w-full align-center">
@@ -175,7 +173,7 @@ const checkout = async () => {
     .post("/api/purchase", kunde)
     .then((response) => {
       localState.paymentIsProcessing = true;
-      console.log(response);
+
       if (response.statusText === "Created") {
         localState.paymentIsProcessing = false;
         store.clearCart();
