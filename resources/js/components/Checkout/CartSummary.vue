@@ -4,10 +4,10 @@
     :tableHeaders="['Remove', 'Name', 'Quantity', 'Price']"
     :tableData="['Test', 'Test', 'Test']"
   >
-    <template v-slot:remove>
+    <template #remove>
       <a tabindex="0" @click="removeProductFromCart(product)">
         <img
-          class="mt-2 ml-4 cursor-pointer"
+          class="mt-2 cursor-pointer mx-auto"
           alt="Remove icon"
           aria-label="Remove"
           src="../../../img/svg/Remove.svg"

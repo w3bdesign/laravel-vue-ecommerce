@@ -7,15 +7,13 @@
         >
       </div>
 
-      
-
       <cart-summary />
 
-
+      
 
       <div
-        v-for="product in getCartContent"
-        :key="product.id"
+        v-for="{ id, name, quantity, price } in getCartContent"
+        :key="id"
         class="container mx-auto mt-4 flex border border-gray-300 rounded-lg shadow flex-wrap flex-row justify-around items-center content-center"
       >
         <div class="lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto">
@@ -38,7 +36,7 @@
           <span class="block mt-2 text-xl font-bold">Name: <br /></span>
           <span
             class="text-lg inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full"
-            >{{ product.name }}</span
+            >{{ name }}</span
           >
         </div>
         <div class="lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto">
@@ -46,7 +44,7 @@
           <span
             class="text-lg inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full"
           >
-            {{ product.quantity }}
+            {{ quantity }}
           </span>
         </div>
         <div class="item">
@@ -54,7 +52,7 @@
           <span
             class="text-lg inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full"
           >
-            {{ formatPrice(product.price) }}
+            {{ formatPrice(price) }}
           </span>
         </div>
       </div>

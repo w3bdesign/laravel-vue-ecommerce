@@ -21,7 +21,7 @@
             v-for="header in tableHeaders"
             :key="header"
             scope="col"
-            class="p-3 text-left"
+            class="p-3 text-center"
           >
             {{ header }}
           </th>
@@ -33,15 +33,17 @@
 
 
       
-          <td v-if="$slots.remove"><slot name="remove"></slot></td>
+          
 
-          <td
-            v-for="data in tableData"
+          <template
+            v-for="(data, index) in tableData"
             :key="data"
-            class="border-grey-light border hover:bg-gray-100 p-3"
+            class="border-grey-light border hover:bg-gray-100 p-3 text-center"
           >
-            {{ data }}
-          </td>
+          <td v-if="$slots.remove && index === 0" class="inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full"><slot name="remove"></slot></td>
+         
+           <td class="border-grey-light border hover:bg-gray-100 p-3 text-center">{{ data }}</td> 
+          </template>
         </tr>
       </tbody>
     </table>
