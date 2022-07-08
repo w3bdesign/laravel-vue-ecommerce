@@ -6,12 +6,9 @@
           >Error during order. Please retry</span
         >
       </div>
-
-      <cart-summary />
-
-
-
-
+      <div v-if="getCartQuantity">
+        <cart-summary />
+      </div>
     </section>
     <h2 v-if="!getCartQuantity" class="m-4 text-3xl text-center">
       Cart is currently empty
@@ -54,7 +51,6 @@ import { reactive, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { loadStripe } from "@stripe/stripe-js";
 
-import { formatPrice } from "../../utils/functions";
 import { useCart } from "../../store/useCart";
 
 const localState = reactive({
@@ -68,15 +64,7 @@ const localState = reactive({
 
 const store = useCart();
 
-const { getCartQuantity, getCartContent, getCartTotal, getCustomerDetails } = storeToRefs(
-  store
-);
-
-const removeProductFromCart = (product) => {
-  localState.removingCartItem = true;
-  store.removeFromCart(product);
-  localState.removingCartItem = false;
-};
+const { getCartQuantity, getCustomerDetails } = storeToRefs(store);
 
 onMounted(async () => {
   localState.stripe = await loadStripe(process.env.MIX_STRIPE_KEY);

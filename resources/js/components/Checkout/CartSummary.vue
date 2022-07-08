@@ -25,7 +25,7 @@
       </thead>
       <tbody class="flex-1 sm:flex-none">
         <template
-          v-for="({ name, quantity, price }, index) in getCartContent"
+          v-for="{ name, quantity, price } in getCartContent"
           :key="id"
           class="border-grey-light border hover:bg-gray-100 p-3 text-center"
         >
