@@ -19,10 +19,8 @@
           aria-label="Nettbutikk logo"
           src="../../../img/svg/MobileLogo.svg"
         />
-        <div class="md:hidden block">
-          <router-link to="/checkout">
-            <cart-component />
-          </router-link>
+        <div class="lg:hidden block">         
+            <cart-component />         
         </div>
       </div>
       <mobile-menu />
