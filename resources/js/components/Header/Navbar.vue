@@ -20,7 +20,7 @@
           src="../../../img/svg/MobileLogo.svg"
         />
         <div class="md:hidden block">
-          <router-link to="/cart">
+          <router-link to="/checkout">
             <cart-component />
           </router-link>
         </div>
