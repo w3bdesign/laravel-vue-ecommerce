@@ -1,11 +1,11 @@
 <template>
   <div class="relative">
     <div
-      v-if="!firstRender"
+      v-if="!state.firstRender"
       class="fixed top-0 left-0 z-50 w-screen mt-40 bg-white h-96 animate__animated"
       :class="{
-        animate__fadeInLeft: expandedMenu,
-        animate__fadeOutRight: !expandedMenu && !firstRender,
+        animate__fadeInLeft: state.expandedMenu,
+        animate__fadeOutRight: !state.expandedMenu && !state.firstRender,
       }"
     >
       <ul class="z-50">
@@ -41,28 +41,15 @@
   </div>
 </template>
 
-<script>
-// TODO: Convert to script setup
-import { defineComponent, reactive, toRefs } from "vue";
+<script setup>
+import { reactive } from "vue";
 
-import Cart from "./Cart.vue";
+const state = reactive({ expandedMenu: false, firstRender: true });
 
-export default defineComponent({
-  name: "MobileMenu",
-  components: { Cart },
-  setup() {
-    const state = reactive({ expandedMenu: false, firstRender: true });
-    const displayMobileMenu = () => {
-      state.expandedMenu = !state.expandedMenu;
-      state.firstRender = false;
-    };
-
-    return {
-      ...toRefs(state),
-      displayMobileMenu,
-    };
-  },
-});
+const displayMobileMenu = () => {
+  state.expandedMenu = !state.expandedMenu;
+  state.firstRender = false;
+};
 </script>
 
 <style scoped>
