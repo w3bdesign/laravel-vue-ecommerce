@@ -82,18 +82,28 @@ onMounted(async () => {
 });
 
 const checkout = async () => {
+  const {
+    firstName,
+    lastName,
+    address,
+    zipcode,
+    city,
+    state,
+    email,
+  } = store.getCustomerDetails;
+
   const { paymentMethod, error } = await localState.stripe.createPaymentMethod(
     "card",
     localState.cardElement,
     {
       billing_details: {
-        name: "Test test",
-        email: "test@test.no",
+        name: `${firstName} ${lastName}`,
+        email: email,
         address: {
-          line1: "Test",
-          city: "City",
-          state: "State",
-          postal_code: "1234",
+          line1: address,
+          city: city,
+          state: state,
+          postal_code: zipcode,
         },
       },
     }

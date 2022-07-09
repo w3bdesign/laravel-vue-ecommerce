@@ -64,7 +64,6 @@ export const useCart = defineStore("shopState", {
         getOrderDetails() {
             return this.order;
         },
-
         getCartContent() {
             return this.cart;
         },

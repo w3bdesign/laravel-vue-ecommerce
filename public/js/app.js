@@ -20457,40 +20457,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var checkout = /*#__PURE__*/function () {
       var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var _yield$localState$str, paymentMethod, error, kunde;
+        var _store$getCustomerDet, firstName, lastName, address, zipcode, city, state, email, _yield$localState$str, paymentMethod, error, kunde;
 
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
+                _store$getCustomerDet = store.getCustomerDetails, firstName = _store$getCustomerDet.firstName, lastName = _store$getCustomerDet.lastName, address = _store$getCustomerDet.address, zipcode = _store$getCustomerDet.zipcode, city = _store$getCustomerDet.city, state = _store$getCustomerDet.state, email = _store$getCustomerDet.email;
+                _context2.next = 3;
                 return localState.stripe.createPaymentMethod("card", localState.cardElement, {
                   billing_details: {
-                    name: "Test test",
-                    email: "test@test.no",
+                    name: "".concat(firstName, " ").concat(lastName),
+                    email: email,
                     address: {
-                      line1: "Test",
-                      city: "City",
-                      state: "State",
-                      postal_code: "1234"
+                      line1: address,
+                      city: city,
+                      state: state,
+                      postal_code: zipcode
                     }
                   }
                 });
 
-              case 2:
+              case 3:
                 _yield$localState$str = _context2.sent;
                 paymentMethod = _yield$localState$str.paymentMethod;
                 error = _yield$localState$str.error;
 
                 if (!(error || !paymentMethod.id)) {
-                  _context2.next = 8;
+                  _context2.next = 9;
                   break;
                 }
 
                 localState.orderError = "Error";
                 return _context2.abrupt("return");
 
-              case 8:
+              case 9:
                 kunde = _objectSpread(_objectSpread({}, store.getCustomerDetails), {}, {
                   cart: JSON.stringify(store.getCartContent),
                   amount: 5000,
@@ -20511,7 +20512,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   localState.orderError = true;
                 });
 
-              case 10:
+              case 11:
               case "end":
                 return _context2.stop();
             }
