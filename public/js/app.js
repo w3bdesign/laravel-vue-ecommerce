@@ -20313,12 +20313,18 @@ __webpack_require__.r(__webpack_exports__);
         getCartTotal = _storeToRefs.getCartTotal,
         getCartQuantity = _storeToRefs.getCartQuantity;
 
+    var removeProductFromCart = function removeProductFromCart(id) {
+      // localState.removingCartItem = true;
+      store.removeProductFromCart(id); //localState.removingCartItem = false;
+    };
+
     var __returned__ = {
       tableHeaders: tableHeaders,
       store: store,
       getCartContent: getCartContent,
       getCartTotal: getCartTotal,
       getCartQuantity: getCartQuantity,
+      removeProductFromCart: removeProductFromCart,
       storeToRefs: pinia__WEBPACK_IMPORTED_MODULE_2__.storeToRefs,
       formatPrice: _utils_functions__WEBPACK_IMPORTED_MODULE_0__.formatPrice,
       useCart: _store_useCart__WEBPACK_IMPORTED_MODULE_1__.useCart
@@ -20695,6 +20701,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+// TODO: Convert to script setup
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
@@ -20954,8 +20961,9 @@ var _hoisted_6 = {
 var _hoisted_7 = {
   "class": "border-grey-light border hover:bg-gray-100 h-12"
 };
+var _hoisted_8 = ["onClick"];
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
   "class": "mt-2 mx-auto cursor-pointer",
   alt: "Remove icon",
   "aria-label": "Remove",
@@ -20964,10 +20972,7 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_9 = [_hoisted_8];
-var _hoisted_10 = {
-  "class": "border-grey-light border hover:bg-gray-100 p-3 text-center h-12"
-};
+var _hoisted_10 = [_hoisted_9];
 var _hoisted_11 = {
   "class": "border-grey-light border hover:bg-gray-100 p-3 text-center h-12"
 };
@@ -20975,10 +20980,13 @@ var _hoisted_12 = {
   "class": "border-grey-light border hover:bg-gray-100 p-3 text-center h-12"
 };
 var _hoisted_13 = {
+  "class": "border-grey-light border hover:bg-gray-100 p-3 text-center h-12"
+};
+var _hoisted_14 = {
   key: 0,
   "class": "container mx-auto flex flex-wrap flex-row justify-end items-end content-center"
 };
-var _hoisted_14 = {
+var _hoisted_15 = {
   "class": "p-4 text-xl font-bold text-right"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -21000,27 +21008,30 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), 128
   /* KEYED_FRAGMENT */
   ))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", _hoisted_6, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.getCartContent, function (_ref) {
-    var name = _ref.name,
+    var id = _ref.id,
+        name = _ref.name,
         quantity = _ref.quantity,
         price = _ref.price;
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
-      key: _ctx.id,
+      key: id,
       "class": "flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
       tabindex: "0",
-      onClick: _cache[0] || (_cache[0] = function ($event) {
-        return _ctx.removeProductFromCart(_ctx.product);
-      })
-    }, _hoisted_9)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(name), 1
+      onClick: function onClick($event) {
+        return $setup.removeProductFromCart(id);
+      }
+    }, _hoisted_10, 8
+    /* PROPS */
+    , _hoisted_8)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(name), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(quantity), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(quantity), 1
     /* TEXT */
-    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formatPrice(price)), 1
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formatPrice(price)), 1
     /* TEXT */
     )]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), $setup.getCartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_14, "Total: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formatPrice($setup.getCartTotal)), 1
+  ))])]), $setup.getCartQuantity ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_15, "Total: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.formatPrice($setup.getCartTotal)), 1
   /* TEXT */
   )])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64
   /* STABLE_FRAGMENT */
@@ -22518,7 +22529,7 @@ var useCart = (0,pinia__WEBPACK_IMPORTED_MODULE_0__.defineStore)("shopState", {
         this.cart.push(item);
       }
     },
-    removeFromCart: function removeFromCart(_ref2) {
+    removeProductFromCart: function removeProductFromCart(_ref2) {
       var item = _ref2.item;
       this.cart.splice(this.cart.indexOf(item), 1);
     },

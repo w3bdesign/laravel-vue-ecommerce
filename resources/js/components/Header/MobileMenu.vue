@@ -42,6 +42,7 @@
 </template>
 
 <script>
+// TODO: Convert to script setup
 import { defineComponent, reactive, toRefs } from "vue";
 
 import Cart from "./Cart.vue";

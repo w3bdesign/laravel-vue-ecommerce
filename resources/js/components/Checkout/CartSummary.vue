@@ -28,13 +28,13 @@
       </thead>
       <tbody class="flex-1 sm:flex-none">
         <template
-          v-for="{ name, quantity, price } in getCartContent"
+          v-for="{ id, name, quantity, price } in getCartContent"
           :key="id"
           class="border-grey-light border hover:bg-gray-100 p-3 text-center"
         >
           <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
             <td class="border-grey-light border hover:bg-gray-100 h-12">
-              <a tabindex="0" @click="removeProductFromCart(product)">
+              <a tabindex="0" @click="removeProductFromCart(id)">
                 <img
                   class="mt-2 mx-auto cursor-pointer"
                   alt="Remove icon"
@@ -78,6 +78,12 @@ const tableHeaders = ["Remove", "Name", "Quantity", "Price"];
 const store = useCart();
 
 const { getCartContent, getCartTotal, getCartQuantity } = storeToRefs(store);
+
+const removeProductFromCart = (id) => {
+ // localState.removingCartItem = true;
+  store.removeProductFromCart(id);
+  //localState.removingCartItem = false;
+};
 </script>
 
 <style>

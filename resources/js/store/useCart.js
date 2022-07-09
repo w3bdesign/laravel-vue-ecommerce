@@ -33,7 +33,7 @@ export const useCart = defineStore("shopState", {
                 this.cart.push(item);
             }
         },
-        removeFromCart({ item }) {
+        removeProductFromCart({ item }) {
             this.cart.splice(this.cart.indexOf(item), 1);
         },
 
