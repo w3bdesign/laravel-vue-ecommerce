@@ -1849,6 +1849,10 @@ video {
 
 @media (min-width: 768px) {
 
+  .md\:block {
+    display: block;
+  }
+
   .md\:w-full {
     width: 100%;
   }

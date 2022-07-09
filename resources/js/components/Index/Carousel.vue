@@ -4,9 +4,9 @@
     <div class="overflow-hidden relative h-56 rounded-lg sm:h-64 xl:h-80 2xl:h-96">
       <!-- Item 1 -->
       <div class="hidden duration-700 ease-in-out" data-carousel-item>
-        <div class="flex items-start justify-center w-full px-6 tracking-wide">
+        <div class="flex items-start justify-center w-full px-6 tracking-wide ">
           <span
-            class="z-40 absolute top-1/2 p-4 my-4 text-2xl text-black bg-white rounded-lg mt-4"
+            class="z-40 absolute top-1/2 p-4 my-4 text-2xl text-black bg-white rounded-lg mt-4 hidden md:block"
             >MacBook Air 12 In Store now!</span
           >
           <img
@@ -20,7 +20,7 @@
       <div class="hidden duration-700 ease-in-out" data-carousel-item>
         <div class="flex items-start justify-center w-full px-6 tracking-wide">
           <span
-            class="z-40 absolute top-1/2 p-4 my-4 text-2xl text-black bg-white rounded-lg mt-4"
+            class="z-40 absolute top-1/2 p-4 my-4 text-2xl text-black bg-white rounded-lg mt-4 hidden md:block"
             >MacBook Air 13 In Store now!</span
           >
           <img
@@ -34,7 +34,7 @@
       <div class="hidden duration-700 ease-in-out" data-carousel-item>
         <div class="flex items-start justify-center w-full px-6 tracking-wide">
           <span
-            class="z-40 absolute top-1/2 p-4 my-4 text-2xl text-black bg-white rounded-lg mt-4"
+            class="z-40 absolute top-1/2 p-4 my-4 text-2xl text-black bg-white rounded-lg mt-4 hidden md:block"
             >MacBook Air 14 In Store now!</span
           >
           <img

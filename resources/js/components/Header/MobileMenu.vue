@@ -9,10 +9,14 @@
       }"
     >
       <ul class="z-50">
-        <li class="z-50 text-xl w-auto p-4 m-4 font-bold text-center border border-gray-300 border-opacity-50 shadow-md rounded">
+        <li
+          class="z-50 text-xl w-auto p-4 m-4 font-bold text-center border border-gray-300 border-opacity-50 shadow-md rounded"
+        >
           <router-link to="/" @click="displayMobileMenu"> Home </router-link>
         </li>
-        <li class="z-50 text-xl w-auto p-4 m-4 font-bold text-center border border-gray-300 border-opacity-50 shadow-md rounded">
+        <li
+          class="z-50 text-xl w-auto p-4 m-4 font-bold text-center border border-gray-300 border-opacity-50 shadow-md rounded"
+        >
           <router-link to="/products" @click="displayMobileMenu">Products </router-link>
         </li>
         <li class="flex justify-center mt-6 text-lg w-auto p-4 m-4 font-bold text-center">
@@ -66,15 +70,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-/* Style for mobile menu links */
-.linkStyle {
-  @apply w-auto p-4 m-4 font-bold text-center border border-gray-300 border-opacity-50 shadow-md rounded;
-}
-
-.linkStyleCart {
-  @apply w-auto p-4 m-4 font-bold text-center;
-}
-
 /* Main hamburger styling */
 .burger {
   height: 3em;
