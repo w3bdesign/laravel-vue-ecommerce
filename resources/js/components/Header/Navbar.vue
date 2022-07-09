@@ -15,6 +15,7 @@
         </div>
       </div>
       <!-- mobile-menu kommer her -->
+      <mobile-menu />
       <div class="hidden lg:w-1/12 lg:block" />
       <div
         id="nav-content"

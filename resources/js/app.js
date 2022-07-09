@@ -8,6 +8,9 @@ import { createAutoAnimatePlugin } from "@formkit/addons";
 import Layout from "./layout/Layout.vue";
 
 import Cart from "./components/Header/Cart.vue";
+import Navbar from "./components/Header/Navbar.vue";
+import MobileMenu from "./components/Header/MobileMenu.vue";
+
 import ShowAllProducts from "./components/Products/ShowAllProducts.vue";
 
 import CustomerDetails from "./components/Checkout/CustomerDetails.vue";
@@ -16,7 +19,7 @@ import CartSummary from "./components/Checkout/CartSummary.vue";
 
 import Carousel from "./components/Index/Carousel.vue";
 
-import Navbar from "./components/Header/Navbar.vue";
+
 import FooterContent from "./components/Footer/Footer.vue";
 import OrderCheckout from "./components/Checkout/OrderCheckout.vue";
 import OrderForm from "./components/Checkout/OrderForm.vue";
@@ -38,6 +41,7 @@ app.component("fakevisa-details", FakeVisaDetails);
 app.component("cart-summary", CartSummary);
 
 app.component("carousel-component", Carousel);
+app.component("mobile-menu", MobileMenu);
 
 app.component("nav-bar", Navbar);
 app.component("footer-content", FooterContent);
