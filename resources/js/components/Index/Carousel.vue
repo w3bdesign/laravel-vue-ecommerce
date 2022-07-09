@@ -7,7 +7,7 @@
         <div class="flex items-start justify-center w-full px-6 tracking-wide">
           <span
             class="z-40 absolute top-1/2 p-4 my-4 text-2xl text-black bg-white rounded-lg mt-4"
-            >MacBook Air 14 In Store now!</span
+            >MacBook Air 12 In Store now!</span
           >
           <img
             src="/images/Hero.jpg"
@@ -18,19 +18,31 @@
       </div>
       <!-- Item 2 -->
       <div class="hidden duration-700 ease-in-out" data-carousel-item>
-        <img
-          src="/images/Hero.jpg"
-          class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
-          alt="..."
-        />
+        <div class="flex items-start justify-center w-full px-6 tracking-wide">
+          <span
+            class="z-40 absolute top-1/2 p-4 my-4 text-2xl text-black bg-white rounded-lg mt-4"
+            >MacBook Air 13 In Store now!</span
+          >
+          <img
+            src="/images/Hero.jpg"
+            class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
+            alt="..."
+          />
+        </div>
       </div>
       <!-- Item 3 -->
       <div class="hidden duration-700 ease-in-out" data-carousel-item>
-        <img
-          src="/images/Hero.jpg"
-          class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
-          alt="..."
-        />
+        <div class="flex items-start justify-center w-full px-6 tracking-wide">
+          <span
+            class="z-40 absolute top-1/2 p-4 my-4 text-2xl text-black bg-white rounded-lg mt-4"
+            >MacBook Air 14 In Store now!</span
+          >
+          <img
+            src="/images/Hero.jpg"
+            class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2"
+            alt="..."
+          />
+        </div>
       </div>
     </div>
     <!-- Slider indicators -->

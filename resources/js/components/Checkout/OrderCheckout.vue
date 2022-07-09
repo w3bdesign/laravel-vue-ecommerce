@@ -52,6 +52,7 @@ import { storeToRefs } from "pinia";
 import { loadStripe } from "@stripe/stripe-js";
 
 import { useCart } from "../../store/useCart";
+import router from "../../router";
 
 const localState = reactive({
   removingCartItem: false,
@@ -119,6 +120,8 @@ const checkout = async () => {
         localState.paymentIsProcessing = false;
         store.clearCart();
         store.clearCustomer();
+        store.saveOrderId(paymentMethod.id);
+        router.push("/success");
       }
     })
     .catch(() => {

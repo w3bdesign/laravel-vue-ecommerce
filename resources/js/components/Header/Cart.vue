@@ -9,7 +9,9 @@
             aria-label="Cart"
             src="../../../img/svg/Cart.svg"
           />
-          <span class="absolute w-6 h-6 pb-2 ml-16 -mt-12 text-center text-white bg-black rounded-full lg:ml-14">
+          <span
+            class="absolute w-6 h-6 pb-2 ml-16 -mt-12 text-center text-white bg-black rounded-full lg:ml-14"
+          >
             {{ getCartQuantity }}
           </span>
           <span>Total: {{ formatPrice(getCartTotal) }}</span>
@@ -31,10 +33,6 @@ const { getCartQuantity, getCartTotal } = storeToRefs(store);
 </script>
 
 <style scoped>
-.cartQuantity {
-  @apply absolute w-6 h-6 pb-2 ml-16 -mt-12 text-center text-white bg-black rounded-full lg:ml-14;
-}
-
 .fade-enter-active,
 .fade-leave-active {
   transition: all 1.5s ease;

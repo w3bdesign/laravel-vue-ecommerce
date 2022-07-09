@@ -47,6 +47,9 @@ export const useCart = defineStore("shopState", {
         saveCustomerDetails(customer) {
             this.customer = customer;
         },
+        saveOrderId(order) {
+            this.order = order;
+        },
         getSingleProduct(slug) {
             return this.products.find((product) => product.slug === slug);
         },
@@ -57,6 +60,9 @@ export const useCart = defineStore("shopState", {
                 (total, product) => total + product.quantity,
                 0
             );
+        },
+        getOrderDetails() {
+            return this.order;
         },
 
         getCartContent() {
