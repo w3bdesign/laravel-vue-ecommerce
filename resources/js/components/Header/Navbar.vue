@@ -21,9 +21,11 @@
           src="../../../img/svg/MobileLogo.svg"
         />
 
-        <router-link to="/cart">
-          <cart-component />
-        </router-link>
+        <div class="md:hidden block">
+          <router-link to="/cart">
+            <cart-component />
+          </router-link>
+        </div>
       </div>
 
       <mobile-menu />

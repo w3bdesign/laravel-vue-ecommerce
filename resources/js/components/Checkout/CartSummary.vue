@@ -10,7 +10,6 @@
       <caption class="sr-only">
         Cart summary
       </caption>
-
       <thead class="text-white">
         <template v-for="_content in getCartContent" :key="content">
           <tr
