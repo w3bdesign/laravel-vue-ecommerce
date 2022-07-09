@@ -2,6 +2,7 @@
   <div class="w-full">
     <h3 class="h-12 py-4 mt-2 text-2xl font-bold text-center">Cart summary</h3>
   </div>
+
   <div class="relative mt-2 overflow-x-auto">
     <table
       class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5"
@@ -9,19 +10,22 @@
       <caption class="sr-only">
         Cart summary
       </caption>
+
       <thead class="text-white">
-        <tr
-          class="bg-gray-600 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0"
-        >
-          <th
-            v-for="header in tableHeaders"
-            :key="header"
-            scope="col"
-            class="p-3 text-center"
+        <template v-for="_content in getCartContent" :key="content">
+          <tr
+            class="bg-gray-600 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0"
           >
-            {{ header }}
-          </th>
-        </tr>
+            <th
+              v-for="header in tableHeaders"
+              :key="header"
+              scope="col"
+              class="p-3 text-center h-12"
+            >
+              {{ header }}
+            </th>
+          </tr>
+        </template>
       </thead>
       <tbody class="flex-1 sm:flex-none">
         <template
@@ -30,7 +34,7 @@
           class="border-grey-light border hover:bg-gray-100 p-3 text-center"
         >
           <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
-            <td class="border-grey-light border hover:bg-gray-100">
+            <td class="border-grey-light border hover:bg-gray-100 h-12">
               <a tabindex="0" @click="removeProductFromCart(product)">
                 <img
                   class="mt-2 mx-auto cursor-pointer"
@@ -40,13 +44,13 @@
                 />
               </a>
             </td>
-            <td class="border-grey-light border hover:bg-gray-100 p-3 text-center">
+            <td class="border-grey-light border hover:bg-gray-100 p-3 text-center h-12">
               {{ name }}
             </td>
-            <td class="border-grey-light border hover:bg-gray-100 p-3 text-center">
+            <td class="border-grey-light border hover:bg-gray-100 p-3 text-center h-12">
               {{ quantity }}
             </td>
-            <td class="border-grey-light border hover:bg-gray-100 p-3 text-center">
+            <td class="border-grey-light border hover:bg-gray-100 p-3 text-center h-12">
               {{ formatPrice(price) }}
             </td>
           </tr>

@@ -26,7 +26,7 @@
       <div class="self-center block w-full mr-4">
         <button
           id="nav-toggle"
-          class="burger burger-squeeze"
+          class="mt-2 burger burger-squeeze"
           aria-haspopup="true"
           :aria-expanded="expandedMenu"
           aria-controls="menu"
