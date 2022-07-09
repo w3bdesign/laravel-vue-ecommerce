@@ -33,7 +33,7 @@ Ecommerce site with Laravel 9, Vue 3 and Stripe.
 
 -   Easily change currency by setting two environment variables: `CASHIER_CURRENCY` and `CASHIER_CURRENCY_LOCALE`
 
--   ESLint code linting with AirBnB ruleset
+-   Code linting with Laravel Pint
 
 -   CSS animations
 
