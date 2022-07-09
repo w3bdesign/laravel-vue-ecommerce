@@ -53,7 +53,6 @@
         </template>
       </tbody>
     </table>
-
     <div
       v-if="getCartQuantity"
       class="container mx-auto flex flex-wrap flex-row justify-end items-end content-center"
