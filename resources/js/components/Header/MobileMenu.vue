@@ -28,10 +28,10 @@
           id="nav-toggle"
           class="mt-2 burger burger-squeeze"
           aria-haspopup="true"
-          :aria-expanded="expandedMenu"
+          :aria-expanded="state.expandedMenu"
           aria-controls="menu"
           aria-label="Navigation"
-          :class="{ open: expandedMenu }"
+          :class="{ open: state.expandedMenu }"
           @click="displayMobileMenu"
         >
           <div class="burger-lines" />

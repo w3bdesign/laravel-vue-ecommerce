@@ -21552,10 +21552,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     id: "nav-toggle",
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["mt-2 burger burger-squeeze", {
-      open: _ctx.expandedMenu
+      open: $setup.state.expandedMenu
     }]),
     "aria-haspopup": "true",
-    "aria-expanded": _ctx.expandedMenu,
+    "aria-expanded": $setup.state.expandedMenu,
     "aria-controls": "menu",
     "aria-label": "Navigation",
     onClick: $setup.displayMobileMenu
