@@ -40,9 +40,11 @@ export const useCart = defineStore("shopState", {
         clearCart() {
             this.cart.length = 0;
         },
-
         clearCustomer() {
             this.customer = {};
+        },
+        clearOrder() {
+            this.order = {};
         },
         saveCustomerDetails(customer) {
             this.customer = customer;

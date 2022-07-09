@@ -19,11 +19,6 @@
         >
           <router-link to="/products" @click="displayMobileMenu">Products </router-link>
         </li>
-        <li class="flex justify-center mt-6 text-lg w-auto p-4 m-4 font-bold text-center">
-          <router-link to="/cart" @click="displayMobileMenu">
-            <cart />
-          </router-link>
-        </li>
       </ul>
     </div>
     <div class="w-5/12 lg:hidden" />
@@ -31,7 +26,7 @@
       <div class="self-center block w-full mr-4">
         <button
           id="nav-toggle"
-          class="mt-6 burger burger-squeeze"
+          class="burger burger-squeeze"
           aria-haspopup="true"
           :aria-expanded="expandedMenu"
           aria-controls="menu"
