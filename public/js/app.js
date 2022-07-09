@@ -20457,7 +20457,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var checkout = /*#__PURE__*/function () {
       var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var _store$getCustomerDet, firstName, lastName, address, zipcode, city, state, email, _yield$localState$str, paymentMethod, error, kunde;
+        var _store$getCustomerDet, firstName, lastName, address, zipcode, city, state, email, _yield$localState$str, paymentMethod, error, finalCustomerDetails;
 
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
@@ -20492,12 +20492,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context2.abrupt("return");
 
               case 9:
-                kunde = _objectSpread(_objectSpread({}, store.getCustomerDetails), {}, {
+                finalCustomerDetails = _objectSpread(_objectSpread({}, store.getCustomerDetails), {}, {
                   cart: JSON.stringify(store.getCartContent),
-                  amount: 5000,
+                  amount: store.getCartTotal * 100,
                   payment_method_id: paymentMethod.id
                 });
-                axios.post("/api/purchase", kunde).then(function (response) {
+                axios.post("/api/purchase", finalCustomerDetails).then(function (response) {
                   localState.paymentIsProcessing = true;
 
                   if (response.statusText === "Created") {

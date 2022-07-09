@@ -114,15 +114,15 @@ const checkout = async () => {
     return;
   }
 
-  const kunde = {
+  const finalCustomerDetails = {
     ...store.getCustomerDetails,
     cart: JSON.stringify(store.getCartContent),
-    amount: 5000,
+    amount: store.getCartTotal * 100,
     payment_method_id: paymentMethod.id,
   };
 
   axios
-    .post("/api/purchase", kunde)
+    .post("/api/purchase", finalCustomerDetails)
     .then((response) => {
       localState.paymentIsProcessing = true;
 
