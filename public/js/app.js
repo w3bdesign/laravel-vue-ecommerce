@@ -20314,8 +20314,7 @@ __webpack_require__.r(__webpack_exports__);
         getCartQuantity = _storeToRefs.getCartQuantity;
 
     var removeProductFromCart = function removeProductFromCart(id) {
-      // localState.removingCartItem = true;
-      store.removeProductFromCart(id); //localState.removingCartItem = false;
+      store.removeProductFromCart(id);
     };
 
     var __returned__ = {
@@ -20350,9 +20349,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.esm-browser.js");
 /* harmony import */ var _store_useCart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../store/useCart */ "./resources/js/store/useCart.js");
-
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'CustomerDetails',
@@ -20360,14 +20357,23 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose();
     var store = (0,_store_useCart__WEBPACK_IMPORTED_MODULE_0__.useCart)();
-
-    var _storeToRefs = (0,pinia__WEBPACK_IMPORTED_MODULE_1__.storeToRefs)(store),
-        getCustomerDetails = _storeToRefs.getCustomerDetails;
-
+    var _store$getCustomerDet = store.getCustomerDetails,
+        firstName = _store$getCustomerDet.firstName,
+        lastName = _store$getCustomerDet.lastName,
+        address = _store$getCustomerDet.address,
+        zipcode = _store$getCustomerDet.zipcode,
+        city = _store$getCustomerDet.city,
+        state = _store$getCustomerDet.state,
+        email = _store$getCustomerDet.email;
     var __returned__ = {
       store: store,
-      getCustomerDetails: getCustomerDetails,
-      storeToRefs: pinia__WEBPACK_IMPORTED_MODULE_1__.storeToRefs,
+      firstName: firstName,
+      lastName: lastName,
+      address: address,
+      zipcode: zipcode,
+      city: city,
+      state: state,
+      email: email,
       useCart: _store_useCart__WEBPACK_IMPORTED_MODULE_0__.useCart
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
@@ -20898,7 +20904,7 @@ __webpack_require__.r(__webpack_exports__);
     var store = (0,_store_useCart__WEBPACK_IMPORTED_MODULE_0__.useCart)();
     var getOrderDetails = store.getOrderDetails,
         clearOrder = store.clearOrder;
-    clearOrder;
+    clearOrder();
     var __returned__ = {
       store: store,
       getOrderDetails: getOrderDetails,
@@ -21059,7 +21065,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_base_table, {
     tableTitle: "Customer details",
     tableHeaders: ['Name', 'Address', 'Zipcode', 'City', 'State', 'Email'],
-    tableData: ["".concat($setup.getCustomerDetails.firstName, " ").concat($setup.getCustomerDetails.lastName), $setup.getCustomerDetails.address, $setup.getCustomerDetails.zipcode, $setup.getCustomerDetails.city, $setup.getCustomerDetails.state, $setup.getCustomerDetails.email]
+    tableData: ["".concat($setup.firstName, " ").concat($setup.lastName), $setup.address, $setup.zipcode, $setup.city, $setup.state, $setup.email]
   }, null, 8
   /* PROPS */
   , ["tableData"]);

@@ -80,9 +80,7 @@ const store = useCart();
 const { getCartContent, getCartTotal, getCartQuantity } = storeToRefs(store);
 
 const removeProductFromCart = (id) => {
- // localState.removingCartItem = true;
   store.removeProductFromCart(id);
-  //localState.removingCartItem = false;
 };
 </script>
 
