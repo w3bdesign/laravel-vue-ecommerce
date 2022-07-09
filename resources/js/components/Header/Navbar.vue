@@ -13,23 +13,19 @@
             src="../../../img/svg/Logo.svg"
           />
         </div>
-
         <img
           alt="Mobile logo"
           class="h-16 md:hidden block w-32"
           aria-label="Nettbutikk logo"
           src="../../../img/svg/MobileLogo.svg"
         />
-
         <div class="md:hidden block">
           <router-link to="/cart">
             <cart-component />
           </router-link>
         </div>
       </div>
-
       <mobile-menu />
-
       <div class="hidden lg:w-1/12 lg:block" />
       <div
         id="nav-content"

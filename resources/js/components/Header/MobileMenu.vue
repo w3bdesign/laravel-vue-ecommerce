@@ -17,7 +17,7 @@
         <li
           class="z-50 text-xl w-auto p-4 m-4 font-bold text-center border border-gray-300 border-opacity-50 shadow-md rounded"
         >
-          <router-link to="/products" @click="displayMobileMenu">Products </router-link>
+          <router-link to="/products" @click="displayMobileMenu"> Products </router-link>
         </li>
       </ul>
     </div>
