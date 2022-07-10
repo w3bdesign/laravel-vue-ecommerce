@@ -787,6 +787,10 @@ video {
   margin-left: 1.5rem;
 }
 
+.mt-36 {
+  margin-top: 9rem;
+}
+
 .block {
   display: block;
 }
@@ -885,6 +889,10 @@ video {
 
 .h-4 {
   height: 1rem;
+}
+
+.h-screen {
+  height: 100vh;
 }
 
 .w-full {

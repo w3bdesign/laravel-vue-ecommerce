@@ -2,7 +2,7 @@
   <div class="relative">
     <div
       v-if="!state.firstRender"
-      class="fixed top-0 left-0 z-50 w-screen mt-40 bg-white h-96 animate__animated"
+      class="fixed top-0 left-0 z-50 w-screen mt-36 bg-white h-screen animate__animated"
       :class="{
         animate__fadeInLeft: state.expandedMenu,
         animate__fadeOutRight: !state.expandedMenu && !state.firstRender,

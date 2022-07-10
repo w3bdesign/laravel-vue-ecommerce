@@ -21523,7 +21523,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [!$setup.state.firstRender ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
     key: 0,
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["fixed top-0 left-0 z-50 w-screen mt-40 bg-white h-96 animate__animated", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["fixed top-0 left-0 z-50 w-screen mt-36 bg-white h-screen animate__animated", {
       animate__fadeInLeft: $setup.state.expandedMenu,
       animate__fadeOutRight: !$setup.state.expandedMenu && !$setup.state.firstRender
     }])
