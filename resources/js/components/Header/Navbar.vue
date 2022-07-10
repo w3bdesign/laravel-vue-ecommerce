@@ -6,31 +6,30 @@
     <div class="flex flex-wrap justify-between">
       <div class="pr-2 my-2 overflow-hidden">
         <div class="ml-4 lg:ml-0 hidden md:block">
-          <img
-            alt="Logo"
-            class="h-20 lg:h-24"
-            aria-label="Nettbutikk logo"
-            src="../../../img/svg/Logo.svg"
-          />
+          <router-link to="/">
+            <img
+              alt="Logo"
+              class="h-20 lg:h-24"
+              aria-label="Nettbutikk logo"
+              src="../../../img/svg/Logo.svg"
+            />
+          </router-link>
         </div>
-        <img
-          alt="Mobile logo"
-          class="h-16 md:hidden block w-32"
-          aria-label="Nettbutikk logo"
-          src="../../../img/svg/MobileLogo.svg"
-        />
-        
+        <router-link to="/">
+          <img
+            alt="Mobile logo"
+            class="h-16 md:hidden block w-32"
+            aria-label="Nettbutikk logo"
+            src="../../../img/svg/MobileLogo.svg"
+          />
+        </router-link>
       </div>
 
-
-
-<div class="lg:hidden block">         
-            <cart-component />         
-        </div>
+      <div class="lg:hidden block">
+        <cart-component />
+      </div>
 
       <mobile-menu />
-
-
 
       <div class="hidden lg:w-1/12 lg:block" />
       <div
