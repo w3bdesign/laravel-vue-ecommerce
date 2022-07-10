@@ -31,8 +31,6 @@ Ecommerce site with Laravel 9, Vue 3 and Stripe.
 
 -   Order form setup with FormKit and builtin validation
 
--   Vuex-persist for persisting cart after page refresh
-
 -   Stripe for payments
 
 -   Easily change currency by setting two environment variables: `CASHIER_CURRENCY` and `CASHIER_CURRENCY_LOCALE`
