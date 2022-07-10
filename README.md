@@ -27,7 +27,7 @@ Ecommerce site with Laravel 9, Vue 3 and Stripe.
 
 -   Pinia state management
 
--   State persist with pinia-plugin-persist
+-   State persist with pinia-plugin-persistedstate
 
 -   Order form setup with FormKit and builtin validation
 
