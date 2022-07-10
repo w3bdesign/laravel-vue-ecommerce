@@ -1,13 +1,4 @@
 <template>
-  <show-all-products />
+  <h1 class="h-10 p-6 text-3xl font-bold text-center">Products</h1>
+  <showall-products />
 </template>
-
-<script>
-import { defineComponent } from 'vue';
-
-import ShowAllProducts from '../components/Products/ShowAllProducts.vue';
-
-export default defineComponent({
-  components: { ShowAllProducts },
-});
-</script>

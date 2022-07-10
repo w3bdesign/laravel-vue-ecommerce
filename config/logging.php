@@ -4,7 +4,7 @@ use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -17,7 +17,23 @@ return array(
     |
     */
 
-    'default'  => env('LOG_CHANNEL', 'stack'),
+    'default' => env('LOG_CHANNEL', 'stack'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Deprecations Log Channel
+    |--------------------------------------------------------------------------
+    |
+    | This option controls the log channel that should be used to log warnings
+    | regarding deprecated PHP and library features. This allows you to get
+    | your application ready for upcoming major versions of dependencies.
+    |
+    */
+
+    'deprecations' => [
+        'channel' => env('LOG_DEPRECATIONS_CHANNEL', 'null'),
+        'trace' => false,
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -34,71 +50,73 @@ return array(
     |
     */
 
-    'channels' => array(
-        'stack'      => array(
-            'driver'            => 'stack',
-            'channels'          => array( 'single' ),
+    'channels' => [
+        'stack' => [
+            'driver' => 'stack',
+            'channels' => ['single'],
             'ignore_exceptions' => false,
-        ),
+        ],
 
-        'single'     => array(
-            'driver' => 'errorlog',
-            'path'   => storage_path('logs/laravel.log'),
-            'level'  => env('LOG_LEVEL', 'debug'),
-        ),
+        'single' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/laravel.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
 
-        'daily'      => array(
-            'driver' => 'errorlog',
-            'path'   => storage_path('logs/laravel.log'),
-            'level'  => env('LOG_LEVEL', 'debug'),
-            'days'   => 14,
-        ),
+        'daily' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/laravel.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+            'days' => 14,
+        ],
 
-        'slack'      => array(
-            'driver'   => 'errorlog',
-            'url'      => env('LOG_SLACK_WEBHOOK_URL'),
+        'slack' => [
+            'driver' => 'slack',
+            'url' => env('LOG_SLACK_WEBHOOK_URL'),
             'username' => 'Laravel Log',
-            'emoji'    => ':boom:',
-            'level'    => env('LOG_LEVEL', 'critical'),
-        ),
+            'emoji' => ':boom:',
+            'level' => env('LOG_LEVEL', 'critical'),
+        ],
 
-        'papertrail' => array(
-            'driver'       => 'errorlog',
-            'level'        => env('LOG_LEVEL', 'debug'),
-            'handler'      => SyslogUdpHandler::class,
-            'handler_with' => array(
+        'papertrail' => [
+            'driver' => 'monolog',
+            'level' => env('LOG_LEVEL', 'debug'),
+            'handler' => env('LOG_PAPERTRAIL_HANDLER', SyslogUdpHandler::class),
+            'handler_with' => [
                 'host' => env('PAPERTRAIL_URL'),
                 'port' => env('PAPERTRAIL_PORT'),
-            ),
-        ),
+                'connectionString' => 'tls://'.env('PAPERTRAIL_URL').':'.env('PAPERTRAIL_PORT'),
+            ],
+        ],
 
-        'stderr'     => array(
-            'driver'    => 'errorlog',
-            'handler'   => StreamHandler::class,
+        'stderr' => [
+            'driver' => 'monolog',
+            'level' => env('LOG_LEVEL', 'debug'),
+            'handler' => StreamHandler::class,
             'formatter' => env('LOG_STDERR_FORMATTER'),
-            'with'      => array(
+            'with' => [
                 'stream' => 'php://stderr',
-            ),
-        ),
+            ],
+        ],
 
-        'syslog'     => array(
+        'syslog' => [
+            'driver' => 'syslog',
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+
+        'errorlog' => [
             'driver' => 'errorlog',
-            'level'  => env('LOG_LEVEL', 'debug'),
-        ),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
 
-        'errorlog'   => array(
-            'driver' => 'errorlog',
-            'level'  => env('LOG_LEVEL', 'debug'),
-        ),
-
-        'null'       => array(
-            'driver'  => 'errorlog',
+        'null' => [
+            'driver' => 'monolog',
             'handler' => NullHandler::class,
-        ),
+        ],
 
-        'emergency'  => array(
+        'emergency' => [
             'path' => storage_path('logs/laravel.log'),
-        ),
-    ),
+        ],
+    ],
 
-);
+];

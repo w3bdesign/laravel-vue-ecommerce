@@ -1,58 +1,41 @@
 <template>
-  <div>
+  <div class="container mx-auto">
     <transition name="fade">
-      <span
-        v-if="cartQuantity"
-        class="text-xl text-white no-underline lg:text-black is-active"
-      >
+      <div v-if="getCartQuantity">
         <router-link to="/checkout">
           <img
             alt="Cart icon"
             class="h-12 ml-4 lg:ml-2"
             aria-label="Cart"
             src="../../../img/svg/Cart.svg"
+          />
+          <span
+            class="absolute w-6 h-6 pb-2 ml-16 -mt-12 text-center text-white bg-black rounded-full lg:ml-14"
           >
-        </router-link>
-      </span>
-    </transition>
-    <transition name="fade">
-      <div v-if="cartQuantity">
-        <router-link to="/checkout">
-          <span class="cartQuantity">
-            {{ cartQuantity.quantity ? cartQuantity.quantity : cartQuantity }}
+            {{ getCartQuantity }}
           </span>
-          <span>Total: {{ formatPrice(cartTotal) }}</span>
+          <span>Total: {{ formatPrice(getCartTotal) }}</span>
         </router-link>
       </div>
     </transition>
   </div>
 </template>
 
-<script>
-import { computed } from 'vue';
-import { useStore } from 'vuex';
+<script setup>
+import { storeToRefs } from "pinia";
 
-import { formatPrice } from '../../utils/functions';
+import { useCart } from "../../store/useCart";
+import { formatPrice } from "../../utils/functions";
 
-export default {
-  setup() {
-    const store = useStore();
-    const cartQuantity = computed(() => store.getters.cartQuantity);
-    const cartTotal = computed(() => store.getters.cartTotal);
+const store = useCart();
 
-    return { cartQuantity, cartTotal, formatPrice };
-  },
-};
+const { getCartQuantity, getCartTotal } = storeToRefs(store);
 </script>
 
 <style scoped>
-.cartQuantity {
-  @apply absolute w-6 h-6 pb-2 ml-16 -mt-12 text-center text-white bg-black rounded-full lg:ml-14;
-}
-
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 0.5s ease;
+  transition: all 1.5s ease;
 }
 
 .fade-enter-from,

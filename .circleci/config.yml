@@ -1,11 +1,12 @@
 version: 2.1
 orbs:
-  browser-tools: circleci/browser-tools@1.3.0
+  browser-tools: circleci/browser-tools@1.2
+
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     docker: # run the steps with Docker
       #- image: cimg/php:8.0.14-browsers # ...with this image as the primary container; this is where all `steps` will run
-      - image: cimg/php:8.0.19-browsers # ...with this image as the primary container; this is where all `steps` will run
+      - image: cimg/php:8.1.7-browsers # ...with this image as the primary container; this is where all `steps` will run
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -34,8 +35,8 @@ jobs: # a collection of steps
           key: node-v1-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
-      - run: touch database/database.sqlite
-      - run: php artisan migrate --env=testing
+      - run: touch database/testing.sqlite
+      - run: php artisan migrate --env=testing --database=sqlite_testing --force
       - run: php artisan dusk:chrome-driver 70
       - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
       - run: sudo dpkg -i google-chrome-stable_current_amd64.deb
@@ -45,7 +46,8 @@ jobs: # a collection of steps
           name: Serve Application
           background: true
           command: php artisan serve  
-      - run: php artisan dusk      
+      - run: php artisan dusk
+      - run: php artisan test      
       - store_artifacts:
           path: ./tests/Browser/console
           destination: console

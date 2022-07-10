@@ -1,13 +1,4 @@
 <template>
+  <h1 class="h-10 p-6 text-3xl font-bold text-center">Checkout</h1>
   <order-checkout />
 </template>
-
-<script>
-import { defineComponent } from 'vue';
-
-import OrderCheckout from '../components/Checkout/OrderCheckout.vue';
-
-export default defineComponent({
-  components: { OrderCheckout },
-});
-</script>
