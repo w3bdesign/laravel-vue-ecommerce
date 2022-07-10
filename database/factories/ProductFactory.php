@@ -24,7 +24,7 @@ class ProductFactory extends Factory
     public function definition()
     {
         $productPrefixes = ['Sweater', 'Pants', 'Shirt', 'Hat', 'Glasses', 'Socks'];
-        $name = $this->faker->company . ' ' . Arr::random($productPrefixes);
+        $name = $this->faker->company.' '.Arr::random($productPrefixes);
 
         return [
             'name' => $name,

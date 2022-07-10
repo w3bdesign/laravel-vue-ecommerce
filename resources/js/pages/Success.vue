@@ -1,13 +1,17 @@
 <template>
-  <order-success />
+  <div v-if="getOrderDetails">
+    <h1 class="h-64 mt-24 p-6 text-3xl font-bold text-center">
+      Order completed with order ID #{{ getOrderDetails }}
+    </h1>
+  </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { useCart } from "../store/useCart";
 
-import OrderSuccess from '../components/Success/OrderSuccess.vue';
+const store = useCart();
 
-export default defineComponent({
-  components: { OrderSuccess },
-});
+const { getOrderDetails, clearOrder } = store;
+
+clearOrder();
 </script>

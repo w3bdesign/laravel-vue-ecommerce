@@ -1,89 +1,46 @@
 <template>
-  <div>
-    <div
-      id="product-container"
-      class="flex flex-wrap items-center"
-    >
+  <div v-if="data && data.length">
+    <div id="product-container" class="flex flex-wrap items-center">
       <div
-        v-for="product in products"
+        v-for="product in data"
         :key="product.id"
         class="flex flex-col mt-6 md:pr-6 xl:pr-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4"
       >
         <router-link
           :to="{
             name: 'single.product',
-            params: { slug: product.slug },
+            params: { slug: product.slug, product: JSON.stringify(product) },
           }"
         >
           <img
-            v-if="product.imageUrl !== undefined"
+            v-if="product.imageUrl"
             class="productImage"
             :alt="product.name"
             :src="product.imageUrl"
-          >
-          <img
-            v-else
-            class="productImage"
-            :alt="product.name"
-            :src="placeholderImage"
-          >
+          />
           <div class="flex justify-center pt-3">
             <p class="text-xl font-bold text-center cursor-pointer">
               {{ product.name }}
             </p>
           </div>
           <div class="flex justify-center mt-2">
-            <div class="ml-4 text-xl text-gray-900">
-              {{ formatPrice(product.price) }}
-            </div>
+            <div class="text-xl text-gray-900">kr {{ product.price }}</div>
           </div>
-          <button class="productButton">
-            View Product
-          </button>
+          <div class="flex justify-center pt-3">
+            <base-button backgroundColor="bg-blue-600">View Product</base-button>
+          </div>
         </router-link>
       </div>
     </div>
-
-    <loading-spinner v-if="loading" />
+  </div>
+  <div v-if="error">
+    <h1 class="text-center text-3xl text-red-500 m-4 p-4 mt-8">Error loading products</h1>
   </div>
 </template>
 
-<script>
-import { useStore } from 'vuex';
+<script setup>
+import useSWRV from "swrv";
 
-import {
-  defineComponent, reactive, toRefs, onBeforeMount,
-} from 'vue';
-
-import { formatPrice } from '../../utils/functions';
-
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.vue';
-
-export default defineComponent({
-  components: { LoadingSpinner },
-  setup() {
-    const store = useStore();
-    const localState = reactive({
-      loading: true,
-      products: null,
-    });
-
-    const placeholderImage = process.env.MIX_PLACEHOLDER_SMALL_IMAGE_URL;
-
-    const fetchProducts = () => {
-      localState.products = store.state.products;
-      localState.loading = false;
-    };
-
-    onBeforeMount(fetchProducts);
-
-    return { ...toRefs(localState), formatPrice, placeholderImage };
-  },
-});
+const fetcher = (key) => fetch(key).then((res) => res.json());
+const { data, error } = useSWRV("/api/products", fetcher);
 </script>
-
-<style scoped>
-.productButton {
-  @apply w-full p-2 mt-4 mb-4 text-lg font-bold text-white bg-blue-700 rounded hover:bg-blue-800;
-}
-</style>

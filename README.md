@@ -2,7 +2,7 @@
 
 # Laravel webshop
 
- Ecommerce site with Laravel 8, Vue 3 and Stripe.
+Ecommerce site with Laravel 9, Vue 3 and Stripe.
 
 ### Screenshot:
 
@@ -15,15 +15,17 @@
  <img src="https://user-images.githubusercontent.com/45217974/108796168-670f7380-7588-11eb-87d5-bc28276f0b35.png" alt="Stripe screenshot" />
  <br />
 
-## Features 
+## Features
 
--   Laravel 8
+-   Laravel 9
 
--   Vue 3 with composition API
+-   Vue 3 with SFC and script setup syntax
 
--   Vuex 4 state management
+-   Pinia state management
 
--   Form validation with Vee Validate and Yup
+-   State persist with pinia-plugin-persist
+
+-   Order form setup with FormKit and builtin validation
 
 -   Vuex-persist for persisting cart after page refresh
 
@@ -31,7 +33,7 @@
 
 -   Easily change currency by setting two environment variables: `CASHIER_CURRENCY` and `CASHIER_CURRENCY_LOCALE`
 
--   ESLint code linting with AirBnB ruleset
+-   Code linting with Laravel Pint
 
 -   CSS animations
 
@@ -45,7 +47,7 @@
 
 -   Fork or clone the project
 
--   Ensure you have PHP 7.4 or newer installed and setup properly (alternatively use Docker, see <https://laravel.com/docs/8.x/sail>)
+-   Ensure you have PHP 7.4 or newer installed and setup properly (alternatively use Docker, see <https://laravel.com/docs/9.x/sail>)
 
 -   Ensure you have access to a PostgreSQL database
 
@@ -61,7 +63,7 @@
 
 -   You should create at least one sample product. Although you can use the builtin factory seeders, I prefer to do manual creation for testing purposes.
 
-    To do so run these commands after running `php artisan tinker`: 
+    To do so run these commands after running `php artisan tinker`:
 
     ```php
     $product = new App\Models\Product();
@@ -82,11 +84,11 @@
 ## TODO
 
 -   Do WCAG analysis and ensure there are no issues
- 
+
 -   Finish implementing search with meilisearch-vue or vue-instantsearch when Vue 3 is supported
 
 -   Add some tests to verify that the cart and checkout works correctly
 
--   Consider adding an admin dashboard 
+-   Consider adding an admin dashboard
 
 -   Look into performance optimization

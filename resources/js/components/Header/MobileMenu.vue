@@ -1,51 +1,37 @@
 <template>
   <div class="relative">
     <div
-      v-if="!firstRender"
-      class="fixed top-0 left-0 z-50 w-screen mt-40 bg-white h-96 animate__animated"
+      v-if="!state.firstRender"
+      class="fixed top-0 left-0 z-50 w-screen mt-36 bg-white h-screen animate__animated"
       :class="{
-        animate__fadeInLeft: expandedMenu,
-        animate__fadeOutRight: !expandedMenu && !firstRender,
+        animate__fadeInLeft: state.expandedMenu,
+        animate__fadeOutRight: !state.expandedMenu && !state.firstRender,
       }"
     >
       <ul class="z-50">
-        <li class="z-50 text-xl linkStyle">
-          <router-link
-            to="/"
-            @click="displayMobileMenu"
-          >
-            Home
-          </router-link>
+        <li
+          class="z-50 text-xl w-auto p-4 m-4 font-bold text-center border border-gray-300 border-opacity-50 shadow-md rounded"
+        >
+          <router-link to="/" @click="displayMobileMenu"> Home </router-link>
         </li>
-        <li class="z-50 text-xl linkStyle">
-          <router-link
-            to="/products"
-            @click="displayMobileMenu"
-          >
-            Products
-          </router-link>
-        </li>
-        <li class="flex justify-center mt-6 text-lg linkStyleCart">
-          <router-link
-            to="/cart"
-            @click="displayMobileMenu"
-          >
-            <cart />
-          </router-link>
+        <li
+          class="z-50 text-xl w-auto p-4 m-4 font-bold text-center border border-gray-300 border-opacity-50 shadow-md rounded"
+        >
+          <router-link to="/products" @click="displayMobileMenu"> Products </router-link>
         </li>
       </ul>
     </div>
     <div class="w-5/12 lg:hidden" />
-    <div class="flex flex-row w-2/12 px-2 my-2 lg:hidden">
+    <div class="flex flex-row w-2/12 px-2 py-2 ml-8 lg:hidden">
       <div class="self-center block w-full mr-4">
         <button
           id="nav-toggle"
-          class="mt-6 burger burger-squeeze"
+          class="mt-2 burger burger-squeeze"
           aria-haspopup="true"
-          :aria-expanded="expandedMenu"
+          :aria-expanded="state.expandedMenu"
           aria-controls="menu"
           aria-label="Navigation"
-          :class="{ open: expandedMenu }"
+          :class="{ open: state.expandedMenu }"
           @click="displayMobileMenu"
         >
           <div class="burger-lines" />
@@ -55,40 +41,18 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, reactive, toRefs } from 'vue';
+<script setup>
+import { reactive } from "vue";
 
-import Cart from './Cart.vue';
+const state = reactive({ expandedMenu: false, firstRender: true });
 
-export default defineComponent({
-  name: 'MobileMenu',
-  components: { Cart },
-  setup() {
-    const state = reactive({ expandedMenu: false, firstRender: true });
-    const displayMobileMenu = () => {
-      state.expandedMenu = !state.expandedMenu;
-      state.firstRender = false;
-    };
-
-    return {
-      ...toRefs(state),
-      displayMobileMenu,
-    };
-  },
-});
+const displayMobileMenu = () => {
+  state.expandedMenu = !state.expandedMenu;
+  state.firstRender = false;
+};
 </script>
 
 <style scoped>
-/* Style for mobile menu links */
-.linkStyle {
-  @apply w-auto p-4 m-4 font-bold text-center border;
-  @apply border-gray-300 border-opacity-50 shadow-md rounded;
-}
-
-.linkStyleCart {
-  @apply w-auto p-4 m-4 font-bold text-center;
-}
-
 /* Main hamburger styling */
 .burger {
   height: 3em;
@@ -143,11 +107,7 @@ export default defineComponent({
 .burger.burger-squeeze .burger-lines,
 .burger.burger-squeeze .burger-lines::after,
 .burger.burger-squeeze .burger-lines::before {
-  transition:
-    0.2s top 0.2s,
-    0.1s left,
-    0.2s transform,
-    0.4s background-color 0.2s;
+  transition: 0.2s top 0.2s, 0.1s left, 0.2s transform, 0.4s background-color 0.2s;
 }
 
 .burger.burger-squeeze .burger-lines::after,
