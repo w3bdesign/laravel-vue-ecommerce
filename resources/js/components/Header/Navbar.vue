@@ -24,13 +24,10 @@
           />
         </router-link>
       </div>
-
       <div class="lg:hidden block">
         <cart-component />
       </div>
-
       <mobile-menu />
-
       <div class="hidden lg:w-1/12 lg:block" />
       <div
         id="nav-content"

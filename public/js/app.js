@@ -21087,7 +21087,7 @@ function render(_ctx, _cache) {
   var _component_base_table = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("base-table");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_base_table, {
-    tableTitle: "Use the following card details for testing",
+    tableTitle: "Card details for testing",
     tableHeaders: ['Number', 'CVC', 'Date', 'Zipcode'],
     tableData: ['4242424242424242', 'Any 3 digits', 'Any future date', 'Any zip code']
   });
