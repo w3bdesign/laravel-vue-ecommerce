@@ -3,8 +3,8 @@
     role="banner"
     class="container flex flex-col justify-center px-0 pt-6 mx-auto mb-6"
   >
-    <div class="flex flex-wrap">
-      <div class="w-9/12 pr-2 my-2 overflow-hidden lg:w-3/12 md:w-10/12 flex flex-wrap">
+    <div class="flex flex-wrap justify-between">
+      <div class="pr-2 my-2 overflow-hidden">
         <div class="ml-4 lg:ml-0 hidden md:block">
           <img
             alt="Logo"
@@ -19,11 +19,19 @@
           aria-label="Nettbutikk logo"
           src="../../../img/svg/MobileLogo.svg"
         />
-        <div class="lg:hidden block">         
+        
+      </div>
+
+
+
+<div class="lg:hidden block">         
             <cart-component />         
         </div>
-      </div>
+
       <mobile-menu />
+
+
+
       <div class="hidden lg:w-1/12 lg:block" />
       <div
         id="nav-content"

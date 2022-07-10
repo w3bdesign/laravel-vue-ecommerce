@@ -22,7 +22,7 @@
       </ul>
     </div>
     <div class="w-5/12 lg:hidden" />
-    <div class="flex flex-row w-2/12 px-2 my-2 lg:hidden">
+    <div class="flex flex-row w-2/12 px-2 py-2 ml-8 lg:hidden">
       <div class="self-center block w-full mr-4">
         <button
           id="nav-toggle"
