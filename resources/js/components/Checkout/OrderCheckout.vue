@@ -21,7 +21,7 @@
         <div v-show="getCustomerDetails.firstName">
           <customer-details />
           <fakevisa-details />
-          <!-- TODO: Refactor Stripe into separate component -->
+
           <h2 class="h-10 p-4 mt-6 text-2xl font-bold text-center">Stripe payment</h2>
           <div class="flex justify-center w-full align-center">
             <div id="card-element" class="w-full h-16 mt-6 lg:w-5/12 xl:w-5/12">
@@ -92,6 +92,8 @@ const checkout = async () => {
     email,
   } = store.getCustomerDetails;
 
+  localState.paymentIsProcessing = true;
+
   const { paymentMethod, error } = await localState.stripe.createPaymentMethod(
     "card",
     localState.cardElement,
@@ -114,18 +116,23 @@ const checkout = async () => {
     return;
   }
 
+  const stripeAmount = store.getCartTotal * 100;
+
+  if (stripeAmount < 300) {
+    localState.orderError = "Cart total needs to be higher ";
+    return;
+  }
+
   const finalCustomerDetails = {
     ...store.getCustomerDetails,
     cart: JSON.stringify(store.getCartContent),
-    amount: store.getCartTotal * 100,
+    amount: stripeAmount,
     payment_method_id: paymentMethod.id,
   };
 
   axios
     .post("/api/purchase", finalCustomerDetails)
     .then((response) => {
-      localState.paymentIsProcessing = true;
-
       if (response.statusText === "Created") {
         localState.paymentIsProcessing = false;
         store.clearCart();
@@ -143,7 +150,8 @@ const checkout = async () => {
 
 <style>
 .disabledButton {
-  @apply cursor-not-allowed opacity-50;
+  opacity: 0.2;
+  pointer-events: none;
 }
 
 .flex-container {

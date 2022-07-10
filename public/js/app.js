@@ -20469,14 +20469,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     var checkout = /*#__PURE__*/function () {
       var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        var _store$getCustomerDet, firstName, lastName, address, zipcode, city, state, email, _yield$localState$str, paymentMethod, error, finalCustomerDetails;
+        var _store$getCustomerDet, firstName, lastName, address, zipcode, city, state, email, _yield$localState$str, paymentMethod, error, stripeAmount, finalCustomerDetails;
 
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _store$getCustomerDet = store.getCustomerDetails, firstName = _store$getCustomerDet.firstName, lastName = _store$getCustomerDet.lastName, address = _store$getCustomerDet.address, zipcode = _store$getCustomerDet.zipcode, city = _store$getCustomerDet.city, state = _store$getCustomerDet.state, email = _store$getCustomerDet.email;
-                _context2.next = 3;
+                localState.paymentIsProcessing = true;
+                _context2.next = 4;
                 return localState.stripe.createPaymentMethod("card", localState.cardElement, {
                   billing_details: {
                     name: "".concat(firstName, " ").concat(lastName),
@@ -20490,28 +20491,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 });
 
-              case 3:
+              case 4:
                 _yield$localState$str = _context2.sent;
                 paymentMethod = _yield$localState$str.paymentMethod;
                 error = _yield$localState$str.error;
 
                 if (!(error || !paymentMethod.id)) {
-                  _context2.next = 9;
+                  _context2.next = 10;
                   break;
                 }
 
                 localState.orderError = "Error";
                 return _context2.abrupt("return");
 
-              case 9:
+              case 10:
+                stripeAmount = store.getCartTotal * 100;
+
+                if (!(stripeAmount < 300)) {
+                  _context2.next = 14;
+                  break;
+                }
+
+                localState.orderError = "Cart total needs to be higher ";
+                return _context2.abrupt("return");
+
+              case 14:
                 finalCustomerDetails = _objectSpread(_objectSpread({}, store.getCustomerDetails), {}, {
                   cart: JSON.stringify(store.getCartContent),
-                  amount: store.getCartTotal * 100,
+                  amount: stripeAmount,
                   payment_method_id: paymentMethod.id
                 });
                 axios.post("/api/purchase", finalCustomerDetails).then(function (response) {
-                  localState.paymentIsProcessing = true;
-
                   if (response.statusText === "Created") {
                     localState.paymentIsProcessing = false;
                     store.clearCart();
@@ -20524,7 +20534,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   localState.orderError = true;
                 });
 
-              case 11:
+              case 16:
               case "end":
                 return _context2.stop();
             }
@@ -21169,7 +21179,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     persisted: ""
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_customer_details), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_fakevisa_details), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" TODO: Refactor Stripe into separate component "), _hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_customer_details), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_fakevisa_details), _hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["mt-6 px-6 py-2 font-semibold text-white rounded-md hover:opacity-90 transition-all duration-500 ease-in-out focus:outline-none bg-blue-600", {
           disabledButton: $setup.localState.paymentIsProcessing
         }]),
@@ -24615,7 +24625,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.disabledButton {\n@apply cursor-not-allowed opacity-50;\n}\n.flex-container {\n@apply container mx-auto mt-4 flex border border-gray-300 rounded-lg shadow flex-wrap flex-row justify-around items-center content-center;\n}\n.item {\n@apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;\n}\n.inline-block {\n@apply inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;\n}\n.removing {\n@apply animate-spin cursor-not-allowed;\n}\n.fade-enter-active,\r\n.fade-leave-active {\r\n  transition: all 0.5s ease;\n}\n.fade-enter-from,\r\n.fade-leave-to {\r\n  opacity: 0;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.disabledButton {\r\n  opacity: 0.2;\r\n  pointer-events: none;\n}\n.flex-container {\n@apply container mx-auto mt-4 flex border border-gray-300 rounded-lg shadow flex-wrap flex-row justify-around items-center content-center;\n}\n.item {\n@apply lg:m-2 xl:m-4 xl:w-1/6 lg:w-1/6 sm:m-2 w-auto;\n}\n.inline-block {\n@apply inline-block mt-4 lg:h-12 h-20 w-32 md:w-full lg:w-full xl:w-full;\n}\n.removing {\n@apply animate-spin cursor-not-allowed;\n}\n.fade-enter-active,\r\n.fade-leave-active {\r\n  transition: all 0.5s ease;\n}\n.fade-enter-from,\r\n.fade-leave-to {\r\n  opacity: 0;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
