@@ -16,7 +16,7 @@
         "laravel-mix": "^6.0.49",
         "lodash": "^4.17.21",
         "postcss": "^8.4.14",
-        "tailwindcss": "^3.1.5",
+        "tailwindcss": "^3.1.6",
         "vue-loader": "17.0.0"
     },
     "dependencies": {
@@ -25,10 +25,10 @@
         "@stripe/stripe-js": "^1.32.0",
         "flowbite": "^1.4.7",
         "lodash": "^4.17.21",
-        "pinia": "^2.0.14",
+        "pinia": "^2.0.16",
         "pinia-plugin-persistedstate": "^1.6.1",
         "swrv": "1.0.0-beta.8",
         "vue": "^3.2.37",
-        "vue-router": "^4.1.1"
+        "vue-router": "^4.1.2"
     }
 }
