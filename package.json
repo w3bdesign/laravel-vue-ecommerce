@@ -8,11 +8,21 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "test": "jest"
     },
     "devDependencies": {
+        "@babel/preset-env": "^7.18.6",
+        "@testing-library/vue": "^6.6.0",
+        "@vue/vue3-jest": "^28.0.1",
         "autoprefixer": "^10.4.7",
         "axios": "^0.27.2",
+        "babel-core": "^7.0.0-bridge.0",
+        "babel-jest": "^28.1.2",
+        "global-jsdom": "^8.5.0",
+        "jest": "^28.1.2",
+        "jest-environment-jsdom": "^28.1.2",
+        "jsdom": "^20.0.0",
         "laravel-mix": "^6.0.49",
         "lodash": "^4.17.21",
         "postcss": "^8.4.14",
