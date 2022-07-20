@@ -13,7 +13,7 @@
         "laravel/tinker": "^v2.7.2"
     },
     "require-dev": {
-        "fakerphp/faker": "^v1.9.2",
+        "fakerphp/faker": "1.20.0",
         "laravel/dusk": "6.25.0",
         "laravel/pint": "1.0.0",
         "laravel/sail": "^v1.9.0",
