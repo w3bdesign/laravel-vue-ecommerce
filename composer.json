@@ -8,7 +8,7 @@
         "php": "^8.0.2",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/cashier": "13.13.0",
-        "laravel/framework": "9.21.5",
+        "laravel/framework": "9.21.6",
         "laravel/sanctum": "^v2.9.4",
         "laravel/tinker": "^v2.7.2"
     },
