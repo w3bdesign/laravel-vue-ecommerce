@@ -34,10 +34,10 @@
         "@formkit/addons": "1.0.0-beta.9",
         "@formkit/vue": "1.0.0-beta.9",
         "@stripe/stripe-js": "^1.32.0",
-        "flowbite": "^1.4.7",
+        "flowbite": "1.5.1",
         "lodash": "^4.17.21",
         "pinia": "^2.0.16",
-        "pinia-plugin-persistedstate": "^1.6.1",
+        "pinia-plugin-persistedstate": "1.6.3",
         "swrv": "1.0.0-beta.8",
         "vue": "^3.2.37",
         "vue-router": "^4.1.2"
