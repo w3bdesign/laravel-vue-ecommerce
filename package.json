@@ -16,7 +16,7 @@
         "@testing-library/jest-dom": "^5.16.4",
         "@testing-library/vue": "6.6.1",
         "@vue/vue3-jest": "^28.0.1",
-        "autoprefixer": "^10.4.7",
+        "autoprefixer": "10.4.8",
         "axios": "^0.27.2",
         "babel-core": "^7.0.0-bridge.0",
         "babel-jest": "^28.1.3",
