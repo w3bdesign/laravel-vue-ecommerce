@@ -32,7 +32,7 @@
     },
     "dependencies": {
         "@formkit/addons": "1.0.0-beta.9",
-        "@formkit/vue": "1.0.0-beta.9",
+        "@formkit/vue": "1.0.0-beta.10",
         "@stripe/stripe-js": "1.34.0",
         "flowbite": "1.5.1",
         "lodash": "^4.17.21",
