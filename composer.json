@@ -6,7 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
-        "guzzlehttp/guzzle": "7.4.5",
+        "guzzlehttp/guzzle": "7.5.0",
         "laravel/cashier": "13.15.1",
         "laravel/framework": "9.26.1",
         "laravel/sanctum": "3.0.1",
