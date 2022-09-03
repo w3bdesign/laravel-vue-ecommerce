@@ -12,3 +12,4 @@ yarn-error.log
 /.vscode
 .env
 .env.testing
+.env.planetscale
