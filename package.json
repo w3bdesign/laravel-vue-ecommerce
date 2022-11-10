@@ -39,7 +39,7 @@
         "pinia": "2.0.23",
         "pinia-plugin-persistedstate": "2.3.0",
         "swrv": "1.0.0",
-        "vue": "3.2.43",
+        "vue": "3.2.44",
         "vue-router": "4.1.6"
     }
 }
