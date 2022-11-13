@@ -37,7 +37,7 @@
         "flowbite": "1.5.3",
         "lodash": "4.17.21",
         "pinia": "2.0.23",
-        "pinia-plugin-persistedstate": "2.3.0",
+        "pinia-plugin-persistedstate": "2.4.0",
         "swrv": "1.0.1",
         "vue": "3.2.45",
         "vue-router": "4.1.6"
