@@ -33,7 +33,7 @@
     "dependencies": {
         "@formkit/addons": "1.0.0-beta.12",
         "@formkit/vue": "1.0.0-beta.12",
-        "@stripe/stripe-js": "1.38.1",
+        "@stripe/stripe-js": "1.44.1",
         "flowbite": "1.5.4",
         "lodash": "4.17.21",
         "pinia": "2.0.24",
