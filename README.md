@@ -87,6 +87,8 @@ Ecommerce site with Laravel 9, Vue 3 and Stripe.
 
 -   Do WCAG analysis and ensure there are no issues
 
+-   Fix hardcoded currency
+
 -   Finish implementing search with meilisearch-vue or vue-instantsearch when Vue 3 is supported
 
 -   Add some tests to verify that the cart and checkout works correctly
