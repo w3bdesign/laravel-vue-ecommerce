@@ -4,10 +4,6 @@
 
 Ecommerce site with Laravel 9, Vue 3 and Stripe.
 
-# Live URL
-
-<http://laravel-vue3-webshop.herokuapp.com>
-
 ### Screenshot:
 
  <br /> 
