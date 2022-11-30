@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cd78785e7e4fdcafab8bbda1ce7008a8",
+    "content-hash": "ffc113ebe0b724ef7cca2b2d12e3ff67",
     "packages": [
         {
             "name": "brick/math",
@@ -1045,16 +1045,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.42.0",
+            "version": "v9.42.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "0bb828f0b8d1b320cac0b71874807ea2f334ea89"
+                "reference": "8bcd484c8648053acf3a12041e7c8294392e15f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/0bb828f0b8d1b320cac0b71874807ea2f334ea89",
-                "reference": "0bb828f0b8d1b320cac0b71874807ea2f334ea89",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/8bcd484c8648053acf3a12041e7c8294392e15f7",
+                "reference": "8bcd484c8648053acf3a12041e7c8294392e15f7",
                 "shasum": ""
             },
             "require": {
@@ -1227,7 +1227,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2022-11-29T15:18:16+00:00"
+            "time": "2022-11-30T15:15:24+00:00"
         },
         {
             "name": "laravel/sanctum",
