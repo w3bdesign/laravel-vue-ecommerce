@@ -38,7 +38,6 @@
                   placeholder="Address"
                 />
               </div>
-
               <div class="p-2 lg:w-1/2">
                 <form-kit
                   type="text"
