@@ -2,10 +2,13 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
-        "php": "^8.1.0",
+        "php": "8.1.0",
         "guzzlehttp/guzzle": "7.5.0",
         "laravel/cashier": "13.16.0",
         "laravel/framework": "9.43.0",
@@ -58,7 +61,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "php": "8.1.0"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
