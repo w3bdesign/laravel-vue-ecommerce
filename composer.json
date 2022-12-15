@@ -8,7 +8,7 @@
         "php": "^8.1.0",
         "guzzlehttp/guzzle": "7.5.0",
         "laravel/cashier": "13.16.0",
-        "laravel/framework": "9.42.2",
+        "laravel/framework": "9.43.0",
         "laravel/sanctum": "3.0.1",
         "laravel/tinker": "2.7.3"
     },
@@ -19,8 +19,8 @@
         "laravel/sail": "1.16.3",
         "mockery/mockery": "1.5.1",
         "nunomaduro/collision": "6.3.1",
-        "phpunit/phpunit": "9.5.26",
-        "spatie/laravel-ignition": "1.6.1",
+        "phpunit/phpunit": "9.5.27",
+        "spatie/laravel-ignition": "1.6.2",
         "squizlabs/php_codesniffer": "3.7.1"
     },
     "autoload": {
