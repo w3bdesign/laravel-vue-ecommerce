@@ -12,7 +12,7 @@
         "guzzlehttp/guzzle": "7.5.0",
         "laravel/cashier": "13.16.0",
         "laravel/framework": "9.46.0",
-        "laravel/sanctum": "3.0.1",
+        "laravel/sanctum": "3.1.0",
         "laravel/tinker": "2.7.3"
     },
     "require-dev": {
