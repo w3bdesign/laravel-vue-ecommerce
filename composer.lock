@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "60df282f82d0d351286083d0aa94ce95",
+    "content-hash": "a16bf622dde8adaf60269e161788ad99",
     "packages": [
         {
             "name": "brick/math",
@@ -1275,16 +1275,16 @@
         },
         {
             "name": "laravel/sanctum",
-            "version": "v3.0.1",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sanctum.git",
-                "reference": "b71e80a3a8e8029e2ec8c1aa814b999609ce16dc"
+                "reference": "d823587299d50c3ae9c26fa1731ef0d5b725c788"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sanctum/zipball/b71e80a3a8e8029e2ec8c1aa814b999609ce16dc",
-                "reference": "b71e80a3a8e8029e2ec8c1aa814b999609ce16dc",
+                "url": "https://api.github.com/repos/laravel/sanctum/zipball/d823587299d50c3ae9c26fa1731ef0d5b725c788",
+                "reference": "d823587299d50c3ae9c26fa1731ef0d5b725c788",
                 "shasum": ""
             },
             "require": {
@@ -1336,7 +1336,7 @@
                 "issues": "https://github.com/laravel/sanctum/issues",
                 "source": "https://github.com/laravel/sanctum"
             },
-            "time": "2022-07-29T21:33:30+00:00"
+            "time": "2023-01-03T09:38:46+00:00"
         },
         {
             "name": "laravel/serializable-closure",
