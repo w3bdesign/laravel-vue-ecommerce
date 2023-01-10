@@ -34,7 +34,7 @@
         "@formkit/addons": "1.0.0-beta.12",
         "@formkit/vue": "1.0.0-beta.12",
         "@stripe/stripe-js": "1.46.0",
-        "flowbite": "1.6.0",
+        "flowbite": "1.6.1",
         "lodash": "4.17.21",
         "pinia": "2.0.28",
         "pinia-plugin-persistedstate": "3.0.2",
