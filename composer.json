@@ -10,14 +10,14 @@
     "require": {
         "php": "8.2.1",
         "guzzlehttp/guzzle": "7.5.0",
-        "laravel/cashier": "13.16.0",
-        "laravel/framework": "9.46.0",
-        "laravel/sanctum": "3.1.0",
-        "laravel/tinker": "2.7.3"
+        "laravel/cashier": "v14.7.0",
+        "laravel/framework": "v9.47.0",
+        "laravel/sanctum": "v3.2.0",
+        "laravel/tinker": "v2.8.0"
     },
     "require-dev": {
         "fakerphp/faker": "1.21.0",
-        "laravel/dusk": "7.3.0",
+        "laravel/dusk": "7.4.0",
         "laravel/pint": "1.3.0",
         "laravel/sail": "1.17.0",
         "mockery/mockery": "1.5.1",
