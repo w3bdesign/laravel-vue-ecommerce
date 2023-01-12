@@ -38,7 +38,7 @@
         "lodash": "4.17.21",
         "pinia": "2.0.28",
         "pinia-plugin-persistedstate": "3.0.2",
-        "swrv": "1.0.2",
+        "swrv": "1.0.3",
         "vue": "3.2.45",
         "vue-router": "4.1.6"
     }
