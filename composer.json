@@ -8,7 +8,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "8.2.1",
+        "php": "8.2.2",
         "guzzlehttp/guzzle": "7.5.0",
         "laravel/cashier": "v14.7.0",
         "laravel/framework": "v9.47.0",
