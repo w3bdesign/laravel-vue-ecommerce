@@ -18,7 +18,7 @@
     "require-dev": {
         "fakerphp/faker": "1.21.0",
         "laravel/dusk": "7.6.1",
-        "laravel/pint": "1.4.1",
+        "laravel/pint": "1.5.0",
         "laravel/sail": "v1.18.0",
         "mockery/mockery": "1.5.1",
         "nunomaduro/collision": "7.0.2",
