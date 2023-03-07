@@ -11,7 +11,7 @@
         "php": "8.2.3",
         "guzzlehttp/guzzle": "7.5.0",
         "laravel/cashier": "v14.9.0",
-        "laravel/framework": "v10.2.0",
+        "laravel/framework": "v10.3.0",
         "laravel/sanctum": "v3.2.1",
         "laravel/tinker": "v2.8.1"
     },
