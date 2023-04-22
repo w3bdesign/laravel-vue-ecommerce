@@ -2,7 +2,7 @@
 
 # Laravel eCommerce
 
-Ecommerce site with Laravel 9, Vue 3 and Stripe.
+Ecommerce site with Laravel 10, Vue 3 and Stripe.
 
 ### Screenshot:
 
@@ -17,7 +17,7 @@ Ecommerce site with Laravel 9, Vue 3 and Stripe.
 
 ## Features
 
--   Laravel 9
+-   Laravel 10
 
 -   Vue 3 with SFC and script setup syntax
 
