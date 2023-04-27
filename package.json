@@ -15,7 +15,7 @@
         "@babel/preset-env": "7.21.4",
         "@testing-library/jest-dom": "5.16.5",
         "@testing-library/vue": "7.0.0",
-        "@vue/vue3-jest": "29.2.3",
+        "@vue/vue3-jest": "29.2.4",
         "autoprefixer": "10.4.14",
         "axios": "0.9.1",
         "babel-core": "7.0.0-bridge.0",
