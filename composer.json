@@ -19,7 +19,7 @@
         "fakerphp/faker": "1.21.0",
         "laravel/dusk": "7.7.1",
         "laravel/pint": "1.10.0",
-        "laravel/sail": "v1.21.5",
+        "laravel/sail": "v1.22.0",
         "mockery/mockery": "1.5.1",
         "nunomaduro/collision": "7.5.2",
         "phpunit/phpunit": "10.1.2",
