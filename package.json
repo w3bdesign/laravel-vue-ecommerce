@@ -36,7 +36,7 @@
         "@stripe/stripe-js": "1.53.0",
         "flowbite": "1.6.5",
         "lodash": "4.17.21",
-        "pinia": "2.1.1",
+        "pinia": "2.1.2",
         "pinia-plugin-persistedstate": "3.1.0",
         "swrv": "1.0.3",
         "vue": "3.3.4",
