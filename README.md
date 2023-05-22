@@ -45,7 +45,7 @@ Ecommerce site with Laravel 10, Vue 3 and Stripe.
 
 -   Fork or clone the project
 
--   Ensure you have PHP 8.1 or newer installed and setup properly (alternatively use Docker, see <https://laravel.com/docs/9.x/sail>)
+-   Ensure you have PHP 8.2.4 or newer installed and setup properly (alternatively use Docker, see <https://laravel.com/docs/9.x/sail>)
 
 -   Ensure you have access to a PostgreSQL database
 
