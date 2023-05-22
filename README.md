@@ -68,7 +68,7 @@ Ecommerce site with Laravel 10, Vue 3 and Stripe.
     $product->name = 'Example Product';
     $product->slug = 'example-product';
     $product->description = 'Example product description';
-    $product->imageUrl = 'url to image';
+    $product->imageUrl = 'https://placehold.co/400x400';
     $product->price = 99;
     $product->save();
     ```
