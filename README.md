@@ -57,7 +57,7 @@ Ecommerce site with Laravel 10, Vue 3 and Stripe.
 
 -   Run `npm install` to install the Node dependencies needed by the project. Check out <https://nodejs.org/en/> if necessary
 
--   Run `php artisan:migrate` to setup the Laravel database migrations
+-   Run `php artisan migrate:install` to setup the Laravel database migrations
 
 -   You should create at least one sample product. Although you can use the builtin factory seeders, I prefer to do manual creation for testing purposes.
 
