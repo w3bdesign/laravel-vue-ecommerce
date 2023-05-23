@@ -15,6 +15,7 @@ const routes = [
         name: "single.product",
         path: "/product/:slug",
         component: SingleProduct,
+        props: true
     },
     { path: "/checkout", component: Checkout },
     { path: "/categories", component: Categories },

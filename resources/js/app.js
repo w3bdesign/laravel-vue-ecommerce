@@ -12,13 +12,13 @@ import Navbar from "./components/Header/Navbar.vue";
 import MobileMenu from "./components/Header/MobileMenu.vue";
 
 import ShowAllProducts from "./components/Products/ShowAllProducts.vue";
+import SingleProduct from "./components/Products/SingleProduct.vue";
 
 import CustomerDetails from "./components/Checkout/CustomerDetails.vue";
 import FakeVisaDetails from "./components/Checkout/FakeVisaDetails.vue";
 import CartSummary from "./components/Checkout/CartSummary.vue";
 
 import Carousel from "./components/Index/Carousel.vue";
-
 
 import FooterContent from "./components/Footer/Footer.vue";
 import OrderCheckout from "./components/Checkout/OrderCheckout.vue";
@@ -50,6 +50,7 @@ app.component("layout-component", Layout);
 app.component("showall-products", ShowAllProducts);
 app.component("order-checkout", OrderCheckout);
 app.component("order-form", OrderForm);
+app.component("single-product", SingleProduct);
 
 app.use(pinia);
 app.use(router);

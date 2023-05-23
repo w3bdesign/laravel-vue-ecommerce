@@ -15,9 +15,11 @@ class ProductController extends Controller
             ->get();
     }
 
-    public function show(Product $product)
+    public function show($slug)
     {
-        $product->load('categories:id,name');
+        $product = Product::where('slug', $slug)
+            ->with(['categories:id,name'])
+            ->firstOrFail();
 
         return $product;
     }
