@@ -10,7 +10,7 @@
     "require": {
         "php": "8.2.4",
         "guzzlehttp/guzzle": "7.7.0",
-        "laravel/cashier": "v14.12.1",
+        "laravel/cashier": "^14.12",
         "laravel/framework": "v10.11.0",
         "laravel/sanctum": "v3.2.5",
         "laravel/tinker": "v2.8.1"

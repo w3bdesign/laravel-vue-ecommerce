@@ -18,7 +18,7 @@ class UserController extends Controller
             ],
             [
                 'password' => Hash::make(Str::random(12)),
-                'name' => $request->input('first_name').' '.$request->input('last_name'),
+                'name' => $request->input('first_name') . ' ' . $request->input('last_name'),
                 'address' => $request->input('address'),
                 'city' => $request->input('city'),
                 'state' => $request->input('state'),
@@ -36,9 +36,11 @@ class UserController extends Controller
 
             $order = $user->orders()
                 ->create([
-                    'transaction_id' => $payment->charges->data[0]->id,
-                    'total' => $payment->charges->data[0]->amount,
+                    'transaction_id' => $payment->id,
+                    'total' => $payment->amount,
                 ]);
+
+
             foreach (json_decode($request->input('cart'), true) as $item) {
                 $order->products()
                     ->attach($item['id'], ['quantity' => $item['quantity']]);
