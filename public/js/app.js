@@ -22973,13 +22973,13 @@ var _hoisted_1 = {
   "class": "search-label"
 };
 var _hoisted_2 = {
-  "class": "absolute bg-white left-0 right-0 h-auto mx-auto py-16 px-8 shadow-md overflow-y-auto overflow-x-hidden scrolling-touch z-50 max-w-screen-xl"
+  "class": "flex justify-center absolute bg-white left-0 right-0 h-auto mx-auto py-16 px-8 shadow-md overflow-y-auto overflow-x-hidden scrolling-touch z-50 max-w-screen-md"
 };
 var _hoisted_3 = {
-  "class": "search-result__products"
+  "class": "w-full"
 };
 var _hoisted_4 = {
-  "class": "flex",
+  "class": "flex justify-end",
   href: "/product/1192617/hjem-fritid/stoevsugere-rengjoering/robotstoevsugere/roborock-s7-hvit-ink-toemmestasjon?q=tes"
 };
 var _hoisted_5 = {
@@ -22987,7 +22987,7 @@ var _hoisted_5 = {
 };
 var _hoisted_6 = ["alt", "src"];
 var _hoisted_7 = {
-  "class": "w-[400px]"
+  "class": "w-[170px]"
 };
 var _hoisted_8 = {
   "class": "product__name"
@@ -23010,7 +23010,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 544 /* HYDRATE_EVENTS, NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.searchTerm]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\r\n    <ul>\r\n        <li v-for=\"product in data\" :key=\"product.id\">\r\n\r\n\r\n            <img v-if=\"product.imageUrl\" class=\"productImage\" :alt=\"product.name\" :src=\"product.imageUrl\" width=\"100\"\r\n                height=\"100\" /> - {{ product.name }}\r\n\r\n\r\n        </li>\r\n    </ul>"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.data, function (product) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: product.id,
-      "class": "border-t-2 border-b-2 border-grey-500 py-4"
+      "class": "border-t-2 border-b-2 border-grey-500 py-4 w-full"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [product.imageUrl ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
       key: 0,
       "class": "transform scale-70 max-w-[90px] max-h-full transition ease-in-out duration-200 transform-origin-center left-0 w-65 h-auto object-contain",
