@@ -25,6 +25,8 @@ Ecommerce site with Laravel 10, Vue 3 and Stripe.
 
 -   State persist with pinia-plugin-persistedstate
 
+-   Product search integrated with Laravel product class
+
 -   Order form setup with FormKit and builtin validation
 
 -   Stripe for payments
