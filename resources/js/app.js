@@ -10,6 +10,7 @@ import Layout from "./layout/Layout.vue";
 import Cart from "./components/Header/Cart.vue";
 import Navbar from "./components/Header/Navbar.vue";
 import MobileMenu from "./components/Header/MobileMenu.vue";
+import Search from "./components/Header/Search.vue";
 
 import ShowAllProducts from "./components/Products/ShowAllProducts.vue";
 import SingleProduct from "./components/Products/SingleProduct.vue";
@@ -44,6 +45,7 @@ app.component("carousel-component", Carousel);
 app.component("mobile-menu", MobileMenu);
 
 app.component("nav-bar", Navbar);
+app.component("search", Search);
 app.component("footer-content", FooterContent);
 app.component("cart-component", Cart);
 app.component("layout-component", Layout);
