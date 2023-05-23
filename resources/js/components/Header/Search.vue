@@ -1,10 +1,8 @@
-<template>    
+<template>
     <input
         class="w-full px-3 py-2 my-2 border-2 border-gray-300 rounded-md text-sm focus:border-blue-500 focus:outline-none transition-all duration-300"
-        type="text" 
-        v-model="searchTerm" 
-        placeholder="Search"
-        >
+        type="text" v-model="searchTerm" placeholder="Search">
+
     <div v-if="data && data.length > 0 && searchTerm.length > 0">
         <div
             class="flex justify-center absolute bg-white left-0 right-0 h-auto mx-auto py-16 px-8 shadow-md overflow-y-auto overflow-x-hidden scrolling-touch z-50 max-w-screen-md">
