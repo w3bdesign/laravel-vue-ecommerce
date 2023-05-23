@@ -1,26 +1,12 @@
 <template>
-    <label for="search-input" class="search-label">Search: Searchterm: {{ searchTerm.value }}
-    </label>
+    <label for="search-input" class="search-label"> Search: </label>
     <input class="search-input" type="text" v-model="searchTerm" @input="searchProducts" />
-
-    <!--
-    <ul>
-        <li v-for="product in data" :key="product.id">
-
-
-            <img v-if="product.imageUrl" class="productImage" :alt="product.name" :src="product.imageUrl" width="100"
-                height="100" /> - {{ product.name }}
-
-
-        </li>
-    </ul>-->
-
-    <div>
+    <div v-if="data && data.length > 0">
         <div
             class="flex justify-center absolute bg-white left-0 right-0 h-auto mx-auto py-16 px-8 shadow-md overflow-y-auto overflow-x-hidden scrolling-touch z-50 max-w-screen-md">
             <div class="w-full">
                 <div v-for="product in data" :key="product.id" class="border-t-2 border-b-2 border-grey-500 py-4 w-full">
-                    <router-link :to="{
+                    <RouterLink :to="{
                         name: 'single.product',
                         params: { slug: product.slug },
                     }">
@@ -43,7 +29,7 @@
                                 </div>
                             </div>
                         </div>
-                    </router-link>
+                    </RouterLink>
                 </div>
             </div>
         </div>
@@ -51,33 +37,17 @@
 </template>
 
 <script setup>
-import { ref, watch, computed } from "vue";
+import { ref } from "vue";
 import useSWRV from "swrv";
 
 const fetcher = (key) => fetch(key).then((res) => res.json());
 
-const props = defineProps({
-    searchResults: { type: Array, default: () => [] },
-});
-
 const searchTerm = ref("");
 
-/*const { data } = useSWRV(searchTerm.value ? `/api/products?q=${searchTerm.value}` : null, fetcher
-);*/
-
-const { data } = useSWRV(`/api/products?q=Example`, fetcher);
-
-const searchResults = computed(() => data.value || []);
-
-/*
-watch(searchResults, () => {
-    emit("update:searchResults", searchResults.value);
-});*/
-
-function searchProducts() {
-    // Trigger reactivity by updating searchTerm
-    searchTerm.value = searchTerm.value;
-}
+const { data } = useSWRV(
+    () => (searchTerm.value ? `/api/products?q=${searchTerm.value}` : null),
+    fetcher
+);
 </script>
 
 <style scoped>
