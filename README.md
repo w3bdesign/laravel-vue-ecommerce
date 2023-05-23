@@ -45,7 +45,7 @@ Ecommerce site with Laravel 10, Vue 3 and Stripe.
 
 -   Fork or clone the project
 
--   Ensure you have PHP 8.1 or newer installed and setup properly (alternatively use Docker, see <https://laravel.com/docs/9.x/sail>)
+-   Ensure you have PHP 8.2.4 or newer installed and setup properly (alternatively use Docker, see <https://laravel.com/docs/9.x/sail>)
 
 -   Ensure you have access to a PostgreSQL database
 
@@ -57,7 +57,7 @@ Ecommerce site with Laravel 10, Vue 3 and Stripe.
 
 -   Run `npm install` to install the Node dependencies needed by the project. Check out <https://nodejs.org/en/> if necessary
 
--   Run `php artisan:migrate` to setup the Laravel database migrations
+-   Run `php artisan migrate:install` to setup the Laravel database migrations
 
 -   You should create at least one sample product. Although you can use the builtin factory seeders, I prefer to do manual creation for testing purposes.
 
@@ -68,7 +68,7 @@ Ecommerce site with Laravel 10, Vue 3 and Stripe.
     $product->name = 'Example Product';
     $product->slug = 'example-product';
     $product->description = 'Example product description';
-    $product->imageUrl = 'url to image';
+    $product->imageUrl = 'https://placehold.co/400x400';
     $product->price = 99;
     $product->save();
     ```
