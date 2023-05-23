@@ -80,7 +80,6 @@ const checkout = async () => {
   const { firstName, lastName, address, zipcode, city, state, email } =
     store.getCustomerDetails;
 
-  //localState.paymentIsProcessing = true;
   localState.paymentIsProcessing = false;
 
   const { paymentMethod, error } =
@@ -123,10 +122,6 @@ const checkout = async () => {
   axios
     .post("/api/purchase", finalCustomerDetails)
     .then((response) => {
-
-      console.log("Response ..: ", response)
-
-
       if (response.statusText === "Created") {
         localState.paymentIsProcessing = false;
         store.clearCart();
