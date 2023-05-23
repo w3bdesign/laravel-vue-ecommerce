@@ -1,16 +1,48 @@
 <template>
-    <label for="search-input" class="search-label">Search:
-
-        Data: {{ data }}
-
-        Searchterm: {{ searchTerm.value }}
+    <label for="search-input" class="search-label">Search: Searchterm: {{ searchTerm.value }}
     </label>
     <input class="search-input" type="text" v-model="searchTerm" @input="searchProducts" />
+
+    <!--
     <ul>
-        <li v-for="product in searchResults" :key="product.id">
-            {{ product.name }}
+        <li v-for="product in data" :key="product.id">
+
+
+            <img v-if="product.imageUrl" class="productImage" :alt="product.name" :src="product.imageUrl" width="100"
+                height="100" /> - {{ product.name }}
+
+
         </li>
-    </ul>
+    </ul>-->
+
+    <div>
+        <div
+            class="absolute bg-white left-0 right-0 h-auto mx-auto py-16 px-8 shadow-md overflow-y-auto overflow-x-hidden scrolling-touch z-50 max-w-screen-xl">
+            <div class="search-result__products">
+                <div v-for="product in data" :key="product.id" class="border-t-2 border-b-2 border-grey-500 py-4">
+                    <a class="flex"
+                        href="/product/1192617/hjem-fritid/stoevsugere-rengjoering/robotstoevsugere/roborock-s7-hvit-ink-toemmestasjon?q=tes">
+                        <div class="h-[70px] w-[70px]">
+                            <img v-if="product.imageUrl"
+                                class="transform scale-70 max-w-[90px] max-h-full transition ease-in-out duration-200 transform-origin-center left-0 w-65 h-auto object-contain"
+                                :alt="product.name" :src="product.imageUrl" />
+                        </div>
+                        <div class="w-[400px]">
+                            <div class="product__name">
+                                <div class="product__title" :title="product.name">
+                                    {{ product.name }}
+                                </div>
+
+                            </div>
+                            <div class="mt-4">
+                                <div class="product__price"> {{ product.price }},-</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script setup>
@@ -28,9 +60,7 @@ const searchTerm = ref("");
 /*const { data } = useSWRV(searchTerm.value ? `/api/products?q=${searchTerm.value}` : null, fetcher
 );*/
 
-const { data } = useSWRV(`/api/products?q=Example`, fetcher
-);
-
+const { data } = useSWRV(`/api/products?q=Example`, fetcher);
 
 const searchResults = computed(() => data.value || []);
 
