@@ -19,13 +19,13 @@ Ecommerce site with Laravel 10, Vue 3 and Stripe.
 
 -   Laravel 10
 
--   Vue 3 with SFC and script setup syntax
+-   Vue 3 with SFC and '<script setup >' syntax
 
 -   Pinia state management
 
 -   State persist with pinia-plugin-persistedstate
 
--   Product search integrated with Laravel product class
+-   Product search integrated with Laravel
 
 -   Order form setup with FormKit and builtin validation
 
