@@ -17,6 +17,7 @@
     },
     "require-dev": {
         "fakerphp/faker": "1.22.0",
+        "laravel/breeze": "^1.21",
         "laravel/dusk": "7.7.1",
         "laravel/pint": "1.10.0",
         "laravel/sail": "v1.22.0",
