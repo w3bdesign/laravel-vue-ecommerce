@@ -1,9 +1,9 @@
 <template>
-  <div v-if="getOrderDetails">
-    <h1 class="h-64 mt-24 p-6 text-3xl font-bold text-center">
-      Order completed with order ID #{{ getOrderDetails }}
-    </h1>
-  </div>
+    <div v-if="getOrderDetails">
+        <h1 class="h-64 mt-24 p-6 text-3xl font-bold text-center">
+            Order completed with order ID #{{ getOrderDetails }}
+        </h1>
+    </div>
 </template>
 
 <script setup>
