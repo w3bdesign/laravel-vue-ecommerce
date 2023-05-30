@@ -21945,6 +21945,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   __name: 'BaseButton',
   props: {
+    type: String,
     backgroundColor: String
   },
   setup: function setup(__props, _ref) {
@@ -22997,7 +22998,7 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = ["type"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-    type: _ctx.type,
+    type: $props.type,
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["px-6 py-2 font-semibold text-white rounded-md hover:opacity-90 transition-all duration-500 ease-in-out focus:outline-none", $setup.props.backgroundColor])
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")], 10 /* CLASS, PROPS */, _hoisted_1);
 }
