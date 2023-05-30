@@ -1,3 +1,4 @@
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/w3bdesign/laravel-vue/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/w3bdesign/laravel-vue/tree/main)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=w3bdesign_laravel-vue&metric=alert_status)](https://sonarcloud.io/dashboard?id=w3bdesign_laravel-vue)
 
 # Laravel eCommerce
