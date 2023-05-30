@@ -16,7 +16,7 @@
                     </div>
                     <div class="flex justify-center mt-2">
                         <div class="text-xl text-gray-900">
-                            kr {{ product.price }}
+                            {{ formatPrice(product.price) }}
                         </div>
                     </div>
                     <div class="flex justify-center pt-3">
@@ -34,10 +34,13 @@
         </h1>
     </div>
 </template>
-  
+
 <script setup>
 import useSWRV from "swrv";
+import formatPrice from "../../utils/functions";
 
 const fetcher = (key) => fetch(key).then((res) => res.json());
 const { data, error } = useSWRV("/api/products", fetcher);
+
+
 </script>
