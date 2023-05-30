@@ -26,7 +26,7 @@
                                 </div>
                                 <div class="mt-4">
                                     <div class="product__price">
-                                        {{ product.price }},-
+                                        {{ formatPrice(product.price) }}
                                     </div>
                                 </div>
                             </div>
@@ -41,6 +41,8 @@
 <script setup>
 import { ref } from "vue";
 import useSWRV from "swrv";
+
+import formatPrice from "../../utils/functions";
 
 const fetcher = (key) => fetch(key).then((res) => res.json());
 
