@@ -43,6 +43,19 @@ Ecommerce site with Laravel 10, Vue 3 and Stripe.
 
 -   Laravel tests with CircleCI integration
 
+## Main dependencies:
+
+-   `vue`: Vue.js 3, a progressive JavaScript framework
+-   `vue-router`: Official router for Vue.js 3
+-   `pinia`: Intuitive, type safe, light and flexible Store for Vue using the Composition API
+-   `pinia-plugin-persistedstate`: Persist and rehydrate Pinia stores
+-   `flowbite`: Utility-first CSS framework built on top of Tailwind CSS
+-   `@stripe/stripe-js`: Stripe.js and Elements for collecting payment information
+-   `@formkit/vue`: Form handling and validation for Vue 3
+-   `@formkit/addons`: Addons for FormKit, including support for Stripe Elements
+-   `swrv`: Stale-While-Revalidate data fetching for Vue
+-   `lodash`: A modern JavaScript utility library
+
 ## Setup
 
 -   Fork or clone the project
@@ -80,6 +93,8 @@ Ecommerce site with Laravel 10, Vue 3 and Stripe.
 -   Run `php artisan serve` to serve the PHP files
 
 -   Open up `http://localhost:8000` in your browser
+
+
 
 ## TODO
 

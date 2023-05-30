@@ -22647,6 +22647,9 @@ var _hoisted_17 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_18 = {
   "class": "inline-block py-2 text-xl font-semibold no-underline lg:text-base pl-6"
 };
+var _hoisted_19 = {
+  "class": "mt-6 w-full block md:hidden"
+};
 function render(_ctx, _cache) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
   var _component_cart_component = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("cart-component");
@@ -22682,7 +22685,7 @@ function render(_ctx, _cache) {
       return [_hoisted_17];
     }),
     _: 1 /* STABLE */
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_cart_component)])])])])])])]);
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_cart_component)])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_search)])]);
 }
 
 /***/ }),
@@ -22704,7 +22707,7 @@ var _hoisted_1 = {
   key: 0
 };
 var _hoisted_2 = {
-  "class": "flex justify-center absolute bg-white left-0 right-0 h-auto mx-auto py-16 px-8 shadow-md overflow-y-auto overflow-x-hidden scrolling-touch z-50 max-w-screen-md"
+  "class": "mt-6 md:mt-0 flex justify-center absolute bg-white left-0 right-0 h-auto mx-auto py-16 px-8 shadow-md overflow-y-auto overflow-x-hidden scrolling-touch z-50 max-w-screen-md"
 };
 var _hoisted_3 = {
   "class": "w-full"
@@ -22713,7 +22716,7 @@ var _hoisted_4 = {
   "class": "flex justify-end"
 };
 var _hoisted_5 = {
-  "class": "h-[70px] w-[70px]"
+  "class": "mr-8 md:mr-0"
 };
 var _hoisted_6 = ["alt", "src"];
 var _hoisted_7 = {
@@ -22841,7 +22844,7 @@ var _hoisted_4 = {
   "class": "flex justify-center pt-3"
 };
 var _hoisted_5 = {
-  "class": "text-xl font-bold text-center cursor-pointer"
+  "class": "text-xl font-bold text-center cursor-pointer transition-colors duration-300 ease-in-out group-hover:text-blue-600"
 };
 var _hoisted_6 = {
   "class": "flex justify-center mt-2"
@@ -22865,14 +22868,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [$setup.data && $setup.data.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.data, function (product) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: product.id,
-      "class": "flex flex-col mt-6 md:pr-6 xl:pr-6 sm:w1/2 md:w-1/3 lg:1/4 xl:w-1/4"
+      "class": "flex flex-col mt-6 md:pr-6 xl:pr-6 sm:w1/2 md:w-1/3 lg:w-1/4 xl:w-1/4"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
       to: {
         name: 'single.product',
         params: {
           slug: product.slug
         }
-      }
+      },
+      "class": "group"
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [product.imageUrl ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
@@ -22884,7 +22888,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           backgroundColor: "bg-blue-600"
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("View Product")];
+            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" View Product ")];
           }),
           _: 1 /* STABLE */
         })])];
@@ -23768,7 +23772,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.link-underline[data-v-41f95097] {\r\n    border-bottom-width: 0;\r\n    background-image: linear-gradient(transparent, transparent),\r\n        linear-gradient(#fff, #fff);\r\n    background-size: 0 3px;\r\n    background-position: 0 100%;\r\n    background-repeat: no-repeat;\r\n    transition: background-size 0.3s ease-in-out;\n}\n.link-underline-blue[data-v-41f95097] {\r\n    background-image: linear-gradient(transparent, transparent),\r\n        linear-gradient(rgb(42, 53, 217), rgb(42, 53, 217));\n}\n.link-underline[data-v-41f95097]:hover {\r\n    background-size: 100% 3px;\r\n    background-position: 0 100%;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.link-underline[data-v-41f95097] {\n    border-bottom-width: 0;\n    background-image: linear-gradient(transparent, transparent),\n        linear-gradient(#fff, #fff);\n    background-size: 0 3px;\n    background-position: 0 100%;\n    background-repeat: no-repeat;\n    transition: background-size 0.3s ease-in-out;\n}\n.link-underline-blue[data-v-41f95097] {\n    background-image: linear-gradient(transparent, transparent),\n        linear-gradient(rgb(42, 53, 217), rgb(42, 53, 217));\n}\n.link-underline[data-v-41f95097]:hover {\n    background-size: 100% 3px;\n    background-position: 0 100%;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
