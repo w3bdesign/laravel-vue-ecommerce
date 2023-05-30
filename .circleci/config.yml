@@ -5,11 +5,10 @@ orbs:
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     docker: # run the steps with Docker
-      #- image: cimg/php:8.0.14-browsers # ...with this image as the primary container; this is where all `steps` will run
       - image: cimg/php:8.2.4-browsers # ...with this image as the primary container; this is where all `steps` will run
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
     working_directory: ~/laravel # directory where steps will run
     steps: # a set of executable commands
       - checkout # special step to check out source code to working directory
@@ -45,9 +44,9 @@ jobs: # a collection of steps
       - run:
           name: Serve Application
           background: true
-          command: php artisan serve  
+          command: php artisan serve
       - run: php artisan dusk
-      - run: php artisan test      
+      - run: php artisan test
       - store_artifacts:
           path: ./tests/Browser/console
           destination: console
@@ -55,4 +54,28 @@ jobs: # a collection of steps
           path: ./tests/Browser/screenshots
           destination: screenshots
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
-    resource_class: large 
+    resource_class: large
+
+  vue-tests:
+    docker:
+      - image: cimg/node:16.5.0
+    working_directory: ~/laravel
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-v1-{{ checksum "package-lock.json" }}
+            - node-v1-
+      - run: npm ci
+      - save_cache:
+          key: node-v1-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - run: npm run test # Assuming you have a "test" script in your package.json for running Vue tests
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build
+      - vue-tests
