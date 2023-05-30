@@ -5,7 +5,7 @@
 
     <div v-if="data && data.length > 0 && searchTerm.length > 0">
         <div
-            class="mt-6 md:mt-0 flex justify-center absolute bg-white left-0 right-0 h-auto mx-auto py-16 px-8 shadow-md overflow-y-auto overflow-x-hidden scrolling-touch z-50 max-w-screen-md">
+            class="flex justify-center absolute bg-white left-0 right-0 h-auto mx-auto py-16 px-8 shadow-md overflow-y-auto overflow-x-hidden scrolling-touch z-50 max-w-screen-md">
             <div class="w-full">
                 <div v-for="product in data" :key="product.id" class="border-t-2 border-b-2 border-grey-500 py-4 w-full">
                     <RouterLink :to="{
