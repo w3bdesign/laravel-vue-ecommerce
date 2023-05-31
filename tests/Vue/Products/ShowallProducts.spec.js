@@ -13,6 +13,21 @@ const useRouterLink = {
     template: "<a><slot></slot></a>",
 };
 
+/**
+ * @description
+ * Test case to verify that products are rendered correctly with their respective details,
+ * and that the router-link component works as expected.
+ *
+ * The test will:
+ * 1. Mock the `useSWRV` hook to return a list of products.
+ * 2. Render the `ShowAllProducts` component.
+ * 3. Iterate through each product and check if the product's name, price, and image are present in the DOM.
+ * 4. Check if the list of images found by the role "img" matches the length of the products list.
+ *
+ * @async
+ * @function
+ * @name verifyProductsAreRenderedAndRouterLinkWorksTest
+ */
 test("Verify products are rendered and router-link works", async () => {
     const useSWRV = require("swrv").default;
     const products = [
@@ -54,6 +69,19 @@ test("Verify products are rendered and router-link works", async () => {
     expect(images.length).toBe(products.length);
 });
 
+/**
+ * @description
+ * Test case to verify that an error message is displayed when an error occurs while loading products.
+ *
+ * The test will:
+ * 1. Mock the `useSWRV` hook to return an error.
+ * 2. Render the `ShowAllProducts` component.
+ * 3. Check if the error message is present in the DOM.
+ *
+ * @async
+ * @function
+ * @name verifyErrorMessageIsDisplayedWhenErrorOccursTest
+ */
 test("Verify error message is displayed when error occurs", async () => {
     const useSWRV = require("swrv").default;
     useSWRV.mockReturnValue({
