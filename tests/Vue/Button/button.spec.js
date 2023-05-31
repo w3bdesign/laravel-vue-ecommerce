@@ -4,7 +4,6 @@ import BaseButton from "../../../resources/js/components/base/BaseButton.vue";
 import "@testing-library/jest-dom";
 
 test("Verify that the button renders and that the default slot works", async () => {
-    // The render method returns a collection of utilities to query your component.
     const { getByText } = render(BaseButton, {
         slots: { default: "Button test" },
     });

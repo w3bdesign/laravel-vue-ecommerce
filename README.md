@@ -42,7 +42,7 @@ Ecommerce site with Laravel 10, Vue 3 and Stripe.
 
 -   SonarCloud code quality scanner integration on all pull requests
 
--   Laravel tests with CircleCI integration
+-   Laravel Dusk and Jest tests with CircleCI integration
 
 ## Main dependencies:
 
@@ -100,8 +100,6 @@ Ecommerce site with Laravel 10, Vue 3 and Stripe.
 ## TODO
 
 -   Do WCAG analysis and ensure there are no issues
-
--   Add some tests to verify that the cart and checkout works correctly
 
 -   Consider adding an admin dashboard
 

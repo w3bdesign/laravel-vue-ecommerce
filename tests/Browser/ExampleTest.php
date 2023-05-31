@@ -16,9 +16,8 @@ class ExampleTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
-            //->screenshot('home-page')
-                ->assertSee('MacBook');
-            //->assertPathIs('/');
+                ->assertSee('MacBook')
+                ->assertPathIs('/');
         });
     }
 }
