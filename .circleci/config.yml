@@ -58,7 +58,7 @@ jobs: # a collection of steps
 
   vue-tests:
     docker:
-      - image: cimg/node:16.20.0
+      - image: cimg/node:20.2.0
     working_directory: ~/laravel
     steps:
       - checkout
