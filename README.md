@@ -101,8 +101,6 @@ Ecommerce site with Laravel 10, Vue 3 and Stripe.
 
 -   Do WCAG analysis and ensure there are no issues
 
--   Add some tests to verify that the cart and checkout works correctly
-
 -   Consider adding an admin dashboard
 
 -   Look into performance optimization
