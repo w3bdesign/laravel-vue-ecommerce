@@ -35,6 +35,7 @@ jobs: # a collection of steps
           paths:
             - node_modules
       - run: touch database/testing.sqlite
+      - run: touch database/database.sqlite
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
       - run: php artisan dusk:chrome-driver 70
       - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
