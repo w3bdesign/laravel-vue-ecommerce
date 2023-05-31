@@ -42,7 +42,7 @@ Ecommerce site with Laravel 10, Vue 3 and Stripe.
 
 -   SonarCloud code quality scanner integration on all pull requests
 
--   Laravel tests with CircleCI integration
+-   Laravel PHPUnit and Jest tests with CircleCI integration
 
 ## Main dependencies:
 
