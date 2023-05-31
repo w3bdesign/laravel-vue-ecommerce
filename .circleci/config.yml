@@ -3,7 +3,7 @@ orbs:
   browser-tools: circleci/browser-tools@1.4.1
 
 jobs: # a collection of steps
-  build: # runs not using Workflows must have a `build` job as entry point
+  dusk: # runs not using Workflows must have a `build` job as entry point
     docker: # run the steps with Docker
       - image: cimg/php:8.2.4-browsers # ...with this image as the primary container; this is where all `steps` will run
         auth:
@@ -77,5 +77,5 @@ workflows:
   version: 2
   build-and-test:
     jobs:
-      - build
+      - dusk
       - vue-tests
