@@ -20,7 +20,7 @@
         "laravel/dusk": "7.7.1",
         "laravel/pint": "1.10.0",
         "laravel/sail": "v1.22.0",
-        "mockery/mockery": "1.5.1",
+        "mockery/mockery": "1.6.0",
         "nunomaduro/collision": "7.5.2",
         "phpunit/phpunit": "10.2.0",
         "spatie/laravel-ignition": "2.1.3",
