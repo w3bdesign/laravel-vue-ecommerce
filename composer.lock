@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1b6e6c017848f692479b66fbcd9c8fd2",
+    "content-hash": "cca3ed32ba291093eaca4ac924639c7d",
     "packages": [
         {
             "name": "brick/math",
@@ -6230,22 +6230,22 @@
         },
         {
             "name": "mockery/mockery",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mockery/mockery.git",
-                "reference": "bac1765cb52bbd3364a870e920cb69cd859ee302"
+                "reference": "a8dd186f07ea667c1e3abd2176bfab0ab161ea94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mockery/mockery/zipball/bac1765cb52bbd3364a870e920cb69cd859ee302",
-                "reference": "bac1765cb52bbd3364a870e920cb69cd859ee302",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/a8dd186f07ea667c1e3abd2176bfab0ab161ea94",
+                "reference": "a8dd186f07ea667c1e3abd2176bfab0ab161ea94",
                 "shasum": ""
             },
             "require": {
                 "hamcrest/hamcrest-php": "^2.0.1",
                 "lib-pcre": ">=7.0",
-                "php": "^7.3 || ^8.0"
+                "php": "^7.4 || ^8.0"
             },
             "conflict": {
                 "phpunit/phpunit": "<8.0"
@@ -6302,9 +6302,9 @@
             ],
             "support": {
                 "issues": "https://github.com/mockery/mockery/issues",
-                "source": "https://github.com/mockery/mockery/tree/1.6.0"
+                "source": "https://github.com/mockery/mockery/tree/1.6.1"
             },
-            "time": "2023-05-03T12:55:29+00:00"
+            "time": "2023-06-05T13:59:03+00:00"
         },
         {
             "name": "myclabs/deep-copy",
