@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "abe96eadcc166b2f1fc1d94ce9b5d886",
+    "content-hash": "860b509dbee38730f71e8ae12873ada2",
     "packages": [
         {
             "name": "brick/math",
@@ -1063,16 +1063,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v10.13.2",
+            "version": "v10.13.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "fd4619b56b56308e2c2c1840fedd0b8ebb73dfc5"
+                "reference": "03106ae9ba2ec4b36dc973b7bdca6fad81e032b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/fd4619b56b56308e2c2c1840fedd0b8ebb73dfc5",
-                "reference": "fd4619b56b56308e2c2c1840fedd0b8ebb73dfc5",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/03106ae9ba2ec4b36dc973b7bdca6fad81e032b4",
+                "reference": "03106ae9ba2ec4b36dc973b7bdca6fad81e032b4",
                 "shasum": ""
             },
             "require": {
@@ -1259,7 +1259,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-06-05T15:48:15+00:00"
+            "time": "2023-06-08T20:25:36+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -6230,16 +6230,16 @@
         },
         {
             "name": "mockery/mockery",
-            "version": "1.6.1",
+            "version": "1.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mockery/mockery.git",
-                "reference": "a8dd186f07ea667c1e3abd2176bfab0ab161ea94"
+                "reference": "13a7fa2642c76c58fa2806ef7f565344c817a191"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mockery/mockery/zipball/a8dd186f07ea667c1e3abd2176bfab0ab161ea94",
-                "reference": "a8dd186f07ea667c1e3abd2176bfab0ab161ea94",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/13a7fa2642c76c58fa2806ef7f565344c817a191",
+                "reference": "13a7fa2642c76c58fa2806ef7f565344c817a191",
                 "shasum": ""
             },
             "require": {
@@ -6258,7 +6258,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.4.x-dev"
+                    "dev-main": "1.6.x-dev"
                 }
             },
             "autoload": {
@@ -6302,9 +6302,9 @@
             ],
             "support": {
                 "issues": "https://github.com/mockery/mockery/issues",
-                "source": "https://github.com/mockery/mockery/tree/1.6.1"
+                "source": "https://github.com/mockery/mockery/tree/1.6.2"
             },
-            "time": "2023-06-05T13:59:03+00:00"
+            "time": "2023-06-07T09:07:52+00:00"
         },
         {
             "name": "myclabs/deep-copy",
