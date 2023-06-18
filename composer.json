@@ -11,15 +11,15 @@
         "php": "8.2.4",
         "guzzlehttp/guzzle": "7.7.0",
         "laravel/cashier": "^14.12",
-        "laravel/framework": "v10.13.5",
-        "laravel/sanctum": "v3.2.5",
-        "laravel/tinker": "v2.8.1"
+        "laravel/framework": "10.13.5",
+        "laravel/sanctum": "3.2.5",
+        "laravel/tinker": "2.8.1"
     },
     "require-dev": {
         "fakerphp/faker": "1.23.0",
         "laravel/dusk": "7.7.1",
         "laravel/pint": "1.10.2",
-        "laravel/sail": "v1.22.0",
+        "laravel/sail": "1.22.0",
         "mockery/mockery": "1.6.2",
         "nunomaduro/collision": "7.6.0",
         "phpunit/phpunit": "10.2.2",
