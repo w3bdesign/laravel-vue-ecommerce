@@ -778,6 +778,22 @@ video {
   height: 100vh;
 }
 
+.h-full {
+  height: 100%;
+}
+
+.h-72 {
+  height: 18rem;
+}
+
+.h-\[350px\] {
+  height: 350px;
+}
+
+.h-\[400px\] {
+  height: 400px;
+}
+
 .max-h-full {
   max-height: 100%;
 }
