@@ -1,29 +1,48 @@
 <template>
-    <swiper-container ref="swiperRef" class="swiper-container" slides-per-view="1" pagination-el=".swiper-pagination">
-        <swiper-slide v-for="(image, index) in images" :key="index" class="swiper-slide">
+    <swiper :navigation="true" :modules="[Navigation]" class="mySwiper">
+        <swiper-slide v-for="(image, index) in images" :key="index">
             <img :src="image" :alt="'Image ' + (index + 1)" />
         </swiper-slide>
-        <div class="swiper-pagination"></div>
-    </swiper-container>
+    </swiper>
 </template>
   
 <script setup>
-import { register } from 'swiper/element/bundle';
-import 'swiper/swiper-bundle.css';
-import { ref } from 'vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Navigation } from 'swiper';
 
 const props = defineProps({
     images: Array,
 });
 
-register();
-
-const swiperRef = ref(null);
+defineExpose({
+    Swiper,
+    SwiperSlide,
+});
 </script>
   
 <style>
-.swiper-slide img {
+.mySwiper {
     width: 100%;
-    height: auto;
+    height: 300px;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide images vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 </style>

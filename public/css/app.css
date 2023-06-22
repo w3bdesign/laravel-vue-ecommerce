@@ -863,6 +863,18 @@ video {
   max-height: 100%;
 }
 
+.max-h-\[384px\] {
+  max-height: 384px;
+}
+
+.max-h-\[500px\] {
+  max-height: 500px;
+}
+
+.max-h-\[600px\] {
+  max-height: 600px;
+}
+
 .w-1\/2 {
   width: 50%;
 }
@@ -925,6 +937,10 @@ video {
 
 .max-w-screen-md {
   max-width: 768px;
+}
+
+.max-w-\[1504px\] {
+  max-width: 1504px;
 }
 
 .flex-1 {

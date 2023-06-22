@@ -8,8 +8,8 @@
 import { ref } from 'vue';
 
 const carouselImages = ref([
-    'https://via.placeholder.com/800x300?text=Image+1',
-    'https://via.placeholder.com/800x300?text=Image+2',
-    'https://via.placeholder.com/800x300?text=Image+3',
+    '/images/Hero.jpg',
+    '/images/Hero.jpg',
+    '/images/Hero.jpg',
 ]);
 </script>
