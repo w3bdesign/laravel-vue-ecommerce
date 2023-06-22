@@ -50,7 +50,7 @@ Ecommerce site with Laravel 10, Vue 3 and Stripe.
 -   `vue-router`: Official router for Vue.js 3
 -   `pinia`: Intuitive, type safe, light and flexible Store for Vue using the Composition API
 -   `pinia-plugin-persistedstate`: Persist and rehydrate Pinia stores
--   `flowbite`: Utility-first CSS framework built on top of Tailwind CSS
+-   `swiper`: Responsive image carousel with mobile touch support
 -   `@stripe/stripe-js`: Stripe.js and Elements for collecting payment information
 -   `@formkit/vue`: Form handling and validation for Vue 3
 -   `@formkit/addons`: Addons for FormKit, including support for Stripe Elements
