@@ -23352,7 +23352,16 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var __expose = _ref.expose;
     __expose();
-    var carouselImages = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(['/images/Hero.jpg', '/images/Hero.jpg', '/images/Hero.jpg']);
+    var carouselImages = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([{
+      src: '/images/Hero.jpg',
+      text: 'MacBook Air 12 In Store now!'
+    }, {
+      src: '/images/Hero.jpg',
+      text: 'MacBook Air 13 In Store now!'
+    }, {
+      src: '/images/Hero.jpg',
+      text: 'MacBook Air 14 In Store now!'
+    }]);
     var __returned__ = {
       carouselImages: carouselImages,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref
@@ -24170,7 +24179,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = ["src", "alt"];
+var _hoisted_1 = {
+  "class": "relative"
+};
+var _hoisted_2 = ["src", "alt"];
+var _hoisted_3 = {
+  "class": "z-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 text-2xl text-black bg-white rounded-lg mt-4 hidden md:block"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Swiper"], {
     navigation: true,
@@ -24183,11 +24198,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           key: index
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-              src: image,
-              alt: 'Image ' + (index + 1)
-            }, null, 8 /* PROPS */, _hoisted_1)];
+            return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+              src: image.src,
+              alt: 'Image ' + (index + 1),
+              "class": "w-full object-cover"
+            }, null, 8 /* PROPS */, _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(image.text), 1 /* TEXT */)])];
           }),
+
           _: 2 /* DYNAMIC */
         }, 1024 /* DYNAMIC_SLOTS */);
       }), 128 /* KEYED_FRAGMENT */))];

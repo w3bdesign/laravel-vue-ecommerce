@@ -8,8 +8,8 @@
 import { ref } from 'vue';
 
 const carouselImages = ref([
-    '/images/Hero.jpg',
-    '/images/Hero.jpg',
-    '/images/Hero.jpg',
+{ src: '/images/Hero.jpg', text: 'MacBook Air 12 In Store now!' },
+{ src: '/images/Hero.jpg', text: 'MacBook Air 13 In Store now!' },
+{ src: '/images/Hero.jpg', text: 'MacBook Air 14 In Store now!' },
 ]);
 </script>

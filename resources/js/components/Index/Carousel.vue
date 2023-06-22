@@ -1,26 +1,33 @@
 <template>
     <swiper :navigation="true" :modules="[Navigation]" class="mySwiper">
-        <swiper-slide v-for="(image, index) in images" :key="index">
-            <img :src="image" :alt="'Image ' + (index + 1)" />
-        </swiper-slide>
+      <swiper-slide v-for="(image, index) in images" :key="index">
+        <div class="relative">
+          <img :src="image.src" :alt="'Image ' + (index + 1)" class="w-full object-cover" />
+          <span
+            class="z-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 text-2xl text-black bg-white rounded-lg mt-4 hidden md:block"
+          >
+            {{ image.text }}
+          </span>
+        </div>
+      </swiper-slide>
     </swiper>
-</template>
+  </template>
   
-<script setup>
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import { Navigation } from 'swiper';
-
-const props = defineProps({
+  <script setup>
+  import { Swiper, SwiperSlide } from 'swiper/vue';
+  import 'swiper/css';
+  import 'swiper/css/navigation';
+  import { Navigation } from 'swiper';
+  
+  const props = defineProps({
     images: Array,
-});
-
-defineExpose({
+  });
+  
+  defineExpose({
     Swiper,
     SwiperSlide,
-});
-</script>
+  });
+  </script>
   
 <style>
 .mySwiper {
