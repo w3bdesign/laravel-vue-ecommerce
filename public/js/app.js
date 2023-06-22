@@ -21678,7 +21678,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.mjs");
+/* harmony import */ var pinia__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! pinia */ "./node_modules/pinia/dist/pinia.mjs");
 /* harmony import */ var _formkit_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @formkit/vue */ "./node_modules/@formkit/vue/dist/index.mjs");
 /* harmony import */ var _formkit_addons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @formkit/addons */ "./node_modules/@formkit/addons/dist/index.mjs");
 /* harmony import */ var _layout_Layout_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./layout/Layout.vue */ "./resources/js/layout/Layout.vue");
@@ -21697,8 +21697,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Checkout_OrderForm_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/Checkout/OrderForm.vue */ "./resources/js/components/Checkout/OrderForm.vue");
 /* harmony import */ var _helpers_registerBaseComponents__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./helpers/registerBaseComponents */ "./resources/js/helpers/registerBaseComponents.js");
 /* harmony import */ var _router_index__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./router/index */ "./resources/js/router/index.js");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module 'flowbite'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var pinia_plugin_persistedstate__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! pinia-plugin-persistedstate */ "./node_modules/pinia-plugin-persistedstate/dist/index.mjs");
+/* harmony import */ var pinia_plugin_persistedstate__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! pinia-plugin-persistedstate */ "./node_modules/pinia-plugin-persistedstate/dist/index.mjs");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
@@ -21721,9 +21720,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
-var pinia = (0,pinia__WEBPACK_IMPORTED_MODULE_21__.createPinia)();
+var pinia = (0,pinia__WEBPACK_IMPORTED_MODULE_20__.createPinia)();
 (0,_helpers_registerBaseComponents__WEBPACK_IMPORTED_MODULE_17__.registerBaseComponents)(app);
 app.component("customer-details", _components_Checkout_CustomerDetails_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
 app.component("fakevisa-details", _components_Checkout_FakeVisaDetails_vue__WEBPACK_IMPORTED_MODULE_11__["default"]);
@@ -21745,7 +21743,7 @@ app.use(_formkit_vue__WEBPACK_IMPORTED_MODULE_1__.plugin, (0,_formkit_vue__WEBPA
   plugins: [(0,_formkit_addons__WEBPACK_IMPORTED_MODULE_2__.createAutoAnimatePlugin)()],
   theme: "genesis"
 }));
-pinia.use(pinia_plugin_persistedstate__WEBPACK_IMPORTED_MODULE_20__["default"]);
+pinia.use(pinia_plugin_persistedstate__WEBPACK_IMPORTED_MODULE_19__["default"]);
 app.mount("#app");
 
 /***/ }),
