@@ -2,8 +2,7 @@ module.exports = {
     content: [
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
-        "./resources/**/*.vue",
-        "./node_modules/flowbite/**/*.js",
+        "./resources/**/*.vue",       
     ],
     theme: {
         extend: {},
@@ -13,6 +12,5 @@ module.exports = {
             textColor: ["group-hover"],
             // Add any other group-hover variants you need
         },
-    },
-    plugins: ["flowbite/plugin"],
+    },    
 };
