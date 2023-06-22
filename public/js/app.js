@@ -27000,11 +27000,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-<<<<<<< Updated upstream
-___CSS_LOADER_EXPORT___.push([module.id, "\n.link-underline[data-v-41f95097] {\n    border-bottom-width: 0;\n    background-image: linear-gradient(transparent, transparent),\n        linear-gradient(#fff, #fff);\n    background-size: 0 3px;\n    background-position: 0 100%;\n    background-repeat: no-repeat;\n    transition: background-size 0.3s ease-in-out;\n}\n.link-underline-blue[data-v-41f95097] {\n    background-image: linear-gradient(transparent, transparent),\n        linear-gradient(rgb(42, 53, 217), rgb(42, 53, 217));\n}\n.link-underline[data-v-41f95097]:hover {\n    background-size: 100% 3px;\n    background-position: 0 100%;\n}\n", ""]);
-=======
 ___CSS_LOADER_EXPORT___.push([module.id, "\n.link-underline[data-v-41f95097] {\r\n    border-bottom-width: 0;\r\n    background-image: linear-gradient(transparent, transparent),\r\n        linear-gradient(#fff, #fff);\r\n    background-size: 0 3px;\r\n    background-position: 0 100%;\r\n    background-repeat: no-repeat;\r\n    transition: background-size 0.3s ease-in-out;\n}\n.link-underline-blue[data-v-41f95097] {\r\n    background-image: linear-gradient(transparent, transparent),\r\n        linear-gradient(rgb(42, 53, 217), rgb(42, 53, 217));\n}\n.link-underline[data-v-41f95097]:hover {\r\n    background-size: 100% 3px;\r\n    background-position: 0 100%;\n}\r\n", ""]);
->>>>>>> Stashed changes
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
