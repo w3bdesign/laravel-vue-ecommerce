@@ -29,7 +29,6 @@ import { registerBaseComponents } from "./helpers/registerBaseComponents";
 
 import router from "./router/index";
 
-import "flowbite";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 
 const app = createApp({});
