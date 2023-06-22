@@ -4,7 +4,7 @@
         <div class="relative">
           <img :src="image.src" :alt="'Image ' + (index + 1)" class="w-full object-cover" />
           <span
-            class="z-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 text-2xl text-black bg-white rounded-lg mt-4 hidden md:block"
+            class="z-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 text-xl md:text-2xl text-black bg-white rounded-lg mt-4"
           >
             {{ image.text }}
           </span>

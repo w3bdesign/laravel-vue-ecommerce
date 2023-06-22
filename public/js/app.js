@@ -24184,7 +24184,7 @@ var _hoisted_1 = {
 };
 var _hoisted_2 = ["src", "alt"];
 var _hoisted_3 = {
-  "class": "z-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 text-2xl text-black bg-white rounded-lg mt-4 hidden md:block"
+  "class": "z-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 text-xl md:text-2xl text-black bg-white rounded-lg mt-4"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Swiper"], {
