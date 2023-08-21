@@ -23,7 +23,7 @@
         "babel-core": "7.0.0-bridge.0",
         "babel-jest": "29.6.2",
         "global-jsdom": "9.1.0",
-        "jest": "29.6.2",
+        "jest": "29.6.3",
         "jest-environment-jsdom": "29.6.2",
         "jsdom": "22.1.0",
         "laravel-mix": "6.0.49",
