@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "49d858a9d2be038e59d22d75268b5118",
+    "content-hash": "33e1ddcb5a75117f2527c6c8a7164c3a",
     "packages": [
         {
             "name": "brick/math",
@@ -6129,16 +6129,16 @@
         },
         {
             "name": "laravel/dusk",
-            "version": "v7.9.3",
+            "version": "v7.9.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/dusk.git",
-                "reference": "8d7ce583fb362472558cc1852adccfcd86cf87e4"
+                "reference": "acadeb75ca6a744bf40894cb785bc59d4026cf26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/dusk/zipball/8d7ce583fb362472558cc1852adccfcd86cf87e4",
-                "reference": "8d7ce583fb362472558cc1852adccfcd86cf87e4",
+                "url": "https://api.github.com/repos/laravel/dusk/zipball/acadeb75ca6a744bf40894cb785bc59d4026cf26",
+                "reference": "acadeb75ca6a744bf40894cb785bc59d4026cf26",
                 "shasum": ""
             },
             "require": {
@@ -6199,9 +6199,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/dusk/issues",
-                "source": "https://github.com/laravel/dusk/tree/v7.9.3"
+                "source": "https://github.com/laravel/dusk/tree/v7.9.4"
             },
-            "time": "2023-08-03T16:00:26+00:00"
+            "time": "2023-08-28T13:53:02+00:00"
         },
         {
             "name": "laravel/pint",
@@ -6684,16 +6684,16 @@
         },
         {
             "name": "php-webdriver/webdriver",
-            "version": "1.14.0",
+            "version": "1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-webdriver/php-webdriver.git",
-                "reference": "3ea4f924afb43056bf9c630509e657d951608563"
+                "reference": "a1578689290055586f1ee51eaf0ec9d52895bb6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-webdriver/php-webdriver/zipball/3ea4f924afb43056bf9c630509e657d951608563",
-                "reference": "3ea4f924afb43056bf9c630509e657d951608563",
+                "url": "https://api.github.com/repos/php-webdriver/php-webdriver/zipball/a1578689290055586f1ee51eaf0ec9d52895bb6d",
+                "reference": "a1578689290055586f1ee51eaf0ec9d52895bb6d",
                 "shasum": ""
             },
             "require": {
@@ -6744,9 +6744,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-webdriver/php-webdriver/issues",
-                "source": "https://github.com/php-webdriver/php-webdriver/tree/1.14.0"
+                "source": "https://github.com/php-webdriver/php-webdriver/tree/1.15.0"
             },
-            "time": "2023-02-09T12:12:19+00:00"
+            "time": "2023-08-29T13:52:26+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
