@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  browser-tools: circleci/browser-tools@1.4.4
+  browser-tools: circleci/browser-tools@1.4.5
 
 jobs: # a collection of steps
   dusk: # runs not using Workflows must have a `build` job as entry point
