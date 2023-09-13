@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "be4308aa6b53095dd91b603fabb363b4",
+    "content-hash": "62d96d6a3d1a2f07477cc6fe61b88eae",
     "packages": [
         {
             "name": "brick/math",
@@ -6131,16 +6131,16 @@
         },
         {
             "name": "laravel/dusk",
-            "version": "v7.10.0",
+            "version": "v7.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/dusk.git",
-                "reference": "d9c722c46d5ec41998dbb8f4dc24c037ac5f244c"
+                "reference": "89ec34a35737303bf3e75f0e8b958d7fcd1cf486"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/dusk/zipball/d9c722c46d5ec41998dbb8f4dc24c037ac5f244c",
-                "reference": "d9c722c46d5ec41998dbb8f4dc24c037ac5f244c",
+                "url": "https://api.github.com/repos/laravel/dusk/zipball/89ec34a35737303bf3e75f0e8b958d7fcd1cf486",
+                "reference": "89ec34a35737303bf3e75f0e8b958d7fcd1cf486",
                 "shasum": ""
             },
             "require": {
@@ -6201,9 +6201,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/dusk/issues",
-                "source": "https://github.com/laravel/dusk/tree/v7.10.0"
+                "source": "https://github.com/laravel/dusk/tree/v7.11.0"
             },
-            "time": "2023-09-04T15:59:51+00:00"
+            "time": "2023-09-12T11:13:00+00:00"
         },
         {
             "name": "laravel/pint",
