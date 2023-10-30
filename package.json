@@ -42,7 +42,7 @@
         "pinia-plugin-persistedstate": "3.2.0",
         "swiper": "^9.4.1",
         "swrv": "1.0.4",
-        "vue": "3.3.4",
+        "vue": "3.3.7",
         "vue-router": "4.2.4"
     }
 }
