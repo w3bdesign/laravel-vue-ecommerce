@@ -39,7 +39,7 @@
         "@stripe/stripe-js": "1.54.2",
         "lodash": "4.17.21",
         "pinia": "2.1.7",
-        "pinia-plugin-persistedstate": "3.2.0",
+        "pinia-plugin-persistedstate": "3.2.1",
         "swiper": "^9.4.1",
         "swrv": "1.0.4",
         "vue": "3.3.9",
