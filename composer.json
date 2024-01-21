@@ -13,7 +13,7 @@
         "laravel/cashier": "^15.0",
         "laravel/framework": "10.34.2",
         "laravel/sanctum": "3.3.3",
-        "laravel/tinker": "2.8.2"
+        "laravel/tinker": "2.9.0"
     },
     "require-dev": {
         "fakerphp/faker": "1.23.1",
