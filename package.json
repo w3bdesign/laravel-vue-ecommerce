@@ -34,7 +34,7 @@
         "vue-loader": "17.4.2"
     },
     "dependencies": {
-        "@formkit/addons": "1.4.0",
+        "@formkit/addons": "1.5.1",
         "@formkit/vue": "1.5.1",
         "@stripe/stripe-js": "1.54.2",
         "lodash": "4.17.21",
