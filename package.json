@@ -30,7 +30,7 @@
         "lodash": "4.17.21",
         "postcss": "8.4.40",
         "prettier": "3.3.3",
-        "tailwindcss": "3.4.7",
+        "tailwindcss": "3.4.11",
         "vue-loader": "17.4.2"
     },
     "dependencies": {
