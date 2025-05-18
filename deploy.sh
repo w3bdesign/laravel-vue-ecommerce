@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 set -ex # Exit immediately if a command exits with a non-zero status and print commands.
 
 echo "Running composer"
