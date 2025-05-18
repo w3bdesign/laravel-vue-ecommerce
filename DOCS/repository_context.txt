@@ -87643,19 +87643,6 @@ vendor/
 *.DS_Store
 ``````
 
-## File: deploy.sh
-``````bash
-#!/usr/bin/env bash
-echo "Running composer"
-composer install --no-dev --working-dir=/var/www/html
-echo "Caching config..."
-php artisan config:cache
-echo "Caching routes..."
-php artisan route:cache
-echo "Running migrations..."
-php artisan migrate --force
-``````
-
 ## File: local.ini
 ``````
 ; Custom PHP settings for production
@@ -88662,65 +88649,102 @@ services:
       sizeGB: 1 # Size of the disk in GB, integer
 ``````
 
-## File: Dockerfile
-``````dockerfile
-# Stage 1: Compile Frontend Assets
-FROM node:20-alpine AS node_builder
+## File: deploy.sh
+``````bash
+#!/bin/sh
+set -ex # Exit immediately if a command exits with a non-zero status and print commands.
+echo "Running composer"
+# Attempt to clear composer cache first, then install
+composer clear-cache --working-dir=/var/www/html || echo "Failed to clear composer cache, continuing..."
+composer install --no-dev --no-interaction --no-progress --optimize-autoloader --working-dir=/var/www/html
+echo "Checking for vendor/autoload.php..."
+if [ -f "/var/www/html/vendor/autoload.php" ]; then
+    echo "vendor/autoload.php found."
+else
+    echo "ERROR: vendor/autoload.php NOT found after composer install!"
+    echo "Listing contents of /var/www/html/vendor/ if it exists:"
+    ls -la /var/www/html/vendor/ || echo "/var/www/html/vendor/ directory does not exist."
+    exit 1 # Exit if autoload is missing
+fi
+echo "Caching config..."
+php artisan config:cache
+echo "Caching routes..."
+php artisan route:cache
+echo "Running migrations..."
+php artisan migrate --force
+echo "Deployment script finished successfully."
+``````
 
-WORKDIR /app/frontend
-
-# Copy package files and essential build configuration
-COPY package.json package-lock.json* webpack.mix.js tailwind.config.js postcss.config.js* .babelrc* ./
-# Ensure postcss.config.js and .babelrc are optional by using * in case they don't exist
-
-# Install all dependencies (including devDependencies like laravel-mix)
-RUN npm ci
-
-# Copy frontend source code (js, css, images, etc.)
-COPY resources/js ./resources/js
-COPY resources/css ./resources/css
-COPY resources/img ./resources/img
-# Add other relevant resource directories if needed
-
-# Compile assets for production
-RUN npm run production
-
-# Stage 2: Setup PHP Application Environment using richarvey/nginx-php-fpm
-FROM richarvey/nginx-php-fpm:3.1.6 AS app
-
-# Set Laravel Environment Variables as per the article
-ENV APP_ENV production
-ENV APP_DEBUG false
-ENV LOG_CHANNEL stderr
-ENV APP_KEY ${APP_KEY} 
-ENV SKIP_COMPOSER 1 
-ENV WEBROOT /var/www/html/public 
-ENV PHP_ERRORS_STDERR 1 # Send PHP errors to stderr for Docker logging
-ENV RUN_SCRIPTS 1 # Enable execution of scripts in /scripts directory
-ENV REAL_IP_HEADER 1 # If behind a proxy, trust X-Forwarded-For
-ENV COMPOSER_ALLOW_SUPERUSER 1 # Allow composer to run as root if needed by scripts
-
-# Set working directory
-WORKDIR /var/www/html
-
-# Copy all application files
-COPY . .
-
-# Copy compiled assets from the node_builder stage
-COPY --from=node_builder /app/frontend/public ./public
-
-# Copy our Nginx site configuration to the standard location for richarvey images
-COPY nginx-site.conf /etc/nginx/sites-available/default
-
-# Copy our deploy script to the location where richarvey image expects to run scripts
-# Ensure deploy.sh has necessary commands (composer install, migrations, cache)
-RUN mkdir -p /scripts
-COPY deploy.sh /scripts/00-laravel-deploy.sh
-RUN chmod +x /scripts/00-laravel-deploy.sh
-
-# The base image (richarvey/nginx-php-fpm) handles starting Nginx, PHP-FPM,
-# and running scripts from /scripts. Its default CMD is /start.sh.
-CMD ["/start.sh"]
+## File: composer.json
+``````json
+{
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The Laravel Framework.",
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "8.2.10",
+        "guzzlehttp/guzzle": "7.8.1",
+        "laravel/cashier": "^15.0",
+        "laravel/framework": "10.41.0",
+        "laravel/sanctum": "3.3.3",
+        "laravel/tinker": "2.9.0"
+    },
+    "require-dev": {
+        "fakerphp/faker": "1.23.1",
+        "laravel/dusk": "7.12.1",
+        "laravel/pint": "1.13.11",
+        "laravel/sail": "1.28.0",
+        "mockery/mockery": "1.6.12",
+        "nunomaduro/collision": "7.10.0",
+        "phpunit/phpunit": "10.5.36",
+        "spatie/laravel-ignition": "2.4.1",
+        "squizlabs/php_codesniffer": "3.8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
 ``````
 
 ## File: .circleci/config.yml
@@ -88806,76 +88830,68 @@ workflows:
       - vue-tests
 ``````
 
-## File: composer.json
-``````json
-{
-    "name": "laravel/laravel",
-    "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": [
-        "framework",
-        "laravel"
-    ],
-    "license": "MIT",
-    "require": {
-        "php": "8.2.10",
-        "guzzlehttp/guzzle": "7.8.1",
-        "laravel/cashier": "^15.0",
-        "laravel/framework": "10.41.0",
-        "laravel/sanctum": "3.3.3",
-        "laravel/tinker": "2.9.0"
-    },
-    "require-dev": {
-        "fakerphp/faker": "1.23.1",
-        "laravel/dusk": "7.12.1",
-        "laravel/pint": "1.13.11",
-        "laravel/sail": "1.28.0",
-        "mockery/mockery": "1.6.12",
-        "nunomaduro/collision": "7.10.0",
-        "phpunit/phpunit": "10.5.36",
-        "spatie/laravel-ignition": "2.4.1",
-        "squizlabs/php_codesniffer": "3.8.1"
-    },
-    "autoload": {
-        "psr-4": {
-            "App\\": "app/",
-            "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "scripts": {
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
-        ],
-        "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
-        ]
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": []
-        }
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
-}
+## File: Dockerfile
+``````dockerfile
+# Stage 1: Compile Frontend Assets
+FROM node:20-alpine AS node_builder
+
+WORKDIR /app/frontend
+
+# Copy package files and essential build configuration
+COPY package.json package-lock.json* webpack.mix.js tailwind.config.js postcss.config.js* .babelrc* ./
+# Ensure postcss.config.js and .babelrc are optional by using * in case they don't exist
+
+# Install all dependencies (including devDependencies like laravel-mix)
+RUN npm ci
+
+# Copy frontend source code (js, css, images, etc.)
+COPY resources/js ./resources/js
+COPY resources/css ./resources/css
+COPY resources/img ./resources/img
+# Add other relevant resource directories if needed
+
+# Compile assets for production
+RUN npm run production
+
+# Stage 2: Setup PHP Application Environment using richarvey/nginx-php-fpm
+FROM richarvey/nginx-php-fpm:3.1.6 AS app
+
+# Set Laravel Environment Variables as per the article
+ENV APP_ENV production
+ENV APP_DEBUG false
+ENV LOG_CHANNEL stderr
+ENV APP_KEY ${APP_KEY} 
+ENV SKIP_COMPOSER 1 
+ENV WEBROOT /var/www/html/public 
+ENV PHP_ERRORS_STDERR 1 # Send PHP errors to stderr for Docker logging
+ENV RUN_SCRIPTS 1 # Enable execution of scripts in /scripts directory
+ENV REAL_IP_HEADER 1 # If behind a proxy, trust X-Forwarded-For
+ENV COMPOSER_ALLOW_SUPERUSER 1 # Allow composer to run as root if needed by scripts
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Copy all application files
+COPY . .
+
+# Copy compiled assets from the node_builder stage
+COPY --from=node_builder /app/frontend/public ./public
+
+# Copy our Nginx site configuration to the standard location for richarvey images
+COPY nginx-site.conf /etc/nginx/sites-available/default
+
+# Copy our deploy script to the location where richarvey image expects to run scripts
+# Ensure deploy.sh has necessary commands (composer install, migrations, cache)
+RUN mkdir -p /scripts
+COPY deploy.sh /scripts/00-laravel-deploy.sh
+# Install dos2unix, convert line endings, and ensure the script is executable
+RUN apk add --no-cache dos2unix && \
+    dos2unix /scripts/00-laravel-deploy.sh && \
+    chmod +x /scripts/00-laravel-deploy.sh
+
+# The base image (richarvey/nginx-php-fpm) handles starting Nginx, PHP-FPM,
+# and running scripts from /scripts. Its default CMD is /start.sh.
+CMD ["/start.sh"]
 ``````
 
 ## File: package.json
