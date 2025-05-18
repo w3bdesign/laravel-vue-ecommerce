@@ -50,7 +50,10 @@ COPY nginx-site.conf /etc/nginx/sites-available/default
 # Ensure deploy.sh has necessary commands (composer install, migrations, cache)
 RUN mkdir -p /scripts
 COPY deploy.sh /scripts/00-laravel-deploy.sh
-RUN chmod +x /scripts/00-laravel-deploy.sh
+# Install dos2unix, convert line endings, and ensure the script is executable
+RUN apk add --no-cache dos2unix && \
+    dos2unix /scripts/00-laravel-deploy.sh && \
+    chmod +x /scripts/00-laravel-deploy.sh
 
 # The base image (richarvey/nginx-php-fpm) handles starting Nginx, PHP-FPM,
 # and running scripts from /scripts. Its default CMD is /start.sh.
