@@ -23,25 +23,28 @@ COPY resources/img ./resources/img
 RUN npm run production
 
 # Stage 2: Setup PHP Application Environment
-FROM ric_harvey/nginx-php-fpm:3.1.6 AS app
+FROM webdevops/php-nginx:8.2-alpine AS app
 
 # Set working directory
+# The webdevops images often use /app as the default document root for Nginx.
+# We will set our application root to /var/www/html and ensure Nginx config reflects this.
 WORKDIR /var/www/html
 
 # Install system dependencies and PHP extensions
-# The ric_harvey/nginx-php-fpm image should have most common extensions.
-# We'll add pdo_mysql, gd, zip, bcmath, exif, opcache, intl if they are not present.
-# This often requires root access, then dropping back to www-data.
-# The exact commands depend on the base image's package manager (apk for Alpine).
+# webdevops images are comprehensive. Many extensions are pre-installed or can be enabled via env vars.
+# We'll ensure pdo_mysql, gd, zip, bcmath, exif, opcache, intl are available.
+# The `docker-php-ext-install` approach should still work for missing extensions.
+# $PHPIZE_DEPS are build dependencies for compiling extensions.
 USER root
-RUN apk add --no-cache \
+RUN apk add --no-cache --virtual .build-deps \
+        $PHPIZE_DEPS \
         libzip-dev \
         libpng-dev \
-        libjpeg-turbo-dev \
+        jpeg-dev \
         freetype-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd pdo_mysql zip bcmath exif opcache intl \
-    && apk del libzip-dev libpng-dev libjpeg-turbo-dev freetype-dev \
+    && apk del .build-deps \
     && rm -rf /var/cache/apk/*
 
 # Install Composer globally
@@ -60,10 +63,11 @@ RUN mkdir -p storage/framework/sessions storage/framework/cache/data storage/fra
     && chmod -R 775 storage bootstrap/cache
 
 # Copy Nginx site configuration
-# The ric_harvey image might use /etc/nginx/conf.d/default.conf or similar.
-# We'll assume /etc/nginx/sites-available/default and ensure it's linked or directly used.
-COPY nginx-site.conf /etc/nginx/sites-available/default
-# If sites-enabled is used: RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+# webdevops images typically load *.conf from /etc/nginx/conf.d/
+# Or their main vhost config (which includes /app as root) is often in /etc/nginx/vhost.conf or part of the main nginx.conf
+# We will place our specific Laravel config in conf.d to be included.
+# Ensure our nginx-site.conf sets the root to /var/www/html/public.
+COPY nginx-site.conf /etc/nginx/conf.d/app.conf
 
 # Copy and set permissions for the deploy script
 COPY deploy.sh /usr/local/bin/deploy.sh
