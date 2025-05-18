@@ -268,6 +268,7 @@ composer.json
 deploy.sh
 Dockerfile
 jest.config.js
+local.ini
 nginx-site.conf
 package.json
 phpcs.xml
@@ -280,6 +281,7 @@ schema.json
 tailwind.config.js
 TODO.md
 webpack.mix.js
+www.conf
 ```
 
 # Files
@@ -87654,6 +87656,35 @@ echo "Running migrations..."
 php artisan migrate --force
 ``````
 
+## File: local.ini
+``````
+; Custom PHP settings for production
+
+; Error reporting
+display_errors = Off
+log_errors = On
+error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT
+
+; Performance and Security
+expose_php = Off
+max_execution_time = 60 ; Increased for potentially longer scripts
+memory_limit = 256M ; Adjust based on your application's needs
+post_max_size = 32M ; Max size for POST requests
+upload_max_filesize = 32M ; Max upload file size
+date.timezone = "UTC" ; Set your preferred timezone
+
+; Opcache (ensure opcache extension is enabled in Dockerfile)
+opcache.enable=1
+opcache.enable_cli=1
+opcache.memory_consumption=128
+opcache.interned_strings_buffer=8
+opcache.max_accelerated_files=10000
+opcache.revalidate_freq=0 ; Set to 0 for production (validate on every request if timestamp changed) or a higher value
+opcache.validate_timestamps=1 ; Check timestamps in production
+opcache.save_comments=1
+opcache.fast_shutdown=1
+``````
+
 ## File: nginx-site.conf
 ``````
 server {
@@ -87708,95 +87739,6 @@ server {
     # gzip_http_version 1.1;
     # gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
 }
-``````
-
-## File: render.yaml
-``````yaml
-# render.yaml
-# Defines the infrastructure for deploying the Laravel application on Render
-# based on the provided schema.json.
-# Assumes CircleCI builds the Docker image, pushes it to a registry,
-# and then triggers a deploy on Render using a deploy hook.
-databases:
-  - name: ecommerce-db # Name for your managed MySQL database
-    plan: free # Example: "free", "starter", etc.
-    # databaseName: laravel_ecommerce_db # Optional: specify the actual database name
-    # user: db_user # Optional: specify the username
-    # The schema provided lists postgresMajorVersion, not mysqlMajorVersion.
-    # For MySQL, version is typically tied to the plan or a default.
-services:
-  - type: web # Must be one of "web", "worker", "pserv", "cron" for serverService
-    name: laravel-vue-ecommerce
-    runtime: docker # Valid runtime for serverService
-    autoDeploy: false # Boolean value
-    healthCheckPath: /api/health # For web services
-    # image: # Define if image is pre-built and pushed to a registry
-    #   url: registry.render.com/YOUR_RENDER_ORG_OR_USER/laravel-vue-ecommerce:latest
-    envVars:
-      - key: APP_NAME
-        value: "Laravel Vue Ecommerce"
-      - key: APP_ENV
-        value: "production"
-      - key: APP_DEBUG
-        value: "false" # Env vars are strings
-      - key: APP_URL
-        value: "${RENDER_EXTERNAL_URL}" # Render injects this
-      - key: ASSET_URL
-        value: "${RENDER_EXTERNAL_URL}" # Render injects this
-      - key: APP_KEY
-        generateValue: true # Valid per envVarFromKeyValue schema
-      - key: LOG_CHANNEL
-        value: "stderr"
-      # Database Connection
-      - key: DB_CONNECTION # Tells Laravel to use the mysql driver
-        value: "mysql"
-      - key: DATABASE_URL # Laravel will parse this if DB_CONNECTION is set
-        fromDatabase: # Valid per envVarFromDatabase schema
-          name: ecommerce-db # Must match the name in the top-level 'databases' section
-          property: connectionString # Provides the full database connection URL
-      # Cache and Session
-      - key: CACHE_DRIVER
-        value: "file"
-      - key: SESSION_DRIVER
-        value: "file"
-      # Stripe Keys (Set these as secrets in Render dashboard)
-      - key: STRIPE_KEY
-        sync: false # Valid per envVarFromKeyValue schema
-      - key: STRIPE_SECRET
-        sync: false
-      - key: STRIPE_WEBHOOK_SECRET
-        sync: false
-      # Cashier Settings
-      - key: CASHIER_CURRENCY
-        value: "NOK"
-      - key: CASHIER_CURRENCY_LOCALE
-        value: "nb-NO"
-      # Mailer Configuration (example, adjust as needed)
-      - key: MAIL_MAILER
-        value: "smtp"
-      - key: MAIL_HOST
-        value: "your_mail_host" # Set as secret or actual value
-      - key: MAIL_PORT
-        value: "587"
-      - key: MAIL_USERNAME
-        sync: false
-      - key: MAIL_PASSWORD
-        sync: false
-      - key: MAIL_ENCRYPTION
-        value: "tls"
-      - key: MAIL_FROM_ADDRESS
-        value: "hello@example.com"
-      - key: MAIL_FROM_NAME
-        value: "${APP_NAME}"
-    # Start command: runs our deploy script, then starts the main services.
-    # Assumes the base Docker image (ric_harvey/nginx-php-fpm) has /start.sh as its CMD,
-    # which typically runs supervisord to manage Nginx and PHP-FPM.
-    startCommand: "/usr/local/bin/deploy.sh && /start.sh"
-    # Persistent disk for Laravel storage
-    disk: # Valid per serverService schema, referencing "disk" definition
-      name: laravel-storage # Name for the persistent disk
-      mountPath: /var/www/html/storage # Mount path inside the container
-      sizeGB: 1 # Size of the disk in GB, integer
 ``````
 
 ## File: schema.json
@@ -88605,6 +88547,121 @@ The project uses a modern stack (Laravel 10, Vue 3) and follows generally good p
 - [ ] Clarify the meaning of "bot" in the initial project description. If there's specific automated functionality intended, it needs to be reviewed.
 ``````
 
+## File: www.conf
+``````
+[www]
+user = www-data
+group = www-data
+listen = /var/run/php-fpm.sock
+;listen = 127.0.0.1:9000
+listen.owner = www-data
+listen.group = www-data
+listen.mode = 0660
+
+pm = dynamic
+pm.max_children = 5
+pm.start_servers = 2
+pm.min_spare_servers = 1
+pm.max_spare_servers = 3
+pm.max_requests = 500
+
+chdir = /var/www/html
+
+catch_workers_output = yes
+php_flag[display_errors] = off
+php_admin_value[error_log] = /var/log/fpm-php.www.log
+php_admin_flag[log_errors] = on
+``````
+
+## File: render.yaml
+``````yaml
+# render.yaml
+# Defines the infrastructure for deploying the Laravel application on Render
+# based on the provided schema.json.
+# Assumes CircleCI builds the Docker image, pushes it to a registry,
+# and then triggers a deploy on Render using a deploy hook.
+databases:
+  - name: ecommerce-db # Name for your managed MySQL database
+    plan: free # Example: "free", "starter", etc.
+    # databaseName: laravel_ecommerce_db # Optional: specify the actual database name
+    # user: db_user # Optional: specify the username
+    # The schema provided lists postgresMajorVersion, not mysqlMajorVersion.
+    # For MySQL, version is typically tied to the plan or a default.
+services:
+  - type: web # Must be one of "web", "worker", "pserv", "cron" for serverService
+    name: laravel-vue-ecommerce
+    runtime: docker # Valid runtime for serverService
+    autoDeploy: false # Boolean value
+    healthCheckPath: /api/health # For web services
+    # image: # Define if image is pre-built and pushed to a registry
+    #   url: registry.render.com/YOUR_RENDER_ORG_OR_USER/laravel-vue-ecommerce:latest
+    envVars:
+      - key: APP_NAME
+        value: "Laravel Vue Ecommerce"
+      - key: APP_ENV
+        value: "production"
+      - key: APP_DEBUG
+        value: "false" # Env vars are strings
+      - key: APP_URL
+        value: "${RENDER_EXTERNAL_URL}" # Render injects this
+      - key: ASSET_URL
+        value: "${RENDER_EXTERNAL_URL}" # Render injects this
+      - key: APP_KEY
+        generateValue: true # Valid per envVarFromKeyValue schema
+      - key: LOG_CHANNEL
+        value: "stderr"
+      # Database Connection
+      - key: DB_CONNECTION # Tells Laravel to use the mysql driver
+        value: "mysql"
+      - key: DATABASE_URL # Laravel will parse this if DB_CONNECTION is set
+        fromDatabase: # Valid per envVarFromDatabase schema
+          name: ecommerce-db # Must match the name in the top-level 'databases' section
+          property: connectionString # Provides the full database connection URL
+      # Cache and Session
+      - key: CACHE_DRIVER
+        value: "file"
+      - key: SESSION_DRIVER
+        value: "file"
+      # Stripe Keys (Set these as secrets in Render dashboard)
+      - key: STRIPE_KEY
+        sync: false # Valid per envVarFromKeyValue schema
+      - key: STRIPE_SECRET
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      # Cashier Settings
+      - key: CASHIER_CURRENCY
+        value: "NOK"
+      - key: CASHIER_CURRENCY_LOCALE
+        value: "nb-NO"
+      # Mailer Configuration (example, adjust as needed)
+      - key: MAIL_MAILER
+        value: "smtp"
+      - key: MAIL_HOST
+        value: "your_mail_host" # Set as secret or actual value
+      - key: MAIL_PORT
+        value: "587"
+      - key: MAIL_USERNAME
+        sync: false
+      - key: MAIL_PASSWORD
+        sync: false
+      - key: MAIL_ENCRYPTION
+        value: "tls"
+      - key: MAIL_FROM_ADDRESS
+        value: "hello@example.com"
+      - key: MAIL_FROM_NAME
+        value: "${APP_NAME}"
+    # Start command: The Docker image's CMD ["/start.sh"] will be used by default.
+    # The /start.sh script from richarvey/nginx-php-fpm will execute our /scripts/00-laravel-deploy.sh
+    # (because ENV RUN_SCRIPTS 1 is set) and then start Nginx & PHP-FPM.
+    # Thus, no explicit startCommand override is needed here.
+    # Persistent disk for Laravel storage
+    disk: # Valid per serverService schema, referencing "disk" definition
+      name: laravel-storage # Name for the persistent disk
+      mountPath: /var/www/html/storage # Mount path inside the container
+      sizeGB: 1 # Size of the disk in GB, integer
+``````
+
 ## File: Dockerfile
 ``````dockerfile
 # Stage 1: Compile Frontend Assets
@@ -88612,74 +88669,58 @@ FROM node:20-alpine AS node_builder
 
 WORKDIR /app/frontend
 
-# Copy package files and install dependencies
-COPY package.json package-lock.json* ./
-# Copy build configuration files
-COPY webpack.mix.js tailwind.config.js postcss.config.js* .babelrc* ./
-# Ensure postcss.config.js and .babelrc are optional by using *
+# Copy package files and essential build configuration
+COPY package.json package-lock.json* webpack.mix.js tailwind.config.js postcss.config.js* .babelrc* ./
+# Ensure postcss.config.js and .babelrc are optional by using * in case they don't exist
 
-# Install dependencies for building assets
-# Using npm ci for cleaner installs if package-lock.json is present and up-to-date
-RUN npm ci --production
+# Install all dependencies (including devDependencies like laravel-mix)
+RUN npm ci
 
-# Copy frontend source code
+# Copy frontend source code (js, css, images, etc.)
 COPY resources/js ./resources/js
 COPY resources/css ./resources/css
 COPY resources/img ./resources/img
-# Add other resource directories if you have them (e.g., resources/fonts)
+# Add other relevant resource directories if needed
 
-# Compile assets
+# Compile assets for production
 RUN npm run production
 
-# Stage 2: Setup PHP Application Environment
-FROM ric_harvey/nginx-php-fpm:3.1.6 AS app
+# Stage 2: Setup PHP Application Environment using richarvey/nginx-php-fpm
+FROM richarvey/nginx-php-fpm:3.1.6 AS app
+
+# Set Laravel Environment Variables as per the article
+ENV APP_ENV production
+ENV APP_DEBUG false
+ENV LOG_CHANNEL stderr
+ENV APP_KEY ${APP_KEY} 
+ENV SKIP_COMPOSER 1 
+ENV WEBROOT /var/www/html/public 
+ENV PHP_ERRORS_STDERR 1 # Send PHP errors to stderr for Docker logging
+ENV RUN_SCRIPTS 1 # Enable execution of scripts in /scripts directory
+ENV REAL_IP_HEADER 1 # If behind a proxy, trust X-Forwarded-For
+ENV COMPOSER_ALLOW_SUPERUSER 1 # Allow composer to run as root if needed by scripts
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Install system dependencies and PHP extensions
-# The ric_harvey/nginx-php-fpm image should have most common extensions.
-# We'll add pdo_mysql, gd, zip, bcmath, exif, opcache, intl if they are not present.
-# This often requires root access, then dropping back to www-data.
-# The exact commands depend on the base image's package manager (apk for Alpine).
-USER root
-RUN apk add --no-cache \
-        libzip-dev \
-        libpng-dev \
-        libjpeg-turbo-dev \
-        freetype-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd pdo_mysql zip bcmath exif opcache intl \
-    && apk del libzip-dev libpng-dev libjpeg-turbo-dev freetype-dev \
-    && rm -rf /var/cache/apk/*
-
-# Install Composer globally
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Copy application files (respecting .dockerignore)
+# Copy all application files
 COPY . .
 
 # Copy compiled assets from the node_builder stage
-COPY --chown=www-data:www-data --from=node_builder /app/frontend/public ./public
+COPY --from=node_builder /app/frontend/public ./public
 
-# Set permissions for Laravel storage and bootstrap cache
-# Ensure these directories exist before chown/chmod if copying doesn't create them fully.
-RUN mkdir -p storage/framework/sessions storage/framework/cache/data storage/framework/views storage/logs \
-    && chown -R www-data:www-data storage bootstrap/cache \
-    && chmod -R 775 storage bootstrap/cache
-
-# Copy Nginx site configuration
-# The ric_harvey image might use /etc/nginx/conf.d/default.conf or similar.
-# We'll assume /etc/nginx/sites-available/default and ensure it's linked or directly used.
+# Copy our Nginx site configuration to the standard location for richarvey images
 COPY nginx-site.conf /etc/nginx/sites-available/default
-# If sites-enabled is used: RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
-# Copy and set permissions for the deploy script
-COPY deploy.sh /usr/local/bin/deploy.sh
-RUN chmod +x /usr/local/bin/deploy.sh
+# Copy our deploy script to the location where richarvey image expects to run scripts
+# Ensure deploy.sh has necessary commands (composer install, migrations, cache)
+RUN mkdir -p /scripts
+COPY deploy.sh /scripts/00-laravel-deploy.sh
+RUN chmod +x /scripts/00-laravel-deploy.sh
 
-# Expose port 80
-EXPOSE 80
+# The base image (richarvey/nginx-php-fpm) handles starting Nginx, PHP-FPM,
+# and running scripts from /scripts. Its default CMD is /start.sh.
+CMD ["/start.sh"]
 ``````
 
 ## File: .circleci/config.yml
@@ -88860,7 +88901,7 @@ workflows:
         "@testing-library/vue": "7.0.0",
         "@vue/vue3-jest": "29.2.6",
         "autoprefixer": "10.4.21",
-        "axios": "1.6.8",
+        "axios": "1.9.0",
         "babel-core": "7.0.0-bridge.0",
         "babel-jest": "29.7.0",
         "global-jsdom": "9.1.0",
@@ -88871,7 +88912,7 @@ workflows:
         "lodash": "4.17.21",
         "postcss": "8.4.40",
         "prettier": "3.5.3",
-        "tailwindcss": "3.4.11",
+        "tailwindcss": "3.4.17",
         "vue-loader": "17.4.2"
     },
     "dependencies": {
