@@ -1,0 +1,719 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://render.com/schema/render.yaml.json",
+  "title": "render.yaml JSON Schema",
+  "description": "A JSON schema for render.yaml files. See https://render.com/docs/blueprint-spec for more information",
+  "type": "object",
+  "definitions": {
+    "buildFilter": {
+      "type": "object",
+      "properties": {
+        "paths": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "ignoredPaths": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "diskSizeGB": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "cronService": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "cron"
+        },
+        "name": {
+          "type": "string"
+        },
+        "region": {
+          "$ref": "#/definitions/region"
+        },
+        "plan": {
+          "$ref": "#/definitions/plan"
+        },
+        "runtime": {
+          "$ref": "#/definitions/runtime"
+        },
+        "schedule": {
+          "type": "string"
+        },
+        "buildCommand": {
+          "type": "string"
+        },
+        "startCommand": {
+          "type": "string"
+        },
+        "dockerCommand": {
+          "type": "string"
+        },
+        "dockerfilePath": {
+          "type": "string"
+        },
+        "dockerContext": {
+          "type": "string"
+        },
+        "registryCredential": {
+          "$ref": "#/definitions/registryCredential"
+        },
+        "repo": {
+          "type": "string"
+        },
+        "branch": {
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/definitions/image"
+        },
+        "envVars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/envVar"
+          }
+        },
+        "buildFilter": {
+          "$ref": "#/definitions/buildFilter"
+        },
+        "rootDir": {
+          "type": "string"
+        },
+        "autoDeploy": {
+          "type": "boolean"
+        }
+      },
+      "required": ["type", "name", "runtime", "schedule"],
+      "additionalProperties": false
+    },
+    "database": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "databaseName": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        },
+        "region": {
+          "$ref": "#/definitions/region"
+        },
+        "plan": {
+          "$ref": "#/definitions/plan"
+        },
+        "diskSizeGB": {
+          "$ref": "#/definitions/diskSizeGB"
+        },
+        "previewPlan": {
+          "$ref": "#/definitions/plan"
+        },
+        "previewDiskSizeGB": {
+          "$ref": "#/definitions/diskSizeGB",
+          "description": "The disk size to use for this database in preview environments. If omitted, preview instances use the same disk size as the primary database (specified by `diskSizeGB`)."
+        },
+        "postgresMajorVersion": {
+          "type": "string",
+          "enum": ["10", "11", "12", "13", "14", "15", "16"],
+          "description": "What major version of PostgreSQL the database will use. Please refer to https://render.com/docs/postgresql-upgrading#version-support for which versions may be valid for this owner."
+        },
+        "highAvailability": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "required": ["enabled"],
+          "additionalProperties": false
+        },
+        "ipAllowList": {
+          "$ref": "#/definitions/ipAllowList"
+        },
+        "readReplicas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/readReplica"
+          }
+        }
+      },
+      "required": ["name"],
+      "additionalProperties": false
+    },
+    "disk": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "mountPath": {
+          "type": "string"
+        },
+        "sizeGB": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": ["name", "mountPath"],
+      "additionalProperties": false
+    },
+    "envVar": {
+      "anyOf": [
+        { "$ref": "#/definitions/envVarFromKeyValue" },
+        { "$ref": "#/definitions/envVarFromDatabase" },
+        { "$ref": "#/definitions/envVarFromService" },
+        { "$ref": "#/definitions/envVarFromGroup" }
+      ]
+    },
+    "envVarFromDatabase": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "fromDatabase": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "property": {
+              "type": "string"
+            }
+          },
+          "required": ["name", "property"]
+        }
+      },
+      "required": ["key", "fromDatabase"],
+      "additionalProperties": false
+    },
+    "envVarFromKeyValue": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [{ "type": "string" }, { "type": "number" }]
+        },
+        "generateValue": {
+          "type": "boolean"
+        },
+        "sync": {
+          "type": "boolean"
+        },
+        "previewValue": {
+          "anyOf": [{ "type": "string" }, { "type": "number" }]
+        }
+      },
+      "required": ["key"],
+      "additionalProperties": false
+    },
+    "envVarFromService": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "fromService": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "$ref": "#/definitions/serviceType"
+            },
+            "name": {
+              "type": "string"
+            },
+            "property": {
+              "type": "string"
+            },
+            "envVarKey": {
+              "type": "string"
+            }
+          },
+          "required": ["name", "type"]
+        }
+      },
+      "required": ["key", "fromService"],
+      "additionalProperties": false
+    },
+    "envVarFromGroup": {
+      "type": "object",
+      "properties": {
+        "fromGroup": {
+          "type": "string"
+        }
+      },
+      "required": ["fromGroup"],
+      "additionalProperties": false
+    },
+    "envVarGroup": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "envVars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/envVarFromKeyValue"
+          }
+        }
+      },
+      "required": ["name", "envVars"],
+      "additionalProperties": false
+    },
+    "header": {
+      "type": "object",
+      "properties": {
+        "path": { "type": "string" },
+        "name": { "type": "string" },
+        "value": { "type": "string" }
+      },
+      "required": ["path", "name", "value"]
+    },
+    "image": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "creds": {
+          "$ref": "#/definitions/registryCredential"
+        }
+      },
+      "required": ["url"],
+      "additionalProperties": false
+    },
+    "readReplica": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ipAllowList": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": ["source"]
+      }
+    },
+    "plan": {
+      "type": "string",
+      "enum": [
+        "free",
+        "starter",
+        "standard",
+        "pro",
+        "pro plus",
+        "pro max",
+        "pro ultra",
+        "basic-256mb",
+        "basic-1gb",
+        "basic-4gb",
+        "pro-4gb",
+        "pro-8gb",
+        "pro-16gb",
+        "pro-32gb",
+        "pro-64gb",
+        "pro-128gb",
+        "pro-192gb",
+        "pro-256gb",
+        "pro-384gb",
+        "pro-512gb",
+        "accelerated-16gb",
+        "accelerated-32gb",
+        "accelerated-64gb",
+        "accelerated-128gb",
+        "accelerated-256gb",
+        "accelerated-384gb",
+        "accelerated-512gb",
+        "accelerated-768gb",
+        "accelerated-1024gb"
+      ]
+    },
+    "previewsGeneration": {
+      "type": "string",
+      "enum": ["automatic", "manual", "off"]
+    },
+    "servicePreviews": {
+      "type": "object",
+      "properties": {
+        "generation": {
+          "$ref": "#/definitions/previewsGeneration"
+        },
+        "plan": {
+          "$ref": "#/definitions/plan"
+        }
+      },
+      "additionalProperties": false
+    },
+    "staticServicePreviews": {
+      "type": "object",
+      "properties": {
+        "generation": {
+          "$ref": "#/definitions/previewsGeneration"
+        }
+      },
+      "additionalProperties": false
+    },
+    "rootPreviews": {
+      "type": "object",
+      "properties": {
+        "generation": {
+          "$ref": "#/definitions/previewsGeneration"
+        },
+        "expireAfterDays": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "redisServer": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "redis"
+        },
+        "name": {
+          "type": "string"
+        },
+        "region": {
+          "$ref": "#/definitions/region"
+        },
+        "ipAllowList": {
+          "$ref": "#/definitions/ipAllowList"
+        },
+        "plan": {
+          "$ref": "#/definitions/plan"
+        },
+        "previewPlan": {
+          "$ref": "#/definitions/plan"
+        },
+        "maxmemoryPolicy": {
+          "type": "string"
+        }
+      },
+      "required": ["type", "name", "ipAllowList"],
+      "additionalProperties": false
+    },
+    "region": {
+      "type": "string",
+      "enum": ["oregon", "ohio", "frankfurt", "singapore", "virginia"]
+    },
+    "registryCredential": {
+      "properties": {
+        "fromRegistryCreds": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": ["name"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["fromRegistryCreds"],
+      "additionalProperties": false
+    },
+    "route": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["redirect", "rewrite"]
+        },
+        "source": { "type": "string" },
+        "destination": { "type": "string" }
+      },
+      "required": ["type", "source", "destination"]
+    },
+    "runtime": {
+      "type": "string",
+      "enum": [
+        "docker",
+        "elixir",
+        "go",
+        "image",
+        "node",
+        "python",
+        "ruby",
+        "rust",
+        "static"
+      ]
+    },
+    "serverService": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["web", "worker", "pserv"]
+        },
+        "name": {
+          "type": "string"
+        },
+        "region": {
+          "$ref": "#/definitions/region"
+        },
+        "plan": {
+          "$ref": "#/definitions/plan"
+        },
+        "runtime": {
+          "$ref": "#/definitions/runtime"
+        },
+        "repo": {
+          "type": "string"
+        },
+        "branch": {
+          "type": "string"
+        },
+        "image": {
+          "$ref": "#/definitions/image"
+        },
+        "rootDir": {
+          "type": "string"
+        },
+        "dockerCommand": {
+          "type": "string"
+        },
+        "dockerContext": {
+          "type": "string"
+        },
+        "dockerfilePath": {
+          "type": "string"
+        },
+        "numInstances": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "healthCheckPath": {
+          "type": "string"
+        },
+        "scaling": {
+          "type": "object",
+          "properties": {
+            "minInstances": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "maxInstances": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "targetMemoryPercent": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 90
+            },
+            "targetCPUPercent": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 90
+            }
+          }
+        },
+        "buildCommand": {
+          "type": "string"
+        },
+        "startCommand": {
+          "type": "string"
+        },
+        "preDeployCommand": {
+          "type": "string"
+        },
+        "registryCredential": {
+          "$ref": "#/definitions/registryCredential"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "envVars": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/envVar" }
+        },
+        "autoDeploy": {
+          "type": "boolean"
+        },
+        "initialDeployHook": {
+          "type": "string"
+        },
+        "disk": {
+          "$ref": "#/definitions/disk"
+        },
+        "buildFilter": {
+          "$ref": "#/definitions/buildFilter"
+        },
+        "previews": {
+          "$ref": "#/definitions/servicePreviews"
+        },
+        "pullRequestPreviewsEnabled": {
+          "type": "boolean",
+          "deprecated": true
+        },
+        "previewPlan": {
+          "$ref": "#/definitions/plan",
+          "deprecated": true
+        },
+        "maxShutdownDelaySeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 300
+        }
+      },
+      "required": ["type", "name", "runtime"],
+      "additionalProperties": false
+    },
+    "serviceType": {
+      "type": "string",
+      "enum": [
+        "web",
+        "cron",
+        "worker",
+        "pserv",
+        "static",
+        "dpg",
+        "job",
+        "redis",
+        "keyvalue"
+      ]
+    },
+    "staticService": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "const": "web"
+        },
+        "name": {
+          "type": "string"
+        },
+        "runtime": {
+          "type": "string",
+          "const": "static"
+        },
+        "buildCommand": {
+          "type": "string"
+        },
+        "staticPublishPath": {
+          "type": "string"
+        },
+        "previews": {
+          "$ref": "#/definitions/staticServicePreviews"
+        },
+        "pullRequestPreviewsEnabled": {
+          "type": "boolean",
+          "deprecated": true
+        },
+        "buildFilter": {
+          "$ref": "#/definitions/buildFilter"
+        },
+        "headers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/header"
+          }
+        },
+        "routes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/route"
+          }
+        },
+        "envVars": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/envVar" }
+        },
+        "rootDir": {
+          "type": "string"
+        },
+        "repo": {
+          "type": "string"
+        },
+        "branch": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "autoDeploy": {
+          "type": "boolean"
+        }
+      },
+      "required": ["type", "name"],
+      "additionalProperties": false
+    }
+  },
+  "properties": {
+    "databases": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/database"
+      }
+    },
+    "envVarGroups": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/envVarGroup"
+      }
+    },
+    "previews": {
+      "$ref": "#/definitions/rootPreviews"
+    },
+    "previewsEnabled": {
+      "type": "boolean",
+      "deprecated": true
+    },
+    "previewsExpireAfterDays": {
+      "type": "integer",
+      "minimum": 1,
+      "deprecated": true
+    },
+    "services": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          { "$ref": "#/definitions/redisServer" },
+          { "$ref": "#/definitions/cronService" },
+          { "$ref": "#/definitions/serverService" },
+          { "$ref": "#/definitions/staticService" }
+        ]
+      }
+    },
+    "version": {
+      "type": "string",
+      "const": "1"
+    }
+  },
+  "additionalProperties": false
+}
