@@ -26,11 +26,9 @@ FROM richarvey/nginx-php-fpm:3.1.6 AS app
 ENV APP_ENV production
 ENV APP_DEBUG false
 ENV LOG_CHANNEL stderr
-ENV APP_KEY ${APP_KEY} # Will be provided by Render's environment
-
-# Configure richarvey/nginx-php-fpm specific settings
-ENV SKIP_COMPOSER 1 # We run composer via the deploy script
-ENV WEBROOT /var/www/html/public # Laravel's public directory
+ENV APP_KEY ${APP_KEY} 
+ENV SKIP_COMPOSER 1 
+ENV WEBROOT /var/www/html/public 
 ENV PHP_ERRORS_STDERR 1 # Send PHP errors to stderr for Docker logging
 ENV RUN_SCRIPTS 1 # Enable execution of scripts in /scripts directory
 ENV REAL_IP_HEADER 1 # If behind a proxy, trust X-Forwarded-For
