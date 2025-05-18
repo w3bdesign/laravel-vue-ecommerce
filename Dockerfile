@@ -1,76 +1,59 @@
-FROM php:8.2-fpm
-LABEL org.opencontainers.image.authors="stephen@stephenneal.net"
+# Stage 1: Compile Frontend Assets
+FROM node:20-alpine AS node_builder
 
-# Update OS && install utilities
-RUN apt-get update -y \
-	&& apt-get install -y \
-		expect-dev \
-		g++ \
-	    git \
-	    imagemagick \
-		libgmp-dev \
-	    libfreetype6-dev \
-	    libicu-dev \
-	    libjpeg62-turbo-dev \
-	    libzip-dev \
-	    openssl \
-	    procps \
-	    sudo \
-	    supervisor \
-	    unzip \
-	    zip \
-	    zlib1g-dev
+WORKDIR /app/frontend
 
-# Install Docker PHP extensions
-RUN docker-php-ext-configure intl \
-	&& docker-php-ext-configure gd \
-		--with-freetype=/usr/include/ \
-		--with-jpeg=/usr/include/ \
-	&& docker-php-ext-install -j$(nproc) gd \
-	&& docker-php-ext-install \
-		gmp \
-		intl \
-		pcntl \
-	    pdo \
-	    pdo_mysql \
-	    zip
+# Copy package files and essential build configuration
+COPY package.json package-lock.json* webpack.mix.js tailwind.config.js postcss.config.js* .babelrc* ./
+# Ensure postcss.config.js and .babelrc are optional by using * in case they don't exist
 
-# Copy PHP configuration files
-COPY local.ini /usr/local/etc/php/conf.d/local.ini
-COPY www.conf /usr/local/etc/php-fpm.d/www.conf
+# Install all dependencies (including devDependencies like laravel-mix)
+RUN npm ci
+
+# Copy frontend source code (js, css, images, etc.)
+COPY resources/js ./resources/js
+COPY resources/css ./resources/css
+COPY resources/img ./resources/img
+# Add other relevant resource directories if needed
+
+# Compile assets for production
+RUN npm run production
+
+# Stage 2: Setup PHP Application Environment using richarvey/nginx-php-fpm
+FROM richarvey/nginx-php-fpm:3.1.6 AS app
+
+# Set Laravel Environment Variables as per the article
+ENV APP_ENV production
+ENV APP_DEBUG false
+ENV LOG_CHANNEL stderr
+ENV APP_KEY ${APP_KEY} # Will be provided by Render's environment
+
+# Configure richarvey/nginx-php-fpm specific settings
+ENV SKIP_COMPOSER 1 # We run composer via the deploy script
+ENV WEBROOT /var/www/html/public # Laravel's public directory
+ENV PHP_ERRORS_STDERR 1 # Send PHP errors to stderr for Docker logging
+ENV RUN_SCRIPTS 1 # Enable execution of scripts in /scripts directory
+ENV REAL_IP_HEADER 1 # If behind a proxy, trust X-Forwarded-For
+ENV COMPOSER_ALLOW_SUPERUSER 1 # Allow composer to run as root if needed by scripts
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Install Nginx
-RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
-
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Copy application skeleton (respects .dockerignore)
-# Ensure .dockerignore is set up to exclude vendor, node_modules, .env etc.
+# Copy all application files
 COPY . .
 
-# Install PHP dependencies
-RUN composer install --optimize-autoloader --no-dev --no-interaction --no-progress
+# Copy compiled assets from the node_builder stage
+COPY --from=node_builder /app/frontend/public ./public
 
-# Set permissions for Laravel
-RUN chown -R www-data:www-data storage bootstrap/cache \
-    && chmod -R 775 storage bootstrap/cache
-
-# Copy Nginx site configuration
-# This assumes nginx-site.conf is for Nginx and configured for Laravel
+# Copy our Nginx site configuration to the standard location for richarvey images
 COPY nginx-site.conf /etc/nginx/sites-available/default
-RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default || true \
-    && rm /etc/nginx/sites-enabled/default.conf || true # Remove default Nginx config if it exists with this name
 
-# Copy deploy script (which handles migrations, caching)
-COPY deploy.sh /usr/local/bin/deploy.sh
-RUN chmod +x /usr/local/bin/deploy.sh
+# Copy our deploy script to the location where richarvey image expects to run scripts
+# Ensure deploy.sh has necessary commands (composer install, migrations, cache)
+RUN mkdir -p /scripts
+COPY deploy.sh /scripts/00-laravel-deploy.sh
+RUN chmod +x /scripts/00-laravel-deploy.sh
 
-# Expose port 80 for Nginx
-EXPOSE 80
-
-# CMD / ENTRYPOINT to start supervisor (which then starts nginx and php-fpm) will be added later.
-# Frontend asset compilation (Node.js multi-stage build) will also be added later.
+# The base image (richarvey/nginx-php-fpm) handles starting Nginx, PHP-FPM,
+# and running scripts from /scripts. Its default CMD is /start.sh.
+CMD ["/start.sh"]
