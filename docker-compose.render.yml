@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  php-fpm:
+    build:
+      context: . # We'll build from the project root
+      dockerfile: php-fpm.render.dockerfile # A dedicated Dockerfile for this service
+      args:
+        # Example: Use PHP_VERSION from Laradock's .env or set a default
+        # This can be overridden by Render environment variables if needed
+        LARADOCK_PHP_VERSION: ${PHP_VERSION:-8.2} # Defaulting to 8.2 as in previous Dockerfile
+    volumes:
+      # Mount Render's persistent disk for Laravel storage
+      # The name 'laravel-storage' should match the disk name in render.yaml
+      - laravel-storage:/var/www/html/storage
+    # Environment variables will be injected by Render from render.yaml
+    # working_dir is typically /var/www/html (set in php-fpm.render.dockerfile)
+
+  nginx:
+    build:
+      context: ./laradock/nginx # Use Laradock's Nginx Dockerfile
+      args:
+        # Environment variables from Laradock's .env can be passed as build args if needed
+        # For example, if Laradock's Nginx Dockerfile uses them.
+        # Common ones are already handled by Laradock's Nginx entrypoint/config.
+        PHP_UPSTREAM_CONTAINER: php-fpm # Ensure it points to our php-fpm service
+        PHP_UPSTREAM_PORT: 9000
+        NGINX_HOST_LOG_PATH: /var/log/nginx # Standard log path
+        # Ensure NGINX_SITES_PATH points where Laradock's Dockerfile expects to find site configs
+        # NGINX_SITES_PATH: /etc/nginx/sites-available # Default in Laradock .env
+    volumes:
+      # The application code (especially /public) needs to be accessible by Nginx.
+      # Our php-fpm service builds the code into /var/www/html.
+      # We need to share this with Nginx.
+      # The 'app_code' volume is defined below and should be populated by the php-fpm service.
+      # However, for Render, it's often better if the Nginx image also has the static assets.
+      # Laradock's Nginx Dockerfile usually copies from APP_CODE_PATH_HOST.
+      # Let's ensure our php-fpm service populates the app_code volume,
+      # and nginx mounts it.
+      # Alternatively, nginx Dockerfile could also COPY ../public /var/www/html/public
+      - app_code:/var/www/html
+    ports:
+      - "80:80"
+    depends_on:
+      - php-fpm
+    # Environment variables from render.yaml will be available.
+    # Laradock's Nginx often uses NGINX_APP_CODE_PATH_CONTAINER=/var/www/html
+    # and expects the site config to set root to $NGINX_APP_CODE_PATH_CONTAINER/public
+    environment:
+      NGINX_APP_CODE_PATH_CONTAINER: /var/www/html # To align with Laradock's Nginx config expectations
+      # Other NGINX_... variables from laradock/.env can be set here if needed by the entrypoint
+
+volumes:
+  laravel-storage: # This name must match the disk name in render.yaml
+    driver: local # For local testing; Render handles this differently
+  app_code: # Volume to share application code if needed, populated by php-fpm build
+    driver: local

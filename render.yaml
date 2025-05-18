@@ -13,57 +13,54 @@ databases:
     # For MySQL, version is typically tied to the plan or a default.
 
 services:
-  - type: web # Must be one of "web", "worker", "pserv", "cron" for serverService
-    name: laravel-vue-ecommerce
-    runtime: docker # Valid runtime for serverService
-    autoDeploy: false # Boolean value
-    healthCheckPath: /api/health # For web services
-    # image: # Define if image is pre-built and pushed to a registry
-    #   url: registry.render.com/YOUR_RENDER_ORG_OR_USER/laravel-vue-ecommerce:latest
+  # PHP-FPM Service (Private Service)
+  - type: pserv
+    name: php-fpm # Internal service name
+    runtime: docker # Added runtime
+    dockerContext: . # Build from project root
+    dockerfilePath: ./php-fpm.render.dockerfile # Using the Dockerfile we created
     envVars:
       - key: APP_NAME
         value: "Laravel Vue Ecommerce"
       - key: APP_ENV
         value: "production"
       - key: APP_DEBUG
-        value: "false" # Env vars are strings
+        value: "false"
       - key: APP_URL
-        value: "${RENDER_EXTERNAL_URL}" # Render injects this
+        value: "${RENDER_EXTERNAL_URL}" # Will be taken from the web service
       - key: ASSET_URL
-        value: "${RENDER_EXTERNAL_URL}" # Render injects this
+        value: "${RENDER_EXTERNAL_URL}" # Will be taken from the web service
       - key: APP_KEY
-        generateValue: true # Valid per envVarFromKeyValue schema
+        fromService:
+          type: web
+          name: laravel-vue-ecommerce # Name of the Nginx web service
+          envVarKey: APP_KEY_GENERATED # Use a different key to avoid circular dependency if APP_KEY is also on web
       - key: LOG_CHANNEL
         value: "stderr"
-      # Database Connection
-      - key: DB_CONNECTION # Tells Laravel to use the mysql driver
+      - key: DB_CONNECTION
         value: "mysql"
-      - key: DATABASE_URL # Laravel will parse this if DB_CONNECTION is set
-        fromDatabase: # Valid per envVarFromDatabase schema
-          name: ecommerce-db # Must match the name in the top-level 'databases' section
-          property: connectionString # Provides the full database connection URL
-      # Cache and Session
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ecommerce-db
+          property: connectionString
       - key: CACHE_DRIVER
-        value: "file"
+        value: "file" # Consider 'redis' if you add a Redis service
       - key: SESSION_DRIVER
-        value: "file"
-      # Stripe Keys (Set these as secrets in Render dashboard)
+        value: "file" # Consider 'redis'
       - key: STRIPE_KEY
-        sync: false # Valid per envVarFromKeyValue schema
+        sync: false
       - key: STRIPE_SECRET
         sync: false
       - key: STRIPE_WEBHOOK_SECRET
         sync: false
-      # Cashier Settings
       - key: CASHIER_CURRENCY
         value: "NOK"
       - key: CASHIER_CURRENCY_LOCALE
         value: "nb-NO"
-      # Mailer Configuration (example, adjust as needed)
       - key: MAIL_MAILER
         value: "smtp"
       - key: MAIL_HOST
-        value: "your_mail_host" # Set as secret or actual value
+        value: "your_mail_host"
       - key: MAIL_PORT
         value: "587"
       - key: MAIL_USERNAME
@@ -76,14 +73,44 @@ services:
         value: "hello@example.com"
       - key: MAIL_FROM_NAME
         value: "${APP_NAME}"
+      # For Laradock PHP_VERSION in php-fpm.render.dockerfile build arg
+      - key: PHP_VERSION 
+        value: "8.2" # Or from laradock/.env if possible, but direct is safer for Render
+    disk:
+      name: laravel-storage 
+      mountPath: /var/www/html/storage # Mount point for Laravel's storage
+      sizeGB: 1 # sizeGB defined directly here
 
-    # Start command: The Docker image's CMD ["/start.sh"] will be used by default.
-    # The /start.sh script from richarvey/nginx-php-fpm will execute our /scripts/00-laravel-deploy.sh
-    # (because ENV RUN_SCRIPTS 1 is set) and then start Nginx & PHP-FPM.
-    # Thus, no explicit startCommand override is needed here.
+  # Nginx Service (Web Service)
+  - type: web
+    name: laravel-vue-ecommerce # Public-facing service name
+    runtime: docker # Added runtime
+    dockerContext: ./laradock/nginx # Build using Laradock's Nginx Dockerfile
+    # dockerfilePath is implicitly Dockerfile within the context
+    autoDeploy: false
+    healthCheckPath: / # Or a static file like /favicon.ico, or /api/health if Nginx proxies it
+    envVars:
+      - key: APP_NAME # For consistency, though Nginx might not use it directly
+        value: "Laravel Vue Ecommerce"
+      - key: APP_ENV
+        value: "production"
+      - key: APP_URL
+        value: "${RENDER_EXTERNAL_URL}"
+      - key: ASSET_URL
+        value: "${RENDER_EXTERNAL_URL}"
+      - key: APP_KEY_GENERATED # Nginx service generates the APP_KEY
+        generateValue: true
+      # Environment variables for Laradock's Nginx entrypoint/configuration
+      - key: NGINX_PHP_UPSTREAM_CONTAINER
+        value: "php-fpm" # Must match the name of the php-fpm service above
+      - key: NGINX_PHP_UPSTREAM_PORT
+        value: "9000"
+      - key: NGINX_APP_CODE_PATH_CONTAINER
+        value: "/var/www/html" # Used by laradock/nginx/sites/default.conf
+      # For Laradock PHP_VERSION in its Nginx Dockerfile build args (if it uses it)
+      - key: PHP_VERSION 
+        value: "8.2" 
+    # Nginx service does not directly write to Laravel's storage,
+    # but it needs the application code (public assets) which is built into its image.
 
-    # Persistent disk for Laravel storage
-    disk: # Valid per serverService schema, referencing "disk" definition
-      name: laravel-storage # Name for the persistent disk
-      mountPath: /var/www/html/storage # Mount path inside the container
-      sizeGB: 1 # Size of the disk in GB, integer
+# Top-level disks: block removed as it's not allowed by schema; disk defined in php-fpm service.
