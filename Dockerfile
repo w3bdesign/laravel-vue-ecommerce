@@ -23,7 +23,7 @@ COPY resources/img ./resources/img
 RUN npm run production
 
 # Stage 2: Setup PHP Application Environment
-FROM ric_harvey/nginx-php-fpm:php82 AS app
+FROM ric_harvey/nginx-php-fpm:3.1.6 AS app
 
 # Set working directory
 WORKDIR /var/www/html
