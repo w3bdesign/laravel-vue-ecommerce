@@ -77,10 +77,10 @@ services:
       - key: MAIL_FROM_NAME
         value: "${APP_NAME}"
 
-    # Start command: runs our deploy script, then starts the main services.
-    # Assumes the base Docker image (ric_harvey/nginx-php-fpm) has /start.sh as its CMD,
-    # which typically runs supervisord to manage Nginx and PHP-FPM.
-    startCommand: "/usr/local/bin/deploy.sh && /start.sh"
+    # Start command: The Docker image's CMD ["/start.sh"] will be used by default.
+    # The /start.sh script from richarvey/nginx-php-fpm will execute our /scripts/00-laravel-deploy.sh
+    # (because ENV RUN_SCRIPTS 1 is set) and then start Nginx & PHP-FPM.
+    # Thus, no explicit startCommand override is needed here.
 
     # Persistent disk for Laravel storage
     disk: # Valid per serverService schema, referencing "disk" definition
