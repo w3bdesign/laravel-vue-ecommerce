@@ -1,60 +1,97 @@
-# Stage 1: Compile Frontend Assets
-FROM node:20-alpine AS node_builder
+# Stage 1: Base with PHP, Composer, and common extensions
+# We'll use an official PHP image as a base for PHP-FPM
+FROM php:8.2-fpm-alpine AS php_base
 
-WORKDIR /app/frontend
+# Install system dependencies for PHP extensions and other tools
+RUN apk add --no-cache \
+    bash \
+    curl \
+    git \
+    supervisor \
+    nginx \
+    # For common PHP extensions
+    libzip-dev \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    freetype-dev \
+    icu-dev \
+    libxml2-dev \
+    # For pdo_mysql
+    mysql-client
 
-# Copy package files and essential build configuration
-COPY package.json package-lock.json* webpack.mix.js tailwind.config.js postcss.config.js* .babelrc* ./
-# Ensure postcss.config.js and .babelrc are optional by using * in case they don't exist
+# Install PHP extensions
+# You can customize this list based on Laradock's PHP-FPM Dockerfile or your app's needs
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) \
+        gd \
+        intl \
+        opcache \
+        pdo_mysql \
+        zip \
+        xml \
+        bcmath \
+        pcntl \
+        exif \
+        sockets
 
-# Install all dependencies (including devDependencies like laravel-mix)
-RUN npm ci
+# Get latest Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Copy frontend source code (js, css, images, etc.)
-COPY resources/js ./resources/js
-COPY resources/css ./resources/css
-COPY resources/img ./resources/img
-# Add other relevant resource directories if needed
-
-# Compile assets for production
-RUN npm run production
-
-# Stage 2: Setup PHP Application Environment using richarvey/nginx-php-fpm
-FROM richarvey/nginx-php-fpm:3.1.6 AS app
-
-# Set Laravel Environment Variables as per the article
-ENV APP_ENV production
-ENV APP_DEBUG false
-ENV LOG_CHANNEL stderr
-ENV APP_KEY ${APP_KEY} 
-ENV SKIP_COMPOSER 1 
-ENV WEBROOT /var/www/html/public 
-ENV PHP_ERRORS_STDERR 1 # Send PHP errors to stderr for Docker logging
-ENV RUN_SCRIPTS 1 # Enable execution of scripts in /scripts directory
-ENV REAL_IP_HEADER 1 # If behind a proxy, trust X-Forwarded-For
-ENV COMPOSER_ALLOW_SUPERUSER 1 # Allow composer to run as root if needed by scripts
-
-# Set working directory
+# Set working directory for the application
 WORKDIR /var/www/html
 
-# Copy all application files
+# Copy application code
 COPY . .
 
-# Copy compiled assets from the node_builder stage
-COPY --from=node_builder /app/frontend/public ./public
+# Install Composer dependencies
+RUN composer install --no-dev --no-interaction --no-progress --optimize-autoloader
 
-# Copy our Nginx site configuration to the standard location for richarvey images
-COPY nginx-site.conf /etc/nginx/sites-available/default
+# Optimize Laravel (optional here, can also be done at runtime start, but better in image)
+RUN php artisan config:cache
+RUN php artisan route:cache
+# RUN php artisan view:cache # view:cache can sometimes be problematic if paths change
 
-# Copy our deploy script to the location where richarvey image expects to run scripts
-# Ensure deploy.sh has necessary commands (composer install, migrations, cache)
-RUN mkdir -p /scripts
-COPY deploy.sh /scripts/00-laravel-deploy.sh
-# Install dos2unix, convert line endings, and ensure the script is executable
-RUN apk add --no-cache dos2unix && \
-    dos2unix /scripts/00-laravel-deploy.sh && \
-    chmod +x /scripts/00-laravel-deploy.sh
+# Fix permissions for storage and bootstrap cache
+RUN chown -R www-data:www-data storage bootstrap/cache public \
+    && chmod -R 775 storage bootstrap/cache public
 
-# The base image (richarvey/nginx-php-fpm) handles starting Nginx, PHP-FPM,
-# and running scripts from /scripts. Its default CMD is /start.sh.
-CMD ["/start.sh"]
+# Stage 2: Final image with Nginx and Supervisor
+FROM alpine:latest
+
+# Copy PHP-FPM and application from the php_base stage
+COPY --from=php_base /usr/local/etc/php-fpm.d/ /usr/local/etc/php-fpm.d/
+COPY --from=php_base /usr/local/etc/php/ /usr/local/etc/php/
+COPY --from=php_base /usr/local/sbin/php-fpm /usr/local/sbin/php-fpm
+COPY --from=php_base /usr/local/bin/php /usr/local/bin/php
+COPY --from=php_base /usr/bin/composer /usr/bin/composer
+COPY --from=php_base /var/www/html /var/www/html
+COPY --from=php_base /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+
+# Install Nginx and Supervisor from Alpine packages (if not already in php_base or if we want a clean stage)
+RUN apk add --no-cache nginx supervisor mysql-client bash
+
+# Create Nginx log directory if it doesn't exist from package install
+RUN mkdir -p /var/log/nginx && \
+    chown -R nginx:nginx /var/log/nginx && \
+    mkdir -p /var/lib/nginx && \
+    chown -R nginx:nginx /var/lib/nginx && \
+    # Create run directory for php-fpm and nginx pid
+    mkdir -p /run/php && \
+    mkdir -p /run/nginx
+
+# Copy Nginx configuration
+# We will create these files next: nginx.conf and supervisord.conf
+COPY nginx-prod.conf /etc/nginx/nginx.conf
+COPY laravel-site.conf /etc/nginx/http.d/default.conf
+
+# Copy Supervisor configuration
+COPY supervisord.conf /etc/supervisord.conf
+
+# Application root
+WORKDIR /var/www/html
+
+# Expose port 80 for Nginx
+EXPOSE 80
+
+# Start Supervisor
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
