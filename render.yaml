@@ -1,0 +1,89 @@
+# render.yaml
+# Defines the infrastructure for deploying the Laravel application on Render
+# based on the provided schema.json.
+# Assumes CircleCI builds the Docker image, pushes it to a registry,
+# and then triggers a deploy on Render using a deploy hook.
+
+databases:
+  - name: ecommerce-db # Name for your managed MySQL database
+    plan: free # Example: "free", "starter", etc.
+    # databaseName: laravel_ecommerce_db # Optional: specify the actual database name
+    # user: db_user # Optional: specify the username
+    # The schema provided lists postgresMajorVersion, not mysqlMajorVersion.
+    # For MySQL, version is typically tied to the plan or a default.
+
+services:
+  - type: web # Must be one of "web", "worker", "pserv", "cron" for serverService
+    name: laravel-vue-ecommerce
+    runtime: docker # Valid runtime for serverService
+    autoDeploy: false # Boolean value
+    healthCheckPath: /api/health # For web services
+    # image: # Define if image is pre-built and pushed to a registry
+    #   url: registry.render.com/YOUR_RENDER_ORG_OR_USER/laravel-vue-ecommerce:latest
+    envVars:
+      - key: APP_NAME
+        value: "Laravel Vue Ecommerce"
+      - key: APP_ENV
+        value: "production"
+      - key: APP_DEBUG
+        value: "false" # Env vars are strings
+      - key: APP_URL
+        value: "${RENDER_EXTERNAL_URL}" # Render injects this
+      - key: ASSET_URL
+        value: "${RENDER_EXTERNAL_URL}" # Render injects this
+      - key: APP_KEY
+        generateValue: true # Valid per envVarFromKeyValue schema
+      - key: LOG_CHANNEL
+        value: "stderr"
+      # Database Connection
+      - key: DB_CONNECTION # Tells Laravel to use the mysql driver
+        value: "mysql"
+      - key: DATABASE_URL # Laravel will parse this if DB_CONNECTION is set
+        fromDatabase: # Valid per envVarFromDatabase schema
+          name: ecommerce-db # Must match the name in the top-level 'databases' section
+          property: connectionString # Provides the full database connection URL
+      # Cache and Session
+      - key: CACHE_DRIVER
+        value: "file"
+      - key: SESSION_DRIVER
+        value: "file"
+      # Stripe Keys (Set these as secrets in Render dashboard)
+      - key: STRIPE_KEY
+        sync: false # Valid per envVarFromKeyValue schema
+      - key: STRIPE_SECRET
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      # Cashier Settings
+      - key: CASHIER_CURRENCY
+        value: "NOK"
+      - key: CASHIER_CURRENCY_LOCALE
+        value: "nb-NO"
+      # Mailer Configuration (example, adjust as needed)
+      - key: MAIL_MAILER
+        value: "smtp"
+      - key: MAIL_HOST
+        value: "your_mail_host" # Set as secret or actual value
+      - key: MAIL_PORT
+        value: "587"
+      - key: MAIL_USERNAME
+        sync: false
+      - key: MAIL_PASSWORD
+        sync: false
+      - key: MAIL_ENCRYPTION
+        value: "tls"
+      - key: MAIL_FROM_ADDRESS
+        value: "hello@example.com"
+      - key: MAIL_FROM_NAME
+        value: "${APP_NAME}"
+
+    # Start command: runs our deploy script, then starts the main services.
+    # Assumes the base Docker image (ric_harvey/nginx-php-fpm) has /start.sh as its CMD,
+    # which typically runs supervisord to manage Nginx and PHP-FPM.
+    startCommand: "/usr/local/bin/deploy.sh && /start.sh"
+
+    # Persistent disk for Laravel storage
+    disk: # Valid per serverService schema, referencing "disk" definition
+      name: laravel-storage # Name for the persistent disk
+      mountPath: /var/www/html/storage # Mount path inside the container
+      sizeGB: 1 # Size of the disk in GB, integer

@@ -1,0 +1,24 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Laravel
+.env
+storage/logs/*
+storage/framework/sessions/*
+storage/framework/cache/data/*
+storage/framework/testing/*
+public/hot
+public/storage
+vendor/
+
+# IDE / OS files
+.idea
+.vscode
+*.DS_Store
