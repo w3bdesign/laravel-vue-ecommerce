@@ -82,7 +82,7 @@ RUN mkdir -p /var/log/nginx && \
 # Copy Nginx configuration
 # We will create these files next: nginx.conf and supervisord.conf
 COPY nginx-prod.conf /etc/nginx/nginx.conf
-COPY laravel-site.conf /etc/nginx/http.d/default.conf
+# COPY laravel-site.conf /etc/nginx/http.d/default.conf
 
 # Copy Supervisor configuration
 COPY supervisord.conf /etc/supervisord.conf
