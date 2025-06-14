@@ -256,7 +256,6 @@ tests/
   DuskTestCase.php
   TestCase.php
 .babelrc
-.dockerignore
 .editorconfig
 .env.example
 .gitattributes
@@ -265,23 +264,16 @@ tests/
 .styleci.yml
 artisan
 composer.json
-deploy.sh
-Dockerfile
 jest.config.js
-local.ini
-nginx-site.conf
 package.json
 phpcs.xml
 phpunit.xml
 Procfile
 README.md
-render.yaml
 renovate.json
-schema.json
 tailwind.config.js
 TODO.md
 webpack.mix.js
-www.conf
 ```
 
 # Files
@@ -599,6 +591,34 @@ class TrustHosts extends Middleware
 }
 ``````
 
+## File: app/Http/Middleware/TrustProxies.php
+``````php
+<?php
+namespace App\Http\Middleware;
+use Illuminate\Http\Middleware\TrustProxies as Middleware;
+use Illuminate\Http\Request;
+class TrustProxies extends Middleware
+{
+    /**
+     * The trusted proxies for this application.
+     *
+     * @var array<int, string>|string|null
+     */
+    protected $proxies;
+    /**
+     * The headers that should be used to detect proxies.
+     *
+     * @var int
+     */
+    protected $headers =
+        Request::HEADER_X_FORWARDED_FOR |
+        Request::HEADER_X_FORWARDED_HOST |
+        Request::HEADER_X_FORWARDED_PORT |
+        Request::HEADER_X_FORWARDED_PROTO |
+        Request::HEADER_X_FORWARDED_AWS_ELB;
+}
+``````
+
 ## File: app/Http/Middleware/VerifyCsrfToken.php
 ``````php
 <?php
@@ -768,6 +788,34 @@ class User extends Authenticatable
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+}
+``````
+
+## File: app/Providers/AppServiceProvider.php
+``````php
+<?php
+namespace App\Providers;
+use Illuminate\Support\ServiceProvider;
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
     }
 }
 ``````
@@ -84342,6 +84390,34 @@ window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 </html>
 ``````
 
+## File: routes/api.php
+``````php
+<?php
+/*
+|--------------------------------------------------------------------------
+| API Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register API routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| is assigned the "api" middleware group. Enjoy building your API!
+|
+*/
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\UserController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::get('/categories/{category}', [CategoryController::class, 'show']);
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/product/{product}', [ProductController::class, 'show']);
+Route::post('/purchase', [UserController::class, 'purchase']);
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+``````
+
 ## File: routes/channels.php
 ``````php
 <?php
@@ -87525,932 +87601,6 @@ jobs:
           fi
 ``````
 
-## File: app/Http/Middleware/TrustProxies.php
-``````php
-<?php
-namespace App\Http\Middleware;
-use Illuminate\Http\Middleware\TrustProxies as Middleware;
-use Illuminate\Http\Request;
-class TrustProxies extends Middleware
-{
-    /**
-     * The trusted proxies for this application.
-     *
-     * @var array<int, string>|string|null
-     */
-    protected $proxies = '*'; // Trust all upstream proxies (Render's load balancer)
-    /**
-     * The headers that should be used to detect proxies.
-     *
-     * @var int
-     */
-    protected $headers =
-        Request::HEADER_X_FORWARDED_FOR |
-        Request::HEADER_X_FORWARDED_HOST |
-        Request::HEADER_X_FORWARDED_PORT |
-        Request::HEADER_X_FORWARDED_PROTO |
-        Request::HEADER_X_FORWARDED_AWS_ELB;
-}
-``````
-
-## File: app/Providers/AppServiceProvider.php
-``````php
-<?php
-namespace App\Providers;
-use Illuminate\Routing\UrlGenerator; 
-use Illuminate\Support\ServiceProvider;
-class AppServiceProvider extends ServiceProvider
-{
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot(UrlGenerator $url) 
-    {
-        if (config('app.env') === 'production') { 
-            $url->forceScheme('https');
-        }
-    }
-}
-``````
-
-## File: routes/api.php
-``````php
-<?php
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\ProductController;
-use App\Http\Controllers\Api\UserController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-Route::get('/categories', [CategoryController::class, 'index']);
-Route::get('/categories/{category}', [CategoryController::class, 'show']);
-Route::get('/products', [ProductController::class, 'index']);
-Route::get('/product/{product}', [ProductController::class, 'show']);
-Route::post('/purchase', [UserController::class, 'purchase']);
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-Route::get('/health', function () {
-    return response()->json(['status' => 'ok']);
-});
-``````
-
-## File: .dockerignore
-``````
-# Git
-.git
-.gitignore
-.gitattributes
-
-# Node
-node_modules
-npm-debug.log
-yarn-error.log
-
-# Laravel
-.env
-storage/logs/*
-storage/framework/sessions/*
-storage/framework/cache/data/*
-storage/framework/testing/*
-public/hot
-public/storage
-vendor/
-
-# IDE / OS files
-.idea
-.vscode
-*.DS_Store
-``````
-
-## File: local.ini
-``````
-; Custom PHP settings for production
-
-; Error reporting
-display_errors = Off
-log_errors = On
-error_reporting = E_ALL & ~E_DEPRECATED & ~E_STRICT
-
-; Performance and Security
-expose_php = Off
-max_execution_time = 60 ; Increased for potentially longer scripts
-memory_limit = 256M ; Adjust based on your application's needs
-post_max_size = 32M ; Max size for POST requests
-upload_max_filesize = 32M ; Max upload file size
-date.timezone = "UTC" ; Set your preferred timezone
-
-; Opcache (ensure opcache extension is enabled in Dockerfile)
-opcache.enable=1
-opcache.enable_cli=1
-opcache.memory_consumption=128
-opcache.interned_strings_buffer=8
-opcache.max_accelerated_files=10000
-opcache.revalidate_freq=0 ; Set to 0 for production (validate on every request if timestamp changed) or a higher value
-opcache.validate_timestamps=1 ; Check timestamps in production
-opcache.save_comments=1
-opcache.fast_shutdown=1
-``````
-
-## File: nginx-site.conf
-``````
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    server_name _; # Catch all hostnames
-
-    root /var/www/html/public;
-    index index.php index.html index.htm;
-
-    #charset utf-8;
-
-    location / {
-        try_files $uri $uri/ /index.php?$query_string;
-    }
-
-    location = /favicon.ico { access_log off; log_not_found off; }
-    location = /robots.txt  { access_log off; log_not_found off; }
-
-    # Prevent access to hidden files
-    location ~ /\.ht {
-        deny all;
-    }
-
-    # Handle PHP files
-    location ~ \.php$ {
-        try_files $uri =404;
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        # fastcgi_pass unix:/var/run/php/php8.2-fpm.sock; # Adjust socket based on PHP version and FPM config
-        # The ric_harvey/nginx-php-fpm image might use a TCP port, e.g., 127.0.0.1:9000 or php:9000
-        # Common setup for ric_harvey images or similar:
-        fastcgi_pass 127.0.0.1:9000; # Or php:9000 if php-fpm is exposed on a 'php' hostname in the container network
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_param PATH_INFO $fastcgi_path_info;
-        include fastcgi_params;
-        fastcgi_read_timeout 300; # Optional: Increase timeout for long-running scripts
-    }
-
-    # Security headers (optional but recommended)
-    # add_header X-Frame-Options "SAMEORIGIN";
-    # add_header X-XSS-Protection "1; mode=block";
-    # add_header X-Content-Type-Options "nosniff";
-
-    # Enable gzip compression (optional)
-    # gzip on;
-    # gzip_vary on;
-    # gzip_proxied any;
-    # gzip_comp_level 6;
-    # gzip_buffers 16 8k;
-    # gzip_http_version 1.1;
-    # gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
-}
-``````
-
-## File: schema.json
-``````json
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://render.com/schema/render.yaml.json",
-  "title": "render.yaml JSON Schema",
-  "description": "A JSON schema for render.yaml files. See https://render.com/docs/blueprint-spec for more information",
-  "type": "object",
-  "definitions": {
-    "buildFilter": {
-      "type": "object",
-      "properties": {
-        "paths": {
-          "type": "array",
-          "items": { "type": "string" }
-        },
-        "ignoredPaths": {
-          "type": "array",
-          "items": { "type": "string" }
-        }
-      }
-    },
-    "diskSizeGB": {
-      "type": "integer",
-      "minimum": 1
-    },
-    "cronService": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "cron"
-        },
-        "name": {
-          "type": "string"
-        },
-        "region": {
-          "$ref": "#/definitions/region"
-        },
-        "plan": {
-          "$ref": "#/definitions/plan"
-        },
-        "runtime": {
-          "$ref": "#/definitions/runtime"
-        },
-        "schedule": {
-          "type": "string"
-        },
-        "buildCommand": {
-          "type": "string"
-        },
-        "startCommand": {
-          "type": "string"
-        },
-        "dockerCommand": {
-          "type": "string"
-        },
-        "dockerfilePath": {
-          "type": "string"
-        },
-        "dockerContext": {
-          "type": "string"
-        },
-        "registryCredential": {
-          "$ref": "#/definitions/registryCredential"
-        },
-        "repo": {
-          "type": "string"
-        },
-        "branch": {
-          "type": "string"
-        },
-        "image": {
-          "$ref": "#/definitions/image"
-        },
-        "envVars": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/envVar"
-          }
-        },
-        "buildFilter": {
-          "$ref": "#/definitions/buildFilter"
-        },
-        "rootDir": {
-          "type": "string"
-        },
-        "autoDeploy": {
-          "type": "boolean"
-        }
-      },
-      "required": ["type", "name", "runtime", "schedule"],
-      "additionalProperties": false
-    },
-    "database": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "databaseName": {
-          "type": "string"
-        },
-        "user": {
-          "type": "string"
-        },
-        "region": {
-          "$ref": "#/definitions/region"
-        },
-        "plan": {
-          "$ref": "#/definitions/plan"
-        },
-        "diskSizeGB": {
-          "$ref": "#/definitions/diskSizeGB"
-        },
-        "previewPlan": {
-          "$ref": "#/definitions/plan"
-        },
-        "previewDiskSizeGB": {
-          "$ref": "#/definitions/diskSizeGB",
-          "description": "The disk size to use for this database in preview environments. If omitted, preview instances use the same disk size as the primary database (specified by `diskSizeGB`)."
-        },
-        "postgresMajorVersion": {
-          "type": "string",
-          "enum": ["10", "11", "12", "13", "14", "15", "16"],
-          "description": "What major version of PostgreSQL the database will use. Please refer to https://render.com/docs/postgresql-upgrading#version-support for which versions may be valid for this owner."
-        },
-        "highAvailability": {
-          "type": "object",
-          "properties": {
-            "enabled": {
-              "type": "boolean"
-            }
-          },
-          "required": ["enabled"],
-          "additionalProperties": false
-        },
-        "ipAllowList": {
-          "$ref": "#/definitions/ipAllowList"
-        },
-        "readReplicas": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/readReplica"
-          }
-        }
-      },
-      "required": ["name"],
-      "additionalProperties": false
-    },
-    "disk": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "mountPath": {
-          "type": "string"
-        },
-        "sizeGB": {
-          "type": "integer",
-          "minimum": 1
-        }
-      },
-      "required": ["name", "mountPath"],
-      "additionalProperties": false
-    },
-    "envVar": {
-      "anyOf": [
-        { "$ref": "#/definitions/envVarFromKeyValue" },
-        { "$ref": "#/definitions/envVarFromDatabase" },
-        { "$ref": "#/definitions/envVarFromService" },
-        { "$ref": "#/definitions/envVarFromGroup" }
-      ]
-    },
-    "envVarFromDatabase": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string"
-        },
-        "fromDatabase": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "property": {
-              "type": "string"
-            }
-          },
-          "required": ["name", "property"]
-        }
-      },
-      "required": ["key", "fromDatabase"],
-      "additionalProperties": false
-    },
-    "envVarFromKeyValue": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string"
-        },
-        "value": {
-          "anyOf": [{ "type": "string" }, { "type": "number" }]
-        },
-        "generateValue": {
-          "type": "boolean"
-        },
-        "sync": {
-          "type": "boolean"
-        },
-        "previewValue": {
-          "anyOf": [{ "type": "string" }, { "type": "number" }]
-        }
-      },
-      "required": ["key"],
-      "additionalProperties": false
-    },
-    "envVarFromService": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string"
-        },
-        "fromService": {
-          "type": "object",
-          "properties": {
-            "type": {
-              "$ref": "#/definitions/serviceType"
-            },
-            "name": {
-              "type": "string"
-            },
-            "property": {
-              "type": "string"
-            },
-            "envVarKey": {
-              "type": "string"
-            }
-          },
-          "required": ["name", "type"]
-        }
-      },
-      "required": ["key", "fromService"],
-      "additionalProperties": false
-    },
-    "envVarFromGroup": {
-      "type": "object",
-      "properties": {
-        "fromGroup": {
-          "type": "string"
-        }
-      },
-      "required": ["fromGroup"],
-      "additionalProperties": false
-    },
-    "envVarGroup": {
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "envVars": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/envVarFromKeyValue"
-          }
-        }
-      },
-      "required": ["name", "envVars"],
-      "additionalProperties": false
-    },
-    "header": {
-      "type": "object",
-      "properties": {
-        "path": { "type": "string" },
-        "name": { "type": "string" },
-        "value": { "type": "string" }
-      },
-      "required": ["path", "name", "value"]
-    },
-    "image": {
-      "type": "object",
-      "properties": {
-        "url": {
-          "type": "string"
-        },
-        "creds": {
-          "$ref": "#/definitions/registryCredential"
-        }
-      },
-      "required": ["url"],
-      "additionalProperties": false
-    },
-    "readReplica": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
-    "ipAllowList": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "source": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          }
-        },
-        "required": ["source"]
-      }
-    },
-    "plan": {
-      "type": "string",
-      "enum": [
-        "free",
-        "starter",
-        "standard",
-        "pro",
-        "pro plus",
-        "pro max",
-        "pro ultra",
-        "basic-256mb",
-        "basic-1gb",
-        "basic-4gb",
-        "pro-4gb",
-        "pro-8gb",
-        "pro-16gb",
-        "pro-32gb",
-        "pro-64gb",
-        "pro-128gb",
-        "pro-192gb",
-        "pro-256gb",
-        "pro-384gb",
-        "pro-512gb",
-        "accelerated-16gb",
-        "accelerated-32gb",
-        "accelerated-64gb",
-        "accelerated-128gb",
-        "accelerated-256gb",
-        "accelerated-384gb",
-        "accelerated-512gb",
-        "accelerated-768gb",
-        "accelerated-1024gb"
-      ]
-    },
-    "previewsGeneration": {
-      "type": "string",
-      "enum": ["automatic", "manual", "off"]
-    },
-    "servicePreviews": {
-      "type": "object",
-      "properties": {
-        "generation": {
-          "$ref": "#/definitions/previewsGeneration"
-        },
-        "plan": {
-          "$ref": "#/definitions/plan"
-        }
-      },
-      "additionalProperties": false
-    },
-    "staticServicePreviews": {
-      "type": "object",
-      "properties": {
-        "generation": {
-          "$ref": "#/definitions/previewsGeneration"
-        }
-      },
-      "additionalProperties": false
-    },
-    "rootPreviews": {
-      "type": "object",
-      "properties": {
-        "generation": {
-          "$ref": "#/definitions/previewsGeneration"
-        },
-        "expireAfterDays": {
-          "type": "integer",
-          "minimum": 1
-        }
-      },
-      "additionalProperties": false
-    },
-    "redisServer": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "redis"
-        },
-        "name": {
-          "type": "string"
-        },
-        "region": {
-          "$ref": "#/definitions/region"
-        },
-        "ipAllowList": {
-          "$ref": "#/definitions/ipAllowList"
-        },
-        "plan": {
-          "$ref": "#/definitions/plan"
-        },
-        "previewPlan": {
-          "$ref": "#/definitions/plan"
-        },
-        "maxmemoryPolicy": {
-          "type": "string"
-        }
-      },
-      "required": ["type", "name", "ipAllowList"],
-      "additionalProperties": false
-    },
-    "region": {
-      "type": "string",
-      "enum": ["oregon", "ohio", "frankfurt", "singapore", "virginia"]
-    },
-    "registryCredential": {
-      "properties": {
-        "fromRegistryCreds": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            }
-          },
-          "required": ["name"],
-          "additionalProperties": false
-        }
-      },
-      "required": ["fromRegistryCreds"],
-      "additionalProperties": false
-    },
-    "route": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": ["redirect", "rewrite"]
-        },
-        "source": { "type": "string" },
-        "destination": { "type": "string" }
-      },
-      "required": ["type", "source", "destination"]
-    },
-    "runtime": {
-      "type": "string",
-      "enum": [
-        "docker",
-        "elixir",
-        "go",
-        "image",
-        "node",
-        "python",
-        "ruby",
-        "rust",
-        "static"
-      ]
-    },
-    "serverService": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "enum": ["web", "worker", "pserv"]
-        },
-        "name": {
-          "type": "string"
-        },
-        "region": {
-          "$ref": "#/definitions/region"
-        },
-        "plan": {
-          "$ref": "#/definitions/plan"
-        },
-        "runtime": {
-          "$ref": "#/definitions/runtime"
-        },
-        "repo": {
-          "type": "string"
-        },
-        "branch": {
-          "type": "string"
-        },
-        "image": {
-          "$ref": "#/definitions/image"
-        },
-        "rootDir": {
-          "type": "string"
-        },
-        "dockerCommand": {
-          "type": "string"
-        },
-        "dockerContext": {
-          "type": "string"
-        },
-        "dockerfilePath": {
-          "type": "string"
-        },
-        "numInstances": {
-          "type": "integer",
-          "minimum": 1
-        },
-        "healthCheckPath": {
-          "type": "string"
-        },
-        "scaling": {
-          "type": "object",
-          "properties": {
-            "minInstances": {
-              "type": "integer",
-              "minimum": 1
-            },
-            "maxInstances": {
-              "type": "integer",
-              "minimum": 1
-            },
-            "targetMemoryPercent": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 90
-            },
-            "targetCPUPercent": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 90
-            }
-          }
-        },
-        "buildCommand": {
-          "type": "string"
-        },
-        "startCommand": {
-          "type": "string"
-        },
-        "preDeployCommand": {
-          "type": "string"
-        },
-        "registryCredential": {
-          "$ref": "#/definitions/registryCredential"
-        },
-        "domain": {
-          "type": "string"
-        },
-        "domains": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "envVars": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/envVar" }
-        },
-        "autoDeploy": {
-          "type": "boolean"
-        },
-        "initialDeployHook": {
-          "type": "string"
-        },
-        "disk": {
-          "$ref": "#/definitions/disk"
-        },
-        "buildFilter": {
-          "$ref": "#/definitions/buildFilter"
-        },
-        "previews": {
-          "$ref": "#/definitions/servicePreviews"
-        },
-        "pullRequestPreviewsEnabled": {
-          "type": "boolean",
-          "deprecated": true
-        },
-        "previewPlan": {
-          "$ref": "#/definitions/plan",
-          "deprecated": true
-        },
-        "maxShutdownDelaySeconds": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 300
-        }
-      },
-      "required": ["type", "name", "runtime"],
-      "additionalProperties": false
-    },
-    "serviceType": {
-      "type": "string",
-      "enum": [
-        "web",
-        "cron",
-        "worker",
-        "pserv",
-        "static",
-        "dpg",
-        "job",
-        "redis",
-        "keyvalue"
-      ]
-    },
-    "staticService": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "const": "web"
-        },
-        "name": {
-          "type": "string"
-        },
-        "runtime": {
-          "type": "string",
-          "const": "static"
-        },
-        "buildCommand": {
-          "type": "string"
-        },
-        "staticPublishPath": {
-          "type": "string"
-        },
-        "previews": {
-          "$ref": "#/definitions/staticServicePreviews"
-        },
-        "pullRequestPreviewsEnabled": {
-          "type": "boolean",
-          "deprecated": true
-        },
-        "buildFilter": {
-          "$ref": "#/definitions/buildFilter"
-        },
-        "headers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/header"
-          }
-        },
-        "routes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/route"
-          }
-        },
-        "envVars": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/envVar" }
-        },
-        "rootDir": {
-          "type": "string"
-        },
-        "repo": {
-          "type": "string"
-        },
-        "branch": {
-          "type": "string"
-        },
-        "domain": {
-          "type": "string"
-        },
-        "domains": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "autoDeploy": {
-          "type": "boolean"
-        }
-      },
-      "required": ["type", "name"],
-      "additionalProperties": false
-    }
-  },
-  "properties": {
-    "databases": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/database"
-      }
-    },
-    "envVarGroups": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/envVarGroup"
-      }
-    },
-    "previews": {
-      "$ref": "#/definitions/rootPreviews"
-    },
-    "previewsEnabled": {
-      "type": "boolean",
-      "deprecated": true
-    },
-    "previewsExpireAfterDays": {
-      "type": "integer",
-      "minimum": 1,
-      "deprecated": true
-    },
-    "services": {
-      "type": "array",
-      "items": {
-        "anyOf": [
-          { "$ref": "#/definitions/redisServer" },
-          { "$ref": "#/definitions/cronService" },
-          { "$ref": "#/definitions/serverService" },
-          { "$ref": "#/definitions/staticService" }
-        ]
-      }
-    },
-    "version": {
-      "type": "string",
-      "const": "1"
-    }
-  },
-  "additionalProperties": false
-}
-``````
-
 ## File: TODO.md
 ``````markdown
 # Project Review & TODOs: Laravel Vue E-commerce
@@ -88532,219 +87682,6 @@ The project uses a modern stack (Laravel 10, Vue 3) and follows generally good p
 ## Questions for Clarification
 
 - [ ] Clarify the meaning of "bot" in the initial project description. If there's specific automated functionality intended, it needs to be reviewed.
-``````
-
-## File: www.conf
-``````
-[www]
-user = www-data
-group = www-data
-listen = /var/run/php-fpm.sock
-;listen = 127.0.0.1:9000
-listen.owner = www-data
-listen.group = www-data
-listen.mode = 0660
-
-pm = dynamic
-pm.max_children = 5
-pm.start_servers = 2
-pm.min_spare_servers = 1
-pm.max_spare_servers = 3
-pm.max_requests = 500
-
-chdir = /var/www/html
-
-catch_workers_output = yes
-php_flag[display_errors] = off
-php_admin_value[error_log] = /var/log/fpm-php.www.log
-php_admin_flag[log_errors] = on
-``````
-
-## File: render.yaml
-``````yaml
-# render.yaml
-# Defines the infrastructure for deploying the Laravel application on Render
-# based on the provided schema.json.
-# Assumes CircleCI builds the Docker image, pushes it to a registry,
-# and then triggers a deploy on Render using a deploy hook.
-databases:
-  - name: ecommerce-db # Name for your managed MySQL database
-    plan: free # Example: "free", "starter", etc.
-    # databaseName: laravel_ecommerce_db # Optional: specify the actual database name
-    # user: db_user # Optional: specify the username
-    # The schema provided lists postgresMajorVersion, not mysqlMajorVersion.
-    # For MySQL, version is typically tied to the plan or a default.
-services:
-  - type: web # Must be one of "web", "worker", "pserv", "cron" for serverService
-    name: laravel-vue-ecommerce
-    runtime: docker # Valid runtime for serverService
-    autoDeploy: false # Boolean value
-    healthCheckPath: /api/health # For web services
-    # image: # Define if image is pre-built and pushed to a registry
-    #   url: registry.render.com/YOUR_RENDER_ORG_OR_USER/laravel-vue-ecommerce:latest
-    envVars:
-      - key: APP_NAME
-        value: "Laravel Vue Ecommerce"
-      - key: APP_ENV
-        value: "production"
-      - key: APP_DEBUG
-        value: "false" # Env vars are strings
-      - key: APP_URL
-        value: "${RENDER_EXTERNAL_URL}" # Render injects this
-      - key: ASSET_URL
-        value: "${RENDER_EXTERNAL_URL}" # Render injects this
-      - key: APP_KEY
-        generateValue: true # Valid per envVarFromKeyValue schema
-      - key: LOG_CHANNEL
-        value: "stderr"
-      # Database Connection
-      - key: DB_CONNECTION # Tells Laravel to use the mysql driver
-        value: "mysql"
-      - key: DATABASE_URL # Laravel will parse this if DB_CONNECTION is set
-        fromDatabase: # Valid per envVarFromDatabase schema
-          name: ecommerce-db # Must match the name in the top-level 'databases' section
-          property: connectionString # Provides the full database connection URL
-      # Cache and Session
-      - key: CACHE_DRIVER
-        value: "file"
-      - key: SESSION_DRIVER
-        value: "file"
-      # Stripe Keys (Set these as secrets in Render dashboard)
-      - key: STRIPE_KEY
-        sync: false # Valid per envVarFromKeyValue schema
-      - key: STRIPE_SECRET
-        sync: false
-      - key: STRIPE_WEBHOOK_SECRET
-        sync: false
-      # Cashier Settings
-      - key: CASHIER_CURRENCY
-        value: "NOK"
-      - key: CASHIER_CURRENCY_LOCALE
-        value: "nb-NO"
-      # Mailer Configuration (example, adjust as needed)
-      - key: MAIL_MAILER
-        value: "smtp"
-      - key: MAIL_HOST
-        value: "your_mail_host" # Set as secret or actual value
-      - key: MAIL_PORT
-        value: "587"
-      - key: MAIL_USERNAME
-        sync: false
-      - key: MAIL_PASSWORD
-        sync: false
-      - key: MAIL_ENCRYPTION
-        value: "tls"
-      - key: MAIL_FROM_ADDRESS
-        value: "hello@example.com"
-      - key: MAIL_FROM_NAME
-        value: "${APP_NAME}"
-    # Start command: The Docker image's CMD ["/start.sh"] will be used by default.
-    # The /start.sh script from richarvey/nginx-php-fpm will execute our /scripts/00-laravel-deploy.sh
-    # (because ENV RUN_SCRIPTS 1 is set) and then start Nginx & PHP-FPM.
-    # Thus, no explicit startCommand override is needed here.
-    # Persistent disk for Laravel storage
-    disk: # Valid per serverService schema, referencing "disk" definition
-      name: laravel-storage # Name for the persistent disk
-      mountPath: /var/www/html/storage # Mount path inside the container
-      sizeGB: 1 # Size of the disk in GB, integer
-``````
-
-## File: deploy.sh
-``````bash
-#!/bin/sh
-set -ex # Exit immediately if a command exits with a non-zero status and print commands.
-echo "Running composer"
-# Attempt to clear composer cache first, then install
-composer clear-cache --working-dir=/var/www/html || echo "Failed to clear composer cache, continuing..."
-composer install --no-dev --no-interaction --no-progress --optimize-autoloader --working-dir=/var/www/html
-echo "Checking for vendor/autoload.php..."
-if [ -f "/var/www/html/vendor/autoload.php" ]; then
-    echo "vendor/autoload.php found."
-else
-    echo "ERROR: vendor/autoload.php NOT found after composer install!"
-    echo "Listing contents of /var/www/html/vendor/ if it exists:"
-    ls -la /var/www/html/vendor/ || echo "/var/www/html/vendor/ directory does not exist."
-    exit 1 # Exit if autoload is missing
-fi
-echo "Caching config..."
-php artisan config:cache
-echo "Caching routes..."
-php artisan route:cache
-echo "Running migrations..."
-php artisan migrate --force
-echo "Deployment script finished successfully."
-``````
-
-## File: composer.json
-``````json
-{
-    "name": "laravel/laravel",
-    "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": [
-        "framework",
-        "laravel"
-    ],
-    "license": "MIT",
-    "require": {
-        "php": "8.2.10",
-        "guzzlehttp/guzzle": "7.8.1",
-        "laravel/cashier": "^15.0",
-        "laravel/framework": "10.41.0",
-        "laravel/sanctum": "3.3.3",
-        "laravel/tinker": "2.9.0"
-    },
-    "require-dev": {
-        "fakerphp/faker": "1.23.1",
-        "laravel/dusk": "7.12.1",
-        "laravel/pint": "1.13.11",
-        "laravel/sail": "1.28.0",
-        "mockery/mockery": "1.6.12",
-        "nunomaduro/collision": "7.10.0",
-        "phpunit/phpunit": "10.5.36",
-        "spatie/laravel-ignition": "2.4.1",
-        "squizlabs/php_codesniffer": "3.8.1"
-    },
-    "autoload": {
-        "psr-4": {
-            "App\\": "app/",
-            "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "scripts": {
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
-        ],
-        "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
-        ]
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": []
-        }
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
-}
 ``````
 
 ## File: .circleci/config.yml
@@ -88830,68 +87767,76 @@ workflows:
       - vue-tests
 ``````
 
-## File: Dockerfile
-``````dockerfile
-# Stage 1: Compile Frontend Assets
-FROM node:20-alpine AS node_builder
-
-WORKDIR /app/frontend
-
-# Copy package files and essential build configuration
-COPY package.json package-lock.json* webpack.mix.js tailwind.config.js postcss.config.js* .babelrc* ./
-# Ensure postcss.config.js and .babelrc are optional by using * in case they don't exist
-
-# Install all dependencies (including devDependencies like laravel-mix)
-RUN npm ci
-
-# Copy frontend source code (js, css, images, etc.)
-COPY resources/js ./resources/js
-COPY resources/css ./resources/css
-COPY resources/img ./resources/img
-# Add other relevant resource directories if needed
-
-# Compile assets for production
-RUN npm run production
-
-# Stage 2: Setup PHP Application Environment using richarvey/nginx-php-fpm
-FROM richarvey/nginx-php-fpm:3.1.6 AS app
-
-# Set Laravel Environment Variables as per the article
-ENV APP_ENV production
-ENV APP_DEBUG false
-ENV LOG_CHANNEL stderr
-ENV APP_KEY ${APP_KEY} 
-ENV SKIP_COMPOSER 1 
-ENV WEBROOT /var/www/html/public 
-ENV PHP_ERRORS_STDERR 1 # Send PHP errors to stderr for Docker logging
-ENV RUN_SCRIPTS 1 # Enable execution of scripts in /scripts directory
-ENV REAL_IP_HEADER 1 # If behind a proxy, trust X-Forwarded-For
-ENV COMPOSER_ALLOW_SUPERUSER 1 # Allow composer to run as root if needed by scripts
-
-# Set working directory
-WORKDIR /var/www/html
-
-# Copy all application files
-COPY . .
-
-# Copy compiled assets from the node_builder stage
-COPY --from=node_builder /app/frontend/public ./public
-
-# Copy our Nginx site configuration to the standard location for richarvey images
-COPY nginx-site.conf /etc/nginx/sites-available/default
-
-# Copy our deploy script to the location where richarvey image expects to run scripts
-# Ensure deploy.sh has necessary commands (composer install, migrations, cache)
-RUN mkdir -p /scripts
-COPY deploy.sh /scripts/00-laravel-deploy.sh
-# Install dos2unix, convert line endings, and ensure the script is executable
-RUN apk add --no-cache dos2unix && \
-    dos2unix /scripts/00-laravel-deploy.sh && \
-    chmod +x /scripts/00-laravel-deploy.sh
-
-# The base image (richarvey/nginx-php-fpm) handles starting Nginx, PHP-FPM,
-# and running scripts from /scripts. Its default CMD is /start.sh.
-CMD ["/start.sh"]
+## File: composer.json
+``````json
+{
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The Laravel Framework.",
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "8.2.10",
+        "guzzlehttp/guzzle": "7.8.1",
+        "laravel/cashier": "^15.0",
+        "laravel/framework": "10.41.0",
+        "laravel/sanctum": "3.3.3",
+        "laravel/tinker": "2.9.0"
+    },
+    "require-dev": {
+        "fakerphp/faker": "1.23.1",
+        "laravel/dusk": "7.12.1",
+        "laravel/pint": "1.13.11",
+        "laravel/sail": "1.28.0",
+        "mockery/mockery": "1.6.12",
+        "nunomaduro/collision": "7.10.0",
+        "phpunit/phpunit": "10.5.36",
+        "spatie/laravel-ignition": "2.4.1",
+        "squizlabs/php_codesniffer": "3.8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
 ``````
 
 ## File: package.json
@@ -88912,12 +87857,12 @@ CMD ["/start.sh"]
         "refresh": "rm -rf node_modules && rm package-lock.json && npm i && npm run format"
     },
     "devDependencies": {
-        "@babel/preset-env": "7.27.2",
+        "@babel/preset-env": "7.25.4",
         "@testing-library/jest-dom": "6.2.1",
         "@testing-library/vue": "7.0.0",
         "@vue/vue3-jest": "29.2.6",
-        "autoprefixer": "10.4.21",
-        "axios": "1.9.0",
+        "autoprefixer": "10.4.20",
+        "axios": "1.6.8",
         "babel-core": "7.0.0-bridge.0",
         "babel-jest": "29.7.0",
         "global-jsdom": "9.1.0",
@@ -88928,7 +87873,7 @@ CMD ["/start.sh"]
         "lodash": "4.17.21",
         "postcss": "8.4.40",
         "prettier": "3.5.3",
-        "tailwindcss": "3.4.17",
+        "tailwindcss": "3.4.11",
         "vue-loader": "17.4.2"
     },
     "dependencies": {
@@ -88937,7 +87882,7 @@ CMD ["/start.sh"]
         "@stripe/stripe-js": "1.54.2",
         "lodash": "4.17.21",
         "pinia": "2.1.7",
-        "pinia-plugin-persistedstate": "3.2.1",
+        "pinia-plugin-persistedstate": "3.2.3",
         "swiper": "^9.4.1",
         "swrv": "1.0.4",
         "vue": "3.4.35",
