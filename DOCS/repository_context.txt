@@ -87684,11 +87684,83 @@ The project uses a modern stack (Laravel 10, Vue 3) and follows generally good p
 - [ ] Clarify the meaning of "bot" in the initial project description. If there's specific automated functionality intended, it needs to be reviewed.
 ``````
 
+## File: composer.json
+``````json
+{
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The Laravel Framework.",
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "8.4.11",
+        "guzzlehttp/guzzle": "7.8.1",
+        "laravel/cashier": "^15.0",
+        "laravel/framework": "10.41.0",
+        "laravel/sanctum": "3.3.3",
+        "laravel/tinker": "2.9.0"
+    },
+    "require-dev": {
+        "fakerphp/faker": "1.23.1",
+        "laravel/dusk": "7.12.1",
+        "laravel/pint": "1.13.11",
+        "laravel/sail": "1.28.0",
+        "mockery/mockery": "1.6.12",
+        "nunomaduro/collision": "7.10.0",
+        "phpunit/phpunit": "10.5.57",
+        "spatie/laravel-ignition": "2.4.1",
+        "squizlabs/php_codesniffer": "3.8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
+``````
+
 ## File: .circleci/config.yml
 ``````yaml
 version: 2.1
 orbs:
-  browser-tools: circleci/browser-tools@1.4.8
+  browser-tools: circleci/browser-tools@1.5.3
 jobs: # a collection of steps
   dusk: # runs not using Workflows must have a `build` job as entry point
     docker: # run the steps with Docker
@@ -87767,78 +87839,6 @@ workflows:
       - vue-tests
 ``````
 
-## File: composer.json
-``````json
-{
-    "name": "laravel/laravel",
-    "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": [
-        "framework",
-        "laravel"
-    ],
-    "license": "MIT",
-    "require": {
-        "php": "8.4.11",
-        "guzzlehttp/guzzle": "7.8.1",
-        "laravel/cashier": "^15.0",
-        "laravel/framework": "10.41.0",
-        "laravel/sanctum": "3.3.3",
-        "laravel/tinker": "2.9.0"
-    },
-    "require-dev": {
-        "fakerphp/faker": "1.23.1",
-        "laravel/dusk": "7.12.1",
-        "laravel/pint": "1.13.11",
-        "laravel/sail": "1.28.0",
-        "mockery/mockery": "1.6.12",
-        "nunomaduro/collision": "7.10.0",
-        "phpunit/phpunit": "10.5.57",
-        "spatie/laravel-ignition": "2.4.1",
-        "squizlabs/php_codesniffer": "3.8.1"
-    },
-    "autoload": {
-        "psr-4": {
-            "App\\": "app/",
-            "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
-    },
-    "scripts": {
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
-        ],
-        "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
-        ]
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": []
-        }
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
-}
-``````
-
 ## File: package.json
 ``````json
 {
@@ -87857,12 +87857,12 @@ workflows:
         "refresh": "rm -rf node_modules && rm package-lock.json && npm i && npm run format"
     },
     "devDependencies": {
-        "@babel/preset-env": "7.25.4",
+        "@babel/preset-env": "7.28.3",
         "@testing-library/jest-dom": "6.8.0",
         "@testing-library/vue": "7.0.0",
         "@vue/vue3-jest": "29.2.6",
         "autoprefixer": "10.4.21",
-        "axios": "1.6.8",
+        "axios": "1.12.2",
         "babel-core": "7.0.0-bridge.0",
         "babel-jest": "29.7.0",
         "global-jsdom": "9.1.0",
@@ -87878,7 +87878,7 @@ workflows:
     },
     "dependencies": {
         "@formkit/addons": "1.6.9",
-        "@formkit/vue": "1.6.2",
+        "@formkit/vue": "1.6.9",
         "@stripe/stripe-js": "1.54.2",
         "lodash": "4.17.21",
         "pinia": "2.1.7",
