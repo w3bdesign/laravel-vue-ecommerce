@@ -87893,7 +87893,7 @@ workflows:
         "lodash": "4.17.21",
         "postcss": "8.5.8",
         "prettier": "3.8.1",
-        "tailwindcss": "3.4.17",
+        "tailwindcss": "3.4.19",
         "vue-loader": "17.4.2"
     },
     "dependencies": {
