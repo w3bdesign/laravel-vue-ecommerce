@@ -266,6 +266,7 @@ tests/
 .env.example
 .gitattributes
 .gitignore
+.npmrc
 .phpstorm.meta.php
 .styleci.yml
 artisan
@@ -87481,13 +87482,6 @@ Ecommerce site with Laravel 10, Vue 3 and Stripe.
 -   Look into performance optimization
 ``````
 
-## File: renovate.json
-``````json
-{
-    "extends": ["config:base"]
-}
-``````
-
 ## File: tailwind.config.js
 ``````javascript
 module.exports = {
@@ -87610,6 +87604,21 @@ jobs:
           else
             echo "No changes detected in repository_context.txt"
           fi
+``````
+
+## File: .npmrc
+``````
+ignore-scripts=true
+``````
+
+## File: renovate.json
+``````json
+{
+  "extends": [
+    "config:base"
+  ],
+  "minimumReleaseAge": "3 days"
+}
 ``````
 
 ## File: TODO.md
