@@ -87611,16 +87611,6 @@ jobs:
 ignore-scripts=true
 ``````
 
-## File: renovate.json
-``````json
-{
-  "extends": [
-    "config:base"
-  ],
-  "minimumReleaseAge": "3 days"
-}
-``````
-
 ## File: TODO.md
 ``````markdown
 # Project Review & TODOs: Laravel Vue E-commerce
@@ -87704,6 +87694,16 @@ The project uses a modern stack (Laravel 10, Vue 3) and follows generally good p
 - [ ] Clarify the meaning of "bot" in the initial project description. If there's specific automated functionality intended, it needs to be reviewed.
 ``````
 
+## File: renovate.json
+``````json
+{
+  "extends": [
+    "config:recommended"
+  ],
+  "minimumReleaseAge": "3 days"
+}
+``````
+
 ## File: composer.json
 ``````json
 {
@@ -87724,7 +87724,7 @@ The project uses a modern stack (Laravel 10, Vue 3) and follows generally good p
         "laravel/tinker": "2.9.0"
     },
     "require-dev": {
-        "fakerphp/faker": "1.23.1",
+        "fakerphp/faker": "1.24.1",
         "laravel/dusk": "7.12.1",
         "laravel/pint": "1.13.11",
         "laravel/sail": "1.28.0",
@@ -87784,7 +87784,7 @@ orbs:
 jobs: # a collection of steps
   dusk: # runs not using Workflows must have a `build` job as entry point
     docker: # run the steps with Docker
-      - image: cimg/php:8.5.4-browsers # ...with this image as the primary container; this is where all `steps` will run
+      - image: cimg/php:8.5.7-browsers # ...with this image as the primary container; this is where all `steps` will run
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD # context / project UI env-var reference
@@ -87877,7 +87877,7 @@ workflows:
         "refresh": "rm -rf node_modules && rm package-lock.json && npm i && npm run format"
     },
     "devDependencies": {
-        "@babel/preset-env": "7.29.2",
+        "@babel/preset-env": "7.29.7",
         "@testing-library/jest-dom": "6.8.0",
         "@testing-library/vue": "7.0.0",
         "@vue/vue3-jest": "29.2.6",
@@ -87891,8 +87891,8 @@ workflows:
         "jsdom": "22.1.0",
         "laravel-mix": "6.0.49",
         "lodash": "4.17.21",
-        "postcss": "8.5.8",
-        "prettier": "3.8.1",
+        "postcss": "8.5.15",
+        "prettier": "3.8.4",
         "tailwindcss": "3.4.19",
         "vue-loader": "17.4.2"
     },
