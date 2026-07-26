@@ -35,7 +35,7 @@ The content is organized as follows:
 - Files are sorted by Git change count (files with more changes are at the bottom)
 
 # Directory Structure
-```
+``````
 .circleci/
   config.yml
 .github/
@@ -282,7 +282,7 @@ renovate.json
 tailwind.config.js
 TODO.md
 webpack.mix.js
-```
+``````
 
 # Files
 
@@ -88544,8 +88544,8 @@ workflows:
     },
     "devDependencies": {
         "@babel/preset-env": "7.29.7",
-        "@testing-library/jest-dom": "6.8.0",
-        "@testing-library/vue": "7.0.0",
+        "@testing-library/jest-dom": "7.0.0",
+        "@testing-library/vue": "8.1.0",
         "@vue/vue3-jest": "29.2.6",
         "autoprefixer": "10.4.27",
         "axios": "1.12.2",
